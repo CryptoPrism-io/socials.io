@@ -6,35 +6,34 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  build:
+  job_id:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    # Step 1: Authenticate using the service account
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
+    # Step 2: Set up Python environment
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
-    - name: Create and activate virtual environment
+    # Step 3: Install required Python dependencies
+    - name: Install dependencies
       run: |
-        python -m venv venv  # Create virtual environment
-        source venv/bin/activate  # Activate virtual environment
-        pip install pandas numpy matplotlib seaborn mysql-connector-python sqlalchemy requests psycopg2-binary gspread oauth2client gspread-dataframe
+        python -m pip install --upgrade pip
+        pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client pandas numpy matplotlib seaborn mysql-connector-python sqlalchemy requests psycopg2-binary gspread oauth2client gspread-dataframe
 
-    - name: Save IAM Google Key to a file
-      run: |
-        echo "${{ secrets.IAM_GOOGLE_KEY }}" > /tmp/iam_google_key.json
-        cat /tmp/iam_google_key.json  # Debugging output to confirm it's correct (optional)
 
-    - name: Run gsheets script
-      run: |
-        source venv/bin/activate  # Ensure virtual environment is activated
-        python gsheets.py  # Run the Python script
+    # Step 4: Run the Python script
+    - name: Run Python script
+      run: python gsheet.py
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: /tmp/iam_google_key.json  # Use the secret file path
+        GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  # Ensure GCP_CREDENTIALS secret is set up in GitHub
+
 
 
 
