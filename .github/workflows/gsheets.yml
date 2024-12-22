@@ -32,4 +32,6 @@ jobs:
         run: |
           source venv/bin/activate  # Activate the virtual environment
           python gsheets.py
-        continue-on-error: false
+          env:
+            IAM_GOOGLE_KEY: ${{ secrets.IAM_GOOGLE_KEY}}
+
