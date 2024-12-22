@@ -1,26 +1,31 @@
-import pandas as pd
-import gspread
 import os
+import json
+import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-# Get the path to the JSON key file from the environment variable
-json_key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+# Load the Google credentials JSON from the environment variable
+gcp_credentials_json = os.getenv('GCP_CREDENTIALS')
 
 # Define the required scope for Google Sheets API
 scope = ['https://spreadsheets.google.com/feeds']
 
-# Ensure that the file path is valid
-if json_key_path and os.path.exists(json_key_path):
-    # Load the credentials
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key_path, scope)
-    print("Credentials successfully loaded.")
+# Ensure the environment variable is set
+if gcp_credentials_json:
+    try:
+        # Load credentials from the environment variable JSON
+        credentials_dict = json.loads(gcp_credentials_json)
+        credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
+        print("Credentials successfully loaded.")
+    except Exception as e:
+        print(f"Error: Failed to parse credentials from environment variable. {e}")
+        exit(1)
 else:
-    print("Error: Google credentials file not found or is invalid.")
+    print("Error: GCP_CREDENTIALS environment variable is not set.")
     exit(1)
 
 # Authorize the credentials
-credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key_path, scope)
 gc = gspread.authorize(credentials)
+
 
 # @title library and aws con
 import pandas as pd
