@@ -1,13 +1,22 @@
-import os
 import pandas as pd
 import gspread
+import os
 from oauth2client.service_account import ServiceAccountCredentials
 
-# Define the scope
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+# Get the path to the JSON key file from the environment variable
+json_key_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
 
-# Path to your service account key JSON file
-json_key_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+# Define the required scope for Google Sheets API
+scope = ['https://spreadsheets.google.com/feeds']
+
+# Ensure that the file path is valid
+if json_key_path and os.path.exists(json_key_path):
+    # Load the credentials
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key_path, scope)
+    print("Credentials successfully loaded.")
+else:
+    print("Error: Google credentials file not found or is invalid.")
+    exit(1)
 
 # Authorize the credentials
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key_path, scope)
