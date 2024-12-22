@@ -30,7 +30,7 @@ jobs:
 
     # Step 4: Run the Python script
     - name: Run Python script
-      run: python gsheet.py
+      run: python gsheets.py
       env:
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  # Ensure GCP_CREDENTIALS secret is set up in GitHub
 
