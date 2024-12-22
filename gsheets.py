@@ -1,4 +1,4 @@
-
+import os
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -7,7 +7,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 
 # Path to your service account key JSON file
-json_key_path = 'json_login/social-data-pipeline-and-push-c292102e43e0.json'
+json_key_path = os.environ.get('IAM_GOOGLE_KEY')
 
 # Authorize the credentials
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key_path, scope)
