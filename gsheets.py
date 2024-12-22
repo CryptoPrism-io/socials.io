@@ -7,7 +7,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 
 # Path to your service account key JSON file
-json_key_path = os.environ.get('IAM_GOOGLE_KEY')
+json_key_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
 
 # Authorize the credentials
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_key_path, scope)
