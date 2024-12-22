@@ -22,7 +22,6 @@ jobs:
       run: |
         python -m venv venv  # Create virtual environment
         source venv/bin/activate  # Activate virtual environment
-        pip install -r requirements.txt  # Install dependencies
         pip install pandas numpy matplotlib seaborn mysql-connector-python sqlalchemy requests psycopg2-binary gspread oauth2client gspread-dataframe
 
 
