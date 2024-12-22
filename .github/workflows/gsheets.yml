@@ -1,11 +1,10 @@
 name: gsheet_update_figma
 
-
 on:
   schedule:
     - cron: "31 * * * *"  # Daily at 00:30 UTC
   workflow_dispatch: {}
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,12 +22,22 @@ jobs:
       run: |
         python -m venv venv  # Create virtual environment
         source venv/bin/activate  # Activate virtual environment
+        pip install -r requirements.txt  # Install dependencies
         pip install pandas numpy matplotlib seaborn mysql-connector-python sqlalchemy requests psycopg2-binary gspread oauth2client gspread-dataframe
 
+
+    - name: Save IAM Google Key to a file
+      run: |
+        echo "${{ secrets.IAM_GOOGLE_KEY }}" > /tmp/iam_google_key.json
 
     - name: Run gsheets script
       run: |
         source venv/bin/activate  # Ensure virtual environment is activated
         python gsheets.py  # Run the Python script
       env:
-        IAM_GOOGLE_KEY: ${{ secrets.IAM_GOOGLE_KEY }}  # Pass the secret to the script
+        GOOGLE_APPLICATION_CREDENTIALS: /tmp/iam_google_key.json  # Use the secret file
+
+
+
+
+  
