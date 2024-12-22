@@ -24,5 +24,5 @@ jobs:
           pip install pandas numpy matplotlib seaborn mysql-connector-python sqlalchemy requests psycopg2-binary gspread
         
       - name: Run gsheets.py
-        run: python dmv_tvv_pct.py
+        run: python gsheets.py
         continue-on-error: false
