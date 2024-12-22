@@ -5,33 +5,30 @@ on:
   schedule:
     - cron: "31 * * * *"  # Daily at 00:30 UTC
   workflow_dispatch: {}
-
+  
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-          virtual-environment: 'venv'
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pandas numpy matplotlib seaborn mysql-connector-python sqlalchemy requests psycopg2-binary gspread oauth2client gspread-dataframe
+    - name: Create and activate virtual environment
+      run: |
+        python -m venv venv  # Create virtual environment
+        source venv/bin/activate  # Activate virtual environment
+        pip install pandas numpy matplotlib seaborn mysql-connector-python sqlalchemy requests psycopg2-binary gspread oauth2client gspread-dataframe
 
-      - name: Set Google Sheets Key
-        run: |
-          echo "GOOGLE_SHEETS_KEY=$(secrets.IAM_GOOGLE_KEY)" >> $GITHUB_ENV
 
-      - name: Run Python script
-        run: |
-          source venv/bin/activate  # Activate the virtual environment
-          python gsheets.py
-          env:
-            IAM_GOOGLE_KEY: ${{ secrets.IAM_GOOGLE_KEY}}
-
+    - name: Run gsheets script
+      run: |
+        source venv/bin/activate  # Ensure virtual environment is activated
+        python gsheets.py  # Run the Python script
+      env:
+        IAM_GOOGLE_KEY: ${{ secrets.IAM_GOOGLE_KEY }}  # Pass the secret to the script
