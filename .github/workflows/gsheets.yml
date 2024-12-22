@@ -10,6 +10,10 @@ jobs:
   job_id:
     runs-on: ubuntu-latest
     steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
     # Step 1: Authenticate using the service account
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
