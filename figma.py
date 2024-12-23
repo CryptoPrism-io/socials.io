@@ -20,6 +20,55 @@ headers = {
     "X-Figma-Token": FIGMA_API_KEY
 }
 
+# Define the Figma API endpoint
+url = f"https://api.figma.com/v1/files/{FILE_KEY}?ids=450%3A35483"
+
+
+# Send GET request to Figma API
+response = requests.get(url, headers=headers)
+
+# Check if the request was successful
+if response.status_code == 200:
+    print("Request successful")
+    data = response.json()
+    print(data)
+else:
+    print(f"Request failed with status code: {response.status_code}")
+    print(response.text)  # Print the error response for debugging
+
+
+import sys
+
+from datetime import datetime
+
+# Extract today's date
+today = datetime.now().strftime("%Y-%m-%d")
+
+# Traverse the data structure to find the `characters` field
+def find_matching_date(data, today):
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if key == 'characters' and value == today:
+                return True
+            if isinstance(value, (dict, list)):
+                if find_matching_date(value, today):
+                    return True
+    elif isinstance(data, list):
+        for item in data:
+            if find_matching_date(item, today):
+                return True
+    return False
+
+# Check if today's date is present
+if find_matching_date(data, today):
+    print(f"Today's date ({today}) found in 'characters'.")
+else:
+    print(f"Today's date ({today}) not found in 'characters'.")
+    sys.exit(1)
+
+# Place the rest of your script here
+print("Script continues...")
+
 # Step 1: Fetch the file's JSON and find the node ID by name
 def get_node_id_by_name(file_key, image_name):
     url = f"https://api.figma.com/v1/files/{file_key}"
