@@ -95,8 +95,9 @@ import gspread
 # Load the Google credentials JSON from the environment variable
 gcp_credentials_json = os.getenv('GCP_CREDENTIALS')
 
-# Define the required scope for Google Sheets API
-scope = ['https://spreadsheets.google.com/feeds']
+# Define the scope
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/spreadsheets']
+
 
 # Ensure the environment variable is set
 if gcp_credentials_json:
