@@ -2,6 +2,8 @@
 name: figma_caption_instagram
 
 on:
+  schedule:
+    - cron: "*/31 * * * *"  # Daily at 00:30 UTC
   workflow_dispatch: {}
 
 jobs:
