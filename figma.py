@@ -394,14 +394,15 @@ except Exception as e:
 
 print("Session is ready to use")
 
-# Prepare the paths to your media files (JPG/MP4)
 media_files = [
-    Path("/content/1.jpg"),  # Replace with actual paths
-    Path("/content/2.jpg"),
-    Path("/content/3.jpg"),
-    Path("/content/4.jpg"),
-    Path("/content/5.jpg")
+    Path("1.jpg"),
+    Path("2.jpg"),
+    Path("3.jpg"),
+    Path("4.jpg"),
+    Path("5.jpg")
 ]
+
+
 # Define the caption for your carousel post
 caption = caption
 # Upload the carousel post
