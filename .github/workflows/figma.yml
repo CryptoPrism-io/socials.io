@@ -27,7 +27,7 @@ jobs:
     # Step 3: Install dependencies
     - name: Install dependencies
       run: |
-        pip install  requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib together Pillow io base64 json instagrapi pathlib
+        pip install  requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib together Pillow  base64 json instagrapi pathlib
 
 
     # Step 4: Run the Python script
