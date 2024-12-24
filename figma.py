@@ -93,9 +93,7 @@ headers = {
 }
 
 # Define the Figma API endpoint
-url = f"https://api.figma.com/v1/files/{FILE_KEY}?ids=450%3A35483"
-
-
+url = f"https://api.figma.com/v1/files/{FILE_KEY}?ids=126%3A18134"
 # Send GET request to Figma API
 response = requests.get(url, headers=headers)
 
