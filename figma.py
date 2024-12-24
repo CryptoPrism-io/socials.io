@@ -5,6 +5,79 @@ import time
 
 start_time = time.time()
 
+
+import pandas as pd
+from oauth2client.service_account import ServiceAccountCredentials
+from googleapiclient.discovery import build
+import os
+import json
+import gspread
+
+# Load the Google credentials JSON from the environment variable
+gcp_credentials_json = os.getenv('GCP_CREDENTIALS')
+
+# Define the scope
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/spreadsheets']
+
+
+# Ensure the environment variable is set
+if gcp_credentials_json:
+    try:
+        # Load credentials from the environment variable JSON
+        credentials_dict = json.loads(gcp_credentials_json)
+        credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
+        print("Credentials successfully loaded.")
+    except Exception as e:
+        print(f"Error: Failed to parse credentials from environment variable. {e}")
+        exit(1)
+else:
+    print("Error: GCP_CREDENTIALS environment variable is not set.")
+    exit(1)
+
+# Authorize the credentials
+gc = gspread.authorize(credentials)
+
+
+
+from datetime import datetime
+
+# Define the URL or Sheet ID
+sheet_url = "https://docs.google.com/spreadsheets/d/1I3yIxy6-izhri_umggZM1EQEKsIqvJwi1WfAwtYiMx4/edit#gid=0"
+sheet_id = sheet_url.split("/d/")[1].split("/")[0]  # Extract the Sheet ID
+
+try:
+    # Open the Google Sheet
+    sh = gc.open_by_key(sheet_id)
+    worksheet = sh.get_worksheet(0)  # Access the first worksheet
+
+    # Fetch all data from the sheet
+    data = worksheet.get_all_records()
+
+    # Check if the sheet has a 'Date' column
+    if 'Date' not in data[0]:
+        print("Error: 'Date' column not found in the sheet.")
+        exit(1)
+
+    # Get today's date in 'YYYY-MM-DD' format
+    today_date = datetime.now().strftime('%Y-%m-%d')
+
+    # Extract the Date column from the data
+    date_column = [row['Date'] for row in data]
+
+    # Check if today's date exists in the Date column
+    if today_date in date_column:
+        print(f"Today's date ({today_date}) exists in the sheet. Proceeding to the next block of code...")
+        # Add your next block of code here
+        # Example:
+        print("Executing next block of code...")
+    else:
+        print(f"Today's date ({today_date}) does not exist in the sheet. Exiting...")
+        exit(1)
+
+except Exception as e:
+    print(f"Error: {e}")
+    exit(1)
+
 """# Figma"""
 
 import requests
@@ -134,36 +207,6 @@ for image_name in IMAGE_NAMES:
 
 """## Caption Generator"""
 
-import pandas as pd
-from oauth2client.service_account import ServiceAccountCredentials
-from googleapiclient.discovery import build
-import os
-import json
-import gspread
-
-# Load the Google credentials JSON from the environment variable
-gcp_credentials_json = os.getenv('GCP_CREDENTIALS')
-
-# Define the scope
-scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive','https://www.googleapis.com/auth/spreadsheets']
-
-
-# Ensure the environment variable is set
-if gcp_credentials_json:
-    try:
-        # Load credentials from the environment variable JSON
-        credentials_dict = json.loads(gcp_credentials_json)
-        credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_dict, scope)
-        print("Credentials successfully loaded.")
-    except Exception as e:
-        print(f"Error: Failed to parse credentials from environment variable. {e}")
-        exit(1)
-else:
-    print("Error: GCP_CREDENTIALS environment variable is not set.")
-    exit(1)
-
-# Authorize the credentials
-gc = gspread.authorize(credentials)
 
 # Google Spreadsheet details
 spreadsheet_key = '1Ppif1y284fLPVIIoRzAXbPi9eUXzAyjOBr5DR-6XjSM'  # Replace with your spreadsheet key
