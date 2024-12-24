@@ -37,6 +37,7 @@ jobs:
       run: python ./figma.py
       env:
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  # Ensure GCP_CREDENTIALS secret is set up
+        continue-on-error: true
 
 
 
