@@ -496,8 +496,51 @@ media_files = [
 caption = caption
 # Upload the carousel post
 media = cl.album_upload(media_files, caption1)
-# Print the result
-print(media.dict())
+
+
+
+media_dict = media.model_dump() 
+
+data=media_dict
+
+# Extract relevant fields
+carousel_info = {
+    "Post ID": data['id'],
+    "Code": data['code'],
+    "Date": data['taken_at'].strftime('%Y-%m-%d') if isinstance(data['taken_at'], datetime) else None,
+}
+
+# Convert to a DataFrame (table structure)
+df = pd.DataFrame([carousel_info])
+
+sheet_name = 'Updates'
+
+try:
+    # Try to open the existing sheet
+    try:
+        sh = gc.open(sheet_name)
+        print(f"Sheet '{sheet_name}' found and opened.")
+    except gspread.exceptions.SpreadsheetNotFound:
+        # If the sheet doesn't exist, create it
+        sh = gc.create(sheet_name)
+        print(f"Sheet '{sheet_name}' created successfully.")
+        # Share the sheet with edit permissions (optional)
+        sh.share('yogass09@gmail.com', perm_type='user', role='writer')  # Replace with your email
+
+    # Select the first worksheet
+    worksheet = sh.get_worksheet(0)  # Access the first worksheet
+
+    # Check if headers exist, if not, add them
+    if worksheet.row_count == 0 or worksheet.col_count == 0:
+        worksheet.update([df.columns.values.tolist()])
+        print("Headers added to the worksheet.")
+
+    # Append rows to the worksheet
+    worksheet.append_rows(df.values.tolist(), value_input_option="USER_ENTERED")
+    print("New rows successfully appended to the worksheet.")
+
+except Exception as e:
+    print(f"Error: {e}")
 
 
 # @title Time
