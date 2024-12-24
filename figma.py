@@ -38,7 +38,6 @@ else:
 gc = gspread.authorize(credentials)
 
 
-
 from datetime import datetime
 
 # Define the URL or Sheet ID
@@ -66,18 +65,18 @@ try:
 
     # Check if today's date exists in the Date column
     if today_date in date_column:
-        print(f"Today's date ({today_date}) exists in the sheet. Proceeding to the next block of code...")
-        # Add your next block of code here
-        # Example:
-        print("Executing next block of code...")
-    else:
-        print(f"Today's date ({today_date}) does not exist in the sheet. Exiting...")
+        print(f"Today's date ({today_date}) exists in the sheet. Carousel Already posted")
         exit(1)
+
+        
+    else:
+        print(f"Today's date ({today_date}) does not exist in the sheet. ")
+        print("Executing next block of code...")
+        
 
 except Exception as e:
     print(f"Error: {e}")
     exit(1)
-
 """# Figma"""
 
 import requests
