@@ -1,0 +1,46 @@
+
+name: figma_caption_instagram
+
+on:
+  schedule:
+    - cron: "59 0 * * *"  # Daily at 00:30 UTC
+  workflow_dispatch: {}
+
+jobs:
+  job_id:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    # Step 1: Authenticate using the service account
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    # Step 2: Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'  # Specific Python version recommended
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        pip install  requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib together Pillow instagrapi 
+
+
+    # Step 4: Run the Python script
+    - name: Run Python script
+      run: python ./jinja.py
+      env:
+        GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  # Ensure GCP_CREDENTIALS secret is set up
+        continue-on-error: true
+
+
+
+
+
+  
