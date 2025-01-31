@@ -4,6 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 import os
 from jinja2 import Environment, FileSystemLoader
+from instagrapi import Client
 
 # Database connection configuration
 DB_CONFIG = {
@@ -22,6 +23,26 @@ def get_gcp_engine():
 
 # Initialize the GCP engine
 gcp_engine = get_gcp_engine()
+
+async def generate_image_from_html():
+    """Launch Playwright, load the HTML file, and save a screenshot of it."""
+    async with async_playwright() as p:
+        # Launch a browser
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page()
+
+        await page.set_viewport_size({"width": 1080, "height": 1080})
+
+        # Load the rendered HTML file
+        await page.goto('file://' + os.path.abspath('output.html'))
+
+        # Capture the screenshot of the page
+        await page.screenshot(path='output_image.png')
+
+        print("Screenshot saved as 'output_image.png'.")
+
+        # Close the browser
+        await browser.close()
 
 # Data for page 1
 def fetch_data_as_dataframe():
@@ -95,26 +116,27 @@ async def render_page_1():
 
     # Use Playwright to convert the HTML file to an image
     await generate_image_from_html()
+    cl = Client()  # Directly initialize the client
 
-async def generate_image_from_html():
-    """Launch Playwright, load the HTML file, and save a screenshot of it."""
-    async with async_playwright() as p:
-        # Launch a browser
-        browser = await p.chromium.launch(headless=True)
-        page = await browser.new_page()
+    try:
+        # Directly login with credentials
+        cl.login("cryptoprism.io", "jaimaakamakhya")  # Replace with your actual credentials
+        print("Login successful.")
 
-        await page.set_viewport_size({"width": 1080, "height": 1080})
+        # Upload the story
+        try:
+            cl.photo_upload(
+                path="output_image.jpg",
+                caption="cryptoprism.io"
+            )
+            print("Story posted successfully!")
+        except Exception as e:
+            print(f"Error posting story: {e}")
 
-        # Load the rendered HTML file
-        await page.goto('file://' + os.path.abspath('output.html'))
+    except Exception as e:
+        print(f"Error logging in: {e}")
 
-        # Capture the screenshot of the page
-        await page.screenshot(path='output_image.png')
 
-        print("Screenshot saved as 'output_image.png'.")
-
-        # Close the browser
-        await browser.close()
 
 
 
