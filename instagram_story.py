@@ -4,6 +4,7 @@ from instagrapi import Client
 from playwright.async_api import async_playwright
 from dotenv import load_dotenv
 import nest_asyncio
+import asyncio  # Import asyncio
 
 # Apply nest_asyncio to allow asyncio in the already running loop (for environments like Jupyter)
 nest_asyncio.apply()
@@ -35,7 +36,7 @@ html_content = """
     </style>
 </head>
 <body>
-    GIT_ACTIONS_TEST_PASS
+    cryptoprism.io(htmltopjg_usingplaywright)
 </body>
 </html>
 """
@@ -56,10 +57,14 @@ async def capture_screenshot():
         await page.screenshot(path="story.jpg", full_page=True)
         await browser.close()
 
-# Run the asynchronous function to capture screenshot
-await capture_screenshot()
+# Main asynchronous function
+async def main():
+    await capture_screenshot()
 
+# Run the asynchronous function
+asyncio.run(main())
 
+# Instagram login and photo upload section
 import os
 import shutil
 from instagrapi import Client
@@ -88,7 +93,6 @@ except Exception as e:
 
 print("Session is ready to use.")
 
-
 # Upload the story
 try:
     cl.photo_upload(
@@ -98,4 +102,3 @@ try:
     print("Story posted successfully!")
 except Exception as e:
     print(f"Error posting story: {e}")
-
