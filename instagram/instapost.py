@@ -81,7 +81,7 @@ async def render_page_1():
         return
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('instagram/templates'))
     template = env.get_template('1.html')
 
     # Render the template with the fetched data
