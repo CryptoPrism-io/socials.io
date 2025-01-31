@@ -37,9 +37,9 @@ async def generate_image_from_html():
         await page.goto('file://' + os.path.abspath('output.html'))
 
         # Capture the screenshot of the page
-        await page.screenshot(path='output_image.png')
+        await page.screenshot(path='output_image.jpg')
 
-        print("Screenshot saved as 'output_image.png'.")
+        print("Screenshot saved as 'output_image.jpg'.")
 
         # Close the browser
         await browser.close()
