@@ -17,7 +17,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install nest_asyncio requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib instagrapi playwright python-dotenv pillow sqlalchemy jinja2 && playwright install chromium && playwright install firefox && playwright install webkit
+        pip install psycopg2 nest_asyncio requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib instagrapi playwright python-dotenv pillow sqlalchemy jinja2 && playwright install chromium && playwright install firefox && playwright install webkit
 
     - name: Run Instagram Story Script
       run: python instagram/instapost.py
