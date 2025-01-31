@@ -35,7 +35,7 @@ html_content = """
     </style>
 </head>
 <body>
-    cryptoprism.io(htmltopjg_usingplaywright)
+    GIT_ACTIONS_TEST_PASS
 </body>
 </html>
 """
