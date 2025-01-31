@@ -63,7 +63,7 @@ table_names
 # @title Fetch for Top 50 coins
 
 query_top_100 = """
-SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
+SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap
 FROM crypto_listings_latest_1000
 WHERE cmc_rank < 50
 """
@@ -131,10 +131,13 @@ def format_market_cap(market_cap):
 df_top_100_daily['mcap_units'] = df_top_100_daily['market_cap'].apply(format_market_cap)
 
 # Select specific columns from the DataFrame
-df_gsheet  = df_top_100_daily[['logo','slug', 'cmc_rank', 'price_usd', 'pct_1d', 'mcap_units', 'symbol', 'colour',"last_updated"]]
+df_gsheet  = df_top_100_daily[['logo','slug', 'cmc_rank', 'price_usd', 'pct_1d', 'mcap_units', 'symbol', 'colour']]
 
 # prompt: with df_gsheet can you put the coloum cmc_rank as ascending
 df_gsheet = df_gsheet.sort_values('cmc_rank', ascending=True)
+
+# Add 'last_updated' column with today's date
+df_gsheet['last_updated'] = date.today()
 
 # df_gsheet.head()
 
