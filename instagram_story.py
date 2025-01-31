@@ -1,11 +1,11 @@
-import time
 import os
+import shutil
+import time
 from instagrapi import Client
 from playwright.async_api import async_playwright
 from dotenv import load_dotenv
 import nest_asyncio
-import asyncio  # Import asyncio
-import shutil
+import asyncio
 
 # Apply nest_asyncio to allow asyncio in the already running loop (for environments like Jupyter)
 nest_asyncio.apply()
@@ -78,15 +78,18 @@ try:
         print("Successfully loaded existing session")
 
 except Exception as e:
+    print(f"Error loading session: {e}")
     print("Creating new session...")
     # Login with provided credentials since no session file exists
     cl = Client()
-    cl.login("cryptoprism.io", "jaimaakamakhya")  # Replace with your actual credentials
-    cl.dump_settings(SETTINGS_FILE)  # Save the session
-
-    # Save the new settings to the specified location
-    shutil.copy2(SETTINGS_FILE, "instagram_settings.json")
-    print(f"New session created and saved to {SETTINGS_FILE}")
+    try:
+        cl.login("cryptoprism.io", "jaimaakamakhya")  # Replace with your actual credentials
+        print("Login successful.")
+        cl.dump_settings(SETTINGS_FILE)  # Save the session
+        shutil.copy2(SETTINGS_FILE, "instagram_settings.json")
+        print(f"New session created and saved to {SETTINGS_FILE}")
+    except Exception as e:
+        print(f"Error logging in: {e}")
 
 if cl:  # Ensure 'cl' is defined before proceeding
     print("Session is ready to use.")
