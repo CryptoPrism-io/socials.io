@@ -1,0 +1,12 @@
+- name: Install HTTP server
+  run: pip install http.server
+
+- name: Serve files locally
+  run: |
+    python3 -m http.server 8000 &
+    sleep 2  # Allow time for the server to start
+
+- name: Run Playwright
+  run: |
+    # Visit the local server and capture screenshot
+    python render_page.py
