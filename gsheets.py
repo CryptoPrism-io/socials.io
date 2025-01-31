@@ -136,9 +136,14 @@ df_gsheet  = df_top_100_daily[['logo','slug', 'cmc_rank', 'price_usd', 'pct_1d',
 # prompt: with df_gsheet can you put the coloum cmc_rank as ascending
 df_gsheet = df_gsheet.sort_values('cmc_rank', ascending=True)
 
-# Add 'last_updated' column with today's date
-df_gsheet['last_updated'] = date.today()
 
+# adding date time 
+
+from datetime import date, datetime, timedelta
+import time
+
+df_gsheet['last_updated'] = date.today()  # This will now work correctly
+print(f"Data last updated on: {df_gsheet['last_updated']}")
 # df_gsheet.head()
 
 df_gsheet.head()
