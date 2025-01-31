@@ -1,12 +1,18 @@
-- name: Install HTTP server
-  run: pip install http.server
+name: Instagram Story
 
-- name: Serve files locally
-  run: |
-    python3 -m http.server 8000 &
-    sleep 2  # Allow time for the server to start
+on:
+  workflow_dispatch:
 
-- name: Run Playwright
-  run: |
-    # Visit the local server and capture screenshot
-    python render_page.py
+jobs:
+  post_story:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: List directory contents for debugging
+        run: |
+          echo "Listing contents of the root directory"
+          ls -la
+          echo "Listing contents of instagram directory"
+          ls -la instagram
