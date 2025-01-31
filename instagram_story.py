@@ -5,6 +5,7 @@ from playwright.async_api import async_playwright
 from dotenv import load_dotenv
 import nest_asyncio
 import asyncio  # Import asyncio
+import shutil
 
 # Apply nest_asyncio to allow asyncio in the already running loop (for environments like Jupyter)
 nest_asyncio.apply()
@@ -65,12 +66,8 @@ async def main():
 asyncio.run(main())
 
 # Instagram login and photo upload section
-import os
-import shutil
-from instagrapi import Client
-
-# Define the settings file location
 SETTINGS_FILE = "instagram_settings.json"
+cl = None  # Initialize the variable outside the try-except block
 
 try:
     # Attempt to load settings if they exist
@@ -91,14 +88,17 @@ except Exception as e:
     shutil.copy2(SETTINGS_FILE, "instagram_settings.json")
     print(f"New session created and saved to {SETTINGS_FILE}")
 
-print("Session is ready to use.")
+if cl:  # Ensure 'cl' is defined before proceeding
+    print("Session is ready to use.")
 
-# Upload the story
-try:
-    cl.photo_upload(
-        path="/content/story.jpg",
-        caption="cryptoprism.io"
-    )
-    print("Story posted successfully!")
-except Exception as e:
-    print(f"Error posting story: {e}")
+    # Upload the story
+    try:
+        cl.photo_upload(
+            path="story.jpg",
+            caption="cryptoprism.io"
+        )
+        print("Story posted successfully!")
+    except Exception as e:
+        print(f"Error posting story: {e}")
+else:
+    print("Failed to initialize Instagram client.")
