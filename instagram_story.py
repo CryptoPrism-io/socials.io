@@ -65,34 +65,13 @@ async def main():
 # Run the asynchronous function
 asyncio.run(main())
 
-# Instagram login and photo upload section
-SETTINGS_FILE = "instagram_settings.json"
-cl = None  # Initialize the variable outside the try-except block
+# Instagram login and photo upload section (Direct login, no settings file)
+cl = Client()  # Directly initialize the client
 
 try:
-    # Attempt to load settings if they exist
-    if os.path.exists(SETTINGS_FILE):
-        cl = Client()
-        cl.load_settings(SETTINGS_FILE)
-        cl.get_timeline_feed()  # Verify session is still valid
-        print("Successfully loaded existing session")
-
-except Exception as e:
-    print(f"Error loading session: {e}")
-    print("Creating new session...")
-    # Login with provided credentials since no session file exists
-    cl = Client()
-    try:
-        cl.login("cryptoprism.io", "jaimaakamakhya")  # Replace with your actual credentials
-        print("Login successful.")
-        cl.dump_settings(SETTINGS_FILE)  # Save the session
-        shutil.copy2(SETTINGS_FILE, "instagram_settings.json")
-        print(f"New session created and saved to {SETTINGS_FILE}")
-    except Exception as e:
-        print(f"Error logging in: {e}")
-
-if cl:  # Ensure 'cl' is defined before proceeding
-    print("Session is ready to use.")
+    # Directly login with credentials
+    cl.login("cryptoprism.io", "jaimaakamakhya")  # Replace with your actual credentials
+    print("Login successful.")
 
     # Upload the story
     try:
@@ -103,5 +82,6 @@ if cl:  # Ensure 'cl' is defined before proceeding
         print("Story posted successfully!")
     except Exception as e:
         print(f"Error posting story: {e}")
-else:
-    print("Failed to initialize Instagram client.")
+
+except Exception as e:
+    print(f"Error logging in: {e}")
