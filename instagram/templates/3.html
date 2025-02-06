@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+    <link rel="stylesheet" href="instagram/style3.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>3</title>
 </head>
@@ -12,7 +12,7 @@
 
         <div class="col">
             <div class="top-gainer">
-                <div class="top-loser" style="padding-left: 20px;"><img src="{{ url_for('static', filename='Top Loser.png') }}"></div><br>
+                <div class="top-loser" style="padding-left: 20px;"><img src="Top Loser.png"></div><br>
                 {% for coin in coin1 %}
                 <div class="coin-card">
                     <div style="display: flex; flex-direction: row; gap: 20px;">
@@ -51,7 +51,7 @@
 
         <div class="col">
             <div class="top-gainer">
-                <div class="top-loser" style="padding-left: 20px;"><img src="{{ url_for('static', filename='Top Gainer.png') }}""></div><br>
+                <div class="top-loser" style="padding-left: 20px;"><img src="Top Gainer.png"></div><br>
                 {% for coin in coin2 %}
                 <div class="coin-card">
                     <div style="display: flex; flex-direction: row; gap: 20px;">
