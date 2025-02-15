@@ -338,7 +338,7 @@ async def render_page_1():
         return
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('instagram/templates'))
     template = env.get_template('1.html')
 
     # Render the template with the fetched data
@@ -393,7 +393,7 @@ async def render_page_2():
     coins_part3 = df2_part3.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('instagram/templates'))
     template = env.get_template('2.html')
 
     # Render the template with the fetched data
@@ -426,7 +426,7 @@ async def render_page_3():
     df3g_new = df3g.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('instagram/templates'))
     template = env.get_template('3.html')
 
     # Render the template with the fetched data
@@ -461,7 +461,7 @@ async def render_page_4():
     short_positions = df_short.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('instagram/templates'))
     template = env.get_template('4.html')
 
     # Render the template with the fetched data
@@ -491,7 +491,7 @@ async def render_page_5():
     formatted_time = now.strftime("%I:%M:%S %p %A")  # Example: 02:07:45 PM Monday
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('templates'))
+    env = Environment(loader=FileSystemLoader('instagram/templates'))
     template = env.get_template('5.html')
 
     # Render the template with the fetched data
@@ -508,10 +508,10 @@ async def render_page_5():
 
 if __name__=="__main__":
 
-    #asyncio.run(render_page_1())
-    #asyncio.run(render_page_2())
-    #asyncio.run(render_page_3())
-    #asyncio.run(render_page_4())
+    asyncio.run(render_page_1())
+    asyncio.run(render_page_2())
+    asyncio.run(render_page_3())
+    asyncio.run(render_page_4())
     asyncio.run(render_page_5())
     
     
