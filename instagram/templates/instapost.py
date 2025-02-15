@@ -338,7 +338,7 @@ async def render_page_1():
         return
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('instagram/templates'))
+    env = Environment(loader=FileSystemLoader(os.getcwd()))  # Loads from the current directory
     template = env.get_template('1.html')
 
     # Render the template with the fetched data
@@ -393,7 +393,7 @@ async def render_page_2():
     coins_part3 = df2_part3.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('instagram/templates'))
+    env = Environment(loader=FileSystemLoader(os.getcwd())) 
     template = env.get_template('2.html')
 
     # Render the template with the fetched data
@@ -426,7 +426,7 @@ async def render_page_3():
     df3g_new = df3g.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('instagram/templates'))
+    env = Environment(loader=FileSystemLoader(os.getcwd())) 
     template = env.get_template('3.html')
 
     # Render the template with the fetched data
@@ -461,7 +461,7 @@ async def render_page_4():
     short_positions = df_short.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('instagram/templates'))
+    env = Environment(loader=FileSystemLoader(os.getcwd())) 
     template = env.get_template('4.html')
 
     # Render the template with the fetched data
@@ -491,7 +491,7 @@ async def render_page_5():
     formatted_time = now.strftime("%I:%M:%S %p %A")  # Example: 02:07:45 PM Monday
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader('instagram/templates'))
+    env = Environment(loader=FileSystemLoader(os.getcwd())) 
     template = env.get_template('5.html')
 
     # Render the template with the fetched data
@@ -508,47 +508,9 @@ async def render_page_5():
 
 if __name__=="__main__":
 
-    asyncio.run(render_page_1())
-    asyncio.run(render_page_2())
+    #asyncio.run(render_page_1())
+    #asyncio.run(render_page_2())
     asyncio.run(render_page_3())
-    asyncio.run(render_page_4())
-    asyncio.run(render_page_5())
-
-
-    from instagrapi import Client
-    from pathlib import Path
-
-    # Initialize Instagram Client
-    cl = Client()
-
-    # Login to Instagram
-    USERNAME = "cryptoprism.io"
-    PASSWORD = "jaimaakamakhya"
-
-
-    cl.login(USERNAME, PASSWORD)
-
-    # Define the list of media files
-    media_files = [
-        Path("1_output.jpg"),
-        Path("2_output.jpg"),
-        Path("3_output.jpg"),
-        Path("4_output.jpg"),
-        Path("5_output.jpg")
-    ]
-
-    # Define the caption for the carousel post
-    caption = "Your carousel post caption here!"
-
-
-    # Upload the carousel post
-    media = cl.album_upload(media_files, caption)
-
-    print("Carousel Post Uploaded Successfully")
-
-    
-    
-
-
-
+    #asyncio.run(render_page_4())
+    #asyncio.run(render_page_5())
 
