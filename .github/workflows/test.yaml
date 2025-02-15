@@ -16,3 +16,6 @@ jobs:
           ls -la
           echo "Listing contents of instagram directory"
           ls -la instagram
+          echo "Listing contents of instagram directory"
+          ls -la instagram/templates
+
