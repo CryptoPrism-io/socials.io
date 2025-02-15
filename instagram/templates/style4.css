@@ -4,7 +4,7 @@ html, body {
     margin: 0 auto;
     padding: 0;
     overflow: auto;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('4_layout_new.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('instagram/4.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -15,23 +15,55 @@ html, body {
 }
 
 .logo img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
 }
 
 .col {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    padding: 5px;
+    min-width: 470px;
+    max-width: 470px;
+    min-height: 175px;
+    max-height: 175px;
+    overflow: hidden;
+}
+
+.name {
+    font-weight: 400;
+    font-size: 1.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 5px;
+}
+
+.price {
+    font-weight: 400;
+    font-size: 1.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 2px;
+    margin-right: 10px;
 }
 
 .col-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 5px;
+    position: absolute;
+    left: 40px;
+    top: 240px;
+}
+
+.col-container-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    left: 580px;
+    top: 240px;
 }
 
 .div-container {
@@ -39,7 +71,75 @@ html, body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    gap: 100px;
+    margin-top: 200px;
 }
 
-.positive { color: green; }
-.negative { color: red; }
+.positive {
+    color: #8DFF7E;
+}
+
+.negative {
+    color: #FF726D;
+}
+
+.coin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.coin-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.coin-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.coin-data {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0px;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.ratios {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    font-weight: 200;
+    padding-bottom: 20px;
+    margin-bottom: 35px;
+    padding-left: 60px; /* Reduced padding for less indentation */
+    width: 100px; /* Ensure they don't take up too much space */
+    
+}
+
+.pct-change {
+    font-size: 1.5rem;
+    
+    display: flex;
+    justify-content: flex-start;
+    width: 14rem;
+    align-items: start;
+    
+    
+    /* flex-direction: column; Remove flex direction as it will by default be top to bottom */
+}
+
+.pct-change .data {
+    display: flex;  /* Make the percentages display in a row */
+    gap: 20px;   /* Space between percentage values */
+    white-space: nowrap;  /* Prevent wrapping of the percentage and units */
+    min-width: 290px;
+    justify-content: space-evenly;
+}
