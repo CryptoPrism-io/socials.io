@@ -4,7 +4,7 @@ html, body {
     margin: 0 auto;
     padding: 0;
     overflow: auto;
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('1_layout_new.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('instagram/1_layout_new.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
