@@ -1,0 +1,75 @@
+html, body {
+    width: 1080px;
+    height: 1080px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: auto;
+    background-image: url('5.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.date {
+    font-size: 2rem;
+    font-weight:400
+}
+
+.time {
+    font-size: 1.75rem;
+    font-weight: 400;
+}
+
+.pct-change {
+    font-size: 1.5rem;
+    color: #ff4444;
+    font-weight: 300;
+    
+}
+
+.m-cap {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: left;
+    font-weight: 500;   
+}
+
+.season > div:first-child { /*Or .season > div:nth-child(1) */
+    margin-bottom: 10px; /*Adjust this value*/
+}
+
+.season > div:nth-child(2) { /*Or .season > div:nth-child(1) */
+    margin-bottom: 10px; /*Adjust this value*/
+    justify-content: space-between;
+}
+
+.h3 {
+    margin: 0px; /* Add right margin */
+}
+
+.roww2 {
+    display: flex; 
+    gap: 60px; 
+    text-align: left;
+    min-width: 1080px;
+}
+
+.roww3 {
+    display: flex;
+    gap:80px;
+    min-width: 500px;
+    font-size: 2rem;
+}
+
+.row3-m-cap {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: left;
+    font-weight: 700;
+}
+
+
