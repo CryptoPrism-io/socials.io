@@ -23,4 +23,7 @@ jobs:
       run: python instapost.py
 
     - name: Run Instagram post push Script
+      env:
+        GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  # Ensure GCP_CREDENTIALS secret is set up
       run: python instapost_push.py
+      continue-on-error: true
