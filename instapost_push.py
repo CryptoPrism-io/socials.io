@@ -35,7 +35,7 @@ else:
 gc = gspread.authorize(credentials)
 
 
-from datetime import datetime
+"""from datetime import datetime
 
 # Define the URL or Sheet ID
 sheet_url = "https://docs.google.com/spreadsheets/d/1I3yIxy6-izhri_umggZM1EQEKsIqvJwi1WfAwtYiMx4/edit#gid=0"
@@ -74,7 +74,7 @@ try:
 except Exception as e:
     print(f"Error: {e}")
     exit(1)
-
+"""
 
 """## Caption Generator"""
 
