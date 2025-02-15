@@ -21,3 +21,6 @@ jobs:
 
     - name: Run Instagram post Script
       run: python instapost.py
+
+    - name: Run Instagram post push Script
+      run: python instapost_push.py
