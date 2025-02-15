@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "social-data-pipeline-and-push",
+  "private_key_id": "c292102e43e02837b3549bb6ae37d5d8fe542ce4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDYq9AVsIbjkO+E\nq4O0B92fgUVkb076Xy4QfkXZRTCc9+YAqHn5lI0GoH1FWXdfhLXs0BzokpOqjTsc\nE4z5BQsm/SlPrUqgmqxgu951Ane3qIQHB+8B0jQVyRMe7etCsZlDDGqqYIrWaE2v\nwvy6ambfSNhtz71RDIIr0X4zMrxWlh/3x94t1niYDAjN29U8jo5khZUZ02RG9loV\n/Ekz8tXYugcAKqlBlWj322HEuqZ7IPnTI8xaL7tXhPgZDQFKgNc2JhwqOKim0cHu\nUUqTGD80kUB/6ZyQYZ8fQ3XXUj24Y3qwFt1xL5LcyL+CEmg7hJM/Q966rhBcSaLl\nkQy4pQ95AgMBAAECgf9zGtNwslb2jgiwcm2FNqiGFCbJNFjAqc/O80YoJpmsygVm\nVBp4fHJvEtN6BA1msRn0tJqm8zd/Y4gDYl+B6ywBinxn16fNql3pBeUoRCdVajC5\ni31tej4xVKDTzZEt3SuOcwo3eRJI1SBwPyYD4oLEG+7eZ34rkHmWzbQ9fraPSDdi\nIsV5w3JcJVxrTogBDVjxQn2sZ2sY32TKtchnYWcSd5AIO3XVsFQhrBHIxn6+49Gi\n4iJhIpwvH+EEXLnnXETR3FfpMpYSOuYr/ikMTeRCGb3Zz3QxB7gpN9umcRZ74YMp\nJ2NalCKiL+W+Oq7LEEfl/pi+ksPM4/B+umhSPyECgYEA8ZyNsMDx40OgegbirD2w\n8a033RytUdCnSMG2oXOObXJNWRoBzqYTz4XQ7ulSZjUBdNCi541UzqtD2902OVk3\n8UzGBjMrBsOZyPozBOvipIAvI5e6idHdugYlWK9tIXy/hQ+75So+TVJA1WXavVLE\nx3P1x3mb5gz0ez3+ZQ9bIXMCgYEA5ZMI8evi2Ny3YIl7IsNqIH2wqvAri98sQubm\ndLasTTH2x0/1Gns5wzIKEf92yLR1C4x5y9XCeT+T0KxTf+mXoc7HTt2QdhZjUozK\n0sCwEh3PSizKvCcEEAhLQSsYbVBnuzHswp2X4WCDJnoYv5Kja92cN77eYhO/DnVg\nA820YGMCgYEAhShp8qsz5LPFwtr+nDzXwypbKnJ+lyOuvmt8ktiT+3/OXzf1HQXs\nzyeJ8dIHhqrZ5Z6C2ajLv6cmHAt7sfmY2lUcohgbM3wjyl8SNTknzM+Uq0IZHZHb\naIWwmYL9W0JcbyIvxOoWMhkOAE5FUqhGKUKgh1JfeFdVeoK9LMdcyz8CgYBS6Iru\nc3X1Q6CmKIBjyZbmLP5EfX/8f5iIgMLxm5cWOdkZmfK2oZH2wHeKkGvhh+pNRWon\nBwe4qhFD5zgwlbfBI+Auxy2IuAUepuIIwrXTlRhrfUmqMZzx/UzQODQWJleP7zPG\nBQv4xNYYazfM17RVHC9yomfFm8QAALuwI/XkaQKBgQDmxKKccuhJErSJ1nF+QV3o\nukjQZTHLvfNgdvgkAXEg3Hw7cnLom+ktzr33bVjuTKx9HKhwR+QsRBjiCaTb9by0\n+oG/o8wABnxLGjwdhUdFBHFRaAC3aFyuXlx3bg1i/FYYws/wK39oQxymJJC45hUg\nAzXCqHeU3l5PzCzw8faLIA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "automation-access@social-data-pipeline-and-push.iam.gserviceaccount.com",
+  "client_id": "108321165789343527503",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/automation-access%40social-data-pipeline-and-push.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

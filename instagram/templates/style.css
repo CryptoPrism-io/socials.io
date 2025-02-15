@@ -1,0 +1,160 @@
+html, body {
+    width: 1080px;
+    height: 1080px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: auto;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    height: 60px;
+    width: 100%;
+    flex-shrink: 0;
+    padding: 10px;
+}
+
+.top-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0px;
+}
+
+.header-card {
+    display: flex;
+    width: fit-content;
+    border: none;
+    border-radius: 15px;
+}
+
+.coin-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+}
+
+.coin-stat h4 {
+    margin: 0;
+}
+
+.coin-trend {
+    width: 50px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    gap: 15px;
+    padding: 15px;
+}
+
+/* 🔹 Optimized Coin Card */
+.coin-card {
+    display: flex;
+    align-items: center; /* Ensures vertical alignment */
+    justify-content: space-between; /* Even spacing */
+    gap: 15px; /* Adjusted for better spacing */
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 2px solid rgba(121, 121, 121, 0);
+    border-radius: 17px;
+    min-width: 280px;
+    max-width: 280px;
+}
+
+/* 🔹 Logo Styling */
+.logo {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 🔹 Name and Change */
+.name {
+    display: flex;
+    flex-direction: column;
+    gap: 3px; /* Reduced unnecessary space */
+    align-items: flex-start; /* Aligns content to the left */
+    font-weight: 400;
+    flex: 1; /* Takes up available space */
+    margin-right: 10px; /* Adds some spacing between name and price */
+}
+
+.coin-name {
+    font-size: 1.75rem; /* Scales better than fixed px */
+    color: white;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+    text-align: left; /* Ensures text is left-aligned */
+}
+
+.pct-change {
+    font-size: 1.25rem;
+    color: #ff4444;
+}
+
+/* 🔹 Price and Market Cap */
+.price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    font-size: 1.5rem;
+    gap: 5px;
+}
+
+.coin-price {
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+.m-cap {
+    font-size: 1.25rem;
+    font-weight: 300;
+    text-align: right;
+}
+
+/* 🔹 Column Container */
+.col-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    width: fit-content;
+    margin: auto;
+}
+
+.col-container .col:nth-child(2) {
+    padding-top: 50px;
+}
+
+.pct-change.positive {
+    color: #00ff2f;
+    font-weight: bold;
+}
+
+/* Negative percentage change */
+.pct-change.negative {
+    color: #ff2f2f;
+    font-weight: bold;
+}
