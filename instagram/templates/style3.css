@@ -4,7 +4,7 @@ html, body {
     margin: 0 auto;
     padding: 0;
     overflow: auto;
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('instagram/templates/3.png');
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('3.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -15,11 +15,23 @@ html, body {
 }
 
 .coin-name {
-    font-size: 2rem; /* Scales better than fixed px */
+    font-size: 2rem;
     color: white;
     letter-spacing: 2px;
     margin-bottom: 2px;
-    text-align: left; /* Ensures text is left-aligned */
+    text-align: left;
+    max-width: 100px; /* Set a reasonable max width */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Ensures overflow is hidden */
+    text-overflow:ellipsis; /* Adds "..." when text overflows */
+}
+
+.pct-change{
+
+   
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: visible; /* Ensures overflow is hidden */
+    
 }
 
 .coin-card {
