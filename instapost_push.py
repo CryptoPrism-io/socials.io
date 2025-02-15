@@ -332,7 +332,7 @@ caption = caption
 media = cl.album_upload(media_files, caption1)
 
 
-
+"""
 media_dict = media.model_dump() 
 
 data=media_dict
@@ -382,3 +382,4 @@ except Exception as e:
 end_time = time.time()
 elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time} seconds")
+"""
