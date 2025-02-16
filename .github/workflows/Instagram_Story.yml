@@ -1,8 +1,10 @@
 name: Instagram Caraousel Post
 
 on:
-  workflow_dispatch:
-
+  schedule:
+    - cron: "59 0 * * *"  # Daily at 00:30 UTC
+  workflow_dispatch: {}
+  
 jobs:
   post_story:
     runs-on: ubuntu-latest
