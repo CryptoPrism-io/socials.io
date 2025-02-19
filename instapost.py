@@ -180,7 +180,20 @@ def btc_snapshot():
 
   # Apply the function to create the 'Trend' column
   top_1_cc['Trend'] = top_1_cc['sentiment_diff'].apply(classify_trend)
+
+    # Construct the SQL query
+  query = f"""
+  SELECT logo, slug FROM "FE_CC_INFO_URL"
+  """
+
+  # Execute the query and fetch the data into a DataFrame
+  logos_and_slugs = pd.read_sql_query(query, gcp_engine)
+
+  # Merge the two DataFrames on the 'slug' column
+  top_1_cc = pd.merge(top_1_cc, logos_and_slugs, on='slug', how='left')
+
   return top_1_cc
+  
   
 
 # fetch for page 3
