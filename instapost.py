@@ -488,7 +488,7 @@ async def render_page_5():
 
     now = datetime.now()
     formatted_date = now.strftime("%d %b, %Y")  # Example: 15 Feb, 2025
-    formatted_time = now.strftime("%I:%M:%S %p %A")  # Example: 02:07:45 PM Monday
+    formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM Monday
 
     # Set up Jinja2 environment
     env = Environment(loader=FileSystemLoader(os.getcwd())) 
@@ -508,9 +508,9 @@ async def render_page_5():
 
 if __name__=="__main__":
 
-    asyncio.run(render_page_1())
-    asyncio.run(render_page_2())
-    asyncio.run(render_page_3())
+    #asyncio.run(render_page_1())
+    #asyncio.run(render_page_2())
+    #asyncio.run(render_page_3())
     asyncio.run(render_page_4())
-    asyncio.run(render_page_5())
+    #asyncio.run(render_page_5())
 
