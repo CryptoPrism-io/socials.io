@@ -90,6 +90,99 @@ def fetch_data_as_dataframe():
         top_100_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
     return top_100_cc
 
+# Data for BTC snapshot
+def btc_snapshot():
+    # @title bitcoing data only
+  query_top_1 = """
+  SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, volume24h, market_cap, percent_change7d, percent_change30d, ytd_price_change_percentage
+  FROM crypto_listings_latest_1000
+  WHERE cmc_rank < 2
+  """
+  top_1_cc  = pd.read_sql_query(query_top_1, gcp_engine)
+  
+  def format_market_cap(market_cap):
+    """Formats market cap with units (Million, Billion, Trillion)."""
+    if pd.isnull(market_cap):
+        return market_cap
+    market_cap = float(market_cap)
+    if market_cap >= 1e12:
+        return f"${market_cap / 1e12:.2f} T"
+    elif market_cap >= 1e9:
+        return f"${market_cap / 1e9:.2f} B"
+    elif market_cap >= 1e6:
+        return f"${market_cap / 1e6:.2f} M"
+    else:
+        return f"${market_cap:.2f}"
+
+  # Apply the formatting function to the 'market_cap' column
+  top_1_cc['market_cap'] = top_1_cc['market_cap'].apply(format_market_cap)
+  # Apply the formatting function to the 'market_cap' column
+  top_1_cc['volume24h'] = top_1_cc['volume24h'].apply(format_market_cap)
+
+  """Color Code for PCT_Change"""
+
+
+  # Format the 'tg_percent_change24h' column with 2 decimal places and add '%'
+  top_1_cc['percent_change24h'] = top_1_cc['percent_change24h'].apply(lambda x: f"{x:.2f}%" if not pd.isnull(x) else x)
+  top_1_cc['percent_change7d'] = top_1_cc['percent_change7d'].apply(lambda x: f"{x:.2f}%" if not pd.isnull(x) else x)
+  top_1_cc['percent_change30d'] = top_1_cc['percent_change30d'].apply(lambda x: f"{x:.2f}%" if not pd.isnull(x) else x)
+  top_1_cc['ytd_price_change_percentage'] = top_1_cc['ytd_price_change_percentage'].apply(lambda x: f"{x:.2f}%" if not pd.isnull(x) else x)
+
+  # Format the 'price' column with '$' and 2 decimal places
+  top_1_cc['price'] = top_1_cc['price'].apply(lambda x: f"${x:.2f}" if not pd.isnull(x) else x)
+
+  # top_1_cc.head()
+
+  # @title fetching dmv values for bitcoin
+  # Construct the SQL query
+  query = f"""
+  SELECT *
+  FROM "FE_DMV_ALL"
+  WHERE slug = 'bitcoin'
+  """
+  # Execute the query and fetch the data into a DataFrame
+  dmv_bitcoin = pd.read_sql_query(query, gcp_engine)
+
+  # @title count of bullish bearing and neautal for btc
+  # prompt: at dmv_bitcoin can you help me count the number '1' '-1' and '0' in the first row and create a add three more colums bullish- Number of '1' in the first row bearishNumber of '-1' in the first row and Number of '0' in the first row is neutral
+  dmv_bitcoin_first_row = dmv_bitcoin.iloc[0].tolist()
+  bullish_count = dmv_bitcoin_first_row.count(1)
+  bearish_count = dmv_bitcoin_first_row.count(-1)
+  neutral_count = dmv_bitcoin_first_row.count(0)
+
+  # Print counts
+  print(f"Bullish (1): {bullish_count}")
+  print(f"Bearish (-1): {bearish_count}")
+  print(f"Neutral (0): {neutral_count}")
+
+  # Adding the counts to the top_1_cc DataFrame
+  top_1_cc['bullish'] = bullish_count
+  top_1_cc['bearish'] = bearish_count
+  top_1_cc['neutral'] = neutral_count
+
+  # prompt: i want to add a new coloum as Trend and classify it as bearish bullish or consolidating what logic can i use --- # Adding the counts to the top_1_cc DataFrame
+  # top_1_cc['bullish'] = bullish_count
+  # top_1_cc['bearish'] = bearish_count
+  # top_1_cc['neutral'] = neutral_count for these
+
+  # Calculate the difference between bullish and bearish counts
+  top_1_cc['sentiment_diff'] = top_1_cc['bullish'] - top_1_cc['bearish']
+  
+
+  # Define a function to classify the trend
+  def classify_trend(sentiment_diff):
+      if sentiment_diff > 4:  # Adjust threshold as needed
+          return "Bullish"
+      elif sentiment_diff < -4: # Adjust threshold as needed
+          return "Bearish"
+      else:
+          return "Consolidating"
+
+  # Apply the function to create the 'Trend' column
+  top_1_cc['Trend'] = top_1_cc['sentiment_diff'].apply(classify_trend)
+  return top_1_cc
+  
+
 # fetch for page 3
 def fetch_for_3():
     """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
@@ -332,6 +425,8 @@ async def render_page_1():
     """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
     # Fetch the data using the previously defined function
     coins = fetch_data_as_dataframe()
+    snap = btc_snapshot()
+    snap.info()
 
     if coins.empty:
         print("No data to render.")
@@ -508,9 +603,9 @@ async def render_page_5():
 
 if __name__=="__main__":
 
-    #asyncio.run(render_page_1())
+    asyncio.run(render_page_1())
     #asyncio.run(render_page_2())
     #asyncio.run(render_page_3())
-    asyncio.run(render_page_4())
+    #asyncio.run(render_page_4())
     #asyncio.run(render_page_5())
 
