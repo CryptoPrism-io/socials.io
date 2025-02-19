@@ -220,12 +220,5 @@ html, body {
         min-width: 410px;
 }
 
-.trend {
-    padding-left: 355px;
-    font-size: 30px;
-    color: #00ff2f;
-    font-weight: bolder;
-    position: absolute;
-    top: 275px;
-    left: 525px;
-}
+
+
