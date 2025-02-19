@@ -8,55 +8,70 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header" style="padding: 25px 50px;">LAST UPDATE:</div>
-    <div class="top-bar" style="top: 100px;">
+    {% for snaps in snap %}
+    <div class="header" style="padding: 25px 50px;">{{snaps['last_updated']}}</div>
+    
         <div class="header-card">
-            <div class="coin-stat">
-                <div style="display: flex; gap: 240px; font-size: 32px; position:absolute; top:100px; left: 420px">
-                    <div class="logo">
-                        <img src="" alt="Coin logo">
-                    </div>
-                    <h2>BTC</h2>
-                    <h4>$90000</h4>
+            <div class="snap-logo">
+                <div class="logo">
+                    <img src="{{ snaps['logo'] }}">
                 </div>
-                <div style="display: flex; gap: 200px; font-size: 20px; position:absolute; top:150px; left: 470px">
-                    
-                    <h4>$1.92 T</h4>
+                <div class="symbol">
+                    BTC
                 </div>
-                <div style="display: flex; gap: 185px; font-size: 20px; position:absolute; top:200px; left: 470px"">
-                    
-                    <h4>$97.25 B</h4>
-                </div>
-                
-                <div style="display: flex; gap: 65px; font-size: 15px; position:absolute; top:274px; left: 160px">
-                    <h4 style="color: #ff0000;">-3.48%</h4>
-                    <h4 style="color: #00ff2f;">12.24%</h4>
-                    <h4 style="color: #ff0000;">-3%</h4>
-                    <h4 style="color: #00ff2f;">120.07%</h4>
-                </div>
-                
             </div>
             <div class="coin-stat">
+                <div class="snap-price">
+                    <h4>{{snaps['price']}}</h4>
+                </div>
+                <div class="snap-mcap">
+
+                    <h4>{{snaps['market_cap']}}</h4>
+                </div>
+                <div class="snap-vol">
+                    
+                    <h4>{{snaps['volume24h']}}</h4>
+                </div>
+                
+                <div class="snap-pct">
+                    <h4 class="pct-change {% if snaps['percent_change24h']|float > 0 %}positive{% elif snaps['percent_change24h']|float < 0 %}negative{% endif %}">
+                        {{ snaps['percent_change24h'] }}
+                    </h4>
+                    <h4 class=" pct-change {% if snaps['percent_change7d']|float > 0 %}positive{% elif snaps['percent_change7d']|float < 0 %}negative{% endif %}">
+                        {{ snaps['percent_change7d'] }}
+                    </h4>
+                    <h4 class=" pct-change {% if snaps['percent_change30d']|float > 0 %}positive{% elif snaps['percent_change30d']|float < 0 %}negative{% endif %}">
+                        {{ snaps['percent_change30d'] }}
+                    </h4>
+                    <h4 class=" pct-change {% if snaps['ytd_price_change_percentage']|float > 0 %}positive{% elif snaps['ytd_price_change_percentage']|float < 0 %}negative{% endif %}">
+                        {{ snaps['ytd_price_change_percentage'] }}
+                    </h4>
+                </div>
+                
+                
+            </div>
+            <div class="coin-bnb">
                 
                 <div style="display: flex; gap: 120px; justify-content: space-between; font-size: 45px; font-weight: bolder;position:absolute; top:140px; left: 625px">
-                    <div style="color: #ff0000;">4</div>
-                    <div style="color: #ffb338;">4</div>
-                    <div style="color: #00ff2f;">12</div>
+                    <div style="color: #ff0000;">{{snaps['bearish']}}</div>
+                    <div style="color: #ffb338;">{{snaps['neutral']}}</div>
+                    <div style="color: #00ff2f;">{{snaps['bullish']}}</div>
                 </div>
-                <div>
+                <div class="trend">
                     
-                    <div style="padding-left: 355px; font-size: 30px; color: #00ff2f; font-weight: bolder; position:absolute; top:275px; left: 525px">Bullish</div>
+                    <div>{{snaps['Trend']}}</div>
                 </div>
                 
             </div>
         </div>
-    </div>
+    
+    {% endfor %}
 
     <div class="col-container" style="padding-right: 10px;">
         <div class="col" style="position: absolute; left: 20px; top: 365px">
             <div class="coin-card">
                 <div class="logo">
-                    <img src="{{coins[0]['logo'] }}" alt="Coin logo">
+                    <img src="{{coins[0]['logo']}}" alt="Coin logo">
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[0]['symbol']}}</div>
@@ -77,7 +92,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[1]['symbol']}}</div>
-                    <div class="pct-change">{{ coins[1]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[1]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[1]['percent_change24h'] | round(2) }}%%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[1]['price'] | round(2) }}</div>
@@ -91,7 +106,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[2]['symbol']}}</div>
-                    <div class="pct-change">{{ coins[2]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[2]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[2]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[2]['price'] | round(2) }}</div>
@@ -105,7 +120,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[3]['symbol']}}</div>
-                    <div class="pct-change">{{ coins[3]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[3]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[3]['percent_change24h'] | round(2) }}%%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[3]['price'] | round(2) }}</div>
@@ -119,7 +134,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[4]['symbol']}}</div>
-                    <div class="pct-change">{{ coins[4]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[4]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[4]['percent_change24h'] | round(2) }}%%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[4]['price'] | round(2) }}</div>
@@ -136,7 +151,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[5]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[5]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[5]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[5]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[5]['price'] | round(2) }}</div>
@@ -150,7 +165,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[6]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[6]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[6]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[6]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[6]['price'] | round(2) }}</div>
@@ -164,7 +179,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[7]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[7]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[7]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[7]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[7]['price'] | round(2) }}</div>
@@ -178,7 +193,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[8]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[8]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[8]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[8]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[8]['price'] | round(2) }}</div>
@@ -192,7 +207,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[9]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[9]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[9]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[9]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[9]['price'] | round(2) }}</div>
@@ -209,7 +224,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[10]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[10]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[10]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[10]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[10]['price'] | round(2) }}</div>
@@ -223,7 +238,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[11]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[11]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[11]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[11]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[11]['price'] | round(2) }}</div>
@@ -237,7 +252,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[12]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[12]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[12]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[12]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[12]['price'] | round(2) }}</div>
@@ -251,7 +266,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[13]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[13]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[13]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[13]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[13]['price'] | round(2) }}</div>
@@ -265,7 +280,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[14]['symbol'] }}</div>
-                    <div class="pct-change">{{ coins[14]['percent_change24h'] | round(2) }}</div>
+                    <div class="pct-change {% if coins[14]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[14]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[14]['price'] | round(2) }}</div>
