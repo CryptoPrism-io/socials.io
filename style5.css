@@ -72,4 +72,12 @@ html, body {
     font-weight: 700;
 }
 
+.pct-change.positive {
+    color: #00ff5f;
+}
+
+.pct-change.negative {
+    color: #ff3550;
+}
+
 

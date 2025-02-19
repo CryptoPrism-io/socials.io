@@ -35,15 +35,15 @@
                     <div class="dmv">
                         <div>
                             
-                            <span style="color: {% if coin.Durability_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Durability_Score }}</span>
+                            <span class="d" style="color: {% if coin.Durability_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Durability_Score }}</span>
                         </div>
                         <div>
                             
-                            <span style="color: {% if coin.Momentum_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Momentum_Score }}</span>
+                            <span class="m" style="color: {% if coin.Momentum_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Momentum_Score }}</span>
                         </div>
                         <div>
                             
-                            <span style="color: {% if coin.Valuation_Score    >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Valuation_Score }}</span>
+                            <span class="v" style="color: {% if coin.Valuation_Score    >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Valuation_Score }}</span>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
         </div>
 
         <div class="col" style="position: absolute; left: 610px; top:255px">
-            <div class="top-gainer">
+            <div class="top-loser">
                 {% for coin in coin1 %}
                 <div class="coin-card" style="margin-bottom: 10px;"> <!-- Adjusted margin -->
                     <div class="coin-stat">
@@ -76,15 +76,15 @@
                     <div class="dmv">
                         <div>
                             
-                            <span style="color: {% if coin.Durability_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Durability_Score }}</span>
+                            <span class="d" style="color: {% if coin.Durability_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Durability_Score }}</span>
                         </div>
                         <div>
                             
-                            <span style="color: {% if coin.Momentum_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Momentum_Score }}</span>
+                            <span class="m" style="color: {% if coin.Momentum_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Momentum_Score }}</span>
                         </div>
                         <div>
                             
-                            <span style="color: {% if coin.Valuation_Score    >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Valuation_Score }}</span>
+                            <span class="v" style="color: {% if coin.Valuation_Score    >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Valuation_Score }}</span>
                         </div>
                     </div>
                 </div>
