@@ -76,8 +76,8 @@ html, body {
 
 /* 🔹 Logo Styling */
 .logo {
-    width: 64px;
-    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,4 +157,75 @@ html, body {
 .pct-change.negative {
     color: #ff2f2f;
     font-weight: bold;
+}
+
+.snap-logo {
+    position: absolute;
+    left: 120px;
+    top: 85px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.symbol {
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: 5px;
+}
+
+.snap-mcap {
+    display: flex;
+    font-size: 20px;
+    position: absolute;
+    top: 150px;
+    left: 370px;
+    justify-content: flex-end;
+    min-width: 200px;
+    font-weight: 100;
+}
+
+.snap-vol {
+    display: flex;
+    font-size: 20px;
+    position: absolute;
+    top: 190px;
+    left: 370px;
+    justify-content: flex-end;
+    min-width: 200px;
+    font-weight: 100;
+}
+
+.snap-price {
+    display: flex;
+    font-size: 20px;
+    position: absolute;
+    top: 95px;
+    left: 370px;
+    justify-content: flex-end;
+    min-width: 200px;
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+.snap-pct {
+    display: flex;
+        gap: 55px;
+        justify-content: space-between;
+        font-size: 15px;
+        position: absolute;
+        top: 274px;
+        left: 120px;
+        max-width: 440px;
+        min-width: 410px;
+}
+
+.trend {
+    padding-left: 355px;
+    font-size: 30px;
+    color: #00ff2f;
+    font-weight: bolder;
+    position: absolute;
+    top: 275px;
+    left: 525px;
 }

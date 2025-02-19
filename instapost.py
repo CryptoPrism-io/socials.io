@@ -439,7 +439,7 @@ async def render_page_1():
     # Fetch the data using the previously defined function
     coins = fetch_data_as_dataframe()
     snap = btc_snapshot()
-    snap.info()
+    
 
     if coins.empty:
         print("No data to render.")
@@ -449,8 +449,9 @@ async def render_page_1():
     env = Environment(loader=FileSystemLoader(os.getcwd()))  # Loads from the current directory
     template = env.get_template('1.html')
 
+    
     # Render the template with the fetched data
-    output = template.render(coins=coins.to_dict(orient='records'))
+    output = template.render(coins=coins.to_dict(orient='records'), snap=snap.to_dict(orient='records'))
 
     # Save the output to an HTML file
     with open("1_output.html", "w") as f:
