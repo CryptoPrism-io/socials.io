@@ -618,8 +618,8 @@ async def render_page_5():
 if __name__=="__main__":
 
     asyncio.run(render_page_1())
-    #asyncio.run(render_page_2())
-    #asyncio.run(render_page_3())
-    #asyncio.run(render_page_4())
-    #asyncio.run(render_page_5())
+    asyncio.run(render_page_2())
+    asyncio.run(render_page_3())
+    asyncio.run(render_page_4())
+    asyncio.run(render_page_5())
 
