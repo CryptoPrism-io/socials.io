@@ -210,15 +210,25 @@ html, body {
 
 .snap-pct {
     display: flex;
-        gap: 55px;
-        justify-content: space-between;
-        font-size: 15px;
-        position: absolute;
-        top: 274px;
-        left: 120px;
-        max-width: 440px;
-        min-width: 410px;
+    gap: 10px;
+    justify-content: space-between;
+    font-size: 15px;
+    position: absolute;
+    top: 274px;
+    left: 130px;
+    max-width: 440px;
+    min-width: 440px;
+    text-align: center;
 }
 
-
+.trend {
+    font-size: 30px;
+    color: #00ccff;
+    font-weight: bolder;
+    position:absolute;
+    top:275px;
+    left: 660px;
+    min-width: 330px;
+    text-align: right;
+}
 
