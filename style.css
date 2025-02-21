@@ -15,10 +15,15 @@ html, body {
 }
 
 .header {
-    height: 60px;
-    width: 100%;
+    position: absolute;
+    left: 200px;
+    height: auto;
+    width: fit-content;
     flex-shrink: 0;
     padding: 10px;
+    top: 12px;
+    font-size: 1.35rem;
+    color: rgb(129, 129, 129);
 }
 
 .top-bar {
