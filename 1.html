@@ -35,16 +35,16 @@
                 
                 <div class="snap-pct">
                     <h4 class="pct-change {% if snaps['percent_change24h']|float > 0 %}positive{% elif snaps['percent_change24h']|float < 0 %}negative{% endif %}">
-                        {{ snaps['percent_change24h'] }}
+                        {{ snaps['percent_change24h'] }}%
                     </h4>
                     <h4 class=" pct-change {% if snaps['percent_change7d']|float > 0 %}positive{% elif snaps['percent_change7d']|float < 0 %}negative{% endif %}">
-                        {{ snaps['percent_change7d'] }}
+                        {{ snaps['percent_change7d'] }}%
                     </h4>
                     <h4 class=" pct-change {% if snaps['percent_change30d']|float > 0 %}positive{% elif snaps['percent_change30d']|float < 0 %}negative{% endif %}">
-                        {{ snaps['percent_change30d'] }}
+                        {{ snaps['percent_change30d'] }}%
                     </h4>
                     <h4 class=" pct-change {% if snaps['ytd_price_change_percentage']|float > 0 %}positive{% elif snaps['ytd_price_change_percentage']|float < 0 %}negative{% endif %}">
-                        {{ snaps['ytd_price_change_percentage'] }}
+                        {{ snaps['ytd_price_change_percentage'] }}%
                     </h4>
                 </div>
                 
