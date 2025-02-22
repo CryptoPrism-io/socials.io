@@ -52,10 +52,13 @@ html, body {
 }
 
 .roww2 {
-    display: flex; 
-    gap: 60px; 
-    text-align: left;
+    display: flex;
+    gap: 40px;
+    text-align: center;
     min-width: 1080px;
+    justify-content: space-between;
+    max-width: 800px;
+    min-width: 1010px;
 }
 
 .roww3 {
