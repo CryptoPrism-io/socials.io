@@ -93,7 +93,7 @@
                 </div>
                 <div class="name">
                     <div class="coin-name">{{ coins[2]['symbol']}}</div>
-                    <div class="pct-change {% if coins[2]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[2]['percent_change24h'] | round(2) }}%%</div>
+                    <div class="pct-change {% if coins[2]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">{{ coins[2]['percent_change24h'] | round(2) }}%</div>
                 </div>
                 <div class="price">
                     <div class="coin-price">${{ coins[2]['price'] | round(2) }}</div>
