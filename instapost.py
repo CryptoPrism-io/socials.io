@@ -123,10 +123,10 @@ def btc_snapshot():
 
 
   # Format the 'tg_percent_change24h' column with 2 decimal places and add '%'
-  top_1_cc['percent_change24h'] = top_1_cc['percent_change24h'].apply(lambda x: f"{x:.2f}%" if not pd.isnull(x) else x)
-  top_1_cc['percent_change7d'] = top_1_cc['percent_change7d'].apply(lambda x: f"{x:.2f}%" if not pd.isnull(x) else x)
-  top_1_cc['percent_change30d'] = top_1_cc['percent_change30d'].apply(lambda x: f"{x:.2f}%" if not pd.isnull(x) else x)
-  top_1_cc['ytd_price_change_percentage'] = top_1_cc['ytd_price_change_percentage'].apply(lambda x: f"{x:.2f}%" if not pd.isnull(x) else x)
+  top_1_cc['percent_change24h'] = top_1_cc['percent_change24h'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
+  top_1_cc['percent_change7d'] = top_1_cc['percent_change7d'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
+  top_1_cc['percent_change30d'] = top_1_cc['percent_change30d'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
+  top_1_cc['ytd_price_change_percentage'] = top_1_cc['ytd_price_change_percentage'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
 
   # Format the 'price' column with '$' and 2 decimal places
   top_1_cc['price'] = top_1_cc['price'].apply(lambda x: f"${x:.2f}" if not pd.isnull(x) else x)
