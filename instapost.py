@@ -7,6 +7,8 @@ from jinja2 import Environment, FileSystemLoader
 from instagrapi import Client
 from datetime import datetime
 
+#commitcheck
+
 # Database connection configuration
 DB_CONFIG = {
     'host': '34.55.195.199',        # GCP PostgreSQL instance public IP
