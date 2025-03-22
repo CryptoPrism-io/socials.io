@@ -254,7 +254,7 @@ def fetch_for_3():
 def fetch_for_4_long():
     """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
     query_long_short = """
-      SELECT
+SELECT
   "FE_DMV_ALL"."id",
   "FE_DMV_ALL"."slug",
   "FE_DMV_ALL"."name",
@@ -287,11 +287,14 @@ ON
   "FE_DMV_ALL"."slug" = "FE_RATIOS"."slug"
 WHERE
   "crypto_listings_latest_1000"."cmc_rank" < 100
+  AND "FE_RATIOS"."d_rat_beta" > 1
+  AND "FE_RATIOS"."m_rat_omega" > 1
 ORDER BY
   "FE_DMV_ALL"."bullish" DESC
 LIMIT
-    10;
-      """
+  15;
+"""
+
     
     try:
         # Use gcp_engine to execute the query and fetch data as a DataFrame
@@ -317,7 +320,7 @@ LIMIT
 def fetch_for_4_short():
     """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
     query_long_short = """
-      SELECT
+SELECT
   "FE_DMV_ALL"."id",
   "FE_DMV_ALL"."slug",
   "FE_DMV_ALL"."name",
@@ -350,11 +353,14 @@ ON
   "FE_DMV_ALL"."slug" = "FE_RATIOS"."slug"
 WHERE
   "crypto_listings_latest_1000"."cmc_rank" < 100
+  AND "FE_RATIOS"."d_rat_beta" > 1
+  AND "FE_RATIOS"."m_rat_omega" < 2
 ORDER BY
   "FE_DMV_ALL"."bearish" ASC
 LIMIT
-    10;
-      """
+  15;
+"""
+
     
     try:
         # Use gcp_engine to execute the query and fetch data as a DataFrame
