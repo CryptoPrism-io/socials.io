@@ -140,7 +140,7 @@ def btc_snapshot():
   query = f"""
   SELECT *
   FROM "FE_DMV_ALL"
-  WHERE slug = 'ethereum'
+  WHERE slug = 'bitcoin'
   """
   # Execute the query and fetch the data into a DataFrame
   dmv_bitcoin = pd.read_sql_query(query, gcp_engine)
