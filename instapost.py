@@ -356,7 +356,7 @@ WHERE
   AND "FE_RATIOS"."d_rat_beta" > 1
   AND "FE_RATIOS"."m_rat_omega" < 2
 ORDER BY
-  "FE_DMV_ALL"."bearish" ASC
+  "FE_DMV_ALL"."bearish" DESC
 LIMIT
   15;
 """
