@@ -21,7 +21,8 @@ jobs:
       run: |
         pip install together psycopg2 nest_asyncio requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib instagrapi playwright python-dotenv pillow sqlalchemy jinja2 && playwright install chromium && playwright install firefox && playwright install webkit
 
-
+    - name: Run Instagram post Script
+      run: python instapost.py
 
     - name: Run Instagram post push Script
       run: python instapost_push.py
