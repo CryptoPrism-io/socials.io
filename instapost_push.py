@@ -275,7 +275,7 @@ import json
 from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 
 # Define paths
-DRIVE_FILE_ID = '1paoi_HhOMpFoafmfkIerHq4CH9Snq76i'  # Replace with your file ID
+DRIVE_FILE_ID = '1u1jr50hhm-9IJUjvYsZ7mEeGMSgLI8hv'  # Replace with your file ID
 LOCAL_PATH = 'instagram_settings.json'
 
 # Function to download settings from Google Drive
@@ -333,6 +333,3 @@ media = cl.album_upload(media_files, caption1)
 
 # Print the media IDs of the uploaded post
 print("suceesfully uploaded")
-
-
-
