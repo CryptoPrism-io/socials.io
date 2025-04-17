@@ -1,4 +1,6 @@
-# prompt: write a code for collecting start time and end time and then the difference , in 3 lines
+
+
+ #prompt: write a code for collecting start time and end time and then the difference , in 3 lines
 import time
 
 start_time = time.time()
@@ -33,8 +35,6 @@ else:
 
 # Authorize the credentials
 gc = gspread.authorize(credentials)
-
-
 
 """## Caption Generator"""
 print("caption gen")
@@ -231,6 +231,7 @@ for token in response:
 # Now caption1 contains the complete output
 print(caption1)  # Display the generated caption
 
+
 """# Instagram Bot"""
 
 #!pip install instagrapi
@@ -246,7 +247,7 @@ for file in files:
 from googleapiclient.http import MediaIoBaseDownload
 import io
 # Replace with the desired file ID (from the printed list)
-file_id = '1paoi_HhOMpFoafmfkIerHq4CH9Snq76i'
+file_id = '1u1jr50hhm-9IJUjvYsZ7mEeGMSgLI8hv'
 file_name = 'instagram_settings.json'  # Name to save the downloaded file
 
 # Download the file
