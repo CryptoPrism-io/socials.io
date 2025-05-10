@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style4.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>4</title>
+</head>
+<body>
+    <div class="div-container" style="display: flex; gap: 100px; margin-top: 200px;">
+
+        <div class="col-container">
+            {% for coin in coins1 %}
+            <div class="col">
+                <div style="display: flex; gap: 15px;">
+                    <div class="logo">
+                        <img src="{{ coin.logo }}">
+                    </div>
+                    <div>
+                        <div style="display: flex; gap: 250px;">
+                            <div>{{ coin.symbol }}</div>
+                            <div>$ {{ coin.price}}</div>
+                        </div>
+                        <div style="display: flex; gap: 255px;">
+                            <div>#{{ coin.cmc_rank }}</div>
+                            <div>${{ coin.market_cap }} B</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 30px;">
+                    <div style="display: flex; flex-direction: column;">
+                        <div style="display: flex; gap: 50px;">
+                            <div>α</div>
+                            <div>{{ coin.m_rat_alpha }}</div>
+                        </div>
+                        <div style="display: flex; gap: 50px;">
+                            <div>β</div>
+                            <div>{{ coin.d_rat_beta }}</div>
+                        </div>
+                        <div style="display: flex; gap: 50px;">
+                            <div>Ω</div>
+                            <div>{{ coin.m_rat_omega }}</div>
+                        </div>
+                    </div>
+                        <div style="display: flex; flex-direction: column;">
+                        <div style="display: flex; gap: 80px; font-size: larger; font-weight: 800; padding-left: 40px;">
+                            <div>1D</div>
+                            <div>7D</div>
+                            <div>30D</div>
+                        </div>
+                        <div style="display: flex; gap: 60px; font-size: larger; padding-left: 20px;">
+                            <div class="{% if coin.percent_change24h > 0 %}positive{% else %}negative{% endif %}">
+                                {{ coin.percent_change24h }}%
+                            </div>
+                            <div class="{% if coin.percent_change7d > 0 %}positive{% else %}negative{% endif %}">
+                                {{ coin.percent_change7d }}%
+                            </div>
+                            <div class="{% if coin.percent_change30d > 0 %}positive{% else %}negative{% endif %}">
+                                {{ coin.percent_change30d }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-container">
+            {% for coin in coins2 %}
+            <div class="col">
+                <div style="display: flex; gap: 15px;">
+                    <div class="logo">
+                        <img src="{{ coin.logo }}">
+                    </div>
+                    <div>
+                        <div style="display: flex; gap: 250px;">
+                            <div>{{ coin.symbol }}</div>
+                            <div>$ {{ coin.price}}</div>
+                        </div>
+                        <div style="display: flex; gap: 255px;">
+                            <div>#{{ coin.cmc_rank }}</div>
+                            <div>${{ coin.market_cap }} B</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 30px;">
+                    <div style="display: flex; flex-direction: column;">
+                        <div style="display: flex; gap: 50px;">
+                            <div>α</div>
+                            <div>{{ coin.m_rat_alpha }}</div>
+                        </div>
+                        <div style="display: flex; gap: 50px;">
+                            <div>β</div>
+                            <div>{{ coin.d_rat_beta }}</div>
+                        </div>
+                        <div style="display: flex; gap: 50px;">
+                            <div>Ω</div>
+                            <div>{{ coin.m_rat_omega }}</div>
+                        </div>
+                    </div>
+                        <div style="display: flex; flex-direction: column;">
+                        <div style="display: flex; gap: 80px; font-size: larger; font-weight: 800; padding-left: 40px;">
+                            <div>1D</div>
+                            <div>7D</div>
+                            <div>30D</div>
+                        </div>
+                        <div style="display: flex; gap: 60px; font-size: larger; padding-left: 20px;">
+                            <div class="{% if coin.percent_change24h > 0 %}positive{% else %}negative{% endif %}">
+                                {{ coin.percent_change24h }}%
+                            </div>
+                            <div class="{% if coin.percent_change7d > 0 %}positive{% else %}negative{% endif %}">
+                                {{ coin.percent_change7d }}%
+                            </div>
+                            <div class="{% if coin.percent_change30d > 0 %}positive{% else %}negative{% endif %}">
+                                {{ coin.percent_change30d }}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</body>
+</html>
