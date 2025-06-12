@@ -926,3 +926,145 @@ except Exception as e:
    print(f"Error pushing data to MarketOverview in Google Sheet: {e}")
 
 con.close()
+
+
+# Add this code at the end of your script, before con.close()
+
+import gspread_dataframe as gd
+import pandas as pd
+import numpy as np
+
+def clean_dataframe_for_gsheets(df):
+    """
+    Clean DataFrame by replacing NaN, None, inf, and other problematic values
+    with empty strings or appropriate defaults for Google Sheets
+    """
+    df_cleaned = df.copy()
+    
+    # Replace NaN, None, inf, -inf with empty strings
+    df_cleaned = df_cleaned.replace([np.nan, np.inf, -np.inf, None, 'nan', 'NaN', 'null', 'NULL'], '')
+    
+    # Convert any remaining float NaN to empty string
+    for col in df_cleaned.columns:
+        if df_cleaned[col].dtype == 'object':
+            df_cleaned[col] = df_cleaned[col].astype(str).replace(['nan', 'None', 'NaT'], '')
+        elif df_cleaned[col].dtype in ['float64', 'float32']:
+            df_cleaned[col] = df_cleaned[col].fillna('')
+        elif df_cleaned[col].dtype in ['int64', 'int32']:
+            df_cleaned[col] = df_cleaned[col].fillna(0)
+    
+    return df_cleaned
+
+def cleanup_all_sheets():
+    """
+    Clean up all sheets in the Google Spreadsheet by removing NaN/null values
+    """
+    spreadsheet_key = '1Ppif1y284fLPVIIoRzAXbPi9eUXzAyjOBr5DR-6XjSM'
+    
+    # List of all sheet names in your workbook
+    sheet_names = [
+        'Top50Coins',
+        'TopGainer/TopLosers', 
+        'BTC_SNAPSHOT',
+        'ShortOpportunities',
+        'LongOpportunities',
+        'MarketOverview'
+    ]
+    
+    try:
+        sh = gc.open_by_key(spreadsheet_key)
+        print("Starting cleanup of all sheets...")
+        
+        for sheet_name in sheet_names:
+            try:
+                print(f"Cleaning sheet: {sheet_name}")
+                
+                # Get the worksheet
+                worksheet = sh.worksheet(sheet_name)
+                
+                # Get all data from the sheet
+                data = worksheet.get_all_records()
+                
+                if data:  # Check if sheet has data
+                    # Convert to DataFrame
+                    df = pd.DataFrame(data)
+                    
+                    # Clean the DataFrame
+                    df_cleaned = clean_dataframe_for_gsheets(df)
+                    
+                    # Clear the sheet and update with cleaned data
+                    worksheet.clear()
+                    gd.set_with_dataframe(worksheet, df_cleaned)
+                    
+                    print(f"✓ Successfully cleaned {sheet_name}")
+                else:
+                    print(f"⚠ {sheet_name} is empty, skipping...")
+                    
+            except Exception as e:
+                print(f"✗ Error cleaning {sheet_name}: {e}")
+                continue
+        
+        print("✓ Cleanup completed for all sheets!")
+        
+    except Exception as e:
+        print(f"✗ Error accessing spreadsheet: {e}")
+
+# Alternative approach: Clean specific DataFrames before pushing
+def clean_and_push_dataframe(df, sheet_name, spreadsheet_key):
+    """
+    Clean a DataFrame and push it to Google Sheets
+    """
+    try:
+        # Clean the DataFrame
+        df_cleaned = clean_dataframe_for_gsheets(df)
+        
+        # Push to Google Sheets
+        sh = gc.open_by_key(spreadsheet_key)
+        worksheet = sh.worksheet(sheet_name)
+        worksheet.clear()
+        gd.set_with_dataframe(worksheet, df_cleaned)
+        
+        print(f"✓ Successfully pushed cleaned data to {sheet_name}")
+        return True
+        
+    except Exception as e:
+        print(f"✗ Error pushing cleaned data to {sheet_name}: {e}")
+        return False
+
+# Execute the cleanup
+print("\n" + "="*50)
+print("STARTING COMPREHENSIVE SHEET CLEANUP")
+print("="*50)
+
+cleanup_all_sheets()
+
+print("\n" + "="*50)
+print("CLEANUP COMPLETED")
+print("="*50)
+
+# Optional: If you want to re-push specific DataFrames with cleaning
+# Uncomment and modify as needed:
+
+"""
+# Re-push specific sheets with cleaning if needed
+spreadsheet_key = '1Ppif1y284fLPVIIoRzAXbPi9eUXzAyjOBr5DR-6XjSM'
+
+# Clean and re-push each DataFrame
+if 'df_gsheet' in locals():
+    clean_and_push_dataframe(df_gsheet, 'Top50Coins', spreadsheet_key)
+
+if 'merged_df' in locals():
+    clean_and_push_dataframe(merged_df, 'TopGainer/TopLosers', spreadsheet_key)
+
+if 'top_1_cc' in locals():
+    clean_and_push_dataframe(top_1_cc, 'BTC_SNAPSHOT', spreadsheet_key)
+
+if 'top_10_bearish' in locals():
+    clean_and_push_dataframe(top_10_bearish, 'ShortOpportunities', spreadsheet_key)
+
+if 'top_10_bullish' in locals():
+    clean_and_push_dataframe(top_10_bullish, 'LongOpportunities', spreadsheet_key)
+
+if 'gll' in locals():
+    clean_and_push_dataframe(gll, 'MarketOverview', spreadsheet_key)
+"""
