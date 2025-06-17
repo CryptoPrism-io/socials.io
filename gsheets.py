@@ -257,12 +257,17 @@ merged_df['colours_tl_v'] = merged_df['Valuation_Score_tl'].apply(color_code)
                  'Durability_Score_tl', 'colours_tl_d', 'Momentum_Score_tl', 'colours_tl_m', 'Valuation_Score_tl', 'colours_tl_v']])"""
 
 def color_code(score):
-  if score > 0:
-    return '/#8DFF7E'
-  elif score < 0:
-    return '/#FF726D'
-  else:
-    return '/#FFA500'
+    # Handle None/NaN values
+    if score is None or pd.isna(score):
+        return "#808080"  # gray for missing data
+    
+    # Handle numeric values
+    if score > 0:
+        return "#00ff00"  # green for positive
+    elif score < 0:
+        return "#ff0000"  # red for negative
+    else:
+        return "#ffff00"  # yellow for zero
 
 merged_df['colours_tg_pct'] = merged_df['tg_percent_change24h'].apply(color_code)
 merged_df['colours_tl_pct'] = merged_df['tl_percent_change24h'].apply(color_code)
