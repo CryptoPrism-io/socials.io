@@ -2,7 +2,7 @@ name: Instagram Caraousel Post
 
 on:
   schedule:
-    #- cron: "59 0 * * *"  # Daily at 00:30 UTC
+    - cron: "39 0 * * *"  # Daily at 00:30 UTC
   workflow_dispatch: {}
   
 jobs:
