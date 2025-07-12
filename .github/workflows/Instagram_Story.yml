@@ -1,30 +1,83 @@
-name: Instagram Caraousel Post
-
+name: Crypto Instagram Bot - Daily Post
 on:
   schedule:
-    - cron: "39 0 * * *"  # Daily at 00:30 UTC
-  workflow_dispatch: {}
+    - cron: "30 0 * * *"  # Daily at 00:30 UTC (12:30 AM)
+  workflow_dispatch: {}  # Allow manual triggers
   
 jobs:
-  post_story:
+  crypto_instagram_post:
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # Prevent hanging jobs
+    
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/checkout@v4  # Updated to latest version
+      
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4  # Updated to latest version
       with:
         python-version: '3.10'
-
+        
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
     - name: Install dependencies
       run: |
-        pip install together psycopg2 nest_asyncio requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib instagrapi playwright python-dotenv pillow sqlalchemy jinja2 && playwright install chromium && playwright install firefox && playwright install webkit
-
-    - name: Run Instagram post Script
+        python -m pip install --upgrade pip
+        pip install oauth2client google-api-python-client gspread together instagrapi pandas pillow
+        
+    - name: Verify environment variables
+      run: |
+        echo "🔍 Checking environment variables..."
+        python -c "
+        import os
+        required_vars = ['GCP_CREDENTIALS', 'TOGETHER_API_KEY', 'INSTAGRAM_DRIVE_FILE_ID', 'CRYPTO_SPREADSHEET_KEY', 'INSTAGRAM_USERNAME', 'INSTAGRAM_PASSWORD']
+        missing = [var for var in required_vars if not os.getenv(var)]
+        if missing:
+            print(f'❌ Missing variables: {missing}')
+            exit(1)
+        else:
+            print('✅ All environment variables present')
+        "
+      env:
+        GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        INSTAGRAM_DRIVE_FILE_ID: ${{ secrets.INSTAGRAM_DRIVE_FILE_ID }}
+        CRYPTO_SPREADSHEET_KEY: ${{ secrets.CRYPTO_SPREADSHEET_KEY }}
+        INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+        INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
+        
+    - name: Run Instagram post Script (Data Collection)
       run: python instapost.py
-
-    - name: Run Instagram post push Script
+      env:
+        GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        INSTAGRAM_DRIVE_FILE_ID: ${{ secrets.INSTAGRAM_DRIVE_FILE_ID }}
+        CRYPTO_SPREADSHEET_KEY: ${{ secrets.CRYPTO_SPREADSHEET_KEY }}
+        INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+        INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
+        
+    - name: Run Instagram post push Script (Upload to Instagram)
       run: python instapost_push.py
       env:
-        GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}  # Ensure GCP_CREDENTIALS secret is set up
+        GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+        TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+        INSTAGRAM_DRIVE_FILE_ID: ${{ secrets.INSTAGRAM_DRIVE_FILE_ID }}
+        CRYPTO_SPREADSHEET_KEY: ${{ secrets.CRYPTO_SPREADSHEET_KEY }}
+        INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+        INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
+        
+    - name: Upload logs (if needed)
+      if: always()  # Run even if previous steps fail
+      uses: actions/upload-artifact@v3
+      with:
+        name: bot-logs
+        path: |
+          *.log
+          *.txt
+        retention-days: 7
