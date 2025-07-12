@@ -367,6 +367,10 @@ try:
         except Exception as e:
             print(f"Error uploading to Drive: {e}")
 
+
+
+# previous code ---------------------------
+"""
     try:
         # Download settings from Drive if they exist
         download_from_drive(DRIVE_FILE_ID, LOCAL_PATH)
@@ -389,6 +393,25 @@ try:
         print(f"New session created and uploaded to Drive")
 
     print("Session is ready to use")
+"""
+
+
+
+
+        try:
+        # Download settings from Drive if they exist
+        download_from_drive(DRIVE_FILE_ID, LOCAL_PATH)
+        print("Downloaded existing settings from Drive")
+
+        # Load existing settings and verify session
+        cl = Client()
+        cl.load_settings(LOCAL_PATH)
+        cl.get_timeline_feed()  # Verify session is still valid
+        print("Successfully loaded existing session")
+
+    except Exception as e:
+        print("Session invalid or expired! Aborting without creating a new session.")
+        raise RuntimeError("Instagram session invalid or expired. Manual intervention required.")
 
     # Check if media files exist, create dummy files if they don't
     media_files = []
