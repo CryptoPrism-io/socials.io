@@ -289,13 +289,13 @@ try:
                       f"Ready to ship on instagram (NO AI comments in the output like here is your caption etc), my handle is @cryptoprism.io and my website is cryptoprism.io also link in bio"
                       f"dont want = ** this kind of formatting, make sure the character count is under 2000"
         }],
-        max_tokens=1600,
-        temperature=1,
-        top_p=0.5,
-        top_k=50,
-        repetition_penalty=0.88,
+        max_tokens=600,
+        temperature=0.7,
+        top_p=0.9,
+        frequency_penalty=0.5,
+        presence_penalty=0.3,
         stop=["<|eot_id|>", "<|eom_id|>"],
-        stream=True
+        stream=False
     )
 
     caption1 = ""
