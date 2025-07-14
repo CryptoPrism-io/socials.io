@@ -173,145 +173,177 @@ def safe_get(dataframe, column, row=0, default='N/A'):
     except Exception:
         return default
 
+# Clean Caption Generation with Character Limit Management
+def safe_get(dataframe, column, row=0, default='N/A'):
+    """Safely extract data from DataFrame"""
+    try:
+        if len(dataframe) > row and column in dataframe.columns:
+            value = dataframe.iloc[row][column]
+            return str(value).strip() if pd.notna(value) and str(value).strip() else default
+        return default
+    except Exception:
+        return default
+
+def truncate_caption(text, max_length=2200):
+    """Truncate caption to fit character limit"""
+    if len(text) <= max_length:
+        return text
+    
+    # Find last complete line within limit
+    truncated = text[:max_length]
+    last_newline = truncated.rfind('\n')
+    if last_newline > max_length * 0.8:
+        return truncated[:last_newline]
+    
+    # Find last sentence
+    for punct in ['. ', '! ', '? ']:
+        last_punct = truncated.rfind(punct)
+        if last_punct > max_length * 0.8:
+            return truncated[:last_punct + len(punct)]
+    
+    return truncated[:truncated.rfind(' ')] + '...'
+
+def generate_base_caption():
+    """Generate base caption with error handling"""
+    try:
+        # Get market data
+        market_data = {}
+        if 'MarketOverview' in globals():
+            market_data = {
+                'date': safe_get(MarketOverview, 'Todays_Date'),
+                'total_volume': safe_get(MarketOverview, 'total_volume24h_reported'),
+                'volume_change': safe_get(MarketOverview, 'total_volume24h_yesterday_percentage_change'),
+                'btc_dominance': safe_get(MarketOverview, 'btc_dominance'),
+                'eth_dominance': safe_get(MarketOverview, 'eth_dominance')
+            }
+        
+        # Build caption sections
+        sections = ["🚨 Crypto Alert! Market Never Sleeps 🚨\n"]
+        
+        # Market overview
+        if market_data.get('date', 'N/A') != 'N/A':
+            sections.extend([
+                f"📅 {market_data['date']}",
+                f"💰 Volume: {market_data['total_volume']} ({market_data['volume_change']}%)",
+                f"₿ BTC Dom: {market_data['btc_dominance']}% | Ⓔ ETH Dom: {market_data['eth_dominance']}%\n"
+            ])
+        
+        # Bitcoin data
+        if btc_data.get('price', 'N/A') != 'N/A':
+            trend_emoji = '🔴' if 'red' in str(btc_data.get('colour_24h', '')).lower() else '🟢'
+            sections.extend([
+                f"₿ BITCOIN UPDATE {trend_emoji}",
+                f"Price: {btc_data['price']} ({btc_data['percent_change_24h']}%)",
+                f"Volume: {btc_data['volume_24h']}",
+                f"Market Cap: {btc_data['market_cap']}\n"
+            ])
+        
+        # Top movers
+        if gainer_symbol != 'N/A':
+            sections.extend([
+                "📈 TOP MOVERS (24H)",
+                f"🚀 Best: {gainer_symbol} +{gainer_pct}%",
+                f"📉 Worst: {loser_symbol} {loser_pct}%\n"
+            ])
+        
+        # Trading opportunities
+        if len(top_shorts) > 0:
+            sections.append("🔻 SHORT OPPORTUNITIES:")
+            for i in range(min(2, len(top_shorts))):
+                coin = safe_get(top_shorts, 'slug', i)
+                bearish = safe_get(top_shorts, 'bearish_count', i)
+                sections.append(f"• {coin} (Bearish: {bearish})")
+        
+        if len(top_longs) > 0:
+            sections.append("\n🔺 LONG OPPORTUNITIES:")
+            for i in range(min(2, len(top_longs))):
+                coin = safe_get(top_longs, 'slug', i)
+                bullish = safe_get(top_longs, 'bullish_count', i)
+                sections.append(f"• {coin} (Bullish: {bullish})")
+        
+        # Engagement & hashtags
+        sections.extend([
+            "\n💎 What's your move? Drop your thoughts! 👇",
+            "Follow @cryptoprism.io for daily insights!",
+            "\n#Crypto #Bitcoin #Trading #MarketUpdate #CryptoPrism #BullishOrBearish"
+        ])
+        
+        caption = '\n'.join(sections)
+        return truncate_caption(caption, 2200)
+        
+    except Exception as e:
+        print(f"⚠️ Error generating base caption: {e}")
+        return "🚨 Crypto Market Update! 📈\n\nDaily market analysis coming your way.\n\n#Crypto #MarketUpdate #CryptoPrism"
+
+def generate_ai_caption(base_caption):
+    """Generate AI-enhanced caption with fallback"""
+    if not TOGETHER_API_KEY:
+        print("⚠️ No AI API key, using base caption")
+        return base_caption
+    
+    try:
+        client = Together(api_key=TOGETHER_API_KEY)
+        
+        prompt = f"""Create a 1900-character Instagram caption from this crypto data:
+
+{base_caption}
+
+Rules:
+- MAX 1900 characters (strict)
+- Hook opening line
+- Mobile-friendly format
+- Strategic emojis
+- Include @cryptoprism.io mention
+- 2-3 engagement CTAs
+- End with hashtags
+- NO markdown formatting
+- NO "Here's your caption" responses
+
+Make it engaging and scroll-stopping!"""
+
+        response = client.chat.completions.create(
+            model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=500,
+            temperature=0.7
+        )
+        
+        ai_caption = response.choices[0].message.content.strip()
+        
+        # Clean AI commentary
+        lines = [line.strip() for line in ai_caption.split('\n') 
+                if line.strip() and not any(phrase in line.lower() 
+                for phrase in ['here is', 'here\'s', 'caption:'])]
+        
+        ai_caption = '\n'.join(lines)
+        ai_caption = truncate_caption(ai_caption, 2000)
+        
+        if len(ai_caption) > 100:
+            print(f"✅ AI caption generated ({len(ai_caption)} chars)")
+            return ai_caption
+        else:
+            print("⚠️ AI caption too short, using base")
+            return base_caption
+            
+    except Exception as e:
+        print(f"⚠️ AI generation failed: {e}")
+        return base_caption
+
+# Replace your caption generation section with this:
+print("🔄 Generating caption...")
+
 # Generate base caption
-try:
-    market_data = {}
-    if 'MarketOverview' in globals():
-        market_data = {
-            'date': safe_get(MarketOverview, 'Todays_Date'),
-            'day': safe_get(MarketOverview, 'Todays_Day'),
-            'time': safe_get(MarketOverview, 'Current_Time'),
-            'total_volume': safe_get(MarketOverview, 'total_volume24h_reported'),
-            'volume_change': safe_get(MarketOverview, 'total_volume24h_yesterday_percentage_change'),
-            'altcoin_volume': safe_get(MarketOverview, 'altcoin_volume24h_reported'),
-            'derivatives_volume': safe_get(MarketOverview, 'derivatives_volume24h_reported'),
-            'derivatives_change': safe_get(MarketOverview, 'derivatives24h_percentage_change'),
-            'defi_volume': safe_get(MarketOverview, 'defi_volume24h_reported'),
-            'defi_change': safe_get(MarketOverview, 'defi24h_percentage_change'),
-            'defi_market_cap': safe_get(MarketOverview, 'defi_market_cap'),
-            'btc_dominance': safe_get(MarketOverview, 'btc_dominance'),
-            'btc_dominance_change': safe_get(MarketOverview, 'btc_dominance24h_percentage_change'),
-            'eth_dominance': safe_get(MarketOverview, 'eth_dominance'),
-            'eth_dominance_change': safe_get(MarketOverview, 'eth_dominance24h_percentage_change')
-        }
-    
-    caption = f"""🚨 Crypto Opportunities Alert! 🚨
+base_caption = generate_base_caption()
+print(f"✅ Base caption: {len(base_caption)} characters")
 
-Crypto Market Overview:
-- Today is {market_data.get('date', 'N/A')}, {market_data.get('day', 'N/A')} at {market_data.get('time', 'N/A')}!
+# Generate AI-enhanced version
+caption1 = generate_ai_caption(base_caption)
+print(f"✅ Final caption: {len(caption1)} characters")
 
-* Market Stats:
-  - Total Volume (24h): {market_data.get('total_volume', 'N/A')} (Change: {market_data.get('volume_change', 'N/A')}%)
-  - Altcoin Volume (24h): {market_data.get('altcoin_volume', 'N/A')}
-  - Derivatives Volume (24h): {market_data.get('derivatives_volume', 'N/A')} (Change: {market_data.get('derivatives_change', 'N/A')}%)
-
-* DeFi Highlights:
-  - DeFi Volume (24h): {market_data.get('defi_volume', 'N/A')} (Change: {market_data.get('defi_change', 'N/A')}%)
-  - DeFi Market Cap: {market_data.get('defi_market_cap', 'N/A')}
-
-* Dominance Metrics:
-  - Bitcoin Dominance: {market_data.get('btc_dominance', 'N/A')} (Change 24h: {market_data.get('btc_dominance_change', 'N/A')}%)
-  - Ethereum Dominance: {market_data.get('eth_dominance', 'N/A')} (Change 24h: {market_data.get('eth_dominance_change', 'N/A')}%)
-
-Bitcoin (BTC) Update:
-- Rank: #{btc_data['rank']}
-- Current Price: {btc_data['price']}
-- 24h Change: {btc_data['percent_change_24h']}% ({'🔴' if 'red' in str(btc_data['colour_24h']).lower() else '🟢'} Update)
-- 24h Volume: {btc_data['volume_24h']}
-- Market Cap: {btc_data['market_cap']}
-- Last Updated: {btc_data['last_updated']}
-
-* 7-Day Change: {btc_data['percent_change_7d']}%
-* 30-Day Change: {btc_data['percent_change_30d']}%
-* YTD Change: {btc_data['ytd_change']}%
-
-Market Sentiment:
-- Bullish: {btc_data['bullish']}
-- Bearish: {btc_data['bearish']}
-- Neutral: {btc_data['neutral']}
-- Sentiment Diff: {btc_data['sentiment_diff']}
-- Current Trend: {btc_data['trend']}
-
-Crypto Highlights: Top 50 Coins
-- Top Gainer: {gainer_symbol} skyrocketed by +{gainer_pct}%
-- Top Loser: {loser_symbol} dropped by -{loser_pct}%
-
-Top Short Squeeze Candidates:
-1. {safe_get(top_shorts, 'slug', 0)}
-   - Bearish Count: {safe_get(top_shorts, 'bearish_count', 0)}
-   - Market Cap: {safe_get(top_shorts, 'market_cap', 0)}
-   - 24h Change: {safe_get(top_shorts, 'percent_change24h', 0)}
-
-2. {safe_get(top_shorts, 'slug', 1)}
-   - Bearish Count: {safe_get(top_shorts, 'bearish_count', 1)}
-   - Market Cap: {safe_get(top_shorts, 'market_cap', 1)}
-   - 24h Change: {safe_get(top_shorts, 'percent_change24h', 1)}
-
-Top Long Play Opportunities:
-1. {safe_get(top_longs, 'slug', 0)}
-   - Bullish Count: {safe_get(top_longs, 'bullish_count', 0)}
-   - Market Cap: {safe_get(top_longs, 'market_cap', 0)}
-   - 24h Change: {safe_get(top_longs, 'percent_change24h', 0)}
-
-2. {safe_get(top_longs, 'slug', 1)}
-   - Bullish Count: {safe_get(top_longs, 'bullish_count', 1)}
-   - Market Cap: {safe_get(top_longs, 'market_cap', 1)}
-   - 24h Change: {safe_get(top_longs, 'percent_change24h', 1)}
-
-The crypto market never sleeps! Are you bullish or bearish? Let's hear your thoughts!
-
-#Crypto #LongAndShort #MarketMoves #InvestSmart #TradeWisely
-
-Stay ahead of the game! 🚀💎"""
-
-    print("✅ Base caption generated")
-    
-except Exception as e:
-    print(f"⚠️  Error generating caption: {e}")
-    caption = "🚨 Crypto Market Update! Stay tuned for the latest data. #Crypto #MarketUpdate"
-
-# Generate AI-enhanced caption using environment variable
-os.environ["TOGETHER_API_KEY"] = TOGETHER_API_KEY
-client = Together()
-
-try:
-    print("🔄 Generating AI-enhanced caption...")
-    response = client.chat.completions.create(
-        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-        messages=[{
-            "role": "user",
-            "content": f"Can you write 2200 character instagram caption summarzing my crypto market recap for the day using the data :{caption}"
-                      f"Make Sure it is well formatted, for instagram not as markdown so that user can read it on phone and has maximum information from :{caption}"
-                      f"We need to Make sure it starts with a unique hook to nudge user to read the caption "
-                      f"and place random hooks and CTA it in captions at 2 interval, to nudge user to , and follow us and like the post"
-                      f"Make sure the Caption is well spaced out and Information is not Cluttered use indents and brackets whereever necessary"
-                      f"At begining of all headings and key data points Relevant EMOJIS are at the core pls make sure you encorporate them need to be colorfull and thoughtful "
-                      f"Ready to ship on instagram (NO AI comments in the output like here is your caption etc), my handle is @cryptoprism.io and my website is cryptoprism.io also link in bio"
-                      f"dont want = ** this kind of formatting, make sure the character count is under 2000"
-        }],
-        max_tokens=600,
-        temperature=0.7,
-        top_p=0.9,
-        frequency_penalty=0.5,
-        presence_penalty=0.3,
-        stop=["<|eot_id|>", "<|eom_id|>"],
-        stream=False
-    )
-
-    caption1 = ""
-    for token in response:
-        if hasattr(token, 'choices') and token.choices:
-            if hasattr(token.choices[0], 'delta') and hasattr(token.choices[0].delta, 'content'):
-                if token.choices[0].delta.content:
-                    caption1 += token.choices[0].delta.content
-
-    print("✅ AI-enhanced caption generated")
-    print(f"📝 Caption length: {len(caption1)} characters")
-
-except Exception as e:
-    print(f"⚠️  Error generating AI caption: {e}")
-    caption1 = caption
-
+# Ensure we have a caption
+if not caption1 or len(caption1) < 50:
+    caption1 = base_caption
+    print("⚠️ Using base caption as fallback")
 
 
 
