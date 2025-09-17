@@ -610,3 +610,91 @@ git log --oneline -- ".github/workflows/"
 **Future-Ready Architecture**: Clean component structure supports upcoming styling application to templates 2-5 with minimal effort required.
 
 **Commit Hash**: `6542a86`
+
+---
+
+## [v1.3.1] - 2025-09-17 20:15 UTC
+
+### 🏗️ MAJOR: Auto-Layout Architecture Implementation - Eliminated Absolute Positioning
+
+### Fixed
+- **Overlapping Sections Eliminated**: Resolved critical layout issues where market data sections overlapped due to absolute positioning conflicts
+- **Layout Alignment Problems**: Fixed improper layout alignment causing visual chaos and unreadable content sections
+- **Absolute Positioning Dependencies**: Completely removed absolute positioning system that caused unpredictable layout behavior
+
+### Changed
+- **Complete Layout Architecture Overhaul**: Transformed from absolute positioning to auto-layout structure
+  - **Main Container System**: Implemented flexbox-based main container with proper column flow
+  - **Card-Based Design**: Converted all sections to individual `.market-card` components with natural document flow
+  - **Auto-Layout Structure**: Cards now flow naturally one after another using `flex-direction: column` with consistent gaps
+  - **Individual Card Components**: Each market data section (dominance, global overview, key segments) now exists as separate cards
+
+- **Enhanced Page 1 Content**: Added comprehensive market data from Page 5 to create complete market overview
+  - **Market Dominance Section**: BTC and ETH dominance percentages with 24h percentage changes
+  - **Global Market Overview**: Total market cap and volume with percentage change indicators
+  - **Key Market Segments**: Derivatives and DeFi volume metrics with trend indicators
+  - **Date/Time Integration**: Dynamic date and time display at bottom of layout
+
+- **CSS Architecture Modernization**: Complete rewrite of `core_templates/style.css` layout system
+  - **Flexbox Container**: `.main-container` with `display: flex`, `flex-direction: column`, proper width/height (1080x1080)
+  - **Card-Based Components**: Individual `.market-card` styling with glassmorphism effects
+  - **Natural Document Flow**: Eliminated all `position: absolute` declarations for predictable layout behavior
+  - **Consistent Spacing**: Proper gap management between cards using flexbox gaps
+
+- **Data Integration Enhancement**: Updated `src/scripts/instapost.py` render_page_1 function
+  - **Market Data Source**: Changed from `fetch_data_as_dataframe()` to `fetch_for_5()` for access to market dominance fields
+  - **Template Variables**: Added `current_date` and `current_time` variables for dynamic timestamp display
+  - **Data Binding**: Connected market data to Jinja2 template variables for live data rendering
+
+### Added
+- **Auto-Layout Container System**: Professional container architecture with proper overflow handling
+- **Card-Based Market Data Display**: Individual cards for different market metrics categories
+- **Dynamic Date/Time Display**: Real-time date and time information in dashboard footer
+- **Comprehensive Market Overview**: Page 1 now contains full market analysis instead of sparse BTC-only data
+
+### Removed
+- **Absolute Positioning System**: Eliminated all `position: absolute` CSS declarations causing layout conflicts
+- **Sparse BTC-Only Layout**: Replaced minimal single-section display with comprehensive multi-section market analysis
+
+### Rationale
+
+**Critical Layout Problem Resolution**: The absolute positioning system was causing fundamental layout failures:
+
+**Problem Analysis**:
+- **Overlapping Sections**: Market cards were stacking on top of each other due to absolute positioning conflicts
+- **Unpredictable Layout**: Absolute positioning created brittle layout that broke with content changes
+- **Maintenance Nightmare**: Positioning adjustments required manual calculation of exact pixel coordinates
+- **Responsive Impossibility**: Absolute positioning prevented any responsive behavior or automatic layout adaptation
+
+**Solution Benefits**:
+- **Natural Document Flow**: Auto-layout allows content to flow naturally without manual positioning
+- **Automatic Spacing**: Flexbox gaps handle spacing consistently without pixel-perfect calculations
+- **Content Adaptation**: Layout automatically adjusts when content length changes
+- **Professional Architecture**: Modern CSS practices with maintainable, scalable structure
+
+**Business Impact**:
+- **Content Enhancement**: Page 1 transformed from sparse BTC-only display to comprehensive market overview
+- **Visual Professionalism**: Clean, non-overlapping layout dramatically improves visual appeal for Instagram posts
+- **Data Value**: Users now receive complete market analysis instead of limited Bitcoin metrics
+- **Engagement Potential**: Rich market data increases social media engagement and content value
+
+**Technical Excellence**:
+- **Modern CSS Practices**: Flexbox-based layout follows 2025 web development standards
+- **Maintainable Architecture**: Auto-layout structure easy to modify and extend
+- **Cross-Browser Compatibility**: Flexbox provides consistent rendering across all browsers and devices
+- **Future-Proof Design**: Layout structure supports easy addition of new market data sections
+
+**Data Architecture Enhancement**:
+- **Unified Data Source**: Using `fetch_for_5()` ensures consistency between Page 1 and Page 5 market data
+- **Real-Time Information**: Dynamic date/time display keeps content current and relevant
+- **Complete Market Picture**: Dominance, global metrics, and key segments provide comprehensive market analysis
+
+**User Experience Transformation**:
+- **From Sparse to Rich**: Page 1 evolved from minimal BTC display to comprehensive market dashboard
+- **Visual Clarity**: Auto-layout ensures all information is clearly visible without overlapping
+- **Professional Presentation**: Card-based design matches modern financial dashboard standards
+- **Information Hierarchy**: Natural flow guides user attention through market data logically
+
+**Future Considerations**: This auto-layout implementation provides foundation for applying similar fixes to other templates that may have absolute positioning issues, as mentioned by user: "remember any changes we make in any other output we have to change for the absolute positioning."
+
+**Commit Hash**: `8bab2e9`

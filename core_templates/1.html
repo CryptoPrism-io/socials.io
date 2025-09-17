@@ -8,9 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    {% for snaps in snap %}
-    <!-- Unified Bitcoin Dashboard Component -->
-    <div class="unified-btc-dashboard">
+    <!-- Main Page Container -->
+    <div class="main-container">
+        {% for snaps in snap %}
+        <!-- Bitcoin Dashboard Card -->
+        <div class="btc-dashboard-card">
         <!-- Header Section with Branding and Last Update -->
         <div class="dashboard-header-section">
             <div class="crypto-prism-brand">
@@ -98,12 +100,87 @@
                 <div class="trend-value">{{snaps['Trend']}}</div>
             </div>
         </div>
+        {% endfor %}
+
+        {% for coin in coins %}
+        <!-- Market Dominance Card -->
+        <div class="market-card">
+            <div class="dominance-container">
+            <div class="dominance-title">Market Dominance</div>
+            <div class="dominance-grid">
+                <div class="dominance-item">
+                    <div class="dominance-label">BTC Dominance</div>
+                    <div class="dominance-value">{{ coin.btc_dominance | round(2) }}%</div>
+                    <div class="pct-change {% if coin.btc_dominance24h_percentage_change > 0 %}positive{% elif coin.btc_dominance24h_percentage_change < 0 %}negative{% endif %}">
+                        {{ coin.btc_dominance24h_percentage_change | round(2) }}%
+                    </div>
+                </div>
+                <div class="dominance-item">
+                    <div class="dominance-label">ETH Dominance</div>
+                    <div class="dominance-value">{{ coin.eth_dominance | round(2) }}%</div>
+                    <div class="pct-change {% if coin.eth_dominance24h_percentage_change > 0 %}positive{% elif coin.eth_dominance24h_percentage_change < 0 %}negative{% endif %}">
+                        {{ coin.eth_dominance24h_percentage_change | round(2) }}%
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Global Market Card -->
+        <div class="market-card">
+            <div class="total-market-container">
+            <div class="total-market-title">Global Market Overview</div>
+            <div class="total-market-grid">
+                <div class="market-metric-item">
+                    <div class="metric-label">Total Market Cap</div>
+                    <div class="metric-value">$ {{ coin.total_market_cap | round(2) }} T</div>
+                    <div class="pct-change {% if coin.total_market_cap_yesterday_percentage_change > 0 %}positive{% elif coin.total_market_cap_yesterday_percentage_change < 0 %}negative{% endif %}">
+                        {{ coin.total_market_cap_yesterday_percentage_change | round(2) }}%
+                    </div>
+                </div>
+                <div class="market-metric-item">
+                    <div class="metric-label">Total Volume 24H</div>
+                    <div class="metric-value">$ {{ coin.total_volume24h_reported | round(2) }} T</div>
+                    <div class="pct-change {% if coin.total_volume24h_yesterday_percentage_change > 0 %}positive{% elif coin.total_volume24h_yesterday_percentage_change < 0 %}negative{% endif %}">
+                        {{ coin.total_volume24h_yesterday_percentage_change | round(2) }}%
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Key Segments Card -->
+        <div class="market-card">
+            <div class="market-segments-container">
+            <div class="segments-title">Key Market Segments</div>
+            <div class="segments-grid">
+                <div class="segment-item">
+                    <div class="segment-label">Derivatives Volume 24H</div>
+                    <div class="segment-value">$ {{ coin.derivatives_volume24h_reported | round(2) }} M</div>
+                    <div class="pct-change {% if coin.derivatives24h_percentage_change > 0 %}positive{% elif coin.derivatives24h_percentage_change < 0 %}negative{% endif %}">
+                        {{ coin.derivatives24h_percentage_change | round(2) }}%
+                    </div>
+                </div>
+                <div class="segment-item">
+                    <div class="segment-label">DeFi Volume 24H</div>
+                    <div class="segment-value">$ {{ coin.defi_volume24h_reported | round(2) }} M</div>
+                    <div class="pct-change {% if coin.defi24h_percentage_change > 0 %}positive{% elif coin.defi24h_percentage_change < 0 %}negative{% endif %}">
+                        {{ coin.defi24h_percentage_change | round(2) }}%
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Date and Time Card -->
+        <div class="datetime-container">
+            <div class="date">{{ current_date }}</div>
+            <div class="time">{{ current_time }}</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">Data Provided By</div>
     </div>
-    {% endfor %}
-
-    <!-- Page 1: BTC Snapshot Only - No Coin Grid -->
-
-    <!-- Footer -->
-    <div class="footer-text">Data Provided By</div>
 </body>
 </html>

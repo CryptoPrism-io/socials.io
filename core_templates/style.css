@@ -36,14 +36,20 @@ body {
     }
 }
 
-/* 🚀 Unified Bitcoin Dashboard Component - Page 1 Only */
-.unified-btc-dashboard {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    right: 50px;
-    bottom: 100px;
+/* 📱 Main Page Container */
+.main-container {
+    width: 1080px;
+    height: 1080px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
 
+/* 🚀 Bitcoin Dashboard Card */
+.btc-dashboard-card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -59,6 +65,25 @@ body {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    flex-shrink: 0;
+}
+
+/* 📊 Market Data Cards */
+.market-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 4px 16px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 0;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
 }
 
 /* 📋 Header Section with Branding and Last Update */
@@ -400,13 +425,222 @@ body {
     font-weight: 500;
 }
 
+/* ⏰ Date and Time Styling */
+.date {
+    font-size: 18px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+}
+
+.time {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+    letter-spacing: 2px;
+}
+
+/* 💰 Market Data Styling */
+.pct-change {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 60px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.pct-change.positive {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.15);
+    border-color: rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.pct-change.negative {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.15);
+    border-color: rgba(255, 68, 68, 0.3);
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+}
+
+/* 📊 Dominance Section Styling */
+.dominance-container {
+    padding: 25px;
+}
+
+.dominance-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+.dominance-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.dominance-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.dominance-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dominance-value {
+    font-size: 24px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* 🌐 Total Market Section Styling */
+.total-market-container {
+    padding: 25px;
+}
+
+.total-market-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: pulse-glow 3s ease-in-out infinite alternate;
+}
+
+.total-market-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.market-metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.metric-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.metric-value {
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: pulse-glow 3s ease-in-out infinite alternate;
+}
+
+/* 🎯 Market Segments Section Styling */
+.market-segments-container {
+    padding: 25px;
+}
+
+.segments-title {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+.segments-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.segment-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.segment-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.segment-value {
+    font-size: 22px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* ⏰ Date Time Container */
+.datetime-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* 📝 Footer */
-.footer-text {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+.footer-container {
+    text-align: center;
     font-size: 12px;
     color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
     letter-spacing: 1px;
+    margin-top: 10px;
 }
