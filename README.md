@@ -31,6 +31,77 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 - **Image Output**: Automated screenshot generation at 1080x1080 Instagram format
 - **Style Variations**: 5 different visual themes (`style.css` through `style5.css`)
 
+## 📁 Project Structure
+
+```
+socials.io/
+├── 📁 src/                          # Source code directory
+│   ├── 📁 scripts/                  # Main application scripts
+│   │   ├── 📄 instapost.py          # Main content generation pipeline
+│   │   ├── 📄 instapost_push.py     # Enhanced publishing workflow
+│   │   ├── 📄 gsheets.py            # Google Sheets data synchronization
+│   │   ├── 📄 figma.py              # Figma integration workflow
+│   │   ├── 📄 instapost_new.py      # Development/experimental script
+│   │   ├── 📄 linkedin_auth.py      # LinkedIn authentication
+│   │   └── 📄 twitter_auth.py       # Twitter authentication
+│   ├── 📁 templates/                # HTML templates & styles
+│   │   ├── 📄 1.html → 5.html       # Base HTML templates
+│   │   └── 📁 styles/               # CSS stylesheets
+│   │       └── 📄 style.css → style5.css  # Template stylesheets
+│   └── 📁 utils/                    # Utility modules & helpers
+├── 📁 output/                       # Generated content output
+│   ├── 📁 html/                     # Generated HTML files
+│   │   └── 📄 *_output.html         # Rendered templates with data
+│   └── 📁 images/                   # Generated images
+│       ├── 📄 *.png                 # PNG screenshots
+│       └── 📄 *.jpg                 # JPG final outputs
+├── 📁 config/                       # Configuration modules
+│   └── 📄 paths.py                  # Path configuration management
+├── 📁 tests/                        # Test suite
+│   ├── 📄 test_path_structure.py    # Path validation tests
+│   └── 📄 test_restructure.py       # Structure validation tests
+├── 📁 scripts/                      # Setup & utility scripts
+│   ├── 📄 setup_windows_utf8.bat    # Windows UTF-8 setup (batch)
+│   ├── 📄 setup_windows_utf8.ps1    # Windows UTF-8 setup (PowerShell)
+│   ├── 📄 setup_powershell_utf8.ps1 # PowerShell profile UTF-8 setup
+│   ├── 📄 test_unicode_system.py    # Unicode validation script
+│   ├── 📄 utf8_fix.py               # UTF-8 encoding fix utility
+│   ├── 📄 validate_env.py           # Environment validation
+│   ├── 📄 validate_project.py       # Project validation
+│   └── 📄 UNICODE_*.md              # Unicode documentation
+├── 📁 docs/                         # Documentation
+│   └── 📄 DEPLOYMENT_SUMMARY.md     # Deployment documentation
+├── 📁 .github/workflows/            # GitHub Actions CI/CD
+│   ├── 📄 Instagram_Story.yml       # Instagram automation workflow
+│   ├── 📄 gsheets.yml               # Google Sheets sync workflow
+│   ├── 📄 figma.yml                 # Figma integration workflow
+│   └── 📄 ci-cd.yml                 # CI/CD pipeline
+├── 📁 delete_folder/                # Cleanup - duplicate files removed
+│   └── 📄 *.html, *.css             # Old root-level duplicates
+├── 📄 .env                          # Environment variables (sensitive)
+├── 📄 requirements.txt              # Python dependencies
+├── 📄 requirements-dev.txt          # Development dependencies
+├── 📄 README.md                     # Project documentation (this file)
+├── 📄 CHANGELOG.md                  # Version history & changes
+├── 📄 CLAUDE.md                     # AI assistant guidance
+└── 📄 .gitignore                    # Git ignore rules
+```
+
+### 📂 Directory Purposes
+
+| Directory | Purpose | Contains |
+|-----------|---------|----------|
+| **`src/`** | Source code | Main application scripts, templates, utilities |
+| **`src/scripts/`** | Core functionality | Instagram automation, data sync, publishing |
+| **`src/templates/`** | Content templates | HTML templates, CSS styles for content generation |
+| **`output/`** | Generated content | HTML outputs, generated images for posting |
+| **`config/`** | Configuration | Path management, system configuration |
+| **`tests/`** | Testing suite | Unit tests, validation scripts, test data |
+| **`scripts/`** | Setup utilities | Installation scripts, environment setup, validation |
+| **`docs/`** | Documentation | Deployment guides, technical documentation |
+| **`.github/workflows/`** | Automation | CI/CD pipelines, GitHub Actions workflows |
+| **`delete_folder/`** | Cleanup | Duplicate files removed during organization |
+
 ### Technology Stack
 
 | Component | Technology | Purpose |

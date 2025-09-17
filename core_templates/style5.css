@@ -1,0 +1,120 @@
+html, body {
+    width: 1080px;
+    height: 1080px;
+    margin: 0 auto;
+    padding: 0;
+    overflow: auto;
+    background-image: url('5.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Premium gradient text classes */
+.gradient-text-primary {
+    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.4);
+}
+
+.gradient-text-secondary {
+    background: linear-gradient(135deg, #f8f8f8 0%, #e0e0e0 50%, #c8c8c8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+}
+
+.gradient-text-metallic {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.5), 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* General gradient styling for text elements */
+.date, .time, p {
+    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.4);
+}
+
+.date {
+    font-size: 2rem;
+    font-weight:400
+}
+
+.time {
+    font-size: 1.75rem;
+    font-weight: 400;
+}
+
+.pct-change {
+    font-size: 1.5rem;
+    color: #ff4444;
+    font-weight: 300;
+    
+}
+
+.m-cap {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: left;
+    font-weight: 500;   
+}
+
+.season > div:first-child { /*Or .season > div:nth-child(1) */
+    margin-bottom: 10px; /*Adjust this value*/
+}
+
+.season > div:nth-child(2) { /*Or .season > div:nth-child(1) */
+    margin-bottom: 10px; /*Adjust this value*/
+    justify-content: space-between;
+}
+
+.h3 {
+    margin: 0px; /* Add right margin */
+}
+
+.roww2 {
+    display: flex;
+    gap: 40px;
+    text-align: center;
+    min-width: 1080px;
+    justify-content: space-between;
+    max-width: 800px;
+    min-width: 1010px;
+}
+
+.roww3 {
+    display: flex;
+    gap:80px;
+    min-width: 500px;
+    font-size: 2rem;
+}
+
+.row3-m-cap {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: left;
+    font-weight: 700;
+}
+
+.pct-change.positive {
+    color: #00ff5f;
+}
+
+.pct-change.negative {
+    color: #ff3550;
+}
+
+
