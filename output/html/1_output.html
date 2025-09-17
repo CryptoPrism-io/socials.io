@@ -2,293 +2,381 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
-    <title>1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Dashboard</title>
     <link rel="stylesheet" href="../../core_templates/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     
-    <div class="header">2025-09-17</div>
-    
-        <div class="header-card">
-            <div class="snap-logo">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png">
+    <!-- Unified Bitcoin Dashboard Component -->
+    <div class="unified-btc-dashboard">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">LAST UPDATE: 2025-09-17</div>
+        </div>
+
+        <!-- Main BTC Information Section -->
+        <div class="btc-main-section">
+            <!-- BTC Identity and Price -->
+            <div class="btc-identity">
+                <div class="btc-logo-container">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="Bitcoin Logo" class="btc-logo-img">
                 </div>
-                <div class="symbol">
-                    BTC
+                <div class="btc-info">
+                    <div class="btc-symbol">BTC</div>
+                    <div class="btc-price">$116699.46</div>
                 </div>
             </div>
-            <div class="coin-stat">
-                <div class="snap-price">
-                    <h4>$116699.46</h4>
-                </div>
-                <div class="snap-mcap">
 
-                    <h4>$2.32 T</h4>
+            <!-- Market Data Grid -->
+            <div class="market-data-grid">
+                <div class="market-item">
+                    <div class="market-label">Market Cap</div>
+                    <div class="market-value">$2.32 T</div>
                 </div>
-                <div class="snap-vol">
-                    
-                    <h4>$45.80 B</h4>
+                <div class="market-item">
+                    <div class="market-label">Volume 24H</div>
+                    <div class="market-value">$45.80 B</div>
                 </div>
-                
-                <div class="snap-pct">
-                    <h4 class="pct-change positive">
-                        1.12%
-                    </h4>
-                    <h4 class="pct-change positive">
-                        5.07%
-                    </h4>
-                    <h4 class="pct-change negative">
-                        -0.44%
-                    </h4>
-                    <h4 class="pct-change ">
-                        None%
-                    </h4>
-                </div>
-
-                      
-                
-                
-            </div>
-            <div class="coin-bnb">
-                
-                <div style="display: flex; gap: 120px; justify-content: space-between; font-size: 45px; font-weight: bolder;position:absolute; top:140px; left: 625px">
-                    <div style="color: #ff0000;">2</div>
-                    <div style="color: #ffb338;">14</div>
-                    <div style="color: #00ff2f;">16</div>
-                </div>
-                <div class="trend">
-                    <div>Bullish</div>
-                </div>
-                
             </div>
         </div>
-    
-    
 
-    <div class="col-container" style="padding-right: 10px;">
-        <div class="col" style="position: absolute; left: 20px; top: 365px">
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">ETH</div>
-                    <div class="pct-change negative">
-                        -0.38%
+        <!-- Performance and Sentiment Section -->
+        <div class="performance-sentiment-section">
+            <!-- Performance Grid -->
+            <div class="performance-container">
+                <div class="performance-title">Performance</div>
+                <div class="performance-items">
+                    <div class="perf-item">
+                        <div class="perf-value positive">
+                            1.12%
+                        </div>
+                        <div class="perf-label">1D</div>
                     </div>
-                    
-                </div>
-                <div class="price">
-                    <div class="coin-price">$4516.4</div>
-                    <div class="m-cap">545.15 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/52.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">XRP</div>
-                    <div class="pct-change positive">1.5%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$3.04</div>
-                    <div class="m-cap">181.74 B</div>
+                    <div class="perf-item">
+                        <div class="perf-value positive">
+                            5.07%
+                        </div>
+                        <div class="perf-label">7D</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-value negative">
+                            -0.44%
+                        </div>
+                        <div class="perf-label">30D</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">USDT</div>
-                    <div class="pct-change positive">0.03%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$1.0</div>
-                    <div class="m-cap">171.02 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">BNB</div>
-                    <div class="pct-change positive">4.11%%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$959.36</div>
-                    <div class="m-cap">133.53 B</div>
+            <!-- Sentiment Analysis -->
+            <div class="sentiment-container">
+                <div class="sentiment-title">Market Sentiment</div>
+                <div class="sentiment-items">
+                    <div class="sentiment-item">
+                        <div class="sentiment-count bearish-count">2</div>
+                        <div class="sentiment-label">Bearish</div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-count neutral-count">14</div>
+                        <div class="sentiment-label">Neutral</div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-count bullish-count">16</div>
+                        <div class="sentiment-label">Bullish</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">SOL</div>
-                    <div class="pct-change positive">0.43%%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$236.61</div>
-                    <div class="m-cap">128.48 B</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col" style="position: absolute; left: 380px; top: 410px">
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">USDC</div>
-                    <div class="pct-change positive">0.01%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$1.0</div>
-                    <div class="m-cap">73.65 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/74.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">DOGE</div>
-                    <div class="pct-change positive">0.14%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$0.27</div>
-                    <div class="m-cap">40.7 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">TRX</div>
-                    <div class="pct-change negative">-0.79%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$0.34</div>
-                    <div class="m-cap">32.47 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">ADA</div>
-                    <div class="pct-change positive">1.75%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$0.88</div>
-                    <div class="m-cap">31.52 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/32196.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">HYPE</div>
-                    <div class="pct-change positive">1.27%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$54.22</div>
-                    <div class="m-cap">18.1 B</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col" style="position: absolute; left: 760px; top: 370px">
-       
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">LINK</div>
-                    <div class="pct-change negative">-0.35%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$23.53</div>
-                    <div class="m-cap">15.96 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/29470.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">USDe</div>
-                    <div class="pct-change positive">0.02%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$1.0</div>
-                    <div class="m-cap">13.62 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/20947.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">SUI</div>
-                    <div class="pct-change positive">1.63%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$3.6</div>
-                    <div class="m-cap">12.84 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5805.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">AVAX</div>
-                    <div class="pct-change positive">1.12%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$30.05</div>
-                    <div class="m-cap">12.69 B</div>
-                </div>
-            </div>
-
-            <div class="coin-card">
-                <div class="logo">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/512.png" alt="Coin logo">
-                </div>
-                <div class="name">
-                    <div class="coin-name">XLM</div>
-                    <div class="pct-change positive">1.8%</div>
-                </div>
-                <div class="price">
-                    <div class="coin-price">$0.39</div>
-                    <div class="m-cap">12.32 B</div>
-                </div>
+            <!-- Overall Trend -->
+            <div class="trend-container">
+                <div class="trend-title">Overall Trend</div>
+                <div class="trend-value">Bullish</div>
             </div>
         </div>
     </div>
+    
+
+    <!-- Coin Grid -->
+    <div class="coin-grid">
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png" alt="ETH logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">ETH</div>
+                    <div class="coin-change negative">
+                        -0.38%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$4516.4</div>
+                <div class="coin-mcap">545.15 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/52.png" alt="XRP logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">XRP</div>
+                    <div class="coin-change positive">
+                        1.5%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$3.04</div>
+                <div class="coin-mcap">181.74 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/825.png" alt="USDT logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">USDT</div>
+                    <div class="coin-change positive">
+                        0.03%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$1.0</div>
+                <div class="coin-mcap">171.02 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png" alt="BNB logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">BNB</div>
+                    <div class="coin-change positive">
+                        4.11%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$959.36</div>
+                <div class="coin-mcap">133.53 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png" alt="SOL logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">SOL</div>
+                    <div class="coin-change positive">
+                        0.43%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$236.61</div>
+                <div class="coin-mcap">128.48 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png" alt="USDC logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">USDC</div>
+                    <div class="coin-change positive">
+                        0.01%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$1.0</div>
+                <div class="coin-mcap">73.65 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/74.png" alt="DOGE logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">DOGE</div>
+                    <div class="coin-change positive">
+                        0.14%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$0.27</div>
+                <div class="coin-mcap">40.7 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png" alt="TRX logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">TRX</div>
+                    <div class="coin-change negative">
+                        -0.79%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$0.34</div>
+                <div class="coin-mcap">32.47 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/2010.png" alt="ADA logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">ADA</div>
+                    <div class="coin-change positive">
+                        1.75%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$0.88</div>
+                <div class="coin-mcap">31.52 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/32196.png" alt="HYPE logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">HYPE</div>
+                    <div class="coin-change positive">
+                        1.27%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$54.22</div>
+                <div class="coin-mcap">18.1 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png" alt="LINK logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">LINK</div>
+                    <div class="coin-change negative">
+                        -0.35%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$23.53</div>
+                <div class="coin-mcap">15.96 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/29470.png" alt="USDe logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">USDe</div>
+                    <div class="coin-change positive">
+                        0.02%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$1.0</div>
+                <div class="coin-mcap">13.62 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/20947.png" alt="SUI logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">SUI</div>
+                    <div class="coin-change positive">
+                        1.63%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$3.6</div>
+                <div class="coin-mcap">12.84 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5805.png" alt="AVAX logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">AVAX</div>
+                    <div class="coin-change positive">
+                        1.12%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$30.05</div>
+                <div class="coin-mcap">12.69 B</div>
+            </div>
+        </div>
+        
+        <div class="coin-card">
+            <div class="coin-info">
+                <div class="coin-logo">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/512.png" alt="XLM logo">
+                </div>
+                <div class="coin-details">
+                    <div class="coin-name">XLM</div>
+                    <div class="coin-change positive">
+                        1.8%
+                    </div>
+                </div>
+            </div>
+            <div class="coin-prices">
+                <div class="coin-price">$0.39</div>
+                <div class="coin-mcap">12.32 B</div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-text">Data Provided By</div>
 </body>
 </html>
