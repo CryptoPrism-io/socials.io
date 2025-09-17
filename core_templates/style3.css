@@ -1,140 +1,496 @@
+/* 🎨 Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html, body {
     width: 1080px;
     height: 1080px;
-    margin: 0 auto;
-    padding: 0;
-    overflow: auto;
-    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('../output/images/3.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* 🔥 Pure CSS Background - NO IMAGE */
+body {
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.12) 0%, transparent 50%),
+        linear-gradient(135deg, #0a0a1e 0%, #141432 30%, #0f0f23 70%, #050519 100%);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+/* 🌟 Glow Animation */
+@keyframes pulse-glow {
+    0% {
+        text-shadow: 0 0 15px currentColor, 0 0 30px currentColor;
+        transform: scale(1);
+    }
+    100% {
+        text-shadow: 0 0 25px currentColor, 0 0 45px currentColor;
+        transform: scale(1.02);
+    }
+}
+
+/* 🚀 Unified Bitcoin Dashboard Component - Template 3 */
+.unified-btc-dashboard {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: 30px;
+    height: 200px;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 6px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    padding: 15px 25px;
     display: flex;
     flex-direction: column;
-    color: white;
-    font-family: 'Poppins', sans-serif;
+    gap: 12px;
 }
 
-/* Premium gradient text classes */
-.gradient-text-primary {
-    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+/* 📋 Header Section with Branding and Last Update */
+.dashboard-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crypto-prism-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.prism-triangle {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 16px solid #ff6b35;
+    filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.4));
+}
+
+.brand-text {
+    font-size: 16px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 1px 3px rgba(255,255,255,0.4);
+    text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    letter-spacing: 1.5px;
 }
 
-.gradient-text-secondary {
-    background: linear-gradient(135deg, #f8f8f8 0%, #e0e0e0 50%, #c8c8c8 100%);
+.last-update {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 🪙 Compact BTC Information Section */
+.btc-main-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.btc-identity {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.btc-logo-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btc-logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.btc-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.btc-symbol {
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #f7931a, #ffffff, #f7931a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.gradient-text-metallic {
-    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
+.btc-price {
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 25%, #e0e0e0 50%, #ffffff 75%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 1px 3px rgba(255,255,255,0.5), 0 2px 6px rgba(0,0,0,0.1);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* General gradient styling for text elements */
-h4, .coin-name, .coin-price {
-    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+.market-data-grid {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    justify-content: center;
+}
+
+.market-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.market-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.market-value {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+}
+
+/* 📊 Compact Performance and Sentiment Section */
+.performance-sentiment-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+.performance-container, .sentiment-container, .trend-container {
+    flex: 1;
+}
+
+.performance-title, .sentiment-title, .trend-title {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.performance-items {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.perf-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.perf-value {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    min-width: 45px;
+    text-align: center;
+}
+
+.perf-label {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.sentiment-items {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.sentiment-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.sentiment-count {
+    font-size: 16px;
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px currentColor;
+}
+
+.sentiment-label {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.trend-container {
+    text-align: center;
+}
+
+.trend-value {
+    font-size: 14px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 1px 3px rgba(255,255,255,0.4);
+    text-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+    animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
-.coin-name {
-    font-size: 2rem;
-    color: white;
-    letter-spacing: 2px;
-    margin-bottom: 2px;
-    text-align: left;
-    max-width: 100px; /* Set a reasonable max width */
-    white-space: nowrap; /* Prevents text from wrapping */
-    overflow: hidden; /* Ensures overflow is hidden */
-    text-overflow:ellipsis; /* Adds "..." when text overflows */
+/* Color Classes */
+.bearish-count { color: #ff4444; }
+.neutral-count { color: #ffb338; }
+.bullish-count { color: #00ff88; }
+
+.positive { color: #00ff88; }
+.negative { color: #ff4444; }
+
+/* 📊 Template 3: Gainers/Losers Layout */
+.col-container {
+    position: absolute;
+    top: 250px;
+    left: 30px;
+    right: 30px;
+    bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
 }
 
-.pct-change{
-
-   
-    white-space: nowrap; /* Prevents text from wrapping */
-    overflow: visible; /* Ensures overflow is hidden */
-    
+.col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
+/* 🏆 Section Headers */
+.top-gainer::before,
+.top-loser::before {
+    content: "";
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.top-gainer::before {
+    content: "🚀 TOP GAINERS";
+    color: #00ff88;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+}
+
+.top-loser::before {
+    content: "📉 TOP LOSERS";
+    color: #ff4444;
+    border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+/* 💎 Enhanced Coin Cards for Template 3 */
 .coin-card {
-    /* Remove padding-bottom: -15px;  Negative padding is rarely the best solution */
-    margin-bottom: 10px; /* Add margin between coin cards */
-    margin-top: 10px;
-    padding-bottom: 5px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 4px 16px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 15px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.coin-card:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 6px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .coin-stat {
     display: flex;
-    align-items:center;  /* Vertically center items */
-    justify-content: space-between; /* Distribute space evenly */
-    width: 100%;           /* Take full width of the parent */
-    padding: 20px;
-           /* Add some padding for spacing */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
-.coin-stat > div {
-    flex: 1;           /* Distribute available space equally */
-    padding: 0px;
+.coin-stat > div:first-child {
     display: flex;
-    align-items: center; /* Vertically center items */
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .logo img {
-    width: 48px;
-    height: 48px;
-    object-fit: cover;
-    padding: 0px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }
 
 .left-col {
     display: flex;
     flex-direction: column;
-    padding-left: 10px;  /* Add space between logo and name/rank */
+    gap: 2px;
+}
+
+.coin-name {
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4);
 }
 
 .cmc-rank {
-    font-size: 1.25rem;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
 }
 
 .mid-col {
-    display: flex;
-    flex-direction: column;
-    font-size: 1.25rem;
-    text-align: center; /* Center Market Cap */
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
 }
 
 .right-col {
     display: flex;
     flex-direction: column;
-    font-size: 1.75rem;
-    text-align: right;  /* Right-align Price and % change */
+    align-items: flex-end;
+    gap: 2px;
 }
 
+.price {
+    font-size: 14px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+.pct-change {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 📊 DMV Scores Section */
 .dmv {
     display: flex;
-    align-items:center;
-    flex-direction: row;
-    gap: 60px;
-    font-size: 2rem;
-    min-width: 420px;
-    max-width: 440px;
-    justify-content: space-between;
-    padding-right: 10px;
-    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dmv > div {
-    text-align: left; /* Center "Durability", "Momentum", "Valuation" labels */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.dmv > div::before {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.dmv > div:nth-child(1)::before { content: "D"; }
+.dmv > div:nth-child(2)::before { content: "M"; }
+.dmv > div:nth-child(3)::before { content: "V"; }
+
+.d, .m, .v {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    min-width: 30px;
+    text-align: center;
+}
+
+/* 📝 Footer */
+.footer-text {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    letter-spacing: 1px;
 }

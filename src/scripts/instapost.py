@@ -49,25 +49,25 @@ async def generate_image_from_html(output_html_file, output_image_path):
 
 
 
-# Data for page 1 & 2
+# Data for page 2 only (top 25 coins)
 def fetch_data_as_dataframe():
     """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
-    query_top_100 = """
+    query_top_25 = """
       SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
       FROM crypto_listings_latest_1000
-      WHERE cmc_rank < 50
+      WHERE cmc_rank < 26
       """
-    
+
     try:
         # Use gcp_engine to execute the query and fetch data as a DataFrame
-        top_100_cc  = pd.read_sql_query(query_top_100, gcp_engine)
+        top_25_cc  = pd.read_sql_query(query_top_25, gcp_engine)
         # Convert market_cap to billions and round to 2 decimal places
-        top_100_cc['market_cap'] = (top_100_cc['market_cap'] / 1_000_000_000).round(2)
-        top_100_cc['price'] = (top_100_cc['price']).round(2)
-        top_100_cc['percent_change24h'] = (top_100_cc['percent_change24h']).round(2)
+        top_25_cc['market_cap'] = (top_25_cc['market_cap'] / 1_000_000_000).round(2)
+        top_25_cc['price'] = (top_25_cc['price']).round(2)
+        top_25_cc['percent_change24h'] = (top_25_cc['percent_change24h']).round(2)
 
-        # Create a list of slugs from the top_100_crypto DataFrame
-        slugs = top_100_cc['slug'].tolist()
+        # Create a list of slugs from the top_25_crypto DataFrame
+        slugs = top_25_cc['slug'].tolist()
         # Prepare a string for the IN clause
         slugs_placeholder = ', '.join(f"'{slug}'" for slug in slugs)
 
@@ -81,16 +81,16 @@ def fetch_data_as_dataframe():
         logos_and_slugs = pd.read_sql_query(query_logos, gcp_engine)
 
         # Merge the two DataFrames on the 'slug' column
-        top_100_cc = pd.merge(top_100_cc, logos_and_slugs, on='slug', how='left')
+        top_25_cc = pd.merge(top_25_cc, logos_and_slugs, on='slug', how='left')
 
-        top_100_cc = top_100_cc.sort_values(by='cmc_rank', ascending=True)
+        top_25_cc = top_25_cc.sort_values(by='cmc_rank', ascending=True)
 
         gcp_engine.dispose()
-        
+
     except Exception as e:
         print(f"Error fetching data: {e}")
-        top_100_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
-    return top_100_cc
+        top_25_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
+    return top_25_cc
 
 # Data for BTC snapshot
 def btc_snapshot():
@@ -503,13 +503,13 @@ async def render_page_2():
     df2 = fetch_data_as_dataframe()
     df2 = df2.sort_values('cmc_rank', ascending=True)
 
-    # Skip first 15 rows and take next 21 rows (ranks 16-36)
-    df2 = df2.iloc[15:36]
-    
-    # Split into three DataFrames of 7 rows each
-    df2_part1 = df2.iloc[0:7]    # First 7 rows (ranks 16-22)
-    df2_part2 = df2.iloc[7:14]   # Next 7 rows (ranks 23-29)
-    df2_part3 = df2.iloc[14:21]  # Last 7 rows (ranks 30-36)
+    # Get top 24 coins (ranks 1-24)
+    df2 = df2.iloc[0:24]
+
+    # Split into three DataFrames: 8 coins each for perfect distribution
+    df2_part1 = df2.iloc[0:8]    # First 8 coins (ranks 1-8)
+    df2_part2 = df2.iloc[8:16]   # Next 8 coins (ranks 9-16)
+    df2_part3 = df2.iloc[16:24]  # Last 8 coins (ranks 17-24)
 
     # Convert each DataFrame to dictionary
     coins_part1 = df2_part1.to_dict(orient='records')
