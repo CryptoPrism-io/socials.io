@@ -445,22 +445,27 @@ from jinja2 import Environment, FileSystemLoader
 async def render_page_1():
     """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
     # Fetch the data using the previously defined function
-    coins = fetch_data_as_dataframe()
+    coins = fetch_for_5()  # Use same data source as page 5 for market data
     snap = btc_snapshot()
-    
+
 
     if coins.empty:
         print("No data to render.")
         return
+
+    # Format current date and time
+    now = datetime.now()
+    formatted_date = now.strftime("%d %b, %Y")  # Example: 17 Sep, 2025
+    formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM
 
     # Set up Jinja2 environment
     template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
     env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('1.html')
 
-    
+
     # Render the template with the fetched data
-    output = template.render(coins=coins.to_dict(orient='records'), snap=snap.to_dict(orient='records'))
+    output = template.render(coins=coins.to_dict(orient='records'), snap=snap.to_dict(orient='records'), current_date=formatted_date, current_time=formatted_time)
 
     # Save the output to an HTML file
     output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')

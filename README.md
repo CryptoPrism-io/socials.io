@@ -27,9 +27,9 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 
 ### Template System - Single Source of Truth
 - **Core Templates**: `core_templates/` directory contains:
-  - **HTML Templates**: `1.html` through `5.html` (base templates)
-  - **CSS Stylesheets**: `style.css` through `style5.css` with enhanced 3D effects
-  - **Background Images**: References to `output/images/*.png` for background overlays
+  - **HTML Templates**: `1.html` through `5.html` (base templates with auto-layout architecture)
+  - **CSS Stylesheets**: `style.css` through `style5.css` with enhanced glassmorphism effects and flexbox layouts
+  - **Modern Architecture**: Eliminated absolute positioning in favor of auto-layout container systems
 - **Generated Content**: `output/` directory for all generated files:
   - **HTML Output**: `output/html/` - Rendered templates with live data
   - **Image Output**: `output/images/` - Final Instagram posts (JPG format)
@@ -50,11 +50,10 @@ socials.io/
 │   │   ├── 📄 instapost_new.py      # Development/experimental script
 │   │   ├── 📄 linkedin_auth.py      # LinkedIn authentication
 │   │   └── 📄 twitter_auth.py       # Twitter authentication
-│   ├── 📁 templates/                # HTML templates & styles
-│   │   ├── 📄 1.html → 5.html       # Base HTML templates
-│   │   └── 📁 styles/               # CSS stylesheets
-│   │       └── 📄 style.css → style5.css  # Template stylesheets
 │   └── 📁 utils/                    # Utility modules & helpers
+├── 📁 core_templates/               # Template system (single source of truth)
+│   ├── 📄 1.html → 5.html           # Auto-layout HTML templates
+│   └── 📄 style.css → style5.css    # Flexbox-based CSS stylesheets
 ├── 📁 output/                       # Generated content output
 │   ├── 📁 html/                     # Generated HTML files
 │   │   └── 📄 *_output.html         # Rendered templates with data
@@ -99,7 +98,7 @@ socials.io/
 |-----------|---------|----------|
 | **`src/`** | Source code | Main application scripts, templates, utilities |
 | **`src/scripts/`** | Core functionality | Instagram automation, data sync, publishing |
-| **`src/templates/`** | Content templates | HTML templates, CSS styles for content generation |
+| **`core_templates/`** | Template system | Auto-layout HTML templates, flexbox CSS styles |
 | **`output/`** | Generated content | HTML outputs, generated images for posting |
 | **`config/`** | Configuration | Path management, system configuration |
 | **`tests/`** | Testing suite | Unit tests, validation scripts, test data |
