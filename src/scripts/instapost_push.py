@@ -441,8 +441,10 @@ print("✅ Instagram client ready for use")
 # Prepare media files
 print("🔄 Preparing media files...")
 media_files = []
+# Define path to output images directory
+image_dir = Path(__file__).parent.parent.parent / 'output' / 'images'
 for i in range(1, 6):
-    file_path = Path(f"{i}_output.jpg")
+    file_path = image_dir / f"{i}_output.jpg"
     if file_path.exists():
         media_files.append(file_path)
         print(f"✅ Found {file_path}")
@@ -516,7 +518,7 @@ try:
     if Path(LOCAL_PATH).exists():
         os.remove(LOCAL_PATH)
     for i in range(1, 6):
-        file_path = Path(f"{i}_output.jpg")
+        file_path = image_dir / f"{i}_output.jpg"
         if file_path.exists():
             os.remove(file_path)
     print("✅ Temporary files cleaned up")

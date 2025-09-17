@@ -1,0 +1,41 @@
+# Core dependencies for socialio - Social Media Automation System
+# Based on dependencies listed in CLAUDE.md
+
+# Instagram posting workflow dependencies
+together
+psycopg2
+nest-asyncio
+requests
+pandas
+gspread
+oauth2client
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+instagrapi
+playwright
+python-dotenv
+pillow
+sqlalchemy
+jinja2
+
+# Google Sheets workflow dependencies
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+pandas
+numpy
+matplotlib
+seaborn
+mysql-connector-python
+sqlalchemy
+requests
+psycopg2-binary
+gspread
+oauth2client
+gspread-dataframe
+
+# Additional core dependencies
+pathlib2
+asyncio

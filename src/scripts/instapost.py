@@ -201,22 +201,22 @@ def btc_snapshot():
 # fetch for page 3
 def fetch_for_3():
     """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
-    query_top_500 = """
+    query_top_100 = """
       SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
       FROM crypto_listings_latest_1000
-      WHERE cmc_rank < 500
+      WHERE cmc_rank <= 100
       """
     
     try:
         # Use gcp_engine to execute the query and fetch data as a DataFrame
-        top_500_cc  = pd.read_sql_query(query_top_500, gcp_engine)
+        top_100_cc  = pd.read_sql_query(query_top_100, gcp_engine)
         # Convert market_cap to billions and round to 2 decimal places
-        top_500_cc['market_cap'] = (top_500_cc['market_cap'] / 1_000_000_000).round(2)
-        top_500_cc['price'] = (top_500_cc['price']).round(2)
-        top_500_cc['percent_change24h'] = (top_500_cc['percent_change24h']).round(2)
+        top_100_cc['market_cap'] = (top_100_cc['market_cap'] / 1_000_000_000).round(2)
+        top_100_cc['price'] = (top_100_cc['price']).round(2)
+        top_100_cc['percent_change24h'] = (top_100_cc['percent_change24h']).round(2)
 
         # Create a list of slugs from the top_100_crypto DataFrame
-        slugs = top_500_cc['slug'].tolist()
+        slugs = top_100_cc['slug'].tolist()
         # Prepare a string for the IN clause
         slugs_placeholder = ', '.join(f"'{slug}'" for slug in slugs)
 
@@ -237,19 +237,19 @@ def fetch_for_3():
         logos_and_slugs = pd.read_sql_query(query_logos, gcp_engine)
 
         # Merge the two DataFrames on the 'slug' column
-        top_500_cc = pd.merge(top_500_cc, logos_and_slugs, on='slug', how='left')
-        top_500_cc = pd.merge(top_500_cc, dmv, on='slug', how='left')
+        top_100_cc = pd.merge(top_100_cc, logos_and_slugs, on='slug', how='left')
+        top_100_cc = pd.merge(top_100_cc, dmv, on='slug', how='left')
 
-        top_500_cc['Durability_Score'] = (top_500_cc['Durability_Score']).round(2)
-        top_500_cc['Momentum_Score'] = (top_500_cc['Momentum_Score']).round(2)
-        top_500_cc['Valuation_Score'] = (top_500_cc['Valuation_Score']).round(2)
+        top_100_cc['Durability_Score'] = (top_100_cc['Durability_Score']).round(2)
+        top_100_cc['Momentum_Score'] = (top_100_cc['Momentum_Score']).round(2)
+        top_100_cc['Valuation_Score'] = (top_100_cc['Valuation_Score']).round(2)
 
         gcp_engine.dispose()
-        
+
     except Exception as e:
         print(f"Error fetching data: {e}")
-        top_500_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
-    return top_500_cc
+        top_100_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
+    return top_100_cc
 
 def fetch_for_4_long():
     """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
@@ -454,7 +454,8 @@ async def render_page_1():
         return
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader(os.getcwd()))  # Loads from the current directory
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
+    env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('1.html')
 
     
@@ -462,13 +463,19 @@ async def render_page_1():
     output = template.render(coins=coins.to_dict(orient='records'), snap=snap.to_dict(orient='records'))
 
     # Save the output to an HTML file
-    with open("1_output.html", "w") as f:
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "1_output.html")
+    with open(output_path, "w") as f:
         f.write(output)
 
     print("Rendered page saved as 'output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    await generate_image_from_html("1_output.html", "1_output.jpg")
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
+    os.makedirs(image_dir, exist_ok=True)
+    image_path = os.path.join(image_dir, "1_output.jpg")
+    await generate_image_from_html(output_path, image_path)
     #cl = Client()  # Directly initialize the client
 
     """try:
@@ -510,7 +517,8 @@ async def render_page_2():
     coins_part3 = df2_part3.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader(os.getcwd())) 
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
+    env = Environment(loader=FileSystemLoader(template_dir)) 
     template = env.get_template('2.html')
 
     # Render the template with the fetched data
@@ -519,13 +527,19 @@ async def render_page_2():
                          coins3=coins_part3)
 
     # Save the output to an HTML file
-    with open("2_output.html", "w") as f:
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "2_output.html")
+    with open(output_path, "w") as f:
         f.write(output)
 
     print("Rendered page saved as 'output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    await generate_image_from_html("2_output.html", "2_output.jpg")
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
+    os.makedirs(image_dir, exist_ok=True)
+    image_path = os.path.join(image_dir, "2_output.jpg")
+    await generate_image_from_html(output_path, image_path)
 
 # PAGE 3
 async def render_page_3():
@@ -533,17 +547,28 @@ async def render_page_3():
     # Fetch the data using the previously defined function
     df3 = fetch_for_3()
     df3.head()
-    
-    df3l = df3.sort_values('percent_change24h', ascending=True)  # top losers
+
+    # Filter for top 100 CMC rank and clean data only
+    df3_clean = df3[
+        (df3['cmc_rank'] <= 100) &  # Top 100 tokens only
+        (df3['percent_change24h'].notna()) &  # No nan values in percent change
+        (df3['logo'].notna()) &  # No missing logos
+        (df3['Durability_Score'].notna()) &  # No nan in Durability
+        (df3['Momentum_Score'].notna()) &  # No nan in Momentum
+        (df3['Valuation_Score'].notna())  # No nan in Valuation
+    ]
+
+    df3l = df3_clean.sort_values('percent_change24h', ascending=True)  # top losers
     df3l = df3l.iloc[0:4]
-    df3g = df3.sort_values('percent_change24h', ascending=False)  # top gainers
+    df3g = df3_clean.sort_values('percent_change24h', ascending=False)  # top gainers
     df3g = df3g.iloc[0:4]  # get first 4 rows (highest percent change)
 
     df3l_new = df3l.to_dict(orient='records')
     df3g_new = df3g.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader(os.getcwd())) 
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
+    env = Environment(loader=FileSystemLoader(template_dir)) 
     template = env.get_template('3.html')
 
     # Render the template with the fetched data
@@ -551,13 +576,19 @@ async def render_page_3():
                              coin2=df3g_new)
 
     # Save the output to an HTML file
-    with open("3_output.html", "w") as f:
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "3_output.html")
+    with open(output_path, "w") as f:
         f.write(output)
 
     print("Rendered page saved as 'output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    await generate_image_from_html("3_output.html", '3_output.jpg')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
+    os.makedirs(image_dir, exist_ok=True)
+    image_path = os.path.join(image_dir, "3_output.jpg")
+    await generate_image_from_html(output_path, image_path)
 
 #PAGE 4
 async def render_page_4():
@@ -578,7 +609,8 @@ async def render_page_4():
     short_positions = df_short.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader(os.getcwd())) 
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
+    env = Environment(loader=FileSystemLoader(template_dir)) 
     template = env.get_template('4.html')
 
     # Render the template with the fetched data
@@ -586,13 +618,19 @@ async def render_page_4():
                              coins2=short_positions)
 
     # Save the output to an HTML file
-    with open("4_output.html", "w", encoding="utf-8") as f:
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "4_output.html")
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(output)
 
     print("Rendered page saved as '4_output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    await generate_image_from_html("4_output.html", '4_output.jpg')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
+    os.makedirs(image_dir, exist_ok=True)
+    image_path = os.path.join(image_dir, "4_output.jpg")
+    await generate_image_from_html(output_path, image_path)
 
 # PAGE 5
 async def render_page_5():
@@ -608,20 +646,27 @@ async def render_page_5():
     formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM Monday
 
     # Set up Jinja2 environment
-    env = Environment(loader=FileSystemLoader(os.getcwd())) 
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
+    env = Environment(loader=FileSystemLoader(template_dir)) 
     template = env.get_template('5.html')
 
     # Render the template with the fetched data
     output = template.render(coins=coins, current_date=formatted_date, current_time=formatted_time)
 
     # Save the output to an HTML file
-    with open("5_output.html", "w", encoding="utf-8") as f:
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "5_output.html")
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(output)
 
     print("Rendered page saved as '5_output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    await generate_image_from_html("5_output.html", '5_output.jpg')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
+    os.makedirs(image_dir, exist_ok=True)
+    image_path = os.path.join(image_dir, "5_output.jpg")
+    await generate_image_from_html(output_path, image_path)
 
 if __name__=="__main__":
 

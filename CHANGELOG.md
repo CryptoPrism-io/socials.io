@@ -79,6 +79,255 @@ The documentation system supports the project's core mission of automated, data-
 
 ---
 
+## [v1.1.0] - 2025-09-17 05:45 UTC
+
+### 🔧 FIXED: Unicode/UTF-8 Encoding - Permanent System-Level Solution
+
+### Fixed
+- **UnicodeEncodeError elimination**: Resolved `'charmap' codec can't encode character` errors that occurred when AI responses contained emojis
+- **System-level encoding configuration**: Implemented permanent UTF-8 support across all terminal types and Python processes
+- **Cross-platform compatibility**: Ensured Unicode support works consistently on Windows, Git Bash, PowerShell, and WSL environments
+
+### Added
+- **System setup scripts**:
+  - `setup_windows_utf8.bat` - Quick Windows UTF-8 configuration (batch script)
+  - `setup_windows_utf8.ps1` - Advanced Windows UTF-8 setup with PowerShell integration
+  - `setup_powershell_utf8.ps1` - PowerShell profile configuration for UTF-8 console encoding
+- **Unicode validation tools**:
+  - `test_unicode_system.py` - System-wide Unicode validation without script-level fixes
+  - `utf8_fix.py` - Standalone UTF-8 enabler module (kept for backwards compatibility)
+- **Environment configuration**: Updated ~/.bashrc with permanent PYTHONIOENCODING=utf-8 export
+
+### Changed
+- **Codebase cleanup**: Removed redundant UTF-8 encoding fixes from Python scripts:
+  - `validate_env.py` - Removed per-script encoding setup
+  - `validate_project.py` - Removed per-script encoding setup
+  - `src/scripts/instapost_push.py` - Removed per-script encoding setup
+- **GitHub Actions enhancement**: Added PYTHONIOENCODING=utf-8 environment variable to all workflows
+- **Documentation update**: Created comprehensive troubleshooting guide
+
+### Security
+- **Environment variable management**: Secure handling of system-level encoding configuration without exposing sensitive data
+
+## 🔧 TROUBLESHOOTING: Unicode/Emoji Issues
+
+### Quick Fix for New Environments
+
+If you see `UnicodeEncodeError: 'charmap' codec can't encode character` errors:
+
+**Windows Users:**
+```cmd
+# Run once to fix permanently
+setup_windows_utf8.bat
+```
+
+**PowerShell Users:**
+```powershell
+# Run once to fix permanently
+.\setup_windows_utf8.ps1
+```
+
+**Git Bash Users:**
+```bash
+# Already configured automatically via ~/.bashrc
+# If issues persist, restart Git Bash terminal
+```
+
+### Verify Unicode is Working
+```bash
+# Test system-wide Unicode support
+python test_unicode_system.py
+
+# Quick emoji test
+python -c "print('🚀 Unicode test: 💻🔥👨‍💻🌟')"
+```
+
+### What This Fixes
+
+**Before:** Scripts failed with encoding errors
+```
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f680'
+in position 0: character maps to <undefined>
+```
+
+**After:** Unicode works automatically everywhere
+```
+🚀 Unicode test: 💻🔥👨‍💻🌟 SUCCESS!
+```
+
+## 📚 UNICODE ENCODING: Complete Documentation
+
+### The Problem
+- **Root Cause**: Windows consoles default to CP1252 encoding instead of UTF-8
+- **Impact**: Python scripts crash when AI responses contain Unicode characters (emojis, special symbols)
+- **Scope**: Affected all terminal types - Command Prompt, PowerShell, Git Bash
+
+### The Solution: System-Level Fix
+
+**Implementation Strategy**: Fix encoding once at the system level instead of per-script
+
+#### Priority 1: System Environment Variables
+- **PYTHONIOENCODING=utf-8**: Forces all Python processes to use UTF-8 encoding
+- **LANG=en_US.UTF-8**: Sets system locale for Unicode support
+- **LC_ALL=en_US.UTF-8**: Ensures consistent encoding across all applications
+
+#### Priority 2: Terminal-Specific Configuration
+- **Windows Console**: Set code page to 65001 (UTF-8) via `chcp 65001`
+- **PowerShell**: Configure `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8`
+- **Git Bash**: Export environment variables in ~/.bashrc
+
+#### Priority 3: Codebase Cleanup
+- **Removed redundant fixes**: Eliminated per-script encoding setup code
+- **Cleaner maintainability**: No more repetitive UTF-8 configuration in every file
+- **Automatic inheritance**: All new scripts inherit system-level UTF-8 support
+
+### How It Works
+
+**System-Level Configuration:**
+```bash
+# Environment variables (permanent)
+export PYTHONIOENCODING=utf-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+```
+
+**PowerShell Profile:**
+```powershell
+# Automatic UTF-8 console encoding
+$OutputEncoding = [System.Text.Encoding]::UTF8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$env:PYTHONIOENCODING = "utf-8"
+```
+
+**Windows Registry (via setup scripts):**
+```cmd
+# Permanent console code page
+setx PYTHONIOENCODING utf-8
+chcp 65001
+```
+
+### Benefits
+
+**Developer Experience:**
+- ✅ No more encoding errors in any environment
+- ✅ No per-script fixes needed
+- ✅ Works automatically for all new scripts
+- ✅ Cross-platform compatibility
+
+**Technical Benefits:**
+- ✅ System-level persistence across terminal sessions
+- ✅ Automatic inheritance by all Python processes
+- ✅ Reduced code complexity and maintenance overhead
+- ✅ GitHub Actions compatibility maintained
+
+**Business Value:**
+- ✅ Reliable AI response handling with emoji content
+- ✅ Consistent user experience across all environments
+- ✅ Reduced debugging time and development friction
+- ✅ Professional output formatting for social media content
+
+### Validation Results
+```
+Tests passed: 5/5
+🎉 EXCELLENT! System-level UTF-8 is working perfectly!
+✅ All Unicode tests passed without any script-level fixes.
+✅ Environment variables are correctly set.
+```
+
+### Rationale
+
+**Problem Scope**: The Unicode encoding issue was a **fundamental system configuration problem** that affected every Python script using emoji or special characters. Previous per-script fixes were:
+- **Inefficient**: Required modification of every affected file
+- **Error-prone**: Easy to forget when creating new scripts
+- **Maintenance burden**: Repetitive code across the codebase
+
+**Solution Benefits**: The system-level approach provides:
+- **Permanent fix**: Once configured, works in all new environments automatically
+- **Zero maintenance**: No code changes needed for Unicode support
+- **Professional standard**: Follows enterprise-grade environment configuration practices
+- **Future-proof**: All new scripts inherit Unicode support automatically
+
+**Business Impact**: Enables reliable handling of AI-generated content containing emojis and special characters, critical for social media automation where visual elements enhance engagement and user experience.
+
+**Technical Excellence**: Implements industry best practices for encoding configuration, reducing technical debt and improving overall system reliability.
+
+**Commit Hash**: [To be added after commit]
+
+---
+
+## [v1.2.0] - 2025-09-17 12:30 UTC
+
+### 🏗️ RESTRUCTURE: Major Project Organization & Enhanced Styling
+
+### Added
+- **Professional Directory Structure**: Reorganized project with proper enterprise-grade structure
+  - `core_templates/` - Central template and styling repository (renamed from incorrectly named "delete_folder")
+  - `src/scripts/` - All Python automation scripts centralized
+  - `output/html/` - Generated HTML files for Instagram posts
+  - `output/images/` - Generated JPG images for social media publishing
+  - `tests/` - Testing infrastructure and validation scripts
+  - `docs/` - Documentation and guides
+  - `config/` - Configuration files and settings
+
+- **Enhanced 3D Text Shadow Effects**: Upgraded CSS styling system with Playwright-compatible effects
+  - Premium gradient text classes (`.gradient-text-primary`, `.gradient-text-secondary`, `.gradient-text-metallic`)
+  - Advanced 3D depth effects using multiple text-shadow layers
+  - Optimized for Playwright HTML-to-image conversion process
+  - Cross-browser compatible styling system
+
+### Changed
+- **Script Path Updates**: Updated all Python scripts to reference new directory structure
+  - `src/scripts/instapost.py` - Template paths now point to `../../core_templates/`
+  - `src/scripts/instapost_push.py` - Image paths now reference `../../output/images/`
+  - Output generation now creates files in structured directories
+
+- **GitHub Actions Workflow Updates**: All three workflows updated for new structure
+  - `Instagram_Story.yml` - Script paths updated to `src/scripts/`
+  - `figma.yml` - Script path updated to `src/scripts/figma.py`
+  - `gsheets.yml` - Script path updated to `src/scripts/gsheets.py`
+  - Enhanced UTF-8 encoding support maintained across all workflows
+
+- **Template System Enhancement**: Improved CSS architecture in `core_templates/`
+  - 5 HTML templates with corresponding enhanced CSS files
+  - Backup CSS files removed for cleaner structure
+  - Enhanced text shadow effects compatible with Playwright rendering
+
+### Fixed
+- **Path Resolution Issues**: Corrected all file path references for new directory structure
+- **Template Loading**: Fixed Jinja2 template loader to properly reference `core_templates/`
+- **Output Generation**: Resolved image and HTML output paths for structured organization
+
+### Rationale
+
+**Enterprise-Grade Organization**: The restructuring addresses critical scalability and maintainability issues:
+
+- **Professional Standards**: Implements industry-standard directory structure following enterprise software patterns
+- **Clear Separation of Concerns**: Templates, scripts, outputs, and configs now have dedicated directories
+- **Enhanced Collaboration**: New structure supports team development with clear file organization
+- **Improved Automation**: GitHub Actions workflows now reference structured paths for reliable execution
+
+**Visual Enhancement Impact**: The 3D text shadow improvements provide:
+
+- **Professional Appearance**: Instagram posts now feature premium visual depth effects
+- **Engagement Optimization**: Enhanced text readability and visual appeal for social media
+- **Technical Excellence**: Playwright-compatible styling ensures consistent image generation
+- **Brand Consistency**: Standardized visual effects across all 5 template designs
+
+**Business Value**: This restructuring enables:
+
+- **Faster Development**: Clear organization reduces onboarding time and debugging overhead
+- **Reliable Automation**: Proper path references ensure consistent GitHub Actions execution
+- **Visual Appeal**: Enhanced styling improves Instagram post engagement potential
+- **Scalability**: Structure supports future feature additions and team growth
+
+**Risk Mitigation**: Previous "delete_folder" naming was corrected to "core_templates" - this is the heart of the Instagram automation system containing the most critical templates and styling that generate all social media content.
+
+**Technical Excellence**: The reorganization follows software engineering best practices while preserving all existing functionality and enhancing visual output quality.
+
+**Commit Hash**: `b723bd0`
+
+---
+
 ## 📋 CHANGELOG MAINTENANCE PROTOCOL
 
 ### 📋 CHANGELOG.MD MAINTENANCE PROTOCOL

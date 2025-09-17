@@ -1,36 +1,58 @@
-name: Instagram Caraousel Post
+name: Instagram Carousel Post
 
 on:
   schedule:
     - cron: "31 0 * * *"  # Daily at 00:30 UTC
   workflow_dispatch: {}
 
-  
 jobs:
   post_story:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.11'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
     - name: Install dependencies
       run: |
-        pip install together psycopg2 nest_asyncio requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib instagrapi playwright python-dotenv pillow sqlalchemy jinja2 && playwright install chromium && playwright install firefox && playwright install webkit
-    - name: Run Instagram post Script
-      run: python instapost.py
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        playwright install chromium
       env:
+        PYTHONIOENCODING: utf-8
+
+    - name: Run structure validation tests
+      run: |
+        python tests/test_path_structure.py
+        python -m pytest tests/ -v --tb=short
+
+    - name: Run Instagram post Script
+      run: python src/scripts/instapost.py
+      env:
+        PYTHONIOENCODING: utf-8
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
         INSTAGRAM_DRIVE_FILE_ID: ${{ secrets.INSTAGRAM_DRIVE_FILE_ID }}
         CRYPTO_SPREADSHEET_KEY: ${{ secrets.CRYPTO_SPREADSHEET_KEY }}
         INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
         INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
+
     - name: Run Instagram post push Script
-      run: python instapost_push.py
+      run: python src/scripts/instapost_push.py
       env:
+        PYTHONIOENCODING: utf-8
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
         INSTAGRAM_DRIVE_FILE_ID: ${{ secrets.INSTAGRAM_DRIVE_FILE_ID }}

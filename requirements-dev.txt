@@ -1,0 +1,27 @@
+# Development dependencies for socialio project
+
+# Testing frameworks
+pytest
+pytest-cov
+pytest-asyncio
+unittest-xml-reporting
+
+# Code quality and linting
+flake8
+pylint
+black
+isort
+
+# Security scanning
+bandit
+
+# Type checking
+mypy
+
+# Documentation
+sphinx
+sphinx-rtd-theme
+
+# Development utilities
+pre-commit
+tox
