@@ -328,6 +328,47 @@ Tests passed: 5/5
 
 ---
 
+## [v1.2.1] - 2025-09-17 12:40 UTC
+
+### 🧹 CLEANUP: Template Deduplication & Path Resolution
+
+### Fixed
+- **Background Image Paths**: Corrected CSS background-image URLs to reference proper `../output/images/*.png` paths
+  - `style.css` through `style5.css` now properly load background images
+  - Fixed broken image references that caused missing backgrounds in Instagram posts
+  - Templates now render with proper visual backgrounds from stored PNG files
+
+### Removed
+- **Duplicate Template Files**: Eliminated confusion by removing duplicate template structures
+  - Removed duplicate `src/templates/` directory containing outdated files
+  - Removed duplicate CSS files in `src/templates/styles/`
+  - Established `core_templates/` as single source of truth for all templates
+
+### Changed
+- **README Documentation**: Updated with clean directory structure and single source of truth approach
+  - Clear documentation of `core_templates/` as primary template location
+  - Updated script paths to reflect `src/scripts/` organization
+  - Added comprehensive output directory structure documentation
+
+### Rationale
+
+**Path Resolution Critical Fix**: The background images were not displaying in generated Instagram posts due to incorrect relative paths in CSS files. The templates were looking for `1.png`, `2.png` etc. in the same directory as CSS, but images were stored in `output/images/`.
+
+**Single Source of Truth**: Duplicate template files in multiple locations created confusion and maintenance overhead. Consolidating to `core_templates/` ensures:
+
+- **Consistency**: All scripts reference the same template source
+- **Maintainability**: Changes only need to be made in one location
+- **Reliability**: No risk of using outdated duplicate templates
+- **Clarity**: Clear understanding of project structure for developers
+
+**Business Impact**: This fix ensures Instagram posts display proper background images, significantly improving visual appeal and professional appearance of automated social media content.
+
+**Technical Excellence**: Proper path resolution follows web development best practices and ensures reliable template rendering across different execution contexts.
+
+**Commit Hash**: `edc5652`
+
+---
+
 ## 📋 CHANGELOG MAINTENANCE PROTOCOL
 
 ### 📋 CHANGELOG.MD MAINTENANCE PROTOCOL

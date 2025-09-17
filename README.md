@@ -18,16 +18,22 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 ### Core Components (4 Specialized Scripts)
 
 #### 📊 **Data Collection & Management**
-- **`gsheets.py`** - PostgreSQL to Google Sheets data synchronization
-- **`figma.py`** - Figma-based design workflow integration
+- **`src/scripts/gsheets.py`** - PostgreSQL to Google Sheets data synchronization
+- **`src/scripts/figma.py`** - Figma-based design workflow integration
 
 #### 🎨 **Content Generation Engine**
-- **`instapost.py`** - Main content generation pipeline with HTML-to-image conversion
-- **`instapost_push.py`** - Enhanced content publishing with advanced error handling
+- **`src/scripts/instapost.py`** - Main content generation pipeline with HTML-to-image conversion
+- **`src/scripts/instapost_push.py`** - Enhanced content publishing with advanced error handling
 
-### Template System
-- **Base Templates**: `1.html` through `5.html` with corresponding CSS stylesheets
-- **Dynamic Rendering**: Jinja2-powered data injection into templates
+### Template System - Single Source of Truth
+- **Core Templates**: `core_templates/` directory contains:
+  - **HTML Templates**: `1.html` through `5.html` (base templates)
+  - **CSS Stylesheets**: `style.css` through `style5.css` with enhanced 3D effects
+  - **Background Images**: References to `output/images/*.png` for background overlays
+- **Generated Content**: `output/` directory for all generated files:
+  - **HTML Output**: `output/html/` - Rendered templates with live data
+  - **Image Output**: `output/images/` - Final Instagram posts (JPG format)
+- **Dynamic Rendering**: Jinja2-powered data injection with proper path resolution
 - **Image Output**: Automated screenshot generation at 1080x1080 Instagram format
 - **Style Variations**: 5 different visual themes (`style.css` through `style5.css`)
 
