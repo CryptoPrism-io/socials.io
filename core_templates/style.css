@@ -36,13 +36,13 @@ body {
     }
 }
 
-/* 🚀 Unified Bitcoin Dashboard Component */
+/* 🚀 Unified Bitcoin Dashboard Component - Page 1 Only */
 .unified-btc-dashboard {
     position: absolute;
     top: 50px;
     left: 50px;
     right: 50px;
-    bottom: 420px;
+    bottom: 100px;
 
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px) saturate(180%);

@@ -4,10 +4,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../core_templates/style4.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Crypto Dashboard Template 4</title>
 </head>
 <body>
+    {% for snaps in snap %}
+    <!-- Unified Bitcoin Dashboard Component -->
+    <div class="unified-btc-dashboard">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">LAST UPDATE: {{snaps['last_updated']}}</div>
+        </div>
+
+        <!-- Main BTC Information Section -->
+        <div class="btc-main-section">
+            <!-- BTC Identity and Price -->
+            <div class="btc-identity">
+                <div class="btc-logo-container">
+                    <img src="{{ snaps['logo'] }}" alt="Bitcoin Logo" class="btc-logo-img">
+                </div>
+                <div class="btc-info">
+                    <div class="btc-symbol">BTC</div>
+                    <div class="btc-price">{{snaps['price']}}</div>
+                </div>
+            </div>
+
+            <!-- Market Data Grid -->
+            <div class="market-data-grid">
+                <div class="market-item">
+                    <div class="market-label">Market Cap</div>
+                    <div class="market-value">{{snaps['market_cap']}}</div>
+                </div>
+                <div class="market-item">
+                    <div class="market-label">Volume 24H</div>
+                    <div class="market-value">{{snaps['volume24h']}}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance and Sentiment Section -->
+        <div class="performance-sentiment-section">
+            <!-- Performance Grid -->
+            <div class="performance-container">
+                <div class="performance-title">Performance</div>
+                <div class="performance-items">
+                    <div class="perf-item">
+                        <div class="perf-value {% if snaps['percent_change24h']|float > 0 %}positive{% elif snaps['percent_change24h']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change24h'] }}%
+                        </div>
+                        <div class="perf-label">1D</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-value {% if snaps['percent_change7d']|float > 0 %}positive{% elif snaps['percent_change7d']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change7d'] }}%
+                        </div>
+                        <div class="perf-label">7D</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-value {% if snaps['percent_change30d']|float > 0 %}positive{% elif snaps['percent_change30d']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change30d'] }}%
+                        </div>
+                        <div class="perf-label">30D</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentiment Analysis -->
+            <div class="sentiment-container">
+                <div class="sentiment-title">Market Sentiment</div>
+                <div class="sentiment-items">
+                    <div class="sentiment-item">
+                        <div class="sentiment-count bearish-count">{{snaps['bearish']}}</div>
+                        <div class="sentiment-label">Bearish</div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-count neutral-count">{{snaps['neutral']}}</div>
+                        <div class="sentiment-label">Neutral</div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-count bullish-count">{{snaps['bullish']}}</div>
+                        <div class="sentiment-label">Bullish</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overall Trend -->
+            <div class="trend-container">
+                <div class="trend-title">Overall Trend</div>
+                <div class="trend-value">{{snaps['Trend']}}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Strategy Header -->
+    <div class="strategy-header">
+        <div class="strategy-section long-section">
+            <div class="strategy-icon">🌱</div>
+            <div class="strategy-label">PRISM Quant Select</div>
+            <div class="strategy-title long-title">LONG</div>
+        </div>
+        <div class="strategy-section short-section">
+            <div class="strategy-icon">📈</div>
+            <div class="strategy-label">PRISM Quant Select</div>
+            <div class="strategy-title short-title">SHORT</div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
     <div class="div-container">
         <div class="col-container">
             {% for coin in coins1 %}

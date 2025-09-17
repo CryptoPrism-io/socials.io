@@ -101,28 +101,7 @@
     </div>
     {% endfor %}
 
-    <!-- Coin Grid -->
-    <div class="coin-grid">
-        {% for i in range(1, 16) %}
-        <div class="coin-card">
-            <div class="coin-info">
-                <div class="coin-logo">
-                    <img src="{{coins[i]['logo']}}" alt="{{coins[i]['symbol']}} logo">
-                </div>
-                <div class="coin-details">
-                    <div class="coin-name">{{ coins[i]['symbol']}}</div>
-                    <div class="coin-change {% if coins[i]['percent_change24h'] >= 0 %}positive{% else %}negative{% endif %}">
-                        {{ coins[i]['percent_change24h'] | round(2) }}%
-                    </div>
-                </div>
-            </div>
-            <div class="coin-prices">
-                <div class="coin-price">${{ coins[i]['price'] | round(2) }}</div>
-                <div class="coin-mcap">{{ coins[i]['market_cap'] | round(2) }} B</div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    <!-- Page 1: BTC Snapshot Only - No Coin Grid -->
 
     <!-- Footer -->
     <div class="footer-text">Data Provided By</div>
