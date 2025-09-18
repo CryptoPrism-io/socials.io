@@ -19,7 +19,7 @@
                 <div class="prism-triangle"></div>
                 <span class="brand-text">CRYPTO PRISM</span>
             </div>
-            <div class="last-update">LAST UPDATE: 2025-09-17</div>
+            <div class="last-update">LAST UPDATE: 2025-09-18</div>
         </div>
 
         <!-- Main BTC Information Section -->
@@ -31,7 +31,7 @@
                 </div>
                 <div class="btc-info">
                     <div class="btc-symbol">BTC</div>
-                    <div class="btc-price">$116699.46</div>
+                    <div class="btc-price">$116659.74</div>
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                 </div>
                 <div class="market-item">
                     <div class="market-label">Volume 24H</div>
-                    <div class="market-value">$45.80 B</div>
+                    <div class="market-value">$62.79 B</div>
                 </div>
             </div>
         </div>
@@ -55,20 +55,20 @@
                 <div class="performance-title">Performance</div>
                 <div class="performance-items">
                     <div class="perf-item">
-                        <div class="perf-value positive">
-                            1.12%
+                        <div class="perf-value negative">
+                            -0.05%
                         </div>
                         <div class="perf-label">1D</div>
                     </div>
                     <div class="perf-item">
                         <div class="perf-value positive">
-                            5.07%
+                            2.30%
                         </div>
                         <div class="perf-label">7D</div>
                     </div>
                     <div class="perf-item">
-                        <div class="perf-value negative">
-                            -0.44%
+                        <div class="perf-value positive">
+                            0.20%
                         </div>
                         <div class="perf-label">30D</div>
                     </div>
@@ -80,7 +80,7 @@
                 <div class="sentiment-title">Market Sentiment</div>
                 <div class="sentiment-items">
                     <div class="sentiment-item">
-                        <div class="sentiment-count bearish-count">2</div>
+                        <div class="sentiment-count bearish-count">3</div>
                         <div class="sentiment-label">Bearish</div>
                     </div>
                     <div class="sentiment-item">
@@ -88,7 +88,7 @@
                         <div class="sentiment-label">Neutral</div>
                     </div>
                     <div class="sentiment-item">
-                        <div class="sentiment-count bullish-count">16</div>
+                        <div class="sentiment-count bullish-count">15</div>
                         <div class="sentiment-label">Bullish</div>
                     </div>
                 </div>
@@ -97,86 +97,160 @@
             <!-- Overall Trend -->
             <div class="trend-container">
                 <div class="trend-title">Overall Trend</div>
-                <div class="trend-value">Bullish</div>
+                <div class="trend-value positive">Bullish</div>
             </div>
         </div>
         
 
+        <!-- Market Dominance - Primary Focus -->
         
-        <!-- Market Dominance Card -->
-        <div class="market-card">
-            <div class="dominance-container">
-            <div class="dominance-title">Market Dominance</div>
-            <div class="dominance-grid">
-                <div class="dominance-item">
-                    <div class="dominance-label">BTC Dominance</div>
-                    <div class="dominance-value">57.45%</div>
-                    <div class="pct-change positive">
-                        0.09%
+        <div class="dominance-section">
+            <div class="market-card dominance-card">
+                <div class="dominance-title">Market Dominance</div>
+                <div class="dominance-pie-chart">
+                    <div class="pie-chart-container">
+                        <div class="pie-chart">
+                            <!-- BTC slice: dynamic calculation -->
+                            <div class="pie-slice btc-slice"
+                                 style="--btc-percent: 56.88;
+                                        --eth-percent: 13.65;">
+                            </div>
+                        </div>
+                        <div class="pie-center">
+                            <div class="dominance-label">DOMINANCE</div>
+                        </div>
+                    </div>
+                    <div class="dominance-legend">
+                        <div class="legend-item">
+                            <div class="legend-color btc-color"></div>
+                            <div class="legend-data">
+                                <span class="legend-label">BTC</span>
+                                <span class="legend-percent">56.9%</span>
+                            </div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color eth-color"></div>
+                            <div class="legend-data">
+                                <span class="legend-label">ETH</span>
+                                <span class="legend-percent">13.7%</span>
+                            </div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color others-color"></div>
+                            <div class="legend-data">
+                                <span class="legend-label">Others</span>
+                                <span class="legend-percent">29.4%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="dominance-item">
-                    <div class="dominance-label">ETH Dominance</div>
-                    <div class="dominance-value">13.46%</div>
-                    <div class="pct-change negative">
-                        -0.19%
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        <!-- Global Market Card -->
-        <div class="market-card">
-            <div class="total-market-container">
-            <div class="total-market-title">Global Market Overview</div>
-            <div class="total-market-grid">
-                <div class="market-metric-item">
-                    <div class="metric-label">Total Market Cap</div>
-                    <div class="metric-value">$ 4045.62 T</div>
-                    <div class="pct-change positive">
-                        0.91%
-                    </div>
-                </div>
-                <div class="market-metric-item">
-                    <div class="metric-label">Total Volume 24H</div>
-                    <div class="metric-value">$ 706.34 T</div>
-                    <div class="pct-change negative">
-                        -14.49%
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
 
-        <!-- Key Segments Card -->
+        <!-- Fear & Greed and Altseason - Horizontal Layout -->
+        <div class="indicators-section">
+            
+            <!-- Fear & Greed Index -->
+            <div class="fear-greed-container enhanced">
+                <div class="fear-greed-title">Fear & Greed</div>
+                <div class="fear-greed-speedometer">
+                    <div class="speedometer-circle enhanced">
+                        <div class="speedometer-ticks">
+                            <div class="tick tick-0"></div>
+                            <div class="tick tick-20"></div>
+                            <div class="tick tick-40"></div>
+                            <div class="tick tick-60"></div>
+                            <div class="tick tick-80"></div>
+                            <div class="tick tick-100"></div>
+                        </div>
+                        <div class="speedometer-needle" style="transform: rotate(10.799999999999997deg);"></div>
+                        <div class="speedometer-center"></div>
+                    </div>
+                    <div class="speedometer-labels">
+                        <span class="label-extreme-fear">0</span>
+                        <span class="label-fear">20</span>
+                        <span class="label-neutral">50</span>
+                        <span class="label-greed">80</span>
+                        <span class="label-extreme-greed">100</span>
+                    </div>
+                </div>
+                <div class="fear-greed-value">56</div>
+                <div class="fear-greed-label">Greed</div>
+            </div>
+
+            <!-- Altseason Gauge -->
+            <div class="altseason-container enhanced">
+                <div class="altseason-title">Altseason</div>
+                <div class="altseason-bullet-chart">
+                    <div class="bullet-background enhanced">
+                        <div class="bullet-ticks">
+                            <div class="bullet-tick bullet-tick-25"></div>
+                            <div class="bullet-tick bullet-tick-50"></div>
+                            <div class="bullet-tick bullet-tick-75"></div>
+                            <div class="bullet-tick bullet-tick-100"></div>
+                            <div class="bullet-tick bullet-tick-125"></div>
+                        </div>
+                        <div class="bullet-bar" style="width: 28.000000000000004%;"></div>
+                        <div class="bullet-threshold"></div>
+                    </div>
+                    <div class="bullet-labels">
+                        <span class="label-start">0</span>
+                        <span class="label-threshold">100</span>
+                        <span class="label-end">150</span>
+                    </div>
+                </div>
+                <div class="altseason-value">42</div>
+                <div class="altseason-status negative">No</div>
+            </div>
+            
+        </div>
+
+        <!-- Global Market Overview - Compact -->
+        <div class="global-overview-compact">
+            <div class="market-card compact">
+                <div class="compact-overview">
+                    <div class="overview-item">
+                        <span class="overview-label">Total Market Cap</span>
+                        <span class="overview-value">4.08 T</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-label">Total 24H Volume</span>
+                        <span class="overview-value">985.75 B</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Segments Card - COMMENTED OUT FOR CAROUSEL -->
+        <!--
         <div class="market-card">
             <div class="market-segments-container">
             <div class="segments-title">Key Market Segments</div>
             <div class="segments-grid">
                 <div class="segment-item">
                     <div class="segment-label">Derivatives Volume 24H</div>
-                    <div class="segment-value">$ 1347.88 M</div>
-                    <div class="pct-change negative">
-                        -17.34%
+                    <div class="segment-value">$ 1.82 T</div>
+                    <div class="pct-change positive">
+                        34.75%
                     </div>
                 </div>
                 <div class="segment-item">
                     <div class="segment-label">DeFi Volume 24H</div>
-                    <div class="segment-value">$ 70.27 M</div>
-                    <div class="pct-change negative">
-                        -21.37%
+                    <div class="segment-value">$ 76.71 B</div>
+                    <div class="pct-change positive">
+                        38.86%
                     </div>
                 </div>
             </div>
             </div>
         </div>
+        -->
         
 
         <!-- Date and Time Card -->
         <div class="datetime-container">
-            <div class="date">17 Sep, 2025</div>
-            <div class="time">07:01:31 PM</div>
+            <div class="date">18 Sep, 2025</div>
+            <div class="time">06:42:29 PM</div>
         </div>
 
         <!-- Footer -->
