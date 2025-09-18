@@ -107,39 +107,27 @@
         <div class="dominance-section">
             <div class="market-card dominance-card">
                 <div class="dominance-title">Market Dominance</div>
-                <div class="dominance-pie-chart">
-                    <div class="pie-chart-container">
-                        <div class="pie-chart">
-                            <!-- BTC slice: dynamic calculation -->
-                            <div class="pie-slice btc-slice"
-                                 style="--btc-percent: {{ coin.btc_dominance | round(2) }};
-                                        --eth-percent: {{ coin.eth_dominance | round(2) }};">
+                <div class="dominance-treemap">
+                    <div class="treemap-container">
+                        <div class="treemap-cell btc-cell"
+                             style="flex: {{ coin.btc_dominance | round(1) }};">
+                            <div class="cell-content">
+                                <div class="cell-label">BTC</div>
+                                <div class="cell-percentage">{{ coin.btc_dominance | round(1) }}%</div>
                             </div>
                         </div>
-                        <div class="pie-center">
-                            <div class="dominance-label">DOMINANCE</div>
-                        </div>
-                    </div>
-                    <div class="dominance-legend">
-                        <div class="legend-item">
-                            <div class="legend-color btc-color"></div>
-                            <div class="legend-data">
-                                <span class="legend-label">BTC</span>
-                                <span class="legend-percent">{{ coin.btc_dominance | round(1) }}%</span>
+                        <div class="treemap-cell eth-cell"
+                             style="flex: {{ coin.eth_dominance | round(1) }};">
+                            <div class="cell-content">
+                                <div class="cell-label">ETH</div>
+                                <div class="cell-percentage">{{ coin.eth_dominance | round(1) }}%</div>
                             </div>
                         </div>
-                        <div class="legend-item">
-                            <div class="legend-color eth-color"></div>
-                            <div class="legend-data">
-                                <span class="legend-label">ETH</span>
-                                <span class="legend-percent">{{ coin.eth_dominance | round(1) }}%</span>
-                            </div>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color others-color"></div>
-                            <div class="legend-data">
-                                <span class="legend-label">Others</span>
-                                <span class="legend-percent">{{ (100 - (coin.btc_dominance | round(1)) - (coin.eth_dominance | round(1))) | round(1) }}%</span>
+                        <div class="treemap-cell others-cell"
+                             style="flex: {{ (100 - coin.btc_dominance - coin.eth_dominance) | round(1) }};">
+                            <div class="cell-content">
+                                <div class="cell-label">Others</div>
+                                <div class="cell-percentage">{{ (100 - coin.btc_dominance - coin.eth_dominance) | round(1) }}%</div>
                             </div>
                         </div>
                     </div>
@@ -153,20 +141,19 @@
             <!-- Fear & Greed Index -->
             <div class="fear-greed-container enhanced">
                 <div class="fear-greed-title">Fear & Greed</div>
-                <div class="fear-greed-speedometer">
-                    <div class="speedometer-circle enhanced">
-                        <div class="speedometer-ticks">
-                            <div class="tick tick-0"></div>
-                            <div class="tick tick-20"></div>
-                            <div class="tick tick-40"></div>
-                            <div class="tick tick-60"></div>
-                            <div class="tick tick-80"></div>
-                            <div class="tick tick-100"></div>
+                <div class="fear-greed-bullet-chart">
+                    <div class="fear-greed-background enhanced">
+                        <div class="fear-greed-ticks">
+                            <div class="fear-tick fear-tick-0"></div>
+                            <div class="fear-tick fear-tick-20"></div>
+                            <div class="fear-tick fear-tick-40"></div>
+                            <div class="fear-tick fear-tick-60"></div>
+                            <div class="fear-tick fear-tick-80"></div>
+                            <div class="fear-tick fear-tick-100"></div>
                         </div>
-                        <div class="speedometer-needle" style="transform: rotate({{ (snaps['fear_greed_index'] * 1.8) - 90 }}deg);"></div>
-                        <div class="speedometer-center"></div>
+                        <div class="fear-greed-bar" style="width: {{ snaps['fear_greed_index'] }}%;"></div>
                     </div>
-                    <div class="speedometer-labels">
+                    <div class="fear-greed-labels">
                         <span class="label-extreme-fear">0</span>
                         <span class="label-fear">20</span>
                         <span class="label-neutral">50</span>
