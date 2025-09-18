@@ -89,124 +89,95 @@ body {
     padding: 30px 40px;
 }
 
-.dominance-pie-chart {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    justify-content: center;
-}
-
-.pie-chart-container {
-    position: relative;
+/* 📊 Market Dominance Tree Map */
+.dominance-treemap {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
-.pie-chart {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: conic-gradient(
-        from 0deg,
-        #f7931a 0deg 205deg,
-        #627eea 205deg 254deg,
-        #8b5cf6 254deg 360deg
-    );
-    border: 3px solid rgba(255, 255, 255, 0.2);
+.treemap-container {
+    display: flex;
+    width: 100%;
+    height: 150px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.3);
     box-shadow:
         0 0 30px rgba(0, 0, 0, 0.3),
-        inset 0 0 20px rgba(255, 255, 255, 0.1);
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
-.pie-chart::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90px;
-    height: 90px;
-    background: linear-gradient(135deg, rgba(17, 25, 40, 0.95), rgba(30, 41, 59, 0.95));
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    z-index: 10;
-}
-
-
-.pie-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 50%;
+.treemap-cell {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.dominance-label {
-    font-size: 17px;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.8);
+.treemap-cell:last-child {
+    border-right: none;
+}
+
+.treemap-cell:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+.btc-cell {
+    background: linear-gradient(135deg,
+        #b8864d 0%,
+        #a67a44 50%,
+        #956e3b 100%);
+    box-shadow:
+        0 0 20px rgba(248, 147, 26, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.eth-cell {
+    background: linear-gradient(135deg,
+        #7a8bac 0%,
+        #6f82a5 50%,
+        #64799e 100%);
+    box-shadow:
+        0 0 20px rgba(98, 126, 234, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.others-cell {
+    background: linear-gradient(135deg,
+        #a085b8 0%,
+        #967cb1 50%,
+        #8c73aa 100%);
+    box-shadow:
+        0 0 20px rgba(139, 92, 246, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.cell-content {
     text-align: center;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.cell-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 5px;
     letter-spacing: 1px;
     font-family: 'Orbitron', monospace;
 }
 
-.dominance-legend {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.legend-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.btc-color {
-    background: #f7931a;
-}
-
-.eth-color {
-    background: #627eea;
-}
-
-.others-color {
-    background: #8b5cf6;
-}
-
-.legend-data {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.legend-label {
-    font-size: 30px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 500;
-}
-
-.legend-percent {
-    font-size: 36px;
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 700;
+.cell-percentage {
+    font-size: 24px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 /* 📊 Enhanced Indicators Section - Horizontal Layout */
@@ -276,13 +247,13 @@ body {
 }
 
 .overview-label {
-    font-size: 27px;
+    font-size: 22px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
 
 .overview-value {
-    font-size: 36px;
+    font-size: 20px;
     color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
 }
@@ -312,7 +283,7 @@ body {
 }
 
 .brand-text {
-    font-size: 30px;
+    font-size: 15px;
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
@@ -323,7 +294,7 @@ body {
 }
 
 .last-update {
-    font-size: 30px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
     text-transform: uppercase;
@@ -399,7 +370,7 @@ body {
 }
 
 .market-label {
-    font-size: 30px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
     text-transform: uppercase;
@@ -407,7 +378,7 @@ body {
 }
 
 .market-value {
-    font-size: 27px;
+    font-size: 22px;
     color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -453,7 +424,7 @@ body {
 }
 
 .performance-title, .sentiment-title, .trend-title, .fear-greed-title, .altseason-title {
-    font-size: 32px;
+    font-size: 17px;
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
     text-transform: uppercase;
@@ -476,7 +447,7 @@ body {
 }
 
 .perf-value {
-    font-size: 36px;
+    font-size: 20px;
     font-weight: 700;
     padding: 6px 12px;
     border-radius: 8px;
@@ -486,7 +457,7 @@ body {
 }
 
 .perf-label {
-    font-size: 27px;
+    font-size: 22px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -506,13 +477,13 @@ body {
 }
 
 .sentiment-count {
-    font-size: 36px;
+    font-size: 20px;
     font-weight: 800;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px currentColor;
 }
 
 .sentiment-label {
-    font-size: 17px;
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -523,7 +494,7 @@ body {
 }
 
 .trend-value {
-    font-size: 32px;
+    font-size: 17px;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -532,107 +503,75 @@ body {
 
 /* 📊 Fear & Greed Index Styling */
 /* 🌡️ Fear & Greed Speedometer */
-.fear-greed-speedometer {
+/* 📊 Fear & Greed Rainbow Chart */
+.fear-greed-bullet-chart {
     margin: 15px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.speedometer-circle {
+.fear-greed-background {
     position: relative;
     width: 156px;
-    height: 78px;
-    border-radius: 156px 156px 0 0;
-    background: conic-gradient(
-        from 180deg at 50% 100%,
-        #dc2626 0deg,     /* Zone 1: Extreme Fear (0-20) - Red */
-        #dc2626 36deg,
-        #ea580c 36deg,    /* Zone 2: Fear (20-40) - Orange */
-        #ea580c 72deg,
-        #eab308 72deg,    /* Zone 3: Neutral (40-60) - Yellow */
-        #eab308 108deg,
-        #65a30d 108deg,   /* Zone 4: Greed (60-80) - Light Green */
-        #65a30d 144deg,
-        #16a34a 144deg,   /* Zone 5: Extreme Greed (80-100) - Green */
-        #16a34a 180deg
+    height: 23px;
+    background: linear-gradient(to right,
+        #dc2626 0%,      /* Zone 1: Extreme Fear (0-20) - Red */
+        #dc2626 20%,
+        #ea580c 20%,     /* Zone 2: Fear (20-40) - Orange */
+        #ea580c 40%,
+        #eab308 40%,     /* Zone 3: Neutral (40-60) - Yellow */
+        #eab308 60%,
+        #65a30d 60%,     /* Zone 4: Greed (60-80) - Light Green */
+        #65a30d 80%,
+        #16a34a 80%,     /* Zone 5: Extreme Greed (80-100) - Green */
+        #16a34a 100%
     );
+    border-radius: 12px;
     border: 3px solid rgba(255, 255, 255, 0.4);
     box-shadow:
-        0 0 20px rgba(0, 0, 0, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.3),
         inset 0 2px 4px rgba(255, 255, 255, 0.1),
         inset 0 -2px 4px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
-.speedometer-circle::before {
+.fear-greed-background.enhanced {
+    width: 180px;
+    height: 26px;
+}
+
+.fear-greed-background::before {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 2px;
-    right: 2px;
-    bottom: -2px;
-    border-radius: 151px 151px 0 0;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border-radius: 9px;
     background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 
-.speedometer-needle {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 4px;
-    height: 72px;
-    background: linear-gradient(to top,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0.95) 70%,
-        rgba(255, 255, 255, 0.8) 100%
-    );
-    transform-origin: bottom center;
-    border-radius: 2px;
-    box-shadow:
-        0 0 8px rgba(255, 255, 255, 0.8),
-        0 0 16px rgba(255, 255, 255, 0.4),
-        0 2px 4px rgba(0, 0, 0, 0.3);
-    z-index: 2;
-}
-
-.speedometer-needle::before {
-    content: '';
+.fear-greed-bar {
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 8px solid rgba(255, 255, 255, 0.9);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
-.speedometer-center {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
-    background: radial-gradient(circle,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0.95) 60%,
-        rgba(255, 255, 255, 0.8) 100%
+    left: 0;
+    height: 100%;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.1) 100%
     );
-    border-radius: 50%;
-    border: 3px solid rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    min-width: 3px;
     box-shadow:
-        0 0 12px rgba(255, 255, 255, 0.6),
-        inset 0 2px 4px rgba(255, 255, 255, 0.3),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 3;
+        0 0 12px rgba(255, 255, 255, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.speedometer-ticks {
+.fear-greed-ticks {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -640,47 +579,46 @@ body {
     left: 0;
 }
 
-.tick {
+.fear-tick {
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 3px;
-    height: 16px;
-    background: rgba(255, 255, 255, 0.6);
-    transform-origin: bottom center;
-    border-radius: 1.5px;
+    top: -8px;
+    width: 2px;
+    height: 39px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 1px;
 }
 
-.tick-0 {
-    transform: translateX(-50%) rotate(-90deg);
+.fear-tick-0 {
+    left: 0%;
 }
 
-.tick-20 {
-    transform: translateX(-50%) rotate(-54deg);
+.fear-tick-20 {
+    left: 20%;
 }
 
-.tick-40 {
-    transform: translateX(-50%) rotate(-18deg);
+.fear-tick-40 {
+    left: 40%;
 }
 
-.tick-60 {
-    transform: translateX(-50%) rotate(18deg);
+.fear-tick-60 {
+    left: 60%;
 }
 
-.tick-80 {
-    transform: translateX(-50%) rotate(54deg);
+.fear-tick-80 {
+    left: 80%;
 }
 
-.tick-100 {
-    transform: translateX(-50%) rotate(90deg);
+.fear-tick-100 {
+    left: 100%;
+    transform: translateX(-100%);
 }
 
-.speedometer-labels {
+.fear-greed-labels {
     display: flex;
     justify-content: space-between;
     width: 156px;
-    margin-top: 6px;
-    font-size: 27px;
+    margin-top: 8px;
+    font-size: 22px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
@@ -706,7 +644,7 @@ body {
 }
 
 .fear-greed-value {
-    font-size: 30px;
+    font-size: 15px;
     font-weight: 800;
     text-align: center;
     color: rgba(255, 255, 255, 0.95);
@@ -715,7 +653,7 @@ body {
 }
 
 .fear-greed-label {
-    font-size: 27px;
+    font-size: 22px;
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
     font-weight: 500;
@@ -870,7 +808,7 @@ body {
     justify-content: space-between;
     width: 156px;
     margin-top: 6px;
-    font-size: 30px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
@@ -889,7 +827,7 @@ body {
 }
 
 .altseason-value {
-    font-size: 27px;
+    font-size: 22px;
     font-weight: 700;
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
@@ -898,7 +836,7 @@ body {
 }
 
 .altseason-status {
-    font-size: 30px;
+    font-size: 15px;
     font-weight: 600;
     text-align: center;
     margin-top: 4px;
@@ -988,13 +926,13 @@ body {
 }
 
 .coin-name {
-    font-size: 36px;
+    font-size: 20px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
 }
 
 .coin-change {
-    font-size: 30px;
+    font-size: 15px;
     font-weight: 500;
     padding: 2px 8px;
     border-radius: 6px;
@@ -1009,20 +947,20 @@ body {
 }
 
 .coin-price {
-    font-size: 32px;
+    font-size: 17px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
 }
 
 .coin-mcap {
-    font-size: 27px;
+    font-size: 22px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
 
 /* ⏰ Date and Time Styling */
 .date {
-    font-size: 27px;
+    font-size: 22px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
@@ -1039,7 +977,7 @@ body {
 
 /* 💰 Market Data Styling */
 .pct-change {
-    font-size: 36px;
+    font-size: 20px;
     font-weight: 700;
     padding: 4px 8px;
     border-radius: 6px;
@@ -1071,7 +1009,7 @@ body {
 }
 
 .dominance-title {
-    font-size: 27px;
+    font-size: 22px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
@@ -1094,7 +1032,7 @@ body {
 }
 
 .dominance-label {
-    font-size: 30px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -1102,7 +1040,7 @@ body {
 }
 
 .dominance-value {
-    font-size: 36px;
+    font-size: 20px;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
@@ -1114,7 +1052,7 @@ body {
 }
 
 .total-market-title {
-    font-size: 27px;
+    font-size: 22px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
@@ -1137,7 +1075,7 @@ body {
 }
 
 .metric-label {
-    font-size: 30px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -1145,7 +1083,7 @@ body {
 }
 
 .metric-value {
-    font-size: 38px;
+    font-size: 31px;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -1157,7 +1095,7 @@ body {
 }
 
 .segments-title {
-    font-size: 27px;
+    font-size: 22px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
@@ -1180,7 +1118,7 @@ body {
 }
 
 .segment-label {
-    font-size: 30px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -1188,7 +1126,7 @@ body {
 }
 
 .segment-value {
-    font-size: 32px;
+    font-size: 17px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
@@ -1209,7 +1147,7 @@ body {
 /* 📝 Footer */
 .footer-container {
     text-align: center;
-    font-size: 30px;
+    font-size: 15px;
     color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
     letter-spacing: 1px;

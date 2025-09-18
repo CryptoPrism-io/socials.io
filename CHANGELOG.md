@@ -486,6 +486,84 @@ Tests passed: 5/5
 
 ---
 
+## [v1.6.0] - 2025-09-18 07:05 UTC
+
+### 🌈 MAJOR: Rainbow Chart & Tree Map Visualization Revolution
+
+### Added
+- **Fear & Greed Rainbow Chart**: Completely replaced speedometer with modern horizontal progress bar
+  - 5-zone rainbow gradient visualization: Red → Orange → Yellow → Light Green → Green
+  - Dynamic progress bar showing precise fear/greed index positioning
+  - Consistent horizontal paradigm matching Altseason design language
+  - Enhanced tick marks and color-coded labels for clear zone identification
+  - Smooth transitions and glassmorphism styling integration
+
+- **Market Dominance Tree Map**: Revolutionary replacement of donut chart with proportional rectangles
+  - Full-width responsive tree map utilizing complete container space
+  - Dynamic flex-based proportional sizing: BTC (56.9%), ETH (13.7%), Others (29.5%)
+  - Professional desaturated color palette with subtle glow effects
+  - Enhanced readability with larger in-cell typography and clear percentages
+  - Modern gradient overlays and hover effects for premium appearance
+
+### Changed
+- **Visualization Paradigm Shift**: Moved from circular to horizontal/rectangular layouts
+  - Improved mobile UX with touch-friendly rectangular interfaces
+  - Better proportional understanding through tree map vs. pie chart
+  - Unified horizontal design language across Fear & Greed and Altseason
+  - Enhanced visual hierarchy with full-width market dominance display
+
+- **Color Psychology Optimization**: Refined color schemes for professional appeal
+  - BTC: Desaturated to muted bronze/tan (#b8864d) with orange glow (rgba(248,147,26,0.4))
+  - ETH: Softened to blue-gray (#7a8bac) with blue glow (rgba(98,126,234,0.4))
+  - Others: Muted to lavender-gray (#a085b8) with purple glow (rgba(139,92,246,0.4))
+  - Reduced color saturation for easier viewing and professional appearance
+  - Added subtle glow effects for depth without overwhelming visual noise
+
+### Technical Implementation
+- **CSS Architecture Restructuring**:
+  - Removed: All speedometer-related CSS (`.speedometer-circle`, `.speedometer-needle`, etc.)
+  - Removed: All pie chart CSS (`.pie-chart`, `.pie-chart-container`, etc.)
+  - Added: Modern rainbow chart CSS based on bullet chart paradigm
+  - Added: Flexbox-based tree map layout with proportional sizing
+
+- **HTML Template Modernization**:
+  - Fear & Greed: Replaced complex speedometer with clean bullet chart structure
+  - Market Dominance: Simplified from nested pie chart to linear tree map cells
+  - Dynamic data binding: Maintained Jinja2 template compatibility
+  - Responsive design: Full-width layouts optimize screen real estate
+
+### Fixed
+- **Layout Efficiency**: Tree map now utilizes 100% container width instead of fixed 400px
+- **Data Visualization Clarity**: Rectangular proportions more intuitive than circular segments
+- **Mobile Optimization**: Horizontal layouts work better on portrait mobile screens
+- **Visual Consistency**: Unified design language across all chart components
+
+### Rationale
+
+**Modern Data Visualization**: Tree maps and horizontal progress bars represent contemporary best practices in financial data visualization, moving away from outdated circular charts.
+
+**Mobile-First Design**: With 80%+ Instagram consumption on mobile devices, horizontal layouts provide superior UX compared to circular gauges requiring precise visual angle interpretation.
+
+**Professional Aesthetics**: Desaturated colors with subtle glow effects create a sophisticated, premium appearance suitable for professional financial content while maintaining brand color identity.
+
+**Cognitive Load Reduction**: Rectangular proportions are easier to mentally process than circular segments, improving user comprehension of market dominance data.
+
+**Visual Hierarchy**: Full-width tree map establishes proper importance hierarchy, making market dominance the clear focal point as intended.
+
+### Performance Impact
+- **Rendering Optimization**: Simpler CSS reduces browser rendering complexity
+- **Maintenance Benefits**: Linear layouts easier to debug and modify than complex circular calculations
+- **Scalability**: Flexbox-based tree map automatically adapts to different screen sizes
+
+### Next Steps
+- Fine-tune Fear & Greed rainbow chart label positioning
+- Optimize tree map cell padding for various data ranges
+- Test layouts across different device orientations
+
+**Commit Hash**: `[TO_BE_ADDED]`
+
+---
+
 ## 📋 CHANGELOG MAINTENANCE PROTOCOL
 
 ### 📋 CHANGELOG.MD MAINTENANCE PROTOCOL
