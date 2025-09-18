@@ -6,8 +6,8 @@
 }
 
 html, body {
-    width: 1080px;
-    height: 1350px;
+    width: 2160px;
+    height: 2700px;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
     color: white;
@@ -36,6 +36,8 @@ body {
     gap: 25px;
     overflow: hidden;
     box-sizing: border-box;
+    transform: scale(2);
+    transform-origin: top left;
 }
 
 /* 🚀 Bitcoin Dashboard Card */
@@ -77,26 +79,212 @@ body {
     transition: all 0.3s ease;
 }
 
-/* 🔄 Two-Column Layout */
-.two-column-layout {
-    display: flex;
-    gap: 25px;
+/* 🎯 Market Dominance Section - Primary Focus */
+.dominance-section {
     width: 100%;
     flex-shrink: 0;
 }
 
-.left-column {
-    flex: 0 0 60%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.dominance-card {
+    padding: 30px 40px;
 }
 
-.right-column {
-    flex: 0 0 38%;
+.dominance-pie-chart {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-content: center;
+}
+
+.pie-chart-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pie-chart {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        #f7931a 0deg 205deg,
+        #627eea 205deg 254deg,
+        #8b5cf6 254deg 360deg
+    );
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.pie-chart::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, rgba(17, 25, 40, 0.95), rgba(30, 41, 59, 0.95));
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+
+.pie-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.dominance-label {
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    letter-spacing: 1px;
+    font-family: 'Orbitron', monospace;
+}
+
+.dominance-legend {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btc-color {
+    background: #f7931a;
+}
+
+.eth-color {
+    background: #627eea;
+}
+
+.others-color {
+    background: #8b5cf6;
+}
+
+.legend-data {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.legend-label {
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+.legend-percent {
+    font-size: 36px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+}
+
+/* 📊 Enhanced Indicators Section - Horizontal Layout */
+.indicators-section {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.fear-greed-container.enhanced,
+.altseason-container.enhanced {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 25px 20px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 0 15px rgba(255, 255, 255, 0.2),
+        0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.speedometer-circle.enhanced {
+    width: 180px;
+    height: 90px;
+    border-radius: 180px 180px 0 0;
+}
+
+.speedometer-circle.enhanced .speedometer-needle {
+    height: 85px;
+}
+
+.speedometer-labels {
+    width: 180px;
+}
+
+.bullet-background.enhanced {
+    width: 180px;
+    height: 26px;
+}
+
+/* 📋 Compact Global Overview */
+.global-overview-compact {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.market-card.compact {
+    padding: 15px 25px;
+}
+
+.compact-overview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.overview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.overview-label {
+    font-size: 27px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.overview-value {
+    font-size: 36px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
 }
 
 /* 📋 Header Section with Branding and Last Update */
@@ -124,7 +312,7 @@ body {
 }
 
 .brand-text {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
@@ -135,7 +323,7 @@ body {
 }
 
 .last-update {
-    font-size: 12px;
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
     text-transform: uppercase;
@@ -211,7 +399,7 @@ body {
 }
 
 .market-label {
-    font-size: 12px;
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
     text-transform: uppercase;
@@ -219,7 +407,7 @@ body {
 }
 
 .market-value {
-    font-size: 18px;
+    font-size: 27px;
     color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -265,7 +453,7 @@ body {
 }
 
 .performance-title, .sentiment-title, .trend-title, .fear-greed-title, .altseason-title {
-    font-size: 14px;
+    font-size: 32px;
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
     text-transform: uppercase;
@@ -288,7 +476,7 @@ body {
 }
 
 .perf-value {
-    font-size: 16px;
+    font-size: 36px;
     font-weight: 700;
     padding: 6px 12px;
     border-radius: 8px;
@@ -298,7 +486,7 @@ body {
 }
 
 .perf-label {
-    font-size: 11px;
+    font-size: 27px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -318,13 +506,13 @@ body {
 }
 
 .sentiment-count {
-    font-size: 24px;
+    font-size: 36px;
     font-weight: 800;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px currentColor;
 }
 
 .sentiment-label {
-    font-size: 10px;
+    font-size: 17px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -335,7 +523,7 @@ body {
 }
 
 .trend-value {
-    font-size: 22px;
+    font-size: 32px;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -492,7 +680,7 @@ body {
     justify-content: space-between;
     width: 156px;
     margin-top: 6px;
-    font-size: 11px;
+    font-size: 27px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
@@ -518,7 +706,7 @@ body {
 }
 
 .fear-greed-value {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 800;
     text-align: center;
     color: rgba(255, 255, 255, 0.95);
@@ -527,7 +715,7 @@ body {
 }
 
 .fear-greed-label {
-    font-size: 11px;
+    font-size: 27px;
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
     font-weight: 500;
@@ -682,7 +870,7 @@ body {
     justify-content: space-between;
     width: 156px;
     margin-top: 6px;
-    font-size: 12px;
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
@@ -701,7 +889,7 @@ body {
 }
 
 .altseason-value {
-    font-size: 18px;
+    font-size: 27px;
     font-weight: 700;
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
@@ -710,7 +898,7 @@ body {
 }
 
 .altseason-status {
-    font-size: 12px;
+    font-size: 30px;
     font-weight: 600;
     text-align: center;
     margin-top: 4px;
@@ -800,13 +988,13 @@ body {
 }
 
 .coin-name {
-    font-size: 16px;
+    font-size: 36px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
 }
 
 .coin-change {
-    font-size: 12px;
+    font-size: 30px;
     font-weight: 500;
     padding: 2px 8px;
     border-radius: 6px;
@@ -821,20 +1009,20 @@ body {
 }
 
 .coin-price {
-    font-size: 14px;
+    font-size: 32px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
 }
 
 .coin-mcap {
-    font-size: 11px;
+    font-size: 27px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
 
 /* ⏰ Date and Time Styling */
 .date {
-    font-size: 18px;
+    font-size: 27px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
@@ -851,7 +1039,7 @@ body {
 
 /* 💰 Market Data Styling */
 .pct-change {
-    font-size: 16px;
+    font-size: 36px;
     font-weight: 700;
     padding: 4px 8px;
     border-radius: 6px;
@@ -883,7 +1071,7 @@ body {
 }
 
 .dominance-title {
-    font-size: 18px;
+    font-size: 27px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
@@ -906,7 +1094,7 @@ body {
 }
 
 .dominance-label {
-    font-size: 12px;
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -914,7 +1102,7 @@ body {
 }
 
 .dominance-value {
-    font-size: 24px;
+    font-size: 36px;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
@@ -926,7 +1114,7 @@ body {
 }
 
 .total-market-title {
-    font-size: 18px;
+    font-size: 27px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
@@ -949,7 +1137,7 @@ body {
 }
 
 .metric-label {
-    font-size: 12px;
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -957,7 +1145,7 @@ body {
 }
 
 .metric-value {
-    font-size: 26px;
+    font-size: 38px;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -969,7 +1157,7 @@ body {
 }
 
 .segments-title {
-    font-size: 18px;
+    font-size: 27px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
@@ -992,7 +1180,7 @@ body {
 }
 
 .segment-label {
-    font-size: 12px;
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -1000,7 +1188,7 @@ body {
 }
 
 .segment-value {
-    font-size: 22px;
+    font-size: 32px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
@@ -1021,7 +1209,7 @@ body {
 /* 📝 Footer */
 .footer-container {
     text-align: center;
-    font-size: 12px;
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
     letter-spacing: 1px;

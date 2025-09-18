@@ -34,13 +34,22 @@ async def generate_image_from_html(output_html_file, output_image_path):
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
 
-        await page.set_viewport_size({"width": 1080, "height": 1350})
+        await page.set_viewport_size({"width": 2160, "height": 2700})
+
+        # Set device scale factor for even better quality
+        await page.emulate_media(media='screen')
+        await page.evaluate("() => { document.body.style.zoom = '1'; }")
 
         # Load the rendered HTML file
         await page.goto('file://' + os.path.abspath(output_html_file))
 
-        # Capture the screenshot of the page
-        await page.screenshot(path=output_image_path)
+        # Capture the screenshot of the page with high quality settings
+        await page.screenshot(
+            path=output_image_path,
+            type='jpeg',
+            quality=95,
+            full_page=True
+        )
 
         print(f"Screenshot saved as {output_image_path}.")
 

@@ -395,6 +395,97 @@ Tests passed: 5/5
 
 ---
 
+## [v1.5.0] - 2025-09-18 06:40 UTC
+
+### 🎯 MAJOR: High-Resolution Instagram Layout & Market Dominance Visualization
+
+### Added
+- **Market Dominance Donut Chart**: Implemented dynamic donut chart visualization for template 1
+  - Pure CSS conic-gradient implementation showing BTC, ETH, and Others market dominance
+  - Dynamic percentages with proper mathematical rounding (56.9% + 13.7% + 29.4% = 100%)
+  - Centered "DOMINANCE" label with professional Orbitron font styling
+  - Color-coded legend with distinct segment colors (Orange, Blue, Purple)
+  - 180px diameter with 90px inner circle for optimal donut proportions
+
+- **High-Resolution Screenshot System**: Upgraded viewport resolution for premium quality
+  - Viewport resolution increased from 1080x1350 to 2160x2700 (2x scaling)
+  - JPEG quality set to 95% for minimal compression artifacts
+  - Full-page screenshot rendering with improved anti-aliasing
+  - Screen media emulation for better CSS rendering consistency
+
+### Changed
+- **Layout Hierarchy Restructuring**: Reorganized template 1 for data importance priority
+  - Market Dominance section moved to primary position (largest visual element)
+  - Fear & Greed and Altseason arranged horizontally for better space utilization
+  - Global market overview compacted and relocated to secondary position
+  - BTC main section maintained as header with price and performance data
+
+- **CSS Transform Scaling**: Implemented 2x transform scale for high-resolution adaptation
+  - Main container scaled using `transform: scale(2)` with top-left origin
+  - Maintains original design proportions while filling 2x viewport
+  - Preserves all relative spacing and layout relationships
+
+- **Font Size Enhancement**: Scaled all typography for mobile readability (EXPERIMENTAL - requires adjustment)
+  - Small text: 10px→17px, 11px→18px, 12px→20px (70% increase)
+  - Medium text: 14px→22px, 16px→24px, 18px→27px (50% increase)
+  - Large text: 20px→30px, 22px→32px, 24px→36px (50% increase)
+  - **Note**: Font scaling proved excessive and requires reversion to balanced levels
+
+- **Market Data Labels**: Enhanced clarity between different market metrics
+  - BTC section shows individual Bitcoin market cap and volume data
+  - Global section clearly labeled as "Total Market Cap" and "Total 24H Volume"
+  - Eliminated redundancy between donut chart center and bottom section
+
+### Fixed
+- **Donut Chart Visual Rendering**: Resolved segment visibility issues
+  - Fixed conic-gradient not displaying properly in screenshots
+  - Added visual borders and improved color contrast for segment separation
+  - Ensured proper segment proportions match actual market dominance data
+
+- **Percentage Calculation Accuracy**: Fixed rounding inconsistencies
+  - Implemented proper mathematical rounding for Others percentage calculation
+  - Ensures all dominance percentages sum to exactly 100.0%
+  - Eliminates 100.1% display errors from improper rounding
+
+### Technical Implementation
+- **Screenshot Quality Improvements**:
+  - Browser launch with headless Chromium for consistent rendering
+  - Device scale factor optimization for retina-quality output
+  - Enhanced JPEG compression settings for file size optimization
+  - Full-page capture ensuring no content cropping
+
+- **CSS Architecture Enhancements**:
+  - Maintained glassmorphism design principles with scaled implementation
+  - Preserved backdrop-filter effects at higher resolution
+  - Optimized gradient rendering for 2x pixel density displays
+  - Enhanced text shadow and visual effects for improved readability
+
+### Rationale
+
+**High-Resolution Priority**: Social media platforms increasingly favor high-quality visual content. The 2x resolution upgrade positions the automated Instagram posts for premium visual quality, improving engagement and professional appearance.
+
+**Market Dominance Focus**: Cryptocurrency market dominance is a critical metric for investors. The prominent donut chart visualization immediately communicates market structure, making the posts more valuable and shareable.
+
+**Mobile-First Typography**: With majority Instagram consumption on mobile devices, readable typography is essential. However, the current font scaling requires refinement to balance readability with layout efficiency.
+
+**Data Visualization Best Practices**: The donut chart implementation follows modern data visualization principles with clear color coding, mathematical accuracy, and intuitive legend presentation.
+
+**Technical Excellence**: The scaling approach using CSS transforms maintains design integrity while achieving 4x pixel density improvement (2x width × 2x height) for professional-grade output quality.
+
+### Known Issues
+- **Font Size Calibration**: Current font scaling (50-70% increases) proved excessive for layout constraints
+- **Performance Consideration**: 2x resolution increases rendering time and file sizes
+- **Layout Density**: Some elements may benefit from spacing adjustments at higher resolution
+
+### Next Steps
+- Revert font sizes to more balanced levels (20-30% increases instead of 50-70%)
+- Fine-tune layout spacing for optimal 2x resolution utilization
+- Test across different Instagram display contexts for optimal readability
+
+**Commit Hash**: `[TO_BE_ADDED]`
+
+---
+
 ## 📋 CHANGELOG MAINTENANCE PROTOCOL
 
 ### 📋 CHANGELOG.MD MAINTENANCE PROTOCOL

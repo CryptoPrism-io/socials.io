@@ -102,114 +102,122 @@
         </div>
         {% endfor %}
 
-        <!-- Two-Column Layout Section -->
+        <!-- Market Dominance - Primary Focus -->
         {% for coin in coins %}
-        <div class="two-column-layout">
-            <!-- Left Column (60%) - Market Data -->
-            <div class="left-column">
-                <!-- Market Dominance Card -->
-                <div class="market-card">
-                    <div class="dominance-container">
-                        <div class="dominance-title">Market Dominance</div>
-                        <div class="dominance-grid">
-                            <div class="dominance-item">
-                                <div class="dominance-label">BTC Dominance</div>
-                                <div class="dominance-value">{{ coin.btc_dominance | round(2) }}%</div>
-                                <div class="pct-change {% if coin.btc_dominance24h_percentage_change > 0 %}positive{% elif coin.btc_dominance24h_percentage_change < 0 %}negative{% endif %}">
-                                    {{ coin.btc_dominance24h_percentage_change | round(2) }}%
-                                </div>
-                            </div>
-                            <div class="dominance-item">
-                                <div class="dominance-label">ETH Dominance</div>
-                                <div class="dominance-value">{{ coin.eth_dominance | round(2) }}%</div>
-                                <div class="pct-change {% if coin.eth_dominance24h_percentage_change > 0 %}positive{% elif coin.eth_dominance24h_percentage_change < 0 %}negative{% endif %}">
-                                    {{ coin.eth_dominance24h_percentage_change | round(2) }}%
-                                </div>
+        <div class="dominance-section">
+            <div class="market-card dominance-card">
+                <div class="dominance-title">Market Dominance</div>
+                <div class="dominance-pie-chart">
+                    <div class="pie-chart-container">
+                        <div class="pie-chart">
+                            <!-- BTC slice: dynamic calculation -->
+                            <div class="pie-slice btc-slice"
+                                 style="--btc-percent: {{ coin.btc_dominance | round(2) }};
+                                        --eth-percent: {{ coin.eth_dominance | round(2) }};">
                             </div>
                         </div>
+                        <div class="pie-center">
+                            <div class="dominance-label">DOMINANCE</div>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Global Market Overview Card -->
-                <div class="market-card">
-                    <div class="total-market-container">
-                        <div class="total-market-title">Global Market Overview</div>
-                        <div class="total-market-grid">
-                            <div class="market-metric-item">
-                                <div class="metric-label">Total Market Cap</div>
-                                <div class="metric-value">$ {{ coin.total_market_cap }}</div>
-                                <div class="pct-change {% if coin.total_market_cap_yesterday_percentage_change > 0 %}positive{% elif coin.total_market_cap_yesterday_percentage_change < 0 %}negative{% endif %}">
-                                    {{ coin.total_market_cap_yesterday_percentage_change | round(2) }}%
-                                </div>
+                    <div class="dominance-legend">
+                        <div class="legend-item">
+                            <div class="legend-color btc-color"></div>
+                            <div class="legend-data">
+                                <span class="legend-label">BTC</span>
+                                <span class="legend-percent">{{ coin.btc_dominance | round(1) }}%</span>
                             </div>
-                            <div class="market-metric-item">
-                                <div class="metric-label">Total Volume 24H</div>
-                                <div class="metric-value">$ {{ coin.total_volume24h_reported }}</div>
-                                <div class="pct-change {% if coin.total_volume24h_yesterday_percentage_change > 0 %}positive{% elif coin.total_volume24h_yesterday_percentage_change < 0 %}negative{% endif %}">
-                                    {{ coin.total_volume24h_yesterday_percentage_change | round(2) }}%
-                                </div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color eth-color"></div>
+                            <div class="legend-data">
+                                <span class="legend-label">ETH</span>
+                                <span class="legend-percent">{{ coin.eth_dominance | round(1) }}%</span>
+                            </div>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color others-color"></div>
+                            <div class="legend-data">
+                                <span class="legend-label">Others</span>
+                                <span class="legend-percent">{{ (100 - (coin.btc_dominance | round(1)) - (coin.eth_dominance | round(1))) | round(1) }}%</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Right Column (40%) - Indicators -->
-            <div class="right-column">
-                {% for snaps in snap %}
-                <!-- Fear & Greed Index -->
-                <div class="fear-greed-container">
-                    <div class="fear-greed-title">Fear & Greed</div>
-                    <div class="fear-greed-speedometer">
-                        <div class="speedometer-circle">
-                            <div class="speedometer-ticks">
-                                <div class="tick tick-0"></div>
-                                <div class="tick tick-20"></div>
-                                <div class="tick tick-40"></div>
-                                <div class="tick tick-60"></div>
-                                <div class="tick tick-80"></div>
-                                <div class="tick tick-100"></div>
-                            </div>
-                            <div class="speedometer-needle" style="transform: rotate({{ (snaps['fear_greed_index'] * 1.8) - 90 }}deg);"></div>
-                            <div class="speedometer-center"></div>
+        <!-- Fear & Greed and Altseason - Horizontal Layout -->
+        <div class="indicators-section">
+            {% for snaps in snap %}
+            <!-- Fear & Greed Index -->
+            <div class="fear-greed-container enhanced">
+                <div class="fear-greed-title">Fear & Greed</div>
+                <div class="fear-greed-speedometer">
+                    <div class="speedometer-circle enhanced">
+                        <div class="speedometer-ticks">
+                            <div class="tick tick-0"></div>
+                            <div class="tick tick-20"></div>
+                            <div class="tick tick-40"></div>
+                            <div class="tick tick-60"></div>
+                            <div class="tick tick-80"></div>
+                            <div class="tick tick-100"></div>
                         </div>
-                        <div class="speedometer-labels">
-                            <span class="label-extreme-fear">0</span>
-                            <span class="label-fear">20</span>
-                            <span class="label-neutral">50</span>
-                            <span class="label-greed">80</span>
-                            <span class="label-extreme-greed">100</span>
-                        </div>
+                        <div class="speedometer-needle" style="transform: rotate({{ (snaps['fear_greed_index'] * 1.8) - 90 }}deg);"></div>
+                        <div class="speedometer-center"></div>
                     </div>
-                    <div class="fear-greed-value">{{snaps['fear_greed_index']}}</div>
-                    <div class="fear-greed-label">{{snaps['fear_greed_label']}}</div>
+                    <div class="speedometer-labels">
+                        <span class="label-extreme-fear">0</span>
+                        <span class="label-fear">20</span>
+                        <span class="label-neutral">50</span>
+                        <span class="label-greed">80</span>
+                        <span class="label-extreme-greed">100</span>
+                    </div>
                 </div>
+                <div class="fear-greed-value">{{snaps['fear_greed_index']}}</div>
+                <div class="fear-greed-label">{{snaps['fear_greed_label']}}</div>
+            </div>
 
-                <!-- Altseason Gauge -->
-                <div class="altseason-container">
-                    <div class="altseason-title">Altseason</div>
-                    <div class="altseason-bullet-chart">
-                        <div class="bullet-background">
-                            <div class="bullet-ticks">
-                                <div class="bullet-tick bullet-tick-25"></div>
-                                <div class="bullet-tick bullet-tick-50"></div>
-                                <div class="bullet-tick bullet-tick-75"></div>
-                                <div class="bullet-tick bullet-tick-100"></div>
-                                <div class="bullet-tick bullet-tick-125"></div>
-                            </div>
-                            <div class="bullet-bar" style="width: {{ (snaps['altseason_gauge'] / 150) * 100 }}%;"></div>
-                            <div class="bullet-threshold"></div>
+            <!-- Altseason Gauge -->
+            <div class="altseason-container enhanced">
+                <div class="altseason-title">Altseason</div>
+                <div class="altseason-bullet-chart">
+                    <div class="bullet-background enhanced">
+                        <div class="bullet-ticks">
+                            <div class="bullet-tick bullet-tick-25"></div>
+                            <div class="bullet-tick bullet-tick-50"></div>
+                            <div class="bullet-tick bullet-tick-75"></div>
+                            <div class="bullet-tick bullet-tick-100"></div>
+                            <div class="bullet-tick bullet-tick-125"></div>
                         </div>
-                        <div class="bullet-labels">
-                            <span class="label-start">0</span>
-                            <span class="label-threshold">100</span>
-                            <span class="label-end">150</span>
-                        </div>
+                        <div class="bullet-bar" style="width: {{ (snaps['altseason_gauge'] / 150) * 100 }}%;"></div>
+                        <div class="bullet-threshold"></div>
                     </div>
-                    <div class="altseason-value">{{snaps['altseason_gauge']}}</div>
-                    <div class="altseason-status {% if snaps['altseason_status'] == 'Yes' %}positive{% else %}negative{% endif %}">{{snaps['altseason_status']}}</div>
+                    <div class="bullet-labels">
+                        <span class="label-start">0</span>
+                        <span class="label-threshold">100</span>
+                        <span class="label-end">150</span>
+                    </div>
                 </div>
-                {% endfor %}
+                <div class="altseason-value">{{snaps['altseason_gauge']}}</div>
+                <div class="altseason-status {% if snaps['altseason_status'] == 'Yes' %}positive{% else %}negative{% endif %}">{{snaps['altseason_status']}}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Global Market Overview - Compact -->
+        <div class="global-overview-compact">
+            <div class="market-card compact">
+                <div class="compact-overview">
+                    <div class="overview-item">
+                        <span class="overview-label">Total Market Cap</span>
+                        <span class="overview-value">{{ coin.total_market_cap }}</span>
+                    </div>
+                    <div class="overview-item">
+                        <span class="overview-label">Total 24H Volume</span>
+                        <span class="overview-value">{{ coin.total_volume24h_reported }}</span>
+                    </div>
+                </div>
             </div>
         </div>
 
