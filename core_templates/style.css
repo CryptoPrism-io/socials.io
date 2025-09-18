@@ -7,43 +7,33 @@
 
 html, body {
     width: 1080px;
-    height: 1080px;
+    height: 1350px;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
     color: white;
     position: relative;
 }
 
-/* 🔥 Pure CSS Background - NO IMAGE */
+/* 🔥 Darker CSS Background */
 body {
     background:
-        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.12) 0%, transparent 50%),
-        linear-gradient(135deg, #0a0a1e 0%, #141432 30%, #0f0f23 70%, #050519 100%);
+        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #050505 70%, #000000 100%);
     background-size: 100% 100%;
     background-attachment: fixed;
 }
 
-/* 🌟 Glow Animation */
-@keyframes pulse-glow {
-    0% {
-        text-shadow: 0 0 15px currentColor, 0 0 30px currentColor;
-        transform: scale(1);
-    }
-    100% {
-        text-shadow: 0 0 25px currentColor, 0 0 45px currentColor;
-        transform: scale(1.02);
-    }
-}
+/* 🌟 Static Styling - No Animations */
 
 /* 📱 Main Page Container */
 .main-container {
     width: 1080px;
-    height: 1080px;
+    height: 1350px;
     padding: 30px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -53,7 +43,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-radius: 24px;
+    border-radius: 28px;
     border: 1px solid rgba(255, 255, 255, 0.2);
 
     box-shadow:
@@ -61,29 +51,52 @@ body {
         0 6px 20px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.15);
 
-    padding: 25px 35px;
+    padding: 35px 40px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
     flex-shrink: 0;
 }
 
 /* 📊 Market Data Cards */
 .market-card {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(15px) saturate(150%);
     -webkit-backdrop-filter: blur(15px) saturate(150%);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
 
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 4px 16px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 40px rgba(255, 255, 255, 0.15),
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
 
     padding: 0;
     flex-shrink: 0;
     transition: all 0.3s ease;
+}
+
+/* 🔄 Two-Column Layout */
+.two-column-layout {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.left-column {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column {
+    flex: 0 0 38%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* 📋 Header Section with Branding and Last Update */
@@ -170,19 +183,15 @@ body {
 .btc-symbol {
     font-size: 28px;
     font-weight: 700;
-    background: linear-gradient(45deg, #f7931a, #ffffff, #f7931a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .btc-price {
-    font-size: 36px;
+    font-size: 42px;
     font-weight: 700;
-    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 25%, #e0e0e0 50%, #ffffff 75%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     background-clip: text;
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
@@ -203,7 +212,7 @@ body {
 
 .market-label {
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -211,8 +220,9 @@ body {
 
 .market-value {
     font-size: 18px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* 📊 Performance and Sentiment Section */
@@ -225,11 +235,36 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.performance-container, .sentiment-container, .trend-container {
+/* 📊 Market Data Section - Side by Side Layout */
+.market-data-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 40px rgba(255, 255, 255, 0.15),
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.performance-container, .sentiment-container, .trend-container, .fear-greed-container, .altseason-container {
     flex: 1;
 }
 
-.performance-title, .sentiment-title, .trend-title {
+.dominance-container, .total-market-container {
+    flex: 1;
+}
+
+.performance-title, .sentiment-title, .trend-title, .fear-greed-title, .altseason-title {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
@@ -302,12 +337,383 @@ body {
 .trend-value {
     font-size: 22px;
     font-weight: 800;
-    background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
-    animation: pulse-glow 2s ease-in-out infinite alternate;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* 📊 Fear & Greed Index Styling */
+/* 🌡️ Fear & Greed Speedometer */
+.fear-greed-speedometer {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.speedometer-circle {
+    position: relative;
+    width: 156px;
+    height: 78px;
+    border-radius: 156px 156px 0 0;
+    background: conic-gradient(
+        from 180deg at 50% 100%,
+        #dc2626 0deg,     /* Zone 1: Extreme Fear (0-20) - Red */
+        #dc2626 36deg,
+        #ea580c 36deg,    /* Zone 2: Fear (20-40) - Orange */
+        #ea580c 72deg,
+        #eab308 72deg,    /* Zone 3: Neutral (40-60) - Yellow */
+        #eab308 108deg,
+        #65a30d 108deg,   /* Zone 4: Greed (60-80) - Light Green */
+        #65a30d 144deg,
+        #16a34a 144deg,   /* Zone 5: Extreme Greed (80-100) - Green */
+        #16a34a 180deg
+    );
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.speedometer-circle::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: -2px;
+    border-radius: 151px 151px 0 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.speedometer-needle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    height: 72px;
+    background: linear-gradient(to top,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.95) 70%,
+        rgba(255, 255, 255, 0.8) 100%
+    );
+    transform-origin: bottom center;
+    border-radius: 2px;
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.8),
+        0 0 16px rgba(255, 255, 255, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.speedometer-needle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 8px solid rgba(255, 255, 255, 0.9);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.speedometer-center {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.95) 60%,
+        rgba(255, 255, 255, 0.8) 100%
+    );
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    box-shadow:
+        0 0 12px rgba(255, 255, 255, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+}
+
+.speedometer-ticks {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.tick {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    transform-origin: bottom center;
+    border-radius: 1.5px;
+}
+
+.tick-0 {
+    transform: translateX(-50%) rotate(-90deg);
+}
+
+.tick-20 {
+    transform: translateX(-50%) rotate(-54deg);
+}
+
+.tick-40 {
+    transform: translateX(-50%) rotate(-18deg);
+}
+
+.tick-60 {
+    transform: translateX(-50%) rotate(18deg);
+}
+
+.tick-80 {
+    transform: translateX(-50%) rotate(54deg);
+}
+
+.tick-100 {
+    transform: translateX(-50%) rotate(90deg);
+}
+
+.speedometer-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 156px;
+    margin-top: 6px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.label-extreme-fear {
+    color: #dc2626;
+}
+
+.label-fear {
+    color: #ea580c;
+}
+
+.label-neutral {
+    color: #eab308;
+}
+
+.label-greed {
+    color: #65a30d;
+}
+
+.label-extreme-greed {
+    color: #16a34a;
+}
+
+.fear-greed-value {
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 8px;
+}
+
+.fear-greed-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+/* 📊 Altseason Bullet Chart */
+.altseason-bullet-chart {
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bullet-background {
+    position: relative;
+    width: 156px;
+    height: 23px;
+    background: linear-gradient(to right,
+        rgba(255, 77, 77, 0.25) 0%,      /* Red zone (0-100) */
+        rgba(255, 77, 77, 0.25) 66.67%,
+        rgba(51, 204, 51, 0.25) 66.67%,  /* Green zone (100-150) */
+        rgba(51, 204, 51, 0.25) 100%
+    );
+    border-radius: 12px;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.bullet-background::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border-radius: 9px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.bullet-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(to right,
+        #ff3030 0%,      /* Bright red for values below 100 */
+        #ff4d4d 33%,
+        #ff6b35 66.67%,
+        #33cc33 66.67%,  /* Green for values above 100 */
+        #28a745 100%     /* Deep green */
+    );
+    border-radius: 9px;
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    transition: width 0.5s ease;
+}
+
+.bullet-threshold {
+    position: absolute;
+    top: -4px;
+    left: 66.67%; /* 100/150 = 66.67% */
+    width: 4px;
+    height: 31px;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
+    border-radius: 2px;
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.8),
+        0 0 16px rgba(255, 255, 255, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.bullet-threshold::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.9);
+}
+
+.bullet-threshold::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 4px solid rgba(255, 255, 255, 0.9);
+}
+
+.bullet-ticks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.bullet-tick {
+    position: absolute;
+    top: -5px;
+    width: 1.5px;
+    height: 33px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 0.75px;
+}
+
+.bullet-tick-25 {
+    left: 16.67%; /* 25/150 */
+}
+
+.bullet-tick-50 {
+    left: 33.33%; /* 50/150 */
+}
+
+.bullet-tick-75 {
+    left: 50%; /* 75/150 */
+}
+
+.bullet-tick-100 {
+    left: 66.67%; /* 100/150 */
+    background: rgba(255, 255, 255, 0.6);
+    width: 3px;
+}
+
+.bullet-tick-125 {
+    left: 83.33%; /* 125/150 */
+}
+
+.bullet-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 156px;
+    margin-top: 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.label-start {
+    color: #ff4d4d;
+}
+
+.label-threshold {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+}
+
+.label-end {
+    color: #33cc33;
+}
+
+.altseason-value {
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 8px;
+}
+
+.altseason-status {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 4px;
 }
 
 /* Color Classes */
@@ -317,6 +723,7 @@ body {
 
 .positive { color: #00ff88; }
 .negative { color: #ff4444; }
+.consolidating { color: #ff9500; }
 
 /* 🎯 Coin Grid Layout */
 .coin-grid {
@@ -429,10 +836,7 @@ body {
 .date {
     font-size: 18px;
     font-weight: 600;
-    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
     letter-spacing: 1px;
 }
@@ -440,11 +844,8 @@ body {
 .time {
     font-size: 28px;
     font-weight: 700;
-    background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: pulse-glow 2s ease-in-out infinite alternate;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     letter-spacing: 2px;
 }
 
@@ -486,10 +887,7 @@ body {
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
 }
 
@@ -518,10 +916,7 @@ body {
 .dominance-value {
     font-size: 24px;
     font-weight: 800;
-    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
 }
 
@@ -535,11 +930,8 @@ body {
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: pulse-glow 3s ease-in-out infinite alternate;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .total-market-grid {
@@ -567,11 +959,8 @@ body {
 .metric-value {
     font-size: 26px;
     font-weight: 800;
-    background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: pulse-glow 3s ease-in-out infinite alternate;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* 🎯 Market Segments Section Styling */
@@ -584,10 +973,7 @@ body {
     font-weight: 700;
     text-align: center;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
 }
 
@@ -616,10 +1002,7 @@ body {
 .segment-value {
     font-size: 22px;
     font-weight: 700;
-    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
 }
 
@@ -629,9 +1012,9 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-top: auto;
-    padding: 15px 20px;
+    padding: 20px 25px;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 

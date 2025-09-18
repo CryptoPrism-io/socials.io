@@ -97,73 +97,138 @@
             <!-- Overall Trend -->
             <div class="trend-container">
                 <div class="trend-title">Overall Trend</div>
-                <div class="trend-value">{{snaps['Trend']}}</div>
+                <div class="trend-value {% if snaps['Trend'] == 'Bullish' %}positive{% elif snaps['Trend'] == 'Bearish' %}negative{% elif snaps['Trend'] == 'Consolidating' %}consolidating{% endif %}">{{snaps['Trend']}}</div>
             </div>
         </div>
         {% endfor %}
 
+        <!-- Two-Column Layout Section -->
         {% for coin in coins %}
-        <!-- Market Dominance Card -->
-        <div class="market-card">
-            <div class="dominance-container">
-            <div class="dominance-title">Market Dominance</div>
-            <div class="dominance-grid">
-                <div class="dominance-item">
-                    <div class="dominance-label">BTC Dominance</div>
-                    <div class="dominance-value">{{ coin.btc_dominance | round(2) }}%</div>
-                    <div class="pct-change {% if coin.btc_dominance24h_percentage_change > 0 %}positive{% elif coin.btc_dominance24h_percentage_change < 0 %}negative{% endif %}">
-                        {{ coin.btc_dominance24h_percentage_change | round(2) }}%
+        <div class="two-column-layout">
+            <!-- Left Column (60%) - Market Data -->
+            <div class="left-column">
+                <!-- Market Dominance Card -->
+                <div class="market-card">
+                    <div class="dominance-container">
+                        <div class="dominance-title">Market Dominance</div>
+                        <div class="dominance-grid">
+                            <div class="dominance-item">
+                                <div class="dominance-label">BTC Dominance</div>
+                                <div class="dominance-value">{{ coin.btc_dominance | round(2) }}%</div>
+                                <div class="pct-change {% if coin.btc_dominance24h_percentage_change > 0 %}positive{% elif coin.btc_dominance24h_percentage_change < 0 %}negative{% endif %}">
+                                    {{ coin.btc_dominance24h_percentage_change | round(2) }}%
+                                </div>
+                            </div>
+                            <div class="dominance-item">
+                                <div class="dominance-label">ETH Dominance</div>
+                                <div class="dominance-value">{{ coin.eth_dominance | round(2) }}%</div>
+                                <div class="pct-change {% if coin.eth_dominance24h_percentage_change > 0 %}positive{% elif coin.eth_dominance24h_percentage_change < 0 %}negative{% endif %}">
+                                    {{ coin.eth_dominance24h_percentage_change | round(2) }}%
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="dominance-item">
-                    <div class="dominance-label">ETH Dominance</div>
-                    <div class="dominance-value">{{ coin.eth_dominance | round(2) }}%</div>
-                    <div class="pct-change {% if coin.eth_dominance24h_percentage_change > 0 %}positive{% elif coin.eth_dominance24h_percentage_change < 0 %}negative{% endif %}">
-                        {{ coin.eth_dominance24h_percentage_change | round(2) }}%
+
+                <!-- Global Market Overview Card -->
+                <div class="market-card">
+                    <div class="total-market-container">
+                        <div class="total-market-title">Global Market Overview</div>
+                        <div class="total-market-grid">
+                            <div class="market-metric-item">
+                                <div class="metric-label">Total Market Cap</div>
+                                <div class="metric-value">$ {{ coin.total_market_cap }}</div>
+                                <div class="pct-change {% if coin.total_market_cap_yesterday_percentage_change > 0 %}positive{% elif coin.total_market_cap_yesterday_percentage_change < 0 %}negative{% endif %}">
+                                    {{ coin.total_market_cap_yesterday_percentage_change | round(2) }}%
+                                </div>
+                            </div>
+                            <div class="market-metric-item">
+                                <div class="metric-label">Total Volume 24H</div>
+                                <div class="metric-value">$ {{ coin.total_volume24h_reported }}</div>
+                                <div class="pct-change {% if coin.total_volume24h_yesterday_percentage_change > 0 %}positive{% elif coin.total_volume24h_yesterday_percentage_change < 0 %}negative{% endif %}">
+                                    {{ coin.total_volume24h_yesterday_percentage_change | round(2) }}%
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Right Column (40%) - Indicators -->
+            <div class="right-column">
+                {% for snaps in snap %}
+                <!-- Fear & Greed Index -->
+                <div class="fear-greed-container">
+                    <div class="fear-greed-title">Fear & Greed</div>
+                    <div class="fear-greed-speedometer">
+                        <div class="speedometer-circle">
+                            <div class="speedometer-ticks">
+                                <div class="tick tick-0"></div>
+                                <div class="tick tick-20"></div>
+                                <div class="tick tick-40"></div>
+                                <div class="tick tick-60"></div>
+                                <div class="tick tick-80"></div>
+                                <div class="tick tick-100"></div>
+                            </div>
+                            <div class="speedometer-needle" style="transform: rotate({{ (snaps['fear_greed_index'] * 1.8) - 90 }}deg);"></div>
+                            <div class="speedometer-center"></div>
+                        </div>
+                        <div class="speedometer-labels">
+                            <span class="label-extreme-fear">0</span>
+                            <span class="label-fear">20</span>
+                            <span class="label-neutral">50</span>
+                            <span class="label-greed">80</span>
+                            <span class="label-extreme-greed">100</span>
+                        </div>
+                    </div>
+                    <div class="fear-greed-value">{{snaps['fear_greed_index']}}</div>
+                    <div class="fear-greed-label">{{snaps['fear_greed_label']}}</div>
+                </div>
+
+                <!-- Altseason Gauge -->
+                <div class="altseason-container">
+                    <div class="altseason-title">Altseason</div>
+                    <div class="altseason-bullet-chart">
+                        <div class="bullet-background">
+                            <div class="bullet-ticks">
+                                <div class="bullet-tick bullet-tick-25"></div>
+                                <div class="bullet-tick bullet-tick-50"></div>
+                                <div class="bullet-tick bullet-tick-75"></div>
+                                <div class="bullet-tick bullet-tick-100"></div>
+                                <div class="bullet-tick bullet-tick-125"></div>
+                            </div>
+                            <div class="bullet-bar" style="width: {{ (snaps['altseason_gauge'] / 150) * 100 }}%;"></div>
+                            <div class="bullet-threshold"></div>
+                        </div>
+                        <div class="bullet-labels">
+                            <span class="label-start">0</span>
+                            <span class="label-threshold">100</span>
+                            <span class="label-end">150</span>
+                        </div>
+                    </div>
+                    <div class="altseason-value">{{snaps['altseason_gauge']}}</div>
+                    <div class="altseason-status {% if snaps['altseason_status'] == 'Yes' %}positive{% else %}negative{% endif %}">{{snaps['altseason_status']}}</div>
+                </div>
+                {% endfor %}
             </div>
         </div>
 
-        <!-- Global Market Card -->
-        <div class="market-card">
-            <div class="total-market-container">
-            <div class="total-market-title">Global Market Overview</div>
-            <div class="total-market-grid">
-                <div class="market-metric-item">
-                    <div class="metric-label">Total Market Cap</div>
-                    <div class="metric-value">$ {{ coin.total_market_cap | round(2) }} T</div>
-                    <div class="pct-change {% if coin.total_market_cap_yesterday_percentage_change > 0 %}positive{% elif coin.total_market_cap_yesterday_percentage_change < 0 %}negative{% endif %}">
-                        {{ coin.total_market_cap_yesterday_percentage_change | round(2) }}%
-                    </div>
-                </div>
-                <div class="market-metric-item">
-                    <div class="metric-label">Total Volume 24H</div>
-                    <div class="metric-value">$ {{ coin.total_volume24h_reported | round(2) }} T</div>
-                    <div class="pct-change {% if coin.total_volume24h_yesterday_percentage_change > 0 %}positive{% elif coin.total_volume24h_yesterday_percentage_change < 0 %}negative{% endif %}">
-                        {{ coin.total_volume24h_yesterday_percentage_change | round(2) }}%
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        <!-- Key Segments Card -->
+        <!-- Key Segments Card - COMMENTED OUT FOR CAROUSEL -->
+        <!--
         <div class="market-card">
             <div class="market-segments-container">
             <div class="segments-title">Key Market Segments</div>
             <div class="segments-grid">
                 <div class="segment-item">
                     <div class="segment-label">Derivatives Volume 24H</div>
-                    <div class="segment-value">$ {{ coin.derivatives_volume24h_reported | round(2) }} M</div>
+                    <div class="segment-value">$ {{ coin.derivatives_volume24h_reported }}</div>
                     <div class="pct-change {% if coin.derivatives24h_percentage_change > 0 %}positive{% elif coin.derivatives24h_percentage_change < 0 %}negative{% endif %}">
                         {{ coin.derivatives24h_percentage_change | round(2) }}%
                     </div>
                 </div>
                 <div class="segment-item">
                     <div class="segment-label">DeFi Volume 24H</div>
-                    <div class="segment-value">$ {{ coin.defi_volume24h_reported | round(2) }} M</div>
+                    <div class="segment-value">$ {{ coin.defi_volume24h_reported }}</div>
                     <div class="pct-change {% if coin.defi24h_percentage_change > 0 %}positive{% elif coin.defi24h_percentage_change < 0 %}negative{% endif %}">
                         {{ coin.defi24h_percentage_change | round(2) }}%
                     </div>
@@ -171,6 +236,7 @@
             </div>
             </div>
         </div>
+        -->
         {% endfor %}
 
         <!-- Date and Time Card -->

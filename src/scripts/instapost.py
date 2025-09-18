@@ -34,7 +34,7 @@ async def generate_image_from_html(output_html_file, output_image_path):
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
 
-        await page.set_viewport_size({"width": 1080, "height": 1080})
+        await page.set_viewport_size({"width": 1080, "height": 1350})
 
         # Load the rendered HTML file
         await page.goto('file://' + os.path.abspath(output_html_file))
@@ -92,109 +92,196 @@ def fetch_data_as_dataframe():
         top_25_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
     return top_25_cc
 
+def format_large_number(value, include_dollar=True):
+    """
+    Smart number formatting function that auto-detects magnitude and applies correct units.
+    Fixes the unit conversion issues for proper B/T display.
+    """
+    if pd.isnull(value):
+        return value
+
+    value = float(value)
+    prefix = "$" if include_dollar else ""
+
+    if value >= 1e12:
+        # Trillions
+        return f"{prefix}{value / 1e12:.2f} T"
+    elif value >= 1e9:
+        # Billions
+        return f"{prefix}{value / 1e9:.2f} B"
+    elif value >= 1e6:
+        # Millions
+        return f"{prefix}{value / 1e6:.2f} M"
+    elif value >= 1e3:
+        # Thousands
+        return f"{prefix}{value / 1e3:.2f} K"
+    else:
+        return f"{prefix}{value:.2f}"
+
+def format_for_trillions(value):
+    """Format large numbers specifically for trillion-scale display."""
+    if pd.isnull(value):
+        return value
+    value = float(value)
+    return f"{value / 1e12:.2f}"
+
+def format_for_billions(value):
+    """Format large numbers specifically for billion-scale display."""
+    if pd.isnull(value):
+        return value
+    value = float(value)
+    return f"{value / 1e9:.2f}"
+
 # Data for BTC snapshot
 def btc_snapshot():
     # @title bitcoing data only
-  query_top_1 = """
-  SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, volume24h, market_cap, percent_change7d, percent_change30d, ytd_price_change_percentage
-  FROM crypto_listings_latest_1000
-  WHERE cmc_rank < 2
-  """
-  top_1_cc  = pd.read_sql_query(query_top_1, gcp_engine)
-  
-  def format_market_cap(market_cap):
-    """Formats market cap with units (Million, Billion, Trillion)."""
-    if pd.isnull(market_cap):
-        return market_cap
-    market_cap = float(market_cap)
-    if market_cap >= 1e12:
-        return f"${market_cap / 1e12:.2f} T"
-    elif market_cap >= 1e9:
-        return f"${market_cap / 1e9:.2f} B"
-    elif market_cap >= 1e6:
-        return f"${market_cap / 1e6:.2f} M"
-    else:
-        return f"${market_cap:.2f}"
+    query_top_1 = """
+    SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, volume24h, market_cap, percent_change7d, percent_change30d, ytd_price_change_percentage
+    FROM crypto_listings_latest_1000
+    WHERE cmc_rank < 2
+    """
+    top_1_cc  = pd.read_sql_query(query_top_1, gcp_engine)
 
-  # Apply the formatting function to the 'market_cap' column
-  top_1_cc['market_cap'] = top_1_cc['market_cap'].apply(format_market_cap)
-  # Apply the formatting function to the 'market_cap' column
-  top_1_cc['volume24h'] = top_1_cc['volume24h'].apply(format_market_cap)
+    def format_market_cap(market_cap):
+        """Formats market cap with units (Million, Billion, Trillion)."""
+        if pd.isnull(market_cap):
+            return market_cap
+        market_cap = float(market_cap)
+        if market_cap >= 1e12:
+            return f"${market_cap / 1e12:.2f} T"
+        elif market_cap >= 1e9:
+            return f"${market_cap / 1e9:.2f} B"
+        elif market_cap >= 1e6:
+            return f"${market_cap / 1e6:.2f} M"
+        else:
+            return f"${market_cap:.2f}"
 
-  """Color Code for PCT_Change"""
+    # Apply the formatting function to the 'market_cap' column
+    top_1_cc['market_cap'] = top_1_cc['market_cap'].apply(format_market_cap)
+    # Apply the formatting function to the 'market_cap' column
+    top_1_cc['volume24h'] = top_1_cc['volume24h'].apply(format_market_cap)
+
+    """Color Code for PCT_Change"""
+
+    # Format the 'tg_percent_change24h' column with 2 decimal places and add '%'
+    top_1_cc['percent_change24h'] = top_1_cc['percent_change24h'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
+    top_1_cc['percent_change7d'] = top_1_cc['percent_change7d'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
+    top_1_cc['percent_change30d'] = top_1_cc['percent_change30d'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
+    top_1_cc['ytd_price_change_percentage'] = top_1_cc['ytd_price_change_percentage'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
+
+    # Format the 'price' column with '$' and 2 decimal places
+    top_1_cc['price'] = top_1_cc['price'].apply(lambda x: f"${x:.2f}" if not pd.isnull(x) else x)
+
+    # top_1_cc.head()
+
+    # @title fetching dmv values for bitcoin
+    # Construct the SQL query
+    query = f"""
+    SELECT *
+    FROM "FE_DMV_ALL"
+    WHERE slug = 'bitcoin'
+    """
+    # Execute the query and fetch the data into a DataFrame
+    dmv_bitcoin = pd.read_sql_query(query, gcp_engine)
+
+    # @title count of bullish bearing and neautal for btc
+    # prompt: at dmv_bitcoin can you help me count the number '1' '-1' and '0' in the first row and create a add three more colums bullish- Number of '1' in the first row bearishNumber of '-1' in the first row and Number of '0' in the first row is neutral
+    dmv_bitcoin_first_row = dmv_bitcoin.iloc[0].tolist()
+
+    # Enhanced debugging and validation
+    print(f"🔍 DMV DATA INSPECTION:")
+    print(f"Total columns in DMV data: {len(dmv_bitcoin_first_row)}")
+    print(f"Sample values: {dmv_bitcoin_first_row[:10]}...")
+    print(f"Unique values in data: {set(dmv_bitcoin_first_row)}")
+
+    bullish_count = dmv_bitcoin_first_row.count(1)
+    bearish_count = dmv_bitcoin_first_row.count(-1)
+    neutral_count = dmv_bitcoin_first_row.count(0)
+
+    # Additional validation - count other values that aren't 1, -1, or 0
+    other_values = [val for val in dmv_bitcoin_first_row if val not in [1, -1, 0]]
+    other_count = len(other_values)
+
+    # Print detailed counts with validation
+    print(f"📊 SENTIMENT COUNTS:")
+    print(f"Bullish (1): {bullish_count}")
+    print(f"Bearish (-1): {bearish_count}")
+    print(f"Neutral (0): {neutral_count}")
+    print(f"Other values: {other_count} -> {set(other_values) if other_values else 'None'}")
+    print(f"Total counted: {bullish_count + bearish_count + neutral_count + other_count}")
+
+    # Data quality validation
+    if neutral_count > 20:
+        print(f"⚠️  WARNING: High neutral count ({neutral_count}) detected - may indicate data quality issue")
+    if other_count > 0:
+        print(f"⚠️  WARNING: Found {other_count} values that are not 1, -1, or 0")
+
+    # Adding the counts to the top_1_cc DataFrame
+    top_1_cc['bullish'] = bullish_count
+    top_1_cc['bearish'] = bearish_count
+    top_1_cc['neutral'] = neutral_count
+
+    # prompt: i want to add a new coloum as Trend and classify it as bearish bullish or consolidating what logic can i use --- # Adding the counts to the top_1_cc DataFrame
+    # top_1_cc['bullish'] = bullish_count
+    # top_1_cc['bearish'] = bearish_count
+    # top_1_cc['neutral'] = neutral_count for these
+
+    # Calculate the difference between bullish and bearish counts
+    top_1_cc['sentiment_diff'] = top_1_cc['bullish'] - top_1_cc['bearish']
 
 
-  # Format the 'tg_percent_change24h' column with 2 decimal places and add '%'
-  top_1_cc['percent_change24h'] = top_1_cc['percent_change24h'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
-  top_1_cc['percent_change7d'] = top_1_cc['percent_change7d'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
-  top_1_cc['percent_change30d'] = top_1_cc['percent_change30d'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
-  top_1_cc['ytd_price_change_percentage'] = top_1_cc['ytd_price_change_percentage'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
+    # Define a function to classify the trend
+    def classify_trend(sentiment_diff):
+        if sentiment_diff > 4:  # Adjust threshold as needed
+            return "Bullish"
+        elif sentiment_diff < -4: # Adjust threshold as needed
+            return "Bearish"
+        else:
+            return "Consolidating"
 
-  # Format the 'price' column with '$' and 2 decimal places
-  top_1_cc['price'] = top_1_cc['price'].apply(lambda x: f"${x:.2f}" if not pd.isnull(x) else x)
+    # Apply the function to create the 'Trend' column
+    top_1_cc['Trend'] = top_1_cc['sentiment_diff'].apply(classify_trend)
 
-  # top_1_cc.head()
+    # Add Fear & Greed Index (mock data - replace with real API call)
+    # In production, you would fetch from Fear & Greed Index API
+    import random
+    fear_greed_value = random.randint(20, 80)  # Mock value between 20-80
 
-  # @title fetching dmv values for bitcoin
-  # Construct the SQL query
-  query = f"""
-  SELECT *
-  FROM "FE_DMV_ALL"
-  WHERE slug = 'bitcoin'
-  """
-  # Execute the query and fetch the data into a DataFrame
-  dmv_bitcoin = pd.read_sql_query(query, gcp_engine)
+    def get_fear_greed_label(value):
+        if value <= 25:
+            return "Extreme Fear"
+        elif value <= 45:
+            return "Fear"
+        elif value <= 55:
+            return "Neutral"
+        elif value <= 75:
+            return "Greed"
+        else:
+            return "Extreme Greed"
 
-  # @title count of bullish bearing and neautal for btc
-  # prompt: at dmv_bitcoin can you help me count the number '1' '-1' and '0' in the first row and create a add three more colums bullish- Number of '1' in the first row bearishNumber of '-1' in the first row and Number of '0' in the first row is neutral
-  dmv_bitcoin_first_row = dmv_bitcoin.iloc[0].tolist()
-  bullish_count = dmv_bitcoin_first_row.count(1)
-  bearish_count = dmv_bitcoin_first_row.count(-1)
-  neutral_count = dmv_bitcoin_first_row.count(0)
+    top_1_cc['fear_greed_index'] = fear_greed_value
+    top_1_cc['fear_greed_label'] = get_fear_greed_label(fear_greed_value)
 
-  # Print counts
-  print(f"Bullish (1): {bullish_count}")
-  print(f"Bearish (-1): {bearish_count}")
-  print(f"Neutral (0): {neutral_count}")
+    # Add Altseason Gauge (mock data - replace with real calculation)
+    # In production, calculate based on altcoin performance vs BTC
+    altseason_value = random.randint(40, 120)  # Mock value between 40-120
+    altseason_status = "Yes" if altseason_value > 100 else "No"
 
-  # Adding the counts to the top_1_cc DataFrame
-  top_1_cc['bullish'] = bullish_count
-  top_1_cc['bearish'] = bearish_count
-  top_1_cc['neutral'] = neutral_count
-
-  # prompt: i want to add a new coloum as Trend and classify it as bearish bullish or consolidating what logic can i use --- # Adding the counts to the top_1_cc DataFrame
-  # top_1_cc['bullish'] = bullish_count
-  # top_1_cc['bearish'] = bearish_count
-  # top_1_cc['neutral'] = neutral_count for these
-
-  # Calculate the difference between bullish and bearish counts
-  top_1_cc['sentiment_diff'] = top_1_cc['bullish'] - top_1_cc['bearish']
-  
-
-  # Define a function to classify the trend
-  def classify_trend(sentiment_diff):
-      if sentiment_diff > 4:  # Adjust threshold as needed
-          return "Bullish"
-      elif sentiment_diff < -4: # Adjust threshold as needed
-          return "Bearish"
-      else:
-          return "Consolidating"
-
-  # Apply the function to create the 'Trend' column
-  top_1_cc['Trend'] = top_1_cc['sentiment_diff'].apply(classify_trend)
+    top_1_cc['altseason_gauge'] = altseason_value
+    top_1_cc['altseason_status'] = altseason_status
 
     # Construct the SQL query
-  query = f"""
-  SELECT logo, slug FROM "FE_CC_INFO_URL"
-  """
+    query = f"""
+    SELECT logo, slug FROM "FE_CC_INFO_URL"
+    """
 
-  # Execute the query and fetch the data into a DataFrame
-  logos_and_slugs = pd.read_sql_query(query, gcp_engine)
+    # Execute the query and fetch the data into a DataFrame
+    logos_and_slugs = pd.read_sql_query(query, gcp_engine)
 
-  # Merge the two DataFrames on the 'slug' column
-  top_1_cc = pd.merge(top_1_cc, logos_and_slugs, on='slug', how='left')
+    # Merge the two DataFrames on the 'slug' column
+    top_1_cc = pd.merge(top_1_cc, logos_and_slugs, on='slug', how='left')
 
-  return top_1_cc
+    return top_1_cc
   
   
 
@@ -419,9 +506,15 @@ def fetch_for_5():
         # Execute the query and fetch the data into a DataFrame using the pre-initialized engine
         global_data = pd.read_sql_query(query, gcp_engine)
 
-        # Apply necessary transformations and rounding.
-        # Convert market caps and volumes to billions and round to 2 decimal places
-        for col in ['total_market_cap', 'total_volume24h_reported', 'altcoin_volume24h_reported', 'altcoin_market_cap', 'stablecoin_volume24h_reported', 'stablecoin_market_cap', 'defi_volume24h_reported', 'defi_market_cap', 'derivatives_volume24h_reported']:
+        # Apply smart number formatting with auto-scale detection
+        # Use smart formatting for all large numbers - let function decide appropriate scale
+        global_data['total_market_cap'] = global_data['total_market_cap'].apply(lambda x: format_large_number(x, include_dollar=False))
+        global_data['total_volume24h_reported'] = global_data['total_volume24h_reported'].apply(lambda x: format_large_number(x, include_dollar=False))
+        global_data['derivatives_volume24h_reported'] = global_data['derivatives_volume24h_reported'].apply(lambda x: format_large_number(x, include_dollar=False))
+        global_data['defi_volume24h_reported'] = global_data['defi_volume24h_reported'].apply(lambda x: format_large_number(x, include_dollar=False))
+
+        # Keep other values in billions for consistency
+        for col in ['altcoin_volume24h_reported', 'altcoin_market_cap', 'stablecoin_volume24h_reported', 'stablecoin_market_cap', 'defi_market_cap']:
             global_data[col] = (global_data[col] / 1_000_000_000).round(2)
 
         # Round percentage change columns to 2 decimal places
