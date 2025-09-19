@@ -34,7 +34,7 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
   - **HTML Output**: `output/html/` - Rendered templates with live data
   - **Image Output**: `output/images/` - Final Instagram posts (JPG format)
 - **Dynamic Rendering**: Jinja2-powered data injection with proper path resolution
-- **Image Output**: Automated screenshot generation at 1080x1080 Instagram format
+- **Image Output**: Automated screenshot generation at 2160px high-resolution format for optimal viewport display
 - **Style Variations**: 5 different visual themes (`style.css` through `style5.css`)
 
 ## 📁 Project Structure
@@ -320,10 +320,12 @@ python figma.py
 ```
 
 #### **CSS Styling Guidelines**
-- **Instagram Format**: 1080x1080 square aspect ratio
-- **Font System**: Poppins font family for consistency
-- **Responsive Design**: Viewport-optimized for screenshot generation
-- **Brand Colors**: Customizable color schemes per template
+- **High-Resolution Format**: 2160x2700px template containers with auto-layout flexbox architecture
+- **Font System**: Poppins font family for consistency with rem-based responsive scaling
+- **Auto-Layout Architecture**: Modern flexbox layouts eliminated absolute positioning dependencies
+- **Responsive Design**: Viewport-optimized for screenshot generation with natural document flow
+- **Brand Colors**: Customizable color schemes per template with conditional DMV score coloring
+- **Glassmorphism Effects**: Enhanced visual effects with backdrop-filter and gradient overlays
 
 ### Automation Setup
 
@@ -394,7 +396,7 @@ with open('custom_output.html', 'w') as f:
 #### **Playwright Screenshot Generation**
 ```python
 # Example screenshot generation with custom dimensions
-async def generate_custom_image(html_file, output_path, width=1080, height=1080):
+async def generate_custom_image(html_file, output_path, width=2160, height=2700):
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
