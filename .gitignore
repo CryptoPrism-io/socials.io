@@ -1,5 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+
+# Claude Code local settings
+.claude/
 *.py[cod]
 *$py.class
 
