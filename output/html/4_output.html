@@ -4,341 +4,268 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../core_templates/style4.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Crypto Dashboard Template 4</title>
 </head>
 <body>
-    
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">18 Sep, 2025</div>
+                <div class="last-update-time">7:44 pm</div>
+            </div>
+        </div>
 
-    <!-- Strategy Header -->
-    <div class="strategy-header">
-        <div class="strategy-section long-section">
-            <div class="strategy-icon">🌱</div>
-            <div class="strategy-label">PRISM Quant Select</div>
-            <div class="strategy-title long-title">LONG</div>
+        <!-- Long/Short Strategy Header -->
+        <div class="strategy-header">
+            <div class="strategy-section long-section">
+                <div class="strategy-label">PRISM Quant Select</div>
+                <div class="strategy-title long-title">LONG</div>
+            </div>
+            <div class="strategy-section short-section">
+                <div class="strategy-label">PRISM Quant Select</div>
+                <div class="strategy-title short-title">SHORT</div>
+            </div>
         </div>
-        <div class="strategy-section short-section">
-            <div class="strategy-icon">📈</div>
-            <div class="strategy-label">PRISM Quant Select</div>
-            <div class="strategy-title short-title">SHORT</div>
-        </div>
-    </div>
 
-    <!-- Main Container -->
-    <div class="div-container">
-        <div class="col-container">
-            
-            <div class="col">
-                <div class="coin-card">
+        <!-- Main Long/Short Content -->
+        <div class="longshort-container">
+            <!-- Long Positions Section -->
+            <div class="long-section-content">
+                
+                <div class="position-card long-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png">
+                        <div class="coin-logo">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png" alt="BNB">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">BNB</div>
-                                <div class="cmc-rank">#5</div>
-                                <div class="m-cap">$137.34 B</div>
-                                <div class="price">$986.73</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">BNB</div>
+                            <div class="coin-rank">#5</div>
                         </div>
+                        <div class="coin-price">$986.73</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>0.01</div>
-                            <div>1.19</div>
-                            <div>2.52</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">2.85%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="positive">
-                                    2.85%
-                                </div>
-                                <div class="positive">
-                                    10.58%
-                                </div>
-                                <div class="positive">
-                                    16.31%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">137.34B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">10.58%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col">
-                <div class="coin-card">
+                
+                <div class="position-card long-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5805.png">
+                        <div class="coin-logo">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5805.png" alt="AVAX">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">AVAX</div>
-                                <div class="cmc-rank">#14</div>
-                                <div class="m-cap">$13.61 B</div>
-                                <div class="price">$32.24</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">AVAX</div>
+                            <div class="coin-rank">#14</div>
                         </div>
+                        <div class="coin-price">$32.24</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>0.01</div>
-                            <div>2.19</div>
-                            <div>1.92</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">7.21%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="positive">
-                                    7.21%
-                                </div>
-                                <div class="positive">
-                                    10.66%
-                                </div>
-                                <div class="positive">
-                                    35.14%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">13.61B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">10.66%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col">
-                <div class="coin-card">
+                
+                <div class="position-card long-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/10603.png">
+                        <div class="coin-logo">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/10603.png" alt="IMX">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">IMX</div>
-                                <div class="cmc-rank">#66</div>
-                                <div class="m-cap">$1.45 B</div>
-                                <div class="price">$0.75</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">IMX</div>
+                            <div class="coin-rank">#66</div>
                         </div>
+                        <div class="coin-price">$0.75</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>0.01</div>
-                            <div>2.9</div>
-                            <div>2.34</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">9.55%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="positive">
-                                    9.55%
-                                </div>
-                                <div class="positive">
-                                    33.51%
-                                </div>
-                                <div class="positive">
-                                    32.77%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">1.45B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">33.51%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col">
-                <div class="coin-card">
+                
+                <div class="position-card long-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png">
+                        <div class="coin-logo">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png" alt="SOL">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">SOL</div>
-                                <div class="cmc-rank">#6</div>
-                                <div class="m-cap">$133.61 B</div>
-                                <div class="price">$246.05</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">SOL</div>
+                            <div class="coin-rank">#6</div>
                         </div>
+                        <div class="coin-price">$246.05</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>0.01</div>
-                            <div>2.09</div>
-                            <div>1.54</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">3.99%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="positive">
-                                    3.99%
-                                </div>
-                                <div class="positive">
-                                    9.5%
-                                </div>
-                                <div class="positive">
-                                    33.22%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">133.61B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">9.5%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
+                
             </div>
-            
-        </div>
-    </div>
 
-    <div class="div-container">
-        <div class="col-container-2">
-            
-            <div class="col">
-                <div class="coin-card">
+            <!-- Short Positions Section -->
+            <div class="short-section-content">
+                
+                <div class="position-card short-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/22974.png">
+                        <div class="coin-logo">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/22974.png" alt="TAO">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">TAO</div>
-                                <div class="cmc-rank">#34</div>
-                                <div class="m-cap">$3.56 B</div>
-                                <div class="price">$359.89</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">TAO</div>
+                            <div class="coin-rank">#34</div>
                         </div>
+                        <div class="coin-price">$359.89</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>0.0</div>
-                            <div>2.19</div>
-                            <div>0.92</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">4.32%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="positive">
-                                    4.32%
-                                </div>
-                                <div class="positive">
-                                    1.95%
-                                </div>
-                                <div class="positive">
-                                    0.84%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">3.56B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">1.95%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col">
-                <div class="coin-card">
+                
+                <div class="position-card short-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/35336.png">
+                        <div class="coin-logo">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/35336.png" alt="TRUMP">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">TRUMP</div>
-                                <div class="cmc-rank">#62</div>
-                                <div class="m-cap">$1.74 B</div>
-                                <div class="price">$8.72</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">TRUMP</div>
+                            <div class="coin-rank">#62</div>
                         </div>
+                        <div class="coin-price">$8.72</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>-0.0</div>
-                            <div>1.32</div>
-                            <div>0.67</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">1.08%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="positive">
-                                    1.08%
-                                </div>
-                                <div class="negative">
-                                    -1.31%
-                                </div>
-                                <div class="negative">
-                                    -4.18%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">1.74B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">-1.31%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col">
-                <div class="coin-card">
+                
+                <div class="position-card short-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/7186.png">
+                        <div class="coin-logo">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/7186.png" alt="CAKE">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">CAKE</div>
-                                <div class="cmc-rank">#86</div>
-                                <div class="m-cap">$0.93 B</div>
-                                <div class="price">$2.69</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">CAKE</div>
+                            <div class="coin-rank">#86</div>
                         </div>
+                        <div class="coin-price">$2.69</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>0.0</div>
-                            <div>1.64</div>
-                            <div>1.88</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">4.01%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="positive">
-                                    4.01%
-                                </div>
-                                <div class="positive">
-                                    5.22%
-                                </div>
-                                <div class="negative">
-                                    -0.1%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">0.93B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">5.22%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col">
-                <div class="coin-card">
+                
+                <div class="position-card short-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/9481.png">
+                        <div class="coin-logo">
+                            <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/9481.png" alt="PENDLE">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">PENDLE</div>
-                                <div class="cmc-rank">#93</div>
-                                <div class="m-cap">$0.88 B</div>
-                                <div class="price">$5.19</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">PENDLE</div>
+                            <div class="coin-rank">#93</div>
                         </div>
+                        <div class="coin-price">$5.19</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>0.0</div>
-                            <div>2.05</div>
-                            <div>1.98</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">3.92%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="positive">
-                                    3.92%
-                                </div>
-                                <div class="positive">
-                                    7.71%
-                                </div>
-                                <div class="negative">
-                                    -3.7%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">0.88B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">7.71%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
+                
             </div>
-            
         </div>
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
     </div>
 </body>
 </html>

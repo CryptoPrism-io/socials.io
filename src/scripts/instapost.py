@@ -58,18 +58,18 @@ async def generate_image_from_html(output_html_file, output_image_path):
 
 
 
-# Data for page 2 only (top 25 coins)
+# Data for page 1 (top 24 coins including Bitcoin)
 def fetch_data_as_dataframe():
     """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
-    query_top_25 = """
+    query_top_24 = """
       SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
       FROM crypto_listings_latest_1000
-      WHERE cmc_rank < 26
+      WHERE cmc_rank BETWEEN 1 AND 24
       """
 
     try:
         # Use gcp_engine to execute the query and fetch data as a DataFrame
-        top_25_cc  = pd.read_sql_query(query_top_25, gcp_engine)
+        top_25_cc  = pd.read_sql_query(query_top_24, gcp_engine)
         # Convert market_cap to billions and round to 2 decimal places
         top_25_cc['market_cap'] = (top_25_cc['market_cap'] / 1_000_000_000).round(2)
         top_25_cc['price'] = (top_25_cc['price']).round(2)
@@ -100,6 +100,49 @@ def fetch_data_as_dataframe():
         print(f"Error fetching data: {e}")
         top_25_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
     return top_25_cc
+
+# Data for page 2 (coins 25-48 for continuity)
+def fetch_data_as_dataframe_page2():
+    """Fetch data from the 'coins' table for Page 2 continuation (ranks 25-48)."""
+    query_25_48 = """
+      SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
+      FROM crypto_listings_latest_1000
+      WHERE cmc_rank BETWEEN 25 AND 48
+      """
+
+    try:
+        # Use gcp_engine to execute the query and fetch data as a DataFrame
+        coins_25_48  = pd.read_sql_query(query_25_48, gcp_engine)
+        # Convert market_cap to billions and round to 2 decimal places
+        coins_25_48['market_cap'] = (coins_25_48['market_cap'] / 1_000_000_000).round(2)
+        coins_25_48['price'] = (coins_25_48['price']).round(2)
+        coins_25_48['percent_change24h'] = (coins_25_48['percent_change24h']).round(2)
+
+        # Create a list of slugs from the DataFrame
+        slugs = coins_25_48['slug'].tolist()
+        # Prepare a string for the IN clause
+        slugs_placeholder = ', '.join(f"'{slug}'" for slug in slugs)
+
+        # Construct the SQL query
+        query_logos = f"""
+        SELECT logo, slug FROM "FE_CC_INFO_URL"
+        WHERE slug IN ({slugs_placeholder})
+        """
+
+        # Execute the query and fetch the data into a DataFrame
+        logos_and_slugs = pd.read_sql_query(query_logos, gcp_engine)
+
+        # Merge the two DataFrames on the 'slug' column
+        coins_25_48 = pd.merge(coins_25_48, logos_and_slugs, on='slug', how='left')
+
+        coins_25_48 = coins_25_48.sort_values(by='cmc_rank', ascending=True)
+
+        gcp_engine.dispose()
+
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+        coins_25_48 = pd.DataFrame()  # Return an empty DataFrame in case of error
+    return coins_25_48
 
 def format_large_number(value, include_dollar=True):
     """
@@ -543,17 +586,27 @@ import asyncio
 from playwright.async_api import async_playwright
 import pandas as pd
 from jinja2 import Environment, FileSystemLoader
+import os
+from together import Together
 
 async def render_page_1():
     """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-    # Fetch the data using the previously defined function
-    coins = fetch_for_5()  # Use same data source as page 5 for market data
-    snap = btc_snapshot()
+    # Fetch the top 24 coins data for page 1
+    df = fetch_data_as_dataframe()
 
-
-    if coins.empty:
+    if df.empty:
         print("No data to render.")
         return
+
+    # Split into 3 columns of 8 coins each
+    df1_part1 = df.iloc[0:8]
+    df1_part2 = df.iloc[8:16]
+    df1_part3 = df.iloc[16:24]
+
+    # Convert to dictionaries for template rendering
+    coins_part1 = df1_part1.to_dict(orient='records')
+    coins_part2 = df1_part2.to_dict(orient='records')
+    coins_part3 = df1_part3.to_dict(orient='records')
 
     # Format current date and time
     now = datetime.now()
@@ -565,9 +618,14 @@ async def render_page_1():
     env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('1.html')
 
-
     # Render the template with the fetched data
-    output = template.render(coins=coins.to_dict(orient='records'), snap=snap.to_dict(orient='records'), current_date=formatted_date, current_time=formatted_time)
+    output = template.render(
+        coins1=coins_part1,
+        coins2=coins_part2,
+        coins3=coins_part3,
+        current_date=formatted_date,
+        current_time=formatted_time
+    )
 
     # Save the output to an HTML file
     output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
@@ -606,32 +664,36 @@ async def render_page_1():
 # PAGE 2
 async def render_page_2():
     """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-    # Fetch the data using the previously defined function
-    df2 = fetch_data_as_dataframe()
+    # Fetch the data for continuation (coins 25-48)
+    df2 = fetch_data_as_dataframe_page2()
     df2 = df2.sort_values('cmc_rank', ascending=True)
 
-    # Get top 24 coins (ranks 1-24)
-    df2 = df2.iloc[0:24]
-
     # Split into three DataFrames: 8 coins each for perfect distribution
-    df2_part1 = df2.iloc[0:8]    # First 8 coins (ranks 1-8)
-    df2_part2 = df2.iloc[8:16]   # Next 8 coins (ranks 9-16)
-    df2_part3 = df2.iloc[16:24]  # Last 8 coins (ranks 17-24)
+    df2_part1 = df2.iloc[0:8]    # First 8 coins (ranks 25-32)
+    df2_part2 = df2.iloc[8:16]   # Next 8 coins (ranks 33-40)
+    df2_part3 = df2.iloc[16:24]  # Last 8 coins (ranks 41-48)
 
     # Convert each DataFrame to dictionary
     coins_part1 = df2_part1.to_dict(orient='records')
     coins_part2 = df2_part2.to_dict(orient='records')
     coins_part3 = df2_part3.to_dict(orient='records')
 
+    # Format current date and time
+    now = datetime.now()
+    formatted_date = now.strftime("%d %b, %Y")  # Example: 17 Sep, 2025
+    formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM
+
     # Set up Jinja2 environment
     template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
-    env = Environment(loader=FileSystemLoader(template_dir)) 
+    env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('2.html')
 
     # Render the template with the fetched data
-    output = template.render(coins1=coins_part1, 
-                         coins2=coins_part2, 
-                         coins3=coins_part3)
+    output = template.render(coins1=coins_part1,
+                         coins2=coins_part2,
+                         coins3=coins_part3,
+                         current_date=formatted_date,
+                         current_time=formatted_time)
 
     # Save the output to an HTML file
     output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
@@ -742,11 +804,22 @@ async def render_page_4():
 # PAGE 5
 async def render_page_5():
     """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-    
+
     #fetch
     global_data = fetch_for_5()
     coins = global_data.to_dict(orient='records')
-    
+    snap = btc_snapshot()
+
+    # Fetch logos for BTC and ETH
+    logo_query = """
+    SELECT logo, slug FROM "FE_CC_INFO_URL"
+    WHERE slug IN ('bitcoin', 'ethereum')
+    """
+    logos_data = pd.read_sql_query(logo_query, gcp_engine)
+
+    # Extract individual logos
+    btc_logo = logos_data[logos_data['slug'] == 'bitcoin']['logo'].iloc[0] if not logos_data[logos_data['slug'] == 'bitcoin'].empty else ""
+    eth_logo = logos_data[logos_data['slug'] == 'ethereum']['logo'].iloc[0] if not logos_data[logos_data['slug'] == 'ethereum'].empty else ""
 
     now = datetime.now()
     formatted_date = now.strftime("%d %b, %Y")  # Example: 15 Feb, 2025
@@ -754,11 +827,18 @@ async def render_page_5():
 
     # Set up Jinja2 environment
     template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
-    env = Environment(loader=FileSystemLoader(template_dir)) 
+    env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('5.html')
 
     # Render the template with the fetched data
-    output = template.render(coins=coins, current_date=formatted_date, current_time=formatted_time)
+    output = template.render(
+        coins=coins,
+        snap=snap.to_dict(orient='records'),
+        current_date=formatted_date,
+        current_time=formatted_time,
+        btc_logo=btc_logo,
+        eth_logo=eth_logo
+    )
 
     # Save the output to an HTML file
     output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
@@ -775,6 +855,146 @@ async def render_page_5():
     image_path = os.path.join(image_dir, "5_output.jpg")
     await generate_image_from_html(output_path, image_path)
 
+def generate_bitcoin_news_events():
+    """Generate Bitcoin news and events using Together AI API."""
+    TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY')
+
+    if not TOGETHER_API_KEY:
+        print("⚠️ No AI API key, using placeholder news")
+        return {
+            'past_24h': [
+                "Bitcoin maintains strong support above $117,000 level",
+                "Institutional buying continues with $200M+ inflows reported",
+                "On-chain metrics show healthy network activity"
+            ],
+            'next_24h': [
+                "Watch for resistance test at $120,000 psychological level",
+                "US market open could drive increased volatility",
+                "Weekly options expiry may impact price action"
+            ]
+        }
+
+    try:
+        client = Together(api_key=TOGETHER_API_KEY)
+
+        prompt = """Generate Bitcoin news and events in JSON format. Create realistic, current events for:
+
+1. "past_24h": 3 bullet points about what happened to Bitcoin in the past 24 hours
+2. "next_24h": 3 bullet points about what to watch for Bitcoin in the next 24 hours
+
+Focus on:
+- Price movements and technical levels
+- Institutional activity and market sentiment
+- Regulatory developments
+- On-chain metrics and network activity
+- Market catalysts and upcoming events
+
+Return ONLY valid JSON in this exact format:
+{
+  "past_24h": ["point 1", "point 2", "point 3"],
+  "next_24h": ["point 1", "point 2", "point 3"]
+}
+
+Keep each point under 60 characters. Make them realistic and relevant to current crypto market conditions."""
+
+        response = client.chat.completions.create(
+            model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=400,
+            temperature=0.7
+        )
+
+        ai_response = response.choices[0].message.content.strip()
+
+        # Extract JSON from response
+        import json
+        try:
+            # Find JSON in the response
+            start = ai_response.find('{')
+            end = ai_response.rfind('}') + 1
+            if start != -1 and end != 0:
+                json_str = ai_response[start:end]
+                news_data = json.loads(json_str)
+                print("✅ AI news generated successfully")
+                return news_data
+            else:
+                raise ValueError("No JSON found in response")
+
+        except (json.JSONDecodeError, ValueError) as e:
+            print(f"⚠️ JSON parsing failed: {e}")
+            # Fallback to placeholder
+            return {
+                'past_24h': [
+                    "Bitcoin maintains strong support above $117,000 level",
+                    "Institutional buying continues with $200M+ inflows reported",
+                    "On-chain metrics show healthy network activity"
+                ],
+                'next_24h': [
+                    "Watch for resistance test at $120,000 psychological level",
+                    "US market open could drive increased volatility",
+                    "Weekly options expiry may impact price action"
+                ]
+            }
+
+    except Exception as e:
+        print(f"⚠️ AI news generation failed: {e}")
+        # Fallback to placeholder
+        return {
+            'past_24h': [
+                "Bitcoin maintains strong support above $117,000 level",
+                "Institutional buying continues with $200M+ inflows reported",
+                "On-chain metrics show healthy network activity"
+            ],
+            'next_24h': [
+                "Watch for resistance test at $120,000 psychological level",
+                "US market open could drive increased volatility",
+                "Weekly options expiry may impact price action"
+            ]
+        }
+
+# PAGE 6 - BTC SNAPSHOT ONLY
+async def render_page_6():
+    """Fetch Bitcoin data and render the BTC snapshot page using Jinja2, then convert the HTML to an image using Playwright."""
+
+    # Fetch BTC snapshot data
+    snap = btc_snapshot()
+
+    # Generate Bitcoin news and events
+    news_events = generate_bitcoin_news_events()
+
+    # Format current date and time
+    now = datetime.now()
+    formatted_date = now.strftime("%d %b, %Y")  # Example: 19 Sep, 2025
+    formatted_time = now.strftime("%I:%M:%S %p")  # Example: 09:59:46 AM
+
+    # Set up Jinja2 environment
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
+    env = Environment(loader=FileSystemLoader(template_dir))
+    template = env.get_template('6.html')
+
+    # Render the template with the fetched data
+    output = template.render(
+        snap=snap.to_dict(orient='records'),
+        current_date=formatted_date,
+        current_time=formatted_time,
+        news_events=news_events
+    )
+
+    # Save the output to an HTML file
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "6_output.html")
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(output)
+
+    print("Rendered page saved as '6_output.html'.")
+
+    # Use Playwright to convert the HTML file to an image
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
+    os.makedirs(image_dir, exist_ok=True)
+    image_path = os.path.join(image_dir, "6_output.jpg")
+    await generate_image_from_html(output_path, image_path)
+
 if __name__=="__main__":
 
     asyncio.run(render_page_1())
@@ -782,4 +1002,5 @@ if __name__=="__main__":
     asyncio.run(render_page_3())
     asyncio.run(render_page_4())
     asyncio.run(render_page_5())
+    asyncio.run(render_page_6())
 

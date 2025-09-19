@@ -6,20 +6,20 @@
 }
 
 html, body {
-    width: 1080px;
-    height: 1080px;
+    width: 2160px;
+    height: 2700px;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
     color: white;
     position: relative;
 }
 
-/* 🔥 Pure CSS Background - NO IMAGE */
+/* 🔥 Updated CSS Background to Match Template 1 */
 body {
     background:
-        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.12) 0%, transparent 50%),
-        linear-gradient(135deg, #0a0a1e 0%, #141432 30%, #0f0f23 70%, #050519 100%);
+        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #050505 70%, #000000 100%);
     background-size: 100% 100%;
     background-attachment: fixed;
 }
@@ -34,6 +34,19 @@ body {
         text-shadow: 0 0 25px currentColor, 0 0 45px currentColor;
         transform: scale(1.02);
     }
+}
+
+
+/* 📱 Main Page Container */
+.main-container {
+    width: 2160px;
+    height: 2700px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 /* 🚀 Unified Bitcoin Dashboard Component - Page 2 */
@@ -86,22 +99,40 @@ body {
 }
 
 .brand-text {
-    font-size: 20px;
+    font-size: 1.875rem; /* 30px */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
-    letter-spacing: 1.5px;
+    text-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+    letter-spacing: 3px;
 }
 
 .last-update {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+.last-update-label {
+    font-size: 1.5rem; /* 24px */
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+}
+.last-update-date {
+    font-size: 2rem; /* 32px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.last-update-time {
+    font-size: 1.75rem; /* 28px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Inter', sans-serif;
 }
 
 /* 🪙 Main BTC Information Section */
@@ -143,7 +174,7 @@ body {
 }
 
 .btc-symbol {
-    font-size: 28px;
+    font-size: 3.5rem; /* 56px equiv */
     font-weight: 700;
     background: linear-gradient(45deg, #f7931a, #ffffff, #f7931a);
     -webkit-background-clip: text;
@@ -153,7 +184,8 @@ body {
 }
 
 .btc-price {
-    font-size: 36px;
+    font-family: 'Inter', monospace;
+    font-size: 5.25rem; /* 84px equiv */
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 25%, #e0e0e0 50%, #ffffff 75%);
     -webkit-background-clip: text;
@@ -177,7 +209,7 @@ body {
 }
 
 .market-label {
-    font-size: 12px;
+    font-size: 1.875rem; /* 30px equiv */
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
     text-transform: uppercase;
@@ -185,7 +217,8 @@ body {
 }
 
 .market-value {
-    font-size: 18px;
+    font-family: 'Inter', monospace;
+    font-size: 2.75rem; /* 44px equiv */
     color: rgba(255, 255, 255, 0.9);
     font-weight: 700;
 }
@@ -205,7 +238,7 @@ body {
 }
 
 .performance-title, .sentiment-title, .trend-title {
-    font-size: 14px;
+    font-size: 2.125rem; /* 34px equiv */
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
     text-transform: uppercase;
@@ -228,7 +261,8 @@ body {
 }
 
 .perf-value {
-    font-size: 16px;
+    font-family: 'Inter', monospace;
+    font-size: 18px;
     font-weight: 700;
     padding: 6px 12px;
     border-radius: 8px;
@@ -238,7 +272,7 @@ body {
 }
 
 .perf-label {
-    font-size: 11px;
+    font-size: 12px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -258,13 +292,14 @@ body {
 }
 
 .sentiment-count {
-    font-size: 24px;
+    font-family: 'Inter', monospace;
+    font-size: 26px;
     font-weight: 800;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px currentColor;
 }
 
 .sentiment-label {
-    font-size: 10px;
+    font-size: 11px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -275,7 +310,8 @@ body {
 }
 
 .trend-value {
-    font-size: 22px;
+    font-family: 'Inter', monospace;
+    font-size: 24px;
     font-weight: 800;
     background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
     -webkit-background-clip: text;
@@ -293,59 +329,57 @@ body {
 .positive { color: #00ff88; }
 .negative { color: #ff4444; }
 
-/* 🎯 Coin Grid Layout - Template 2 Style (Full Page) */
+/* 🎯 Coin Grid Layout - Template 2 Style (Full 2160x2700 Coverage) */
 .col-container {
-    position: absolute;
-    top: 0px;
-    left: 60px;
-    right: 60px;
-    bottom: 100px;
-
     display: flex;
     flex-direction: row;
-    gap: 40px;
-    padding: 30px;
+    gap: 80px;
+    padding: 0;
     justify-content: center;
     align-items: flex-start;
+    width: 100%;
+    flex: 1;
+    box-sizing: border-box;
 }
 
 .col {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 44px;
     flex: 1;
-    max-width: 300px;
+    max-width: 600px;
+    min-width: 500px;
 }
 
 .col:nth-child(2) {
-    padding-top: 30px;
+    padding-top: 60px;
 }
 
 .col:nth-child(3) {
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 /* 💎 Individual Coin Cards - Template 2 Style */
 .coin-card {
     background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px) saturate(150%);
-    -webkit-backdrop-filter: blur(15px) saturate(150%);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
 
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 4px 16px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 16px 64px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
 
-    padding: 18px;
+    padding: 36px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     transition: all 0.3s ease;
     cursor: pointer;
-    min-width: 290px;
-    max-width: 290px;
+    width: 100%;
+    min-height: 120px;
 }
 
 .coin-card:hover {
@@ -358,19 +392,19 @@ body {
 }
 
 .logo {
-    width: 64px;
-    height: 64px;
+    width: 128px;
+    height: 128px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .logo img {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: contain;
 }
@@ -378,28 +412,28 @@ body {
 .name {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
     align-items: flex-start;
     flex: 1;
-    margin: 0 15px;
+    margin: 0 30px;
 }
 
 .coin-name {
-    font-size: 1.5rem;
+    font-size: 3.5rem; /* Match template 1 btc-symbol */
     font-weight: 600;
     background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4);
-    letter-spacing: 1px;
+    text-shadow: 0 2px 6px rgba(255, 255, 255, 0.4);
+    letter-spacing: 2px;
 }
 
 .pct-change {
-    font-size: 1.1rem;
+    font-size: 2.4rem;
     font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 6px;
+    padding: 4px 16px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -415,21 +449,23 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 5px;
+    gap: 10px;
 }
 
 .coin-price {
-    font-size: 1.4rem;
+    font-family: 'Inter', monospace;
+    font-size: 3.1rem;
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 2px 6px rgba(255, 255, 255, 0.5);
 }
 
 .m-cap {
-    font-size: 1.1rem;
+    font-family: 'Inter', monospace;
+    font-size: 2.4rem;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
@@ -437,10 +473,10 @@ body {
 /* 📝 Footer */
 .footer-text {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 12px;
+    bottom: 40px;
+    right: 40px;
+    font-size: 26px;
     color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }

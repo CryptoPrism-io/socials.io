@@ -14,6 +14,15 @@ html, body {
     position: relative;
 }
 
+/* Font families for different content types */
+.numeric {
+    font-family: 'Inter', sans-serif !important;
+}
+
+.text-content {
+    font-family: 'Poppins', sans-serif !important;
+}
+
 /* 🔥 Darker CSS Background */
 body {
     background:
@@ -28,51 +37,49 @@ body {
 
 /* 📱 Main Page Container */
 .main-container {
-    width: 1080px;
-    height: 1350px;
-    padding: 30px;
+    width: 2160px;
+    height: 2700px;
+    padding: 60px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 80px;
     overflow: hidden;
     box-sizing: border-box;
-    transform: scale(2);
-    transform-origin: top left;
 }
 
 /* 🚀 Bitcoin Dashboard Card */
 .btc-dashboard-card {
     background: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(14px) saturate(180%);
-    -webkit-backdrop-filter: blur(14px) saturate(180%);
-    border-radius: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 56px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.4),
-        0 6px 20px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        0 24px 80px rgba(0, 0, 0, 0.4),
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15);
 
-    padding: 35px 40px;
+    padding: 70px 80px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 60px;
     flex-shrink: 0;
 }
 
 /* 📊 Market Data Cards */
 .market-card {
     background: rgba(0, 0, 0, 0.12);
-    backdrop-filter: blur(15px) saturate(150%);
-    -webkit-backdrop-filter: blur(15px) saturate(150%);
-    border-radius: 24px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 48px;
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
 
     box-shadow:
-        0 0 20px rgba(255, 255, 255, 0.3),
-        0 0 40px rgba(255, 255, 255, 0.15),
-        0 8px 32px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        0 0 12px rgba(255, 255, 255, 0.09),
+        0 0 24px rgba(255, 255, 255, 0.045),
+        0 16px 64px rgba(0, 0, 0, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2);
 
     padding: 0;
     flex-shrink: 0;
@@ -86,7 +93,7 @@ body {
 }
 
 .dominance-card {
-    padding: 30px 40px;
+    padding: 60px 80px;
 }
 
 /* 📊 Market Dominance Tree Map */
@@ -97,17 +104,6 @@ body {
     width: 100%;
 }
 
-.treemap-container {
-    display: flex;
-    width: 100%;
-    height: 150px;
-    border-radius: 15px;
-    overflow: hidden;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-        0 0 30px rgba(0, 0, 0, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
-}
 
 .treemap-cell {
     position: relative;
@@ -115,7 +111,8 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    border-right: 2px solid rgba(255, 255, 255, 0.2);
+    border-right: 0.5px solid rgba(255, 255, 255, 0.05);
+    z-index: 2;
 }
 
 .treemap-cell:last-child {
@@ -129,61 +126,159 @@ body {
 
 .btc-cell {
     background: linear-gradient(135deg,
-        #b8864d 0%,
-        #a67a44 50%,
-        #956e3b 100%);
+        #F7931A 0%,
+        #E8841A 50%,
+        #D9751A 100%);
     box-shadow:
-        0 0 20px rgba(248, 147, 26, 0.4),
+        0 0 25px rgba(247, 147, 26, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+/* Dark overlay covering the entire treemap container */
+.treemap-container {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.3),
         inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+/* Dark glassmorphism overlay covering entire treemap */
+.treemap-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .eth-cell {
     background: linear-gradient(135deg,
-        #7a8bac 0%,
-        #6f82a5 50%,
-        #64799e 100%);
+        #627EEA 0%,
+        #5A72E1 50%,
+        #5266D8 100%);
     box-shadow:
-        0 0 20px rgba(98, 126, 234, 0.4),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        0 0 25px rgba(98, 126, 234, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
 }
 
 .others-cell {
     background: linear-gradient(135deg,
-        #a085b8 0%,
-        #967cb1 50%,
-        #8c73aa 100%);
+        #8E9AAF 0%,
+        #7F8CA6 50%,
+        #707E9D 100%);
     box-shadow:
-        0 0 20px rgba(139, 92, 246, 0.4),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        0 0 25px rgba(142, 154, 175, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
 }
 
 .cell-content {
     text-align: center;
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    padding: 10px;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 0;
+    border: none;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Cell header with logo and label */
+.cell-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+/* Cryptocurrency logos */
+.cell-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Others icon styling */
+.others-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Percentage change styling */
+.cell-change {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Color coding for percentage changes */
+.cell-change.positive {
+    color: #00FF88;
+}
+
+.cell-change.negative {
+    color: #FF4757;
 }
 
 .cell-label {
-    font-size: 18px;
+    font-size: 36px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 5px;
-    letter-spacing: 1px;
-    font-family: 'Orbitron', monospace;
+    letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
 }
 
 .cell-percentage {
-    font-size: 24px;
+    font-size: 48px;
     font-weight: 800;
     color: rgba(255, 255, 255, 1);
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    font-family: 'Inter', sans-serif;
 }
 
 /* 📊 Enhanced Indicators Section - Horizontal Layout */
 .indicators-section {
     display: flex;
-    gap: 30px;
+    gap: 90px;
     width: 100%;
     flex-shrink: 0;
     justify-content: center;
@@ -196,12 +291,12 @@ body {
     flex-direction: column;
     align-items: center;
     background: rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
-    padding: 25px 20px;
-    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 40px;
+    padding: 50px 40px;
+    border: 0.5px solid rgba(255, 255, 255, 0.06);
     box-shadow:
-        0 0 15px rgba(255, 255, 255, 0.2),
-        0 0 30px rgba(255, 255, 255, 0.1);
+        0 0 4.5px rgba(255, 255, 255, 0.06),
+        0 0 9px rgba(255, 255, 255, 0.03);
 }
 
 .speedometer-circle.enhanced {
@@ -219,8 +314,8 @@ body {
 }
 
 .bullet-background.enhanced {
-    width: 180px;
-    height: 26px;
+    width: 360px;
+    height: 52px;
 }
 
 /* 📋 Compact Global Overview */
@@ -247,15 +342,16 @@ body {
 }
 
 .overview-label {
-    font-size: 22px;
+    font-size: 44px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
 
 .overview-value {
-    font-size: 20px;
+    font-size: 40px;
     color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
+    font-family: 'Inter', sans-serif;
 }
 
 /* 📋 Header Section with Branding and Last Update */
@@ -283,7 +379,7 @@ body {
 }
 
 .brand-text {
-    font-size: 15px;
+    font-size: 1.875rem; /* 30px */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
@@ -294,42 +390,60 @@ body {
 }
 
 .last-update {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
 }
+.last-update-label {
+    font-size: 1.5rem; /* 24px */
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.last-update-date {
+    font-size: 2rem; /* 32px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+}
+.last-update-time {
+    font-size: 1.75rem; /* 28px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Inter', sans-serif;
+}
+/* Bottom datetime styles no longer needed at bottom card */
 
 /* 🪙 Main BTC Information Section */
 .btc-main-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 40px;
+    gap: 80px;
 }
 
 .btc-identity {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
     flex: 1;
 }
 
 .btc-logo-container {
-    width: 70px;
-    height: 70px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
 .btc-logo-img {
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
 }
 
@@ -340,24 +454,25 @@ body {
 }
 
 .btc-symbol {
-    font-size: 28px;
+    font-size: 3.5rem; /* 56px */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .btc-price {
-    font-size: 42px;
+    font-size: 5.25rem; /* 84px */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     background-clip: text;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
 }
 
 .market-data-grid {
     display: flex;
-    gap: 30px;
+    gap: 60px;
     flex: 1;
     justify-content: center;
 }
@@ -370,18 +485,19 @@ body {
 }
 
 .market-label {
-    font-size: 15px;
+    font-size: 1.875rem; /* 30px */
     color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
 .market-value {
-    font-size: 22px;
+    font-size: 2.75rem; /* 44px */
     color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
 }
 
 /* 📊 Performance and Sentiment Section */
@@ -389,9 +505,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 40px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 80px;
+    padding-top: 40px;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.03);
 }
 
 /* 📊 Market Data Section - Side by Side Layout */
@@ -404,7 +520,7 @@ body {
     backdrop-filter: blur(15px) saturate(150%);
     -webkit-backdrop-filter: blur(15px) saturate(150%);
     border-radius: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
     box-shadow:
         0 0 20px rgba(255, 255, 255, 0.3),
         0 0 40px rgba(255, 255, 255, 0.15),
@@ -424,12 +540,12 @@ body {
 }
 
 .performance-title, .sentiment-title, .trend-title, .fear-greed-title, .altseason-title {
-    font-size: 17px;
+    font-size: 2.125rem; /* 34px */
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
     text-align: center;
 }
 
@@ -447,17 +563,18 @@ body {
 }
 
 .perf-value {
-    font-size: 20px;
+    font-size: 2.5rem; /* 40px */
     font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 8px;
+    padding: 12px 24px;
+    border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);
-    min-width: 65px;
+    min-width: 130px;
     text-align: center;
+    font-family: 'Inter', sans-serif;
 }
 
 .perf-label {
-    font-size: 22px;
+    font-size: 44px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -477,13 +594,14 @@ body {
 }
 
 .sentiment-count {
-    font-size: 20px;
+    font-size: 56px;
     font-weight: 800;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px currentColor;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 8px currentColor;
+    font-family: 'Inter', sans-serif;
 }
 
 .sentiment-label {
-    font-size: 12px;
+    font-size: 28px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -494,10 +612,10 @@ body {
 }
 
 .trend-value {
-    font-size: 17px;
+    font-size: 56px;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
@@ -505,7 +623,7 @@ body {
 /* 🌡️ Fear & Greed Speedometer */
 /* 📊 Fear & Greed Rainbow Chart */
 .fear-greed-bullet-chart {
-    margin: 15px 0;
+    margin: 30px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -513,8 +631,8 @@ body {
 
 .fear-greed-background {
     position: relative;
-    width: 156px;
-    height: 23px;
+    width: 312px;
+    height: 46px;
     background: linear-gradient(to right,
         #dc2626 0%,      /* Zone 1: Extreme Fear (0-20) - Red */
         #dc2626 20%,
@@ -528,7 +646,7 @@ body {
         #16a34a 100%
     );
     border-radius: 12px;
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.3),
         inset 0 2px 4px rgba(255, 255, 255, 0.1),
@@ -537,8 +655,8 @@ body {
 }
 
 .fear-greed-background.enhanced {
-    width: 180px;
-    height: 26px;
+    width: 360px;
+    height: 52px;
 }
 
 .fear-greed-background::before {
@@ -616,7 +734,7 @@ body {
 .fear-greed-labels {
     display: flex;
     justify-content: space-between;
-    width: 156px;
+    width: 312px;
     margin-top: 8px;
     font-size: 22px;
     color: rgba(255, 255, 255, 0.6);
@@ -644,25 +762,38 @@ body {
 }
 
 .fear-greed-value {
-    font-size: 15px;
+    font-size: 30px;
     font-weight: 800;
     text-align: center;
     color: rgba(255, 255, 255, 0.95);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     margin-top: 8px;
+    font-family: 'Inter', sans-serif;
 }
 
 .fear-greed-label {
-    font-size: 22px;
+    font-size: 44px;
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
     font-weight: 500;
     margin-top: 2px;
 }
 
+/* 📍 Fear & Greed Indicator Line */
+.fear-greed-indicator {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    z-index: 10;
+}
+
 /* 📊 Altseason Bullet Chart */
 .altseason-bullet-chart {
-    margin: 15px 0;
+    margin: 30px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -679,7 +810,7 @@ body {
         rgba(51, 204, 51, 0.25) 100%
     );
     border-radius: 12px;
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.3),
         inset 0 2px 4px rgba(255, 255, 255, 0.1),
@@ -827,19 +958,32 @@ body {
 }
 
 .altseason-value {
-    font-size: 22px;
+    font-size: 44px;
     font-weight: 700;
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     margin-top: 8px;
+    font-family: 'Inter', sans-serif;
 }
 
 .altseason-status {
-    font-size: 15px;
+    font-size: 30px;
     font-weight: 600;
     text-align: center;
     margin-top: 4px;
+}
+
+/* 📍 Altseason Indicator Line */
+.altseason-indicator {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    z-index: 10;
 }
 
 /* Color Classes */
@@ -973,6 +1117,7 @@ body {
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
 }
 
 /* 💰 Market Data Styling */
@@ -987,6 +1132,7 @@ body {
     min-width: 60px;
     text-align: center;
     transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
 }
 
 .pct-change.positive {
@@ -1009,12 +1155,12 @@ body {
 }
 
 .dominance-title {
-    font-size: 22px;
+    font-size: 44px;
     font-weight: 700;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
 }
 
 .dominance-grid {
@@ -1087,6 +1233,7 @@ body {
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
 }
 
 /* 🎯 Market Segments Section Styling */
@@ -1144,12 +1291,153 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* 📰 Bitcoin News & Events Section */
+.bitcoin-news-section {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.news-card {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.news-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #F7931A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(247, 147, 26, 0.3);
+}
+
+.news-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.news-bullet {
+    color: #F7931A;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 2px;
+    min-width: 16px;
+}
+
+.news-text {
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+/* Different bullet color for next 24h events */
+.news-card:nth-child(2) .news-bullet {
+    color: #FFC107;
+}
+
+/* 👆 Swipe Left Indicator */
+.swipe-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding: 15px 25px;
+    background: rgba(247, 147, 26, 0.1);
+    border-radius: 50px;
+    border: 1px solid rgba(247, 147, 26, 0.2);
+    backdrop-filter: blur(10px);
+    animation: swipePulse 2s ease-in-out infinite;
+}
+
+.swipe-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #F7931A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.swipe-arrow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.arrow-line {
+    width: 20px;
+    height: 2px;
+    background: #F7931A;
+    border-radius: 1px;
+    animation: arrowSlide 2s ease-in-out infinite;
+}
+
+.arrow-tip {
+    font-size: 24px;
+    font-weight: 700;
+    color: #F7931A;
+    line-height: 1;
+    animation: arrowBounce 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes swipePulse {
+    0%, 100% {
+        background: rgba(247, 147, 26, 0.1);
+        border-color: rgba(247, 147, 26, 0.2);
+    }
+    50% {
+        background: rgba(247, 147, 26, 0.15);
+        border-color: rgba(247, 147, 26, 0.3);
+    }
+}
+
+@keyframes arrowSlide {
+    0%, 100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(8px);
+        opacity: 0.7;
+    }
+}
+
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+
 /* 📝 Footer */
 .footer-container {
     text-align: center;
-    font-size: 15px;
+    font-size: 30px;
     color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
-    letter-spacing: 1px;
-    margin-top: 10px;
+    letter-spacing: 2px;
+    margin-top: 20px;
 }
