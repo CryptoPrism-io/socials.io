@@ -1,0 +1,152 @@
+/* Self-hosted fonts for socials.io - Eliminates external dependencies */
+
+/* Poppins Font Family */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('./poppins-300.woff2') format('woff2'),
+       url('./poppins-300.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./poppins-400.woff2') format('woff2'),
+       url('./poppins-400.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./poppins-500.woff2') format('woff2'),
+       url('./poppins-500.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./poppins-600.woff2') format('woff2'),
+       url('./poppins-600.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./poppins-700.woff2') format('woff2'),
+       url('./poppins-700.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('./poppins-800.woff2') format('woff2'),
+       url('./poppins-800.woff') format('woff');
+}
+
+/* Inter Font Family */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('./inter-300.woff2') format('woff2'),
+       url('./inter-300.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./inter-400.woff2') format('woff2'),
+       url('./inter-400.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./inter-500.woff2') format('woff2'),
+       url('./inter-500.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./inter-600.woff2') format('woff2'),
+       url('./inter-600.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./inter-700.woff2') format('woff2'),
+       url('./inter-700.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('./inter-800.woff2') format('woff2'),
+       url('./inter-800.woff') format('woff');
+}
+
+/* Orbitron Font Family */
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./orbitron-400.woff2') format('woff2'),
+       url('./orbitron-400.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./orbitron-500.woff2') format('woff2'),
+       url('./orbitron-500.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./orbitron-700.woff2') format('woff2'),
+       url('./orbitron-700.woff') format('woff');
+}
+
+/* Fallback fonts for better compatibility */
+.poppins-fallback {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.inter-fallback {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.orbitron-fallback {
+  font-family: 'Orbitron', 'Courier New', Courier, monospace;
+}

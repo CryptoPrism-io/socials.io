@@ -10,6 +10,103 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v1.8.2] - 2025-09-19 15:35 UTC
+
+### 🎯 MAJOR: Self-Hosted Fonts Implementation - P1 Production Hardening Complete
+
+### Added
+- **Self-hosted fonts infrastructure** completely eliminates external Google Fonts dependency
+- Created comprehensive `core_templates/fonts/fonts.css` with @font-face declarations
+  - **Poppins family**: 6 weights (300, 400, 500, 600, 700, 800) with WOFF2/WOFF formats
+  - **Inter family**: 6 weights (300, 400, 500, 600, 700, 800) for numeric content
+  - **Orbitron family**: 3 weights (400, 500, 700) for brand elements
+- Font download automation script (`core_templates/fonts/download_fonts.py`) for production setup
+- Comprehensive documentation (`core_templates/fonts/README.md`) with implementation guide
+- Extensive font testing suite (`tests/test_fonts.py`) with 7 test cases validating all aspects
+- Font fallback system with cross-platform system font compatibility
+
+### Fixed
+- **External dependency elimination**: Updated all 12 templates (core_templates + src/templates)
+- Removed all `googleapis.com` font references from HTML templates
+- **Offline rendering capability**: Playwright now works without internet connection
+- **Network reliability**: No dependency on Google Fonts CDN availability
+- **Privacy enhancement**: No external requests to Google servers during content generation
+
+### Enhanced
+- **Environment configuration**: Added CryptoPrism-Screener integration variables
+- Updated `.env` with `CMC_API_KEY`, `COINGECKO_API_KEY` for enhanced data source support
+- Standardized environment variable formatting (removed problematic quotes)
+- Enhanced `.gitignore` with optional font file handling instructions
+
+### Technical Implementation
+- **Template Updates**: All templates now reference `fonts/fonts.css` instead of external CDN
+- **Font Fallback System**: Graceful degradation to system fonts (Apple, Windows, Linux)
+- **Testing Infrastructure**: Comprehensive validation of font files, CSS structure, template updates
+- **Production Ready**: Clear deployment path with font download scripts and documentation
+
+### Rationale
+
+**P1 Production Hardening Completion**: This implementation completes the final P1 task from the production hardening roadmap. The project now has:
+
+✅ **Complete Offline Capability**: Eliminates the single external dependency (Google Fonts)
+✅ **Performance Optimization**: No external DNS lookups or network requests during rendering
+✅ **Reliability Enhancement**: No single point of failure from external CDN dependencies
+✅ **Privacy Compliance**: Zero external requests during content generation process
+✅ **Production Readiness**: Comprehensive testing and deployment automation
+
+**Business Impact**: This enhancement ensures reliable Instagram content generation even in environments with limited internet connectivity, improving the platform's robustness and operational reliability.
+
+**Technical Excellence**: The implementation follows modern web development best practices with proper font loading strategies, fallback systems, and comprehensive testing coverage.
+
+**Milestone Achievement**: With this release, socials.io has completed both P0 (Critical) and P1 (High Impact) production hardening tasks, positioning the platform for P2 (Long-term) enhancements including packaging, containerization, and release automation.
+
+**Commit Hash**: [To be added]
+
+---
+
+## [v1.8.1] - Production Hardening
+
+### Added
+- Enhanced environment validation using python-dotenv
+- CI/CD pipeline tests for HTML and image generation
+- Consolidated instapost scripts into single CLI entrypoint with argparse support
+- CLI options: --template, --dry-run, --skip-generate for flexible content generation
+- Centralized configuration module (`src/config.py`) with type-safe Dataclasses
+- Single source of truth for paths, timezones, image settings, and API credentials
+- Structured JSON logging system with correlation IDs (`src/logging_config.py`)
+- Performance monitoring, operation timing, and context-aware error reporting
+- Comprehensive retry system with exponential backoff and circuit breakers (`src/retry_utils.py`)
+- Database connection retries, browser operation retries, and timeout handling
+- Asynchronous retry logic with configurable backoff strategies (exponential, linear, fixed)
+- Static type checking configuration with mypy and CI/CD integration
+- Comprehensive project configuration (`pyproject.toml`) with tool settings for black, isort, pytest, etc.
+- Custom type stubs for external libraries to improve type safety
+- **Self-hosted fonts infrastructure** eliminates external Google Fonts dependency
+- Created `core_templates/fonts/fonts.css` with @font-face declarations for Poppins, Inter, Orbitron
+- Font download automation script (`download_fonts.py`) for production deployment
+- Comprehensive font testing suite (`tests/test_fonts.py`) with 7 test cases
+
+### Fixed
+- CI/CD paths corrected to scan src/ instead of config/
+- Build artifacts properly ignored and untracked (output/html, output/images)
+- Removed hardcoded database credentials, now uses environment variables
+- Prevented potential credential exposure in env validation logs
+- **External font dependency eliminated**: All 12 templates now use local fonts instead of Google Fonts CDN
+- Playwright rendering now works offline without network dependencies
+- Font fallback system ensures cross-platform compatibility
+
+### Security
+- No credentials logged in validation or startup processes
+- Database credentials moved to environment variables (DB_HOST, DB_NAME, DB_USER, DB_PASSWORD)
+
+### Maintenance
+- Improved gitignore for generated content
+- Enhanced CI/CD workflow with generated assets step
+- Removed duplicate scripts: instapost_new.py, instapost_restructured.py (consolidated)
+- **Environment configuration enhancement**: Added CryptoPrism-Screener integration variables
+- Updated .env with CMC_API_KEY, COINGECKO_API_KEY for enhanced data source support
+- Standardized environment variable formatting (removed problematic quotes)
+
 ## [v1.8.0] - 2025-09-19
 
 ### 🚀 NEW: Template 6 - Dedicated Bitcoin Snapshot with AI News

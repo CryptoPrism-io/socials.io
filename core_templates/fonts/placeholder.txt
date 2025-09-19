@@ -1,0 +1,26 @@
+# Font File Placeholders
+
+This directory should contain the following font files for production use:
+
+## Poppins Font Files
+- poppins-300.woff2, poppins-300.woff
+- poppins-400.woff2, poppins-400.woff
+- poppins-500.woff2, poppins-500.woff
+- poppins-600.woff2, poppins-600.woff
+- poppins-700.woff2, poppins-700.woff
+- poppins-800.woff2, poppins-800.woff
+
+## Inter Font Files
+- inter-300.woff2, inter-300.woff
+- inter-400.woff2, inter-400.woff
+- inter-500.woff2, inter-500.woff
+- inter-600.woff2, inter-600.woff
+- inter-700.woff2, inter-700.woff
+- inter-800.woff2, inter-800.woff
+
+## Orbitron Font Files
+- orbitron-400.woff2, orbitron-400.woff
+- orbitron-500.woff2, orbitron-500.woff
+- orbitron-700.woff2, orbitron-700.woff
+
+To download actual font files, use download_fonts.py or a tool like Google Fonts Helper (https://gwfh.mranftl.com/fonts).

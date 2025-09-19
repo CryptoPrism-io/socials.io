@@ -1,1006 +1,370 @@
+#!/usr/bin/env python3
+"""
+Consolidated Instagram content generation script.
+Replaces multiple instapost scripts with unified CLI interface.
+"""
 import asyncio
-from playwright.async_api import async_playwright
-import pandas as pd
-from sqlalchemy import create_engine
+import argparse
 import os
+import sys
+import uuid
+from pathlib import Path
+from typing import Dict, List, Optional
+
+# Async imports
+from playwright.async_api import async_playwright
 from jinja2 import Environment, FileSystemLoader
-from instagrapi import Client
+from sqlalchemy import create_engine
+import pandas as pd
 from datetime import datetime
 
-#commitcheck
+# Import centralized configuration, logging, and retry utilities
+from config import config
+from logging_config import logger, CorrelationContext, log_operation_start, log_operation_end, log_error
+from retry_utils import database_retry_manager, playwright_retry_manager
 
-# Database connection configuration
-DB_CONFIG = {
-    'host': '34.55.195.199',        # GCP PostgreSQL instance public IP
-    'database': 'dbcp',             # Database name
-    'user': 'yogass09',             # Username
-    'password': 'jaimaakamakhya',   # Password
-    'port': 5432                    # PostgreSQL default port
-}
+# Legacy compatibility functions for backward compatibility
+async def get_gcp_engine():
+    """Create and return a SQLAlchemy engine using centralized config with retry logic."""
+    from retry_utils import retry_async
 
-def get_gcp_engine():
-    """Create and return a SQLAlchemy engine for the GCP PostgreSQL database."""
-    connection_url = f"postgresql+psycopg2://{DB_CONFIG['user']}:{DB_CONFIG['password']}@" \
-                     f"{DB_CONFIG['host']}:{DB_CONFIG['port']}/{DB_CONFIG['database']}"
-    return create_engine(connection_url)
-
-# Initialize the GCP engine
-gcp_engine = get_gcp_engine()
-
-async def generate_image_from_html(output_html_file, output_image_path):
-    """Launch Playwright, load the HTML file, and save a screenshot of it."""
-    async with async_playwright() as p:
-        # Launch a browser
-        browser = await p.chromium.launch(headless=True)
-        page = await browser.new_page()
-
-        await page.set_viewport_size({"width": 2160, "height": 2700})
-
-        # Set device scale factor for even better quality
-        await page.emulate_media(media='screen')
-        await page.evaluate("() => { document.body.style.zoom = '1'; }")
-
-        # Load the rendered HTML file
-        await page.goto('file://' + os.path.abspath(output_html_file))
-
-        # Capture the screenshot of the page with high quality settings
-        await page.screenshot(
-            path=output_image_path,
-            type='jpeg',
-            quality=95,
-            full_page=True
+    def _create_engine():
+        """Internal synchronous engine creation."""
+        return create_engine(
+            config.database.get_connection_url(),
+            pool_pre_ping=True,  # Test connections before use
+            pool_recycle=3600,   # Recycle connections after 1 hour
         )
 
-        print(f"Screenshot saved as {output_image_path}.")
-
-        # Close the browser
-        await browser.close()
-
-
-
-# Data for page 1 (top 24 coins including Bitcoin)
-def fetch_data_as_dataframe():
-    """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
-    query_top_24 = """
-      SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
-      FROM crypto_listings_latest_1000
-      WHERE cmc_rank BETWEEN 1 AND 24
-      """
-
     try:
-        # Use gcp_engine to execute the query and fetch data as a DataFrame
-        top_25_cc  = pd.read_sql_query(query_top_24, gcp_engine)
-        # Convert market_cap to billions and round to 2 decimal places
-        top_25_cc['market_cap'] = (top_25_cc['market_cap'] / 1_000_000_000).round(2)
-        top_25_cc['price'] = (top_25_cc['price']).round(2)
-        top_25_cc['percent_change24h'] = (top_25_cc['percent_change24h']).round(2)
-
-        # Create a list of slugs from the top_25_crypto DataFrame
-        slugs = top_25_cc['slug'].tolist()
-        # Prepare a string for the IN clause
-        slugs_placeholder = ', '.join(f"'{slug}'" for slug in slugs)
-
-        # Construct the SQL query
-        query_logos = f"""
-        SELECT logo, slug FROM "FE_CC_INFO_URL"
-        WHERE slug IN ({slugs_placeholder})
-        """
-
-        # Execute the query and fetch the data into a DataFrame
-        logos_and_slugs = pd.read_sql_query(query_logos, gcp_engine)
-
-        # Merge the two DataFrames on the 'slug' column
-        top_25_cc = pd.merge(top_25_cc, logos_and_slugs, on='slug', how='left')
-
-        top_25_cc = top_25_cc.sort_values(by='cmc_rank', ascending=True)
-
-        gcp_engine.dispose()
-
+        # Execute with retry logic for initial connection
+        engine = await retry_async(_create_engine, manager=database_retry_manager)
+        logger.info("Database connection established successfully")
+        return engine
     except Exception as e:
-        print(f"Error fetching data: {e}")
-        top_25_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
-    return top_25_cc
-
-# Data for page 2 (coins 25-48 for continuity)
-def fetch_data_as_dataframe_page2():
-    """Fetch data from the 'coins' table for Page 2 continuation (ranks 25-48)."""
-    query_25_48 = """
-      SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
-      FROM crypto_listings_latest_1000
-      WHERE cmc_rank BETWEEN 25 AND 48
-      """
-
-    try:
-        # Use gcp_engine to execute the query and fetch data as a DataFrame
-        coins_25_48  = pd.read_sql_query(query_25_48, gcp_engine)
-        # Convert market_cap to billions and round to 2 decimal places
-        coins_25_48['market_cap'] = (coins_25_48['market_cap'] / 1_000_000_000).round(2)
-        coins_25_48['price'] = (coins_25_48['price']).round(2)
-        coins_25_48['percent_change24h'] = (coins_25_48['percent_change24h']).round(2)
-
-        # Create a list of slugs from the DataFrame
-        slugs = coins_25_48['slug'].tolist()
-        # Prepare a string for the IN clause
-        slugs_placeholder = ', '.join(f"'{slug}'" for slug in slugs)
-
-        # Construct the SQL query
-        query_logos = f"""
-        SELECT logo, slug FROM "FE_CC_INFO_URL"
-        WHERE slug IN ({slugs_placeholder})
-        """
-
-        # Execute the query and fetch the data into a DataFrame
-        logos_and_slugs = pd.read_sql_query(query_logos, gcp_engine)
-
-        # Merge the two DataFrames on the 'slug' column
-        coins_25_48 = pd.merge(coins_25_48, logos_and_slugs, on='slug', how='left')
-
-        coins_25_48 = coins_25_48.sort_values(by='cmc_rank', ascending=True)
-
-        gcp_engine.dispose()
-
-    except Exception as e:
-        print(f"Error fetching data: {e}")
-        coins_25_48 = pd.DataFrame()  # Return an empty DataFrame in case of error
-    return coins_25_48
-
-def format_large_number(value, include_dollar=True):
-    """
-    Smart number formatting function that auto-detects magnitude and applies correct units.
-    Fixes the unit conversion issues for proper B/T display.
-    """
-    if pd.isnull(value):
-        return value
-
-    value = float(value)
-    prefix = "$" if include_dollar else ""
-
-    if value >= 1e12:
-        # Trillions
-        return f"{prefix}{value / 1e12:.2f} T"
-    elif value >= 1e9:
-        # Billions
-        return f"{prefix}{value / 1e9:.2f} B"
-    elif value >= 1e6:
-        # Millions
-        return f"{prefix}{value / 1e6:.2f} M"
-    elif value >= 1e3:
-        # Thousands
-        return f"{prefix}{value / 1e3:.2f} K"
-    else:
-        return f"{prefix}{value:.2f}"
-
-def format_for_trillions(value):
-    """Format large numbers specifically for trillion-scale display."""
-    if pd.isnull(value):
-        return value
-    value = float(value)
-    return f"{value / 1e12:.2f}"
-
-def format_for_billions(value):
-    """Format large numbers specifically for billion-scale display."""
-    if pd.isnull(value):
-        return value
-    value = float(value)
-    return f"{value / 1e9:.2f}"
-
-# Data for BTC snapshot
-def btc_snapshot():
-    # @title bitcoing data only
-    query_top_1 = """
-    SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, volume24h, market_cap, percent_change7d, percent_change30d, ytd_price_change_percentage
-    FROM crypto_listings_latest_1000
-    WHERE cmc_rank < 2
-    """
-    top_1_cc  = pd.read_sql_query(query_top_1, gcp_engine)
-
-    def format_market_cap(market_cap):
-        """Formats market cap with units (Million, Billion, Trillion)."""
-        if pd.isnull(market_cap):
-            return market_cap
-        market_cap = float(market_cap)
-        if market_cap >= 1e12:
-            return f"${market_cap / 1e12:.2f} T"
-        elif market_cap >= 1e9:
-            return f"${market_cap / 1e9:.2f} B"
-        elif market_cap >= 1e6:
-            return f"${market_cap / 1e6:.2f} M"
-        else:
-            return f"${market_cap:.2f}"
-
-    # Apply the formatting function to the 'market_cap' column
-    top_1_cc['market_cap'] = top_1_cc['market_cap'].apply(format_market_cap)
-    # Apply the formatting function to the 'market_cap' column
-    top_1_cc['volume24h'] = top_1_cc['volume24h'].apply(format_market_cap)
-
-    """Color Code for PCT_Change"""
-
-    # Format the 'tg_percent_change24h' column with 2 decimal places and add '%'
-    top_1_cc['percent_change24h'] = top_1_cc['percent_change24h'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
-    top_1_cc['percent_change7d'] = top_1_cc['percent_change7d'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
-    top_1_cc['percent_change30d'] = top_1_cc['percent_change30d'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
-    top_1_cc['ytd_price_change_percentage'] = top_1_cc['ytd_price_change_percentage'].apply(lambda x: f"{x:.2f}" if not pd.isnull(x) else x)
-
-    # Format the 'price' column with '$' and 2 decimal places
-    top_1_cc['price'] = top_1_cc['price'].apply(lambda x: f"${x:.2f}" if not pd.isnull(x) else x)
-
-    # top_1_cc.head()
-
-    # @title fetching dmv values for bitcoin
-    # Construct the SQL query
-    query = f"""
-    SELECT *
-    FROM "FE_DMV_ALL"
-    WHERE slug = 'bitcoin'
-    """
-    # Execute the query and fetch the data into a DataFrame
-    dmv_bitcoin = pd.read_sql_query(query, gcp_engine)
-
-    # @title count of bullish bearing and neautal for btc
-    # prompt: at dmv_bitcoin can you help me count the number '1' '-1' and '0' in the first row and create a add three more colums bullish- Number of '1' in the first row bearishNumber of '-1' in the first row and Number of '0' in the first row is neutral
-    dmv_bitcoin_first_row = dmv_bitcoin.iloc[0].tolist()
-
-    # Enhanced debugging and validation
-    print(f"🔍 DMV DATA INSPECTION:")
-    print(f"Total columns in DMV data: {len(dmv_bitcoin_first_row)}")
-    print(f"Sample values: {dmv_bitcoin_first_row[:10]}...")
-    print(f"Unique values in data: {set(dmv_bitcoin_first_row)}")
-
-    bullish_count = dmv_bitcoin_first_row.count(1)
-    bearish_count = dmv_bitcoin_first_row.count(-1)
-    neutral_count = dmv_bitcoin_first_row.count(0)
-
-    # Additional validation - count other values that aren't 1, -1, or 0
-    other_values = [val for val in dmv_bitcoin_first_row if val not in [1, -1, 0]]
-    other_count = len(other_values)
-
-    # Print detailed counts with validation
-    print(f"📊 SENTIMENT COUNTS:")
-    print(f"Bullish (1): {bullish_count}")
-    print(f"Bearish (-1): {bearish_count}")
-    print(f"Neutral (0): {neutral_count}")
-    print(f"Other values: {other_count} -> {set(other_values) if other_values else 'None'}")
-    print(f"Total counted: {bullish_count + bearish_count + neutral_count + other_count}")
-
-    # Data quality validation
-    if neutral_count > 20:
-        print(f"⚠️  WARNING: High neutral count ({neutral_count}) detected - may indicate data quality issue")
-    if other_count > 0:
-        print(f"⚠️  WARNING: Found {other_count} values that are not 1, -1, or 0")
-
-    # Adding the counts to the top_1_cc DataFrame
-    top_1_cc['bullish'] = bullish_count
-    top_1_cc['bearish'] = bearish_count
-    top_1_cc['neutral'] = neutral_count
-
-    # prompt: i want to add a new coloum as Trend and classify it as bearish bullish or consolidating what logic can i use --- # Adding the counts to the top_1_cc DataFrame
-    # top_1_cc['bullish'] = bullish_count
-    # top_1_cc['bearish'] = bearish_count
-    # top_1_cc['neutral'] = neutral_count for these
-
-    # Calculate the difference between bullish and bearish counts
-    top_1_cc['sentiment_diff'] = top_1_cc['bullish'] - top_1_cc['bearish']
-
-
-    # Define a function to classify the trend
-    def classify_trend(sentiment_diff):
-        if sentiment_diff > 4:  # Adjust threshold as needed
-            return "Bullish"
-        elif sentiment_diff < -4: # Adjust threshold as needed
-            return "Bearish"
-        else:
-            return "Consolidating"
-
-    # Apply the function to create the 'Trend' column
-    top_1_cc['Trend'] = top_1_cc['sentiment_diff'].apply(classify_trend)
-
-    # Add Fear & Greed Index (mock data - replace with real API call)
-    # In production, you would fetch from Fear & Greed Index API
-    import random
-    fear_greed_value = random.randint(20, 80)  # Mock value between 20-80
-
-    def get_fear_greed_label(value):
-        if value <= 25:
-            return "Extreme Fear"
-        elif value <= 45:
-            return "Fear"
-        elif value <= 55:
-            return "Neutral"
-        elif value <= 75:
-            return "Greed"
-        else:
-            return "Extreme Greed"
-
-    top_1_cc['fear_greed_index'] = fear_greed_value
-    top_1_cc['fear_greed_label'] = get_fear_greed_label(fear_greed_value)
-
-    # Add Altseason Gauge (mock data - replace with real calculation)
-    # In production, calculate based on altcoin performance vs BTC
-    altseason_value = random.randint(40, 120)  # Mock value between 40-120
-    altseason_status = "Yes" if altseason_value > 100 else "No"
-
-    top_1_cc['altseason_gauge'] = altseason_value
-    top_1_cc['altseason_status'] = altseason_status
-
-    # Construct the SQL query
-    query = f"""
-    SELECT logo, slug FROM "FE_CC_INFO_URL"
-    """
-
-    # Execute the query and fetch the data into a DataFrame
-    logos_and_slugs = pd.read_sql_query(query, gcp_engine)
-
-    # Merge the two DataFrames on the 'slug' column
-    top_1_cc = pd.merge(top_1_cc, logos_and_slugs, on='slug', how='left')
-
-    return top_1_cc
-  
-  
-
-# fetch for page 3
-def fetch_for_3():
-    """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
-    query_top_100 = """
-      SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
-      FROM crypto_listings_latest_1000
-      WHERE cmc_rank <= 100
-      """
-    
-    try:
-        # Use gcp_engine to execute the query and fetch data as a DataFrame
-        top_100_cc  = pd.read_sql_query(query_top_100, gcp_engine)
-        # Convert market_cap to billions and round to 2 decimal places
-        top_100_cc['market_cap'] = (top_100_cc['market_cap'] / 1_000_000_000).round(2)
-        top_100_cc['price'] = (top_100_cc['price']).round(2)
-        top_100_cc['percent_change24h'] = (top_100_cc['percent_change24h']).round(2)
-
-        # Create a list of slugs from the top_100_crypto DataFrame
-        slugs = top_100_cc['slug'].tolist()
-        # Prepare a string for the IN clause
-        slugs_placeholder = ', '.join(f"'{slug}'" for slug in slugs)
-
-        # Construct the SQL query
-        query_logos = f"""
-        SELECT logo, slug FROM "FE_CC_INFO_URL"
-        WHERE slug IN ({slugs_placeholder})
-        """
-        query_dmv = f"""
-        SELECT *
-        FROM "FE_DMV_SCORES"
-        """
-        
-        # Execute the query and fetch data for dmv
-        dmv = pd.read_sql_query(query_dmv, gcp_engine)
-
-        # Execute the query and fetch the data into a DataFrame
-        logos_and_slugs = pd.read_sql_query(query_logos, gcp_engine)
-
-        # Merge the two DataFrames on the 'slug' column
-        top_100_cc = pd.merge(top_100_cc, logos_and_slugs, on='slug', how='left')
-        top_100_cc = pd.merge(top_100_cc, dmv, on='slug', how='left')
-
-        top_100_cc['Durability_Score'] = (top_100_cc['Durability_Score']).round(2)
-        top_100_cc['Momentum_Score'] = (top_100_cc['Momentum_Score']).round(2)
-        top_100_cc['Valuation_Score'] = (top_100_cc['Valuation_Score']).round(2)
-
-        gcp_engine.dispose()
-
-    except Exception as e:
-        print(f"Error fetching data: {e}")
-        top_100_cc = pd.DataFrame()  # Return an empty DataFrame in case of error
-    return top_100_cc
-
-def fetch_for_4_long():
-    """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
-    query_long_short = """
-SELECT
-  "FE_DMV_ALL"."id",
-  "FE_DMV_ALL"."slug",
-  "FE_DMV_ALL"."name",
-  "FE_DMV_ALL"."bullish",
-  "FE_DMV_ALL"."bearish",
-  "crypto_listings_latest_1000"."symbol",
-  "crypto_listings_latest_1000"."percent_change24h",
-  "crypto_listings_latest_1000"."percent_change7d",
-  "crypto_listings_latest_1000"."percent_change30d",
-  "crypto_listings_latest_1000"."cmc_rank",
-  "crypto_listings_latest_1000"."price",
-  "crypto_listings_latest_1000"."market_cap",
-  "FE_CC_INFO_URL"."logo",
-  "FE_RATIOS"."m_rat_alpha",
-  "FE_RATIOS"."d_rat_beta",
-  "FE_RATIOS"."m_rat_omega"
-FROM
-  "FE_DMV_ALL"
-JOIN
-  "crypto_listings_latest_1000"
-ON
-  "FE_DMV_ALL"."slug" = "crypto_listings_latest_1000"."slug"
-JOIN
-  "FE_CC_INFO_URL"
-ON
-  "FE_DMV_ALL"."slug" = "FE_CC_INFO_URL"."slug"
-JOIN
-  "FE_RATIOS"
-ON
-  "FE_DMV_ALL"."slug" = "FE_RATIOS"."slug"
-WHERE
-  "crypto_listings_latest_1000"."cmc_rank" < 100
-  AND "FE_RATIOS"."d_rat_beta" > 1
-  AND "FE_RATIOS"."m_rat_omega" > 1
-ORDER BY
-  "FE_DMV_ALL"."bullish" DESC
-LIMIT
-  15;
-"""
-
-    
-    try:
-        # Use gcp_engine to execute the query and fetch data as a DataFrame
-        long_short  = pd.read_sql_query(query_long_short, gcp_engine)
-        # Convert market_cap to billions and round to 2 decimal places
-        long_short['market_cap'] = (long_short['market_cap'] / 1_000_000_000).round(2)
-        long_short['price'] = (long_short['price']).round(2)
-        long_short['percent_change24h'] = (long_short['percent_change24h']).round(2)
-        long_short['percent_change7d'] = (long_short['percent_change7d']).round(2)
-        long_short['percent_change30d'] = (long_short['percent_change30d']).round(2)
-
-        long_short['m_rat_alpha'] = (long_short['m_rat_alpha']).round(2)
-        long_short['d_rat_beta'] = (long_short['d_rat_beta']).round(2)
-        long_short['m_rat_omega'] = (long_short['m_rat_omega']).round(2)
-        
-        gcp_engine.dispose()
-        
-    except Exception as e:
-        print(f"Error fetching data: {e}")
-        long_short = pd.DataFrame()  # Return an empty DataFrame in case of error
-    return long_short
-
-def fetch_for_4_short():
-    """Fetch data from the 'coins' table and return as a Pandas DataFrame."""
-    query_long_short = """
-SELECT
-  "FE_DMV_ALL"."id",
-  "FE_DMV_ALL"."slug",
-  "FE_DMV_ALL"."name",
-  "FE_DMV_ALL"."bullish",
-  "FE_DMV_ALL"."bearish",
-  "crypto_listings_latest_1000"."symbol",
-  "crypto_listings_latest_1000"."percent_change24h",
-  "crypto_listings_latest_1000"."percent_change7d",
-  "crypto_listings_latest_1000"."percent_change30d",
-  "crypto_listings_latest_1000"."cmc_rank",
-  "crypto_listings_latest_1000"."price",
-  "crypto_listings_latest_1000"."market_cap",
-  "FE_CC_INFO_URL"."logo",
-  "FE_RATIOS"."m_rat_alpha",
-  "FE_RATIOS"."d_rat_beta",
-  "FE_RATIOS"."m_rat_omega"
-FROM
-  "FE_DMV_ALL"
-JOIN
-  "crypto_listings_latest_1000"
-ON
-  "FE_DMV_ALL"."slug" = "crypto_listings_latest_1000"."slug"
-JOIN
-  "FE_CC_INFO_URL"
-ON
-  "FE_DMV_ALL"."slug" = "FE_CC_INFO_URL"."slug"
-JOIN
-  "FE_RATIOS"
-ON
-  "FE_DMV_ALL"."slug" = "FE_RATIOS"."slug"
-WHERE
-  "crypto_listings_latest_1000"."cmc_rank" < 100
-  AND "FE_RATIOS"."d_rat_beta" > 1
-  AND "FE_RATIOS"."m_rat_omega" < 2
-ORDER BY
-  "FE_DMV_ALL"."bearish" DESC
-LIMIT
-  15;
-"""
-
-    
-    try:
-        # Use gcp_engine to execute the query and fetch data as a DataFrame
-        long_short  = pd.read_sql_query(query_long_short, gcp_engine)
-        # Convert market_cap to billions and round to 2 decimal places
-        long_short['market_cap'] = (long_short['market_cap'] / 1_000_000_000).round(2)
-        long_short['price'] = (long_short['price']).round(2)
-        long_short['percent_change24h'] = (long_short['percent_change24h']).round(2)
-        long_short['percent_change7d'] = (long_short['percent_change7d']).round(2)
-        long_short['percent_change30d'] = (long_short['percent_change30d']).round(2)
-
-        long_short['m_rat_alpha'] = (long_short['m_rat_alpha']).round(2)
-        long_short['d_rat_beta'] = (long_short['d_rat_beta']).round(2)
-        long_short['m_rat_omega'] = (long_short['m_rat_omega']).round(2)
-
-        gcp_engine.dispose()
-
-    except Exception as e:
-        print(f"Error fetching data: {e}")
-        long_short = pd.DataFrame()  # Return an empty DataFrame in case of error
-    return long_short
-
-#Fetch for 5
-def fetch_for_5():
-    """Fetches global cryptocurrency data from the PostgreSQL database and returns it as a Pandas DataFrame."""
-
-    query = """
-    SELECT
-        total_market_cap,
-        total_volume24h_reported,
-        altcoin_volume24h_reported,
-        altcoin_market_cap,
-        total_market_cap_yesterday_percentage_change,
-        total_volume24h_yesterday_percentage_change,
-        derivatives_volume24h_reported,
-        derivatives24h_percentage_change,
-        active_crypto_currencies,
-        total_crypto_currencies,
-        active_exchanges,
-        total_exchanges,
-        stablecoin_volume24h_reported,
-        stablecoin_market_cap,
-        stablecoin24h_percentage_change,
-        defi_volume24h_reported,
-        defi_market_cap,
-        defi24h_percentage_change,
-        btc_dominance24h_percentage_change,
-        eth_dominance24h_percentage_change,
-        btc_dominance,
-        eth_dominance
-    FROM
-        crypto_global_latest  
-    """
-
-    try:
-        # Execute the query and fetch the data into a DataFrame using the pre-initialized engine
-        global_data = pd.read_sql_query(query, gcp_engine)
-
-        # Apply smart number formatting with auto-scale detection
-        # Use smart formatting for all large numbers - let function decide appropriate scale
-        global_data['total_market_cap'] = global_data['total_market_cap'].apply(lambda x: format_large_number(x, include_dollar=False))
-        global_data['total_volume24h_reported'] = global_data['total_volume24h_reported'].apply(lambda x: format_large_number(x, include_dollar=False))
-        global_data['derivatives_volume24h_reported'] = global_data['derivatives_volume24h_reported'].apply(lambda x: format_large_number(x, include_dollar=False))
-        global_data['defi_volume24h_reported'] = global_data['defi_volume24h_reported'].apply(lambda x: format_large_number(x, include_dollar=False))
-
-        # Keep other values in billions for consistency
-        for col in ['altcoin_volume24h_reported', 'altcoin_market_cap', 'stablecoin_volume24h_reported', 'stablecoin_market_cap', 'defi_market_cap']:
-            global_data[col] = (global_data[col] / 1_000_000_000).round(2)
-
-        # Round percentage change columns to 2 decimal places
-        for col in ['total_market_cap_yesterday_percentage_change', 'total_volume24h_yesterday_percentage_change', 'derivatives24h_percentage_change', 'stablecoin24h_percentage_change', 'defi24h_percentage_change', 'btc_dominance24h_percentage_change', 'eth_dominance24h_percentage_change', 'btc_dominance', 'eth_dominance']:
-            global_data[col] = global_data[col].round(2)
-
-        # No need to dispose of the engine here, as it's initialized globally
-        return global_data
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None  # Or raise the exception, depending on your error handling strategy
-
-# PAGE 1
-
-import asyncio
-from playwright.async_api import async_playwright
-import pandas as pd
-from jinja2 import Environment, FileSystemLoader
-import os
-from together import Together
-
-async def render_page_1():
-    """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-    # Fetch the top 24 coins data for page 1
-    df = fetch_data_as_dataframe()
-
-    if df.empty:
-        print("No data to render.")
-        return
-
-    # Split into 3 columns of 8 coins each
-    df1_part1 = df.iloc[0:8]
-    df1_part2 = df.iloc[8:16]
-    df1_part3 = df.iloc[16:24]
-
-    # Convert to dictionaries for template rendering
-    coins_part1 = df1_part1.to_dict(orient='records')
-    coins_part2 = df1_part2.to_dict(orient='records')
-    coins_part3 = df1_part3.to_dict(orient='records')
-
-    # Format current date and time
-    now = datetime.now()
-    formatted_date = now.strftime("%d %b, %Y")  # Example: 17 Sep, 2025
-    formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM
-
-    # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
-    env = Environment(loader=FileSystemLoader(template_dir))
-    template = env.get_template('1.html')
-
-    # Render the template with the fetched data
-    output = template.render(
-        coins1=coins_part1,
-        coins2=coins_part2,
-        coins3=coins_part3,
-        current_date=formatted_date,
-        current_time=formatted_time
-    )
-
-    # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "1_output.html")
-    with open(output_path, "w") as f:
-        f.write(output)
-
-    print("Rendered page saved as 'output.html'.")
-
-    # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
-    os.makedirs(image_dir, exist_ok=True)
-    image_path = os.path.join(image_dir, "1_output.jpg")
-    await generate_image_from_html(output_path, image_path)
-    #cl = Client()  # Directly initialize the client
-
-    """try:
-        # Directly login with credentials
-        cl.login("cryptoprism.io", "jaimaakamakhya")  # Replace with your actual credentials
-        print("Login successful.")
-
-        # Upload the story
-        try:
-            cl.photo_upload(
-                path="output_image.jpg",
-                caption="cryptoprism.io"
+        logger.error(f"Failed to establish database connection: {e}", extra={
+            "event": "db_connection_failed",
+            "db_host": config.database.host,
+            "db_port": config.database.port
+        })
+        raise ValueError(f"Database configuration error: {e}")
+
+# Global Jinja environment
+jinja_env = Environment(loader=FileSystemLoader(str(config.paths.templates_dir)))
+
+async def generate_image_from_html(output_html_file: str, output_image_path: str, viewport_width: Optional[int] = None):
+    """Launch Playwright, load the HTML file, and save a screenshot of it with retry logic."""
+    from retry_utils import retry_async
+
+    async def _generate_image():
+        """Internal async image generation function."""
+        async with async_playwright() as p:
+            # Add timeout for browser launch
+            browser = await asyncio.wait_for(
+                p.chromium.launch(headless=True),
+                timeout=config.image.browser_timeout
             )
-            print("Story posted successfully!")
-        except Exception as e:
-            print(f"Error posting story: {e}")
 
-    except Exception as e:
-        print(f"Error logging in: {e}")"""
+            try:
+                page = await browser.new_page()
 
-# PAGE 2
-async def render_page_2():
-    """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-    # Fetch the data for continuation (coins 25-48)
-    df2 = fetch_data_as_dataframe_page2()
-    df2 = df2.sort_values('cmc_rank', ascending=True)
+                # Use config values if not specified
+                width = viewport_width or config.image.width
+                height = config.image.height or width  # Square aspect ratio for Instagram
 
-    # Split into three DataFrames: 8 coins each for perfect distribution
-    df2_part1 = df2.iloc[0:8]    # First 8 coins (ranks 25-32)
-    df2_part2 = df2.iloc[8:16]   # Next 8 coins (ranks 33-40)
-    df2_part3 = df2.iloc[16:24]  # Last 8 coins (ranks 41-48)
+                await page.set_viewport_size({"width": width, "height": height})
+                await page.emulate_media(media='screen')
 
-    # Convert each DataFrame to dictionary
-    coins_part1 = df2_part1.to_dict(orient='records')
-    coins_part2 = df2_part2.to_dict(orient='records')
-    coins_part3 = df2_part3.to_dict(orient='records')
+                # Load the rendered HTML file with timeout
+                html_path = Path(output_html_file).absolute()
+                await asyncio.wait_for(
+                    page.goto(f'file://{html_path}'),
+                    timeout=config.image.browser_timeout
+                )
 
-    # Format current date and time
-    now = datetime.now()
-    formatted_date = now.strftime("%d %b, %Y")  # Example: 17 Sep, 2025
-    formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM
+                # Ensure image output directory exists
+                image_path = Path(output_image_path)
+                image_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
-    env = Environment(loader=FileSystemLoader(template_dir))
-    template = env.get_template('2.html')
+                # Capture the screenshot of the page with timeout
+                await asyncio.wait_for(
+                    page.screenshot(
+                        path=str(image_path),
+                        type=config.image.format,
+                        quality=config.image.quality,
+                        full_page=True
+                    ),
+                    timeout=config.image.browser_timeout
+                )
 
-    # Render the template with the fetched data
-    output = template.render(coins1=coins_part1,
-                         coins2=coins_part2,
-                         coins3=coins_part3,
-                         current_date=formatted_date,
-                         current_time=formatted_time)
+                return image_path
 
-    # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "2_output.html")
-    with open(output_path, "w") as f:
-        f.write(output)
+            finally:
+                await browser.close()
 
-    print("Rendered page saved as 'output.html'.")
-
-    # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
-    os.makedirs(image_dir, exist_ok=True)
-    image_path = os.path.join(image_dir, "2_output.jpg")
-    await generate_image_from_html(output_path, image_path)
-
-# PAGE 3
-async def render_page_3():
-    """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-    # Fetch the data using the previously defined function
-    df3 = fetch_for_3()
-    df3.head()
-
-    # Filter for top 100 CMC rank and clean data only
-    df3_clean = df3[
-        (df3['cmc_rank'] <= 100) &  # Top 100 tokens only
-        (df3['percent_change24h'].notna()) &  # No nan values in percent change
-        (df3['logo'].notna()) &  # No missing logos
-        (df3['Durability_Score'].notna()) &  # No nan in Durability
-        (df3['Momentum_Score'].notna()) &  # No nan in Momentum
-        (df3['Valuation_Score'].notna())  # No nan in Valuation
-    ]
-
-    df3l = df3_clean.sort_values('percent_change24h', ascending=True)  # top losers
-    df3l = df3l.iloc[0:4]
-    df3g = df3_clean.sort_values('percent_change24h', ascending=False)  # top gainers
-    df3g = df3g.iloc[0:4]  # get first 4 rows (highest percent change)
-
-    df3l_new = df3l.to_dict(orient='records')
-    df3g_new = df3g.to_dict(orient='records')
-
-    # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
-    env = Environment(loader=FileSystemLoader(template_dir)) 
-    template = env.get_template('3.html')
-
-    # Render the template with the fetched data
-    output = template.render(coin1=df3l_new, 
-                             coin2=df3g_new)
-
-    # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "3_output.html")
-    with open(output_path, "w") as f:
-        f.write(output)
-
-    print("Rendered page saved as 'output.html'.")
-
-    # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
-    os.makedirs(image_dir, exist_ok=True)
-    image_path = os.path.join(image_dir, "3_output.jpg")
-    await generate_image_from_html(output_path, image_path)
-
-#PAGE 4
-async def render_page_4():
-    """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-    # Fetch the data using the previously defined function
-    long_short = fetch_for_4_long()
-    short = fetch_for_4_short()
-    
-    # Create DataFrame for long positions (sorted by bullish in descending order)
-    df_long = long_short.sort_values('bullish', ascending=False)
-    df_long = df_long.head(4)
-    # Create DataFrame for short positions (sorted by bearish in ascending order)
-    df_short = short.sort_values('bearish', ascending=True)
-    df_short = df_short.head(4)
-
-    # Convert DataFrames to dictionaries for template rendering
-    long_positions = df_long.to_dict(orient='records')
-    short_positions = df_short.to_dict(orient='records')
-
-    # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
-    env = Environment(loader=FileSystemLoader(template_dir)) 
-    template = env.get_template('4.html')
-
-    # Render the template with the fetched data
-    output = template.render(coins1=long_positions,
-                             coins2=short_positions)
-
-    # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "4_output.html")
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(output)
-
-    print("Rendered page saved as '4_output.html'.")
-
-    # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
-    os.makedirs(image_dir, exist_ok=True)
-    image_path = os.path.join(image_dir, "4_output.jpg")
-    await generate_image_from_html(output_path, image_path)
-
-# PAGE 5
-async def render_page_5():
-    """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-
-    #fetch
-    global_data = fetch_for_5()
-    coins = global_data.to_dict(orient='records')
-    snap = btc_snapshot()
-
-    # Fetch logos for BTC and ETH
-    logo_query = """
-    SELECT logo, slug FROM "FE_CC_INFO_URL"
-    WHERE slug IN ('bitcoin', 'ethereum')
-    """
-    logos_data = pd.read_sql_query(logo_query, gcp_engine)
-
-    # Extract individual logos
-    btc_logo = logos_data[logos_data['slug'] == 'bitcoin']['logo'].iloc[0] if not logos_data[logos_data['slug'] == 'bitcoin'].empty else ""
-    eth_logo = logos_data[logos_data['slug'] == 'ethereum']['logo'].iloc[0] if not logos_data[logos_data['slug'] == 'ethereum'].empty else ""
-
-    now = datetime.now()
-    formatted_date = now.strftime("%d %b, %Y")  # Example: 15 Feb, 2025
-    formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM Monday
-
-    # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
-    env = Environment(loader=FileSystemLoader(template_dir))
-    template = env.get_template('5.html')
-
-    # Render the template with the fetched data
-    output = template.render(
-        coins=coins,
-        snap=snap.to_dict(orient='records'),
-        current_date=formatted_date,
-        current_time=formatted_time,
-        btc_logo=btc_logo,
-        eth_logo=eth_logo
+    operation_context = log_operation_start(
+        logger, "generate_image",
+        _log_html_file=output_html_file,
+        _log_image_file=output_image_path
     )
-
-    # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "5_output.html")
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(output)
-
-    print("Rendered page saved as '5_output.html'.")
-
-    # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
-    os.makedirs(image_dir, exist_ok=True)
-    image_path = os.path.join(image_dir, "5_output.jpg")
-    await generate_image_from_html(output_path, image_path)
-
-def generate_bitcoin_news_events():
-    """Generate Bitcoin news and events using Together AI API."""
-    TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY')
-
-    if not TOGETHER_API_KEY:
-        print("⚠️ No AI API key, using placeholder news")
-        return {
-            'past_24h': [
-                "Bitcoin maintains strong support above $117,000 level",
-                "Institutional buying continues with $200M+ inflows reported",
-                "On-chain metrics show healthy network activity"
-            ],
-            'next_24h': [
-                "Watch for resistance test at $120,000 psychological level",
-                "US market open could drive increased volatility",
-                "Weekly options expiry may impact price action"
-            ]
-        }
 
     try:
-        client = Together(api_key=TOGETHER_API_KEY)
+        # Execute with retry logic
+        image_path = await retry_async(_generate_image, manager=playwright_retry_manager)
 
-        prompt = """Generate Bitcoin news and events in JSON format. Create realistic, current events for:
-
-1. "past_24h": 3 bullet points about what happened to Bitcoin in the past 24 hours
-2. "next_24h": 3 bullet points about what to watch for Bitcoin in the next 24 hours
-
-Focus on:
-- Price movements and technical levels
-- Institutional activity and market sentiment
-- Regulatory developments
-- On-chain metrics and network activity
-- Market catalysts and upcoming events
-
-Return ONLY valid JSON in this exact format:
-{
-  "past_24h": ["point 1", "point 2", "point 3"],
-  "next_24h": ["point 1", "point 2", "point 3"]
-}
-
-Keep each point under 60 characters. Make them realistic and relevant to current crypto market conditions."""
-
-        response = client.chat.completions.create(
-            model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=400,
-            temperature=0.7
+        log_operation_end(
+            logger, operation_context, success=True,
+            _log_file_size_mb=round(image_path.stat().st_size / (1024 * 1024), 2)
         )
-
-        ai_response = response.choices[0].message.content.strip()
-
-        # Extract JSON from response
-        import json
-        try:
-            # Find JSON in the response
-            start = ai_response.find('{')
-            end = ai_response.rfind('}') + 1
-            if start != -1 and end != 0:
-                json_str = ai_response[start:end]
-                news_data = json.loads(json_str)
-                print("✅ AI news generated successfully")
-                return news_data
-            else:
-                raise ValueError("No JSON found in response")
-
-        except (json.JSONDecodeError, ValueError) as e:
-            print(f"⚠️ JSON parsing failed: {e}")
-            # Fallback to placeholder
-            return {
-                'past_24h': [
-                    "Bitcoin maintains strong support above $117,000 level",
-                    "Institutional buying continues with $200M+ inflows reported",
-                    "On-chain metrics show healthy network activity"
-                ],
-                'next_24h': [
-                    "Watch for resistance test at $120,000 psychological level",
-                    "US market open could drive increased volatility",
-                    "Weekly options expiry may impact price action"
-                ]
-            }
+        print(f"✓ Generated image: {output_image_path}")
 
     except Exception as e:
-        print(f"⚠️ AI news generation failed: {e}")
-        # Fallback to placeholder
-        return {
-            'past_24h': [
-                "Bitcoin maintains strong support above $117,000 level",
-                "Institutional buying continues with $200M+ inflows reported",
-                "On-chain metrics show healthy network activity"
-            ],
-            'next_24h': [
-                "Watch for resistance test at $120,000 psychological level",
-                "US market open could drive increased volatility",
-                "Weekly options expiry may impact price action"
-            ]
-        }
+        log_error(logger, e, "generate_image", _log_html_file=output_html_file, _log_image_file=output_image_path)
+        log_operation_end(logger, operation_context, success=False, _log_error=str(e))
+        raise
 
-# PAGE 6 - BTC SNAPSHOT ONLY
-async def render_page_6():
-    """Fetch Bitcoin data and render the BTC snapshot page using Jinja2, then convert the HTML to an image using Playwright."""
+async def fetch_data_top_24_coins(engine) -> pd.DataFrame:
+    """Fetch data from the 'coins' table and return as a Pandas DataFrame with retry logic."""
+    from retry_utils import retry_async
 
-    # Fetch BTC snapshot data
-    snap = btc_snapshot()
+    def _fetch_data():
+        """Internal synchronous data fetching function."""
+        query_top_24 = """
+          SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
+          FROM crypto_listings_latest_1000
+          WHERE cmc_rank BETWEEN 1 AND 24
+          """
 
-    # Generate Bitcoin news and events
-    news_events = generate_bitcoin_news_events()
+        df = pd.read_sql_query(query_top_24, engine)
+        df['market_cap'] = (df['market_cap'] / 1_000_000_000).round(2)
+        df['price'] = (df['price']).round(2)
+        df['percent_change24h'] = (df['percent_change24h']).round(2)
 
-    # Format current date and time
-    now = datetime.now()
-    formatted_date = now.strftime("%d %b, %Y")  # Example: 19 Sep, 2025
-    formatted_time = now.strftime("%I:%M:%S %p")  # Example: 09:59:46 AM
+        # Get logos for the coins
+        slugs = df['slug'].tolist()
+        slugs_placeholder = ', '.join(f"'{slug}'" for slug in slugs)
 
-    # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'core_templates')
-    env = Environment(loader=FileSystemLoader(template_dir))
-    template = env.get_template('6.html')
+        query_logos = f"""
+        SELECT logo, slug FROM "FE_CC_INFO_URL"
+        WHERE slug IN ({slugs_placeholder})
+        """
+        logos_df = pd.read_sql_query(query_logos, engine)
+        df = pd.merge(df, logos_df, on='slug', how='left')
+        df = df.sort_values(by='cmc_rank', ascending=True)
 
-    # Render the template with the fetched data
-    output = template.render(
-        snap=snap.to_dict(orient='records'),
-        current_date=formatted_date,
-        current_time=formatted_time,
-        news_events=news_events
+        return df
+
+    operation_context = log_operation_start(
+        logger, "fetch_crypto_data",
+        _log_query_type="top_24_coins"
     )
 
-    # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'html')
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "6_output.html")
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(output)
+    try:
+        # Execute with retry logic
+        df = await retry_async(_fetch_data, manager=database_retry_manager)
 
-    print("Rendered page saved as '6_output.html'.")
+        log_operation_end(
+            logger, operation_context, success=True,
+            _log_record_count=len(df),
+            _log_has_logos=df['logo'].notna().sum() > 0
+        )
 
-    # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output', 'images')
-    os.makedirs(image_dir, exist_ok=True)
-    image_path = os.path.join(image_dir, "6_output.jpg")
-    await generate_image_from_html(output_path, image_path)
+        return df
 
-if __name__=="__main__":
+    except Exception as e:
+        log_error(logger, e, "fetch_crypto_data", _log_query_type="top_24_coins")
+        log_operation_end(logger, operation_context, success=False, _log_error=str(e))
+        return pd.DataFrame()
 
-    asyncio.run(render_page_1())
-    asyncio.run(render_page_2())
-    asyncio.run(render_page_3())
-    asyncio.run(render_page_4())
-    asyncio.run(render_page_5())
-    asyncio.run(render_page_6())
+def fetch_bitcoin_data(engine) -> Dict:
+    """Fetch Bitcoin-specific data for Template 6."""
+    query_btc = """
+    SELECT * FROM crypto_listings_latest_1000
+    WHERE symbol = 'BTC' LIMIT 1
+    """
+    try:
+        btc_df = pd.read_sql_query(query_btc, engine)
+        if btc_df.empty:
+            return {}
 
+        btc = btc_df.iloc[0].to_dict()
+        btc['market_cap'] = bmp f"{btc['market_cap'] / 1e9:.1f} T" if btc['market_cap'] else 'N/A'
+        btc['volume24h'] = f"{btc['volume24h'] / 1e9:.1f} B" if btc['volume24h'] else 'N/A'
+        return btc
+    except Exception as e:
+        print(f"Error fetching Bitcoin data: {e}")
+        return {}
+
+async def render_template(template_num: int, data: Dict, output_dir: Optional[str] = None) -> Optional[str]:
+    """Render HTML from template with data."""
+    try:
+        template_file = f"{template_num}.html"
+        template = jinja_env.get_template(template_file)
+
+        html_content = template.render(**data)
+
+        # Use config output directory if not specified
+        output_dir = Path(output_dir) if output_dir else config.paths.html_output_dir
+        output_path = output_dir / f"{template_num}_output.html"
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+
+        print(f"✓ Rendered template {template_num}: {output_path}")
+        return str(output_path)
+
+    except Exception as e:
+        print(f"Error rendering template {template_num}: {e}")
+        return None
+
+async def convert_to_image(html_path: str, template_num: int):
+    """Convert HTML file to Instagram-ready image."""
+    image_path = str(config.paths.get_image_output_path(template_num, config.image.format))
+    await generate_image_from_html(html_path, image_path)
+
+async def main():
+    """Main CLI entry point for instapost content generation."""
+    parser = argparse.ArgumentParser(description='Instagram content generator for crypto socials')
+    parser.add_argument('--template', '-t', type=int, choices=[1,2,3,4,5,6], default=None,
+                       help='Generate specific template (1-6). If not specified, generates all.')
+    parser.add_argument('--dry-run', action='store_true',
+                       help='Show what would be generated without actually running')
+    parser.add_argument('--skip-generate', action='store_true',
+                       help='Skip screenshot generation, only render HTML')
+    parser.add_argument('--output-dir', default=None,
+                       help='Custom output directory (overrides default)')
+
+    args = parser.parse_args()
+
+    # Set up correlation context for this run
+    correlation_id = CorrelationContext.get_current_correlation_id() or str(uuid.uuid4())[:8]
+    with CorrelationContext(correlation_id):
+        session_context = log_operation_start(
+            logger, "content_generation_session",
+            _log_template_filter=args.template or "all",
+            _log_dry_run=args.dry_run,
+            _log_skip_generate=args.skip_generate,
+            _log_custom_output_dir=args.output_dir is not None
+        )
+
+        try:
+            # Ensure all directories exist
+            config.paths.ensure_directories()
+
+            logger.info("🚀 Starting Instagram content generation session", extra={
+                "templates_dir": str(config.paths.templates_dir),
+                "html_output_dir": str(config.paths.html_output_dir),
+                "images_output_dir": str(config.paths.images_output_dir),
+                "event": "session_start"
+            })
+
+            # Validate configuration
+            config.validate_all()
+
+            if args.dry_run:
+                logger.info("DRY RUN MODE activated - no files will be written")
+                log_operation_end(logger, session_context, success=True, _log_dry_run_completed=True)
+                return
+
+            # Get database connection
+            try:
+                engine = await get_gcp_engine()
+                logger.info("Database connection established successfully")
+            except ValueError as e:
+                logger.error(f"Configuration error: {e}", extra={"event": "db_config_failure"})
+                log_operation_end(logger, session_context, success=False, _log_error=str(e))
+                sys.exit(1)
+
+            templates_to_generate = [args.template] if args.template else [1,2,3,4,5,6]
+            templates_processed = 0
+            templates_failed = 0
+
+            for template_num in templates_to_generate:
+                template_context = log_operation_start(
+                    logger, f"generate_template_{template_num}",
+                    _log_template_num=template_num
+                )
+
+                try:
+                    logger.info(f"Processing Template {template_num}", extra={
+                        "template_num": template_num,
+                        "event": "template_processing_start"
+                    })
+
+                    # Fetch data based on template needs
+                    if template_num == 6:
+                        # Bitcoin snapshot template
+                        btc_data = fetch_bitcoin_data(engine)
+                        if not btc_data:
+                            logger.warning("Skipping Template 6: No Bitcoin data available", extra={
+                                "template_num": template_num,
+                                "event": "template_skipped",
+                                "reason": "no_bitcoin_data"
+                            })
+                            log_operation_end(logger, template_context, success=True, _log_skipped=True)
+                            continue
+                        data = {
+                            'snap': [btc_data],
+                            'current_date': datetime.now(config.app.timezone).strftime(config.app.datetime_format),
+                            'current_time': datetime.now(config.app.timezone).strftime(config.app.time_format)
+                        }
+                    else:
+                        # Multi-coin templates
+                        coins_data = await fetch_data_top_24_coins(engine)
+                        if coins_data.empty:
+                            logger.warning(f"Skipping Template {template_num}: No coin data available", extra={
+                                "template_num": template_num,
+                                "event": "template_skipped",
+                                "reason": "no_coin_data"
+                            })
+                            log_operation_end(logger, template_context, success=True, _log_skipped=True)
+                            continue
+
+                        # Split data for different templates (simplified logic)
+                        start_idx = 0 if template_num == 1 else (24 if template_num == 2 else (48 if template_num == 3 else (72 if template_num == 4 else (96 if template_num == 5 else 0))))
+                        end_idx = start_idx + 24
+                        template_data = coins_data.iloc[start_idx:end_idx]
+
+                        data = {'snap': [row.to_dict() for _, row in template_data.iterrows()]}
+
+                    # Render HTML
+                    output_dir = Path(args.output_dir) if args.output_dir else None
+                    html_path = await render_template(template_num, data, str(output_dir) if output_dir else None)
+                    if not html_path:
+                        log_operation_end(logger, template_context, success=False, _log_error="render_failed")
+                        templates_failed += 1
+                        continue
+
+                    # Generate image if requested
+                    if not args.skip_generate:
+                        await convert_to_image(html_path, template_num)
+
+                    log_operation_end(logger, template_context, success=True)
+                    templates_processed += 1
+
+                except Exception as e:
+                    log_error(logger, e, f"generate_template_{template_num}", _log_template_num=template_num)
+                    log_operation_end(logger, template_context, success=False, _log_error=str(e))
+                    templates_failed += 1
+
+            # Session completion
+            logger.info("Content generation completed", extra={
+                "templates_processed": templates_processed,
+                "templates_failed": templates_failed,
+                "templates_total": len(templates_to_generate),
+                "event": "session_complete"
+            })
+
+            log_operation_end(
+                logger, session_context, success=True,
+                _log_templates_processed=templates_processed,
+                _log_templates_failed=templates_failed,
+                _log_total_templates=len(templates_to_generate)
+            )
+
+        except Exception as e:
+            log_error(logger, e, "content_generation_session")
+            log_operation_end(logger, session_context, success=False, _log_error=str(e))
+            logger.info("Content generation aborted")
+            sys.exit(1)
