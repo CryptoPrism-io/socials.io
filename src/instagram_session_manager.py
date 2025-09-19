@@ -146,11 +146,14 @@ class InstagramSessionManager:
             # Test session with lightweight API call
             logger.info("🔍 Validating session with API test...")
 
+            # Use stored username from metadata instead of client.username which might not be set
+            stored_username = self._session_metadata.get('username', self.username)
+
             # Try to get user info - this is a lightweight operation
-            user_info = self.client.user_info_by_username(self.client.username)
+            user_info = self.client.user_info_by_username(stored_username)
 
             if user_info and user_info.pk:
-                logger.info(f"✅ Session valid - authenticated as {self.client.username}")
+                logger.info(f"✅ Session valid - authenticated as {stored_username}")
                 self._update_session_metadata('last_validated', datetime.now().isoformat())
                 return True
             else:
