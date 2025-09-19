@@ -10,6 +10,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v1.8.3] - 2025-09-19 20:30 UTC
+
+### 🗂️ MAJOR: Repository Organization & Structure Optimization
+
+### Added
+- **Organized directory structure** for better project maintainability
+- Created `scripts/demos/` directory for demonstration and testing scripts
+- Created `logs/` directory for application logs and temporary files
+- Created `docs/assets/` directory for documentation images and media
+- Enhanced `.gitignore` with comprehensive coverage for logs, archives, IDE files, and OS-generated files
+
+### Changed
+- **File organization improvements**:
+  - Moved `demo_mypy.py` and `demo_retry.py` → `scripts/demos/`
+  - Moved `test_logging.py` and `test_mypy.py` → `tests/`
+  - Moved `TODO.md` → `docs/` (now `docs/TODO.md`)
+  - Moved `image.png` → `docs/assets/`
+  - Moved `output.log` → `logs/`
+  - Moved `.env.backup` and `.env.template` → `scripts/`
+
+### Enhanced
+- **`.gitignore` improvements**:
+  - Added exclusions for `logs/` and `*.log` files
+  - Added exclusions for archive and backup files
+  - Added IDE-specific exclusions (VS Code, IntelliJ, Vim)
+  - Added OS-generated file exclusions (macOS, Windows, Linux)
+- **Project structure** now follows industry best practices with clear separation of concerns
+- **Documentation organization** with dedicated assets folder and centralized TODO management
+
+### Fixed
+- **Root directory cleanup**: Removed temporary and demo files from project root
+- **Build artifact management**: Better exclusion of generated files and caches
+- **Development environment**: Cleaner workspace with organized tool-specific files
+
+### Rationale
+This reorganization addresses several items from the production hardening TODO:
+- **Build artifacts cleanup**: Improved `.gitignore` for better artifact management
+- **File organization**: Clear separation between source code, tests, demos, and documentation
+- **Development hygiene**: Cleaner project structure for better maintainability
+
+---
+
 ## [v1.8.2] - 2025-09-19 15:35 UTC
 
 ### 🎯 MAJOR: Self-Hosted Fonts Implementation - P1 Production Hardening Complete

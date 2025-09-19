@@ -67,6 +67,9 @@ socials.io/
 │   ├── 📄 test_path_structure.py    # Path validation tests
 │   └── 📄 test_restructure.py       # Structure validation tests
 ├── 📁 scripts/                      # Setup & utility scripts
+│   ├── 📁 demos/                    # Demo and testing scripts
+│   │   ├── 📄 demo_mypy.py          # MyPy demonstration script
+│   │   └── 📄 demo_retry.py         # Retry mechanism demonstration
 │   ├── 📄 setup_windows_utf8.bat    # Windows UTF-8 setup (batch)
 │   ├── 📄 setup_windows_utf8.ps1    # Windows UTF-8 setup (PowerShell)
 │   ├── 📄 setup_powershell_utf8.ps1 # PowerShell profile UTF-8 setup
@@ -74,9 +77,20 @@ socials.io/
 │   ├── 📄 utf8_fix.py               # UTF-8 encoding fix utility
 │   ├── 📄 validate_env.py           # Environment validation
 │   ├── 📄 validate_project.py       # Project validation
+│   ├── 📄 .env.backup               # Environment backup file
+│   ├── 📄 .env.template             # Environment template file
 │   └── 📄 UNICODE_*.md              # Unicode documentation
 ├── 📁 docs/                         # Documentation
-│   └── 📄 DEPLOYMENT_SUMMARY.md     # Deployment documentation
+│   ├── 📁 assets/                   # Documentation images and media
+│   ├── 📄 DEPLOYMENT_SUMMARY.md     # Deployment documentation
+│   ├── 📄 TODO.md                   # Production hardening TODO
+│   └── 📄 instagram_session_management.md # Instagram session docs
+├── 📁 logs/                         # Application logs and temporary files
+├── 📁 tests/                        # Test suite
+│   ├── 📄 test_path_structure.py    # Path validation tests
+│   ├── 📄 test_restructure.py       # Structure validation tests
+│   ├── 📄 test_logging.py           # Logging functionality tests
+│   └── 📄 test_mypy.py              # MyPy integration tests
 ├── 📁 .github/workflows/            # GitHub Actions CI/CD
 │   ├── 📄 Instagram_Story.yml       # Instagram automation workflow
 │   ├── 📄 gsheets.yml               # Google Sheets sync workflow
