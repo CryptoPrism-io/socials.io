@@ -6,8 +6,8 @@
 }
 
 html, body {
-    width: 1080px;
-    height: 1080px;
+    width: 2160px;
+    height: 2700px;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
     color: white;
@@ -17,9 +17,9 @@ html, body {
 /* 🔥 Pure CSS Background - NO IMAGE */
 body {
     background:
-        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.12) 0%, transparent 50%),
-        linear-gradient(135deg, #0a0a1e 0%, #141432 30%, #0f0f23 70%, #050519 100%);
+        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #050505 70%, #000000 100%);
     background-size: 100% 100%;
     background-attachment: fixed;
 }
@@ -36,29 +36,37 @@ body {
     }
 }
 
-/* 🚀 Unified Bitcoin Dashboard Component - Template 3 */
-.unified-btc-dashboard {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    right: 30px;
-    height: 200px;
-
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-
-    box-shadow:
-        0 12px 40px rgba(0, 0, 0, 0.4),
-        0 6px 20px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-
-    padding: 15px 25px;
+/* 📱 Main Page Container */
+.main-container {
+    width: 2160px;
+    height: 2700px;
+    padding: 60px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 🚀 Bitcoin Dashboard Card - Template 3 */
+.btc-dashboard-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border-radius: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 16px 64px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex-shrink: 0;
+    margin-bottom: 40px;
 }
 
 /* 📋 Header Section with Branding and Last Update */
@@ -66,42 +74,71 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 30px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 📋 Standalone Header (outside cards) */
+.main-container > .dashboard-header-section {
+    padding: 0;
+    margin-bottom: 40px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    border-radius: 0;
 }
 
 .crypto-prism-brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 24px;
 }
 
 .prism-triangle {
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 16px solid #ff6b35;
-    filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.4));
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 64px solid #ff6b35;
+    filter: drop-shadow(0 16px 32px rgba(255, 107, 53, 0.4));
 }
 
 .brand-text {
-    font-size: 16px;
+    font-size: 2.5rem; /* 40px */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
-    letter-spacing: 1.5px;
+    text-shadow: 0 8px 32px rgba(255, 107, 53, 0.3);
+    letter-spacing: 6px;
 }
 
 .last-update {
-    font-size: 10px;
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+.last-update-label {
+    font-size: 1rem; /* 16px */
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 4px;
+}
+.last-update-date {
+    font-size: 1.375rem; /* 22px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.last-update-time {
+    font-size: 1.125rem; /* 18px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Inter', sans-serif;
 }
 
 /* 🪙 Compact BTC Information Section */
@@ -109,62 +146,62 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 120px;
 }
 
 .btc-identity {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 60px;
     flex: 1;
 }
 
 .btc-logo-container {
-    width: 50px;
-    height: 50px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
 }
 
 .btc-logo-img {
-    width: 40px;
-    height: 40px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
 }
 
 .btc-info {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 6px;
 }
 
 .btc-symbol {
-    font-size: 20px;
+    font-size: 2rem; /* 32px */
     font-weight: 700;
     background: linear-gradient(45deg, #f7931a, #ffffff, #f7931a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .btc-price {
-    font-size: 24px;
+    font-size: 2.5rem; /* 40px */
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 25%, #e0e0e0 50%, #ffffff 75%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .market-data-grid {
     display: flex;
-    gap: 20px;
+    gap: 40px;
     flex: 1;
     justify-content: center;
 }
@@ -173,19 +210,19 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
 }
 
 .market-label {
-    font-size: 10px;
+    font-size: 0.875rem; /* 14px */
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 2px;
 }
 
 .market-value {
-    font-size: 14px;
+    font-size: 1.125rem; /* 18px */
     color: rgba(255, 255, 255, 0.9);
     font-weight: 700;
 }
@@ -195,7 +232,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 25px;
+    gap: 50px;
+    padding-top: 40px;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .performance-container, .sentiment-container, .trend-container {
@@ -203,40 +242,40 @@ body {
 }
 
 .performance-title, .sentiment-title, .trend-title {
-    font-size: 10px;
+    font-size: 1rem; /* 16px */
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    letter-spacing: 2px;
+    margin-bottom: 32px;
     text-align: center;
 }
 
 .performance-items {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .perf-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
 }
 
 .perf-value {
-    font-size: 12px;
+    font-size: 1.125rem; /* 18px */
     font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 6px;
+    padding: 16px 32px;
+    border-radius: 24px;
     background: rgba(255, 255, 255, 0.1);
-    min-width: 45px;
+    min-width: 180px;
     text-align: center;
 }
 
 .perf-label {
-    font-size: 8px;
+    font-size: 0.75rem; /* 12px */
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -245,24 +284,24 @@ body {
 .sentiment-items {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .sentiment-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
 }
 
 .sentiment-count {
-    font-size: 16px;
+    font-size: 1.5rem; /* 24px */
     font-weight: 800;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 15px currentColor;
+    text-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 60px currentColor;
 }
 
 .sentiment-label {
-    font-size: 8px;
+    font-size: 0.75rem; /* 12px */
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -273,13 +312,13 @@ body {
 }
 
 .trend-value {
-    font-size: 14px;
+    font-size: 1.375rem; /* 22px */
     font-weight: 800;
     background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 15px rgba(0, 204, 255, 0.5);
+    text-shadow: 0 0 60px rgba(0, 204, 255, 0.5);
     animation: pulse-glow 2s ease-in-out infinite alternate;
 }
 
@@ -291,16 +330,18 @@ body {
 .positive { color: #00ff88; }
 .negative { color: #ff4444; }
 
+/* DMV Score Color Classes */
+.dmv-low { color: #ff8c00; }      /* Orange for scores below 50 */
+.dmv-medium { color: #ffd700; }   /* Yellow-gold for scores 50-70 */
+.dmv-high { color: #00ff88; }     /* Green for scores above 70 */
+
 /* 📊 Template 3: Gainers/Losers Layout */
 .col-container {
-    position: absolute;
-    top: 250px;
-    left: 30px;
-    right: 30px;
-    bottom: 80px;
     display: flex;
     justify-content: space-between;
-    gap: 40px;
+    gap: 80px;
+    flex: 1;
+    width: 100%;
 }
 
 .col {
@@ -315,13 +356,13 @@ body {
     content: "";
     display: block;
     text-align: center;
-    font-size: 18px;
+    font-size: 72px;
     font-weight: 700;
-    margin-bottom: 20px;
-    padding: 10px 0;
-    border-radius: 12px;
+    margin-bottom: 80px;
+    padding: 40px 0;
+    border-radius: 48px;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(40px);
 }
 
 .top-gainer::before {
@@ -339,18 +380,18 @@ body {
 /* 💎 Enhanced Coin Cards for Template 3 */
 .coin-card {
     background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px) saturate(150%);
-    -webkit-backdrop-filter: blur(15px) saturate(150%);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
 
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 4px 16px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        0 16px 64px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
 
-    padding: 15px;
-    margin-bottom: 12px;
+    padding: 30px;
+    margin-bottom: 24px;
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -378,46 +419,46 @@ body {
 }
 
 .logo {
-    width: 40px;
-    height: 40px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
 }
 
 .logo img {
-    width: 32px;
-    height: 32px;
+    width: 128px;
+    height: 128px;
     border-radius: 50%;
 }
 
 .left-col {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
 }
 
 .coin-name {
-    font-size: 16px;
+    font-size: 1.5rem; /* 24px */
     font-weight: 600;
     background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 50%, #d0d0d0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4);
+    text-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
 }
 
 .cmc-rank {
-    font-size: 11px;
+    font-size: 0.875rem; /* 14px */
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
 }
 
 .mid-col {
-    font-size: 13px;
+    font-size: 1rem; /* 16px */
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
 }
@@ -426,24 +467,25 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 2px;
+    gap: 4px;
 }
 
 .price {
-    font-size: 14px;
+    font-size: 1.25rem; /* 20px */
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 4px 12px rgba(255, 255, 255, 0.5);
 }
 
 .pct-change {
-    font-size: 12px;
+    font-family: 'Inter', monospace;
+    font-size: 1.125rem; /* 18px */
     font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 4px;
+    padding: 8px 24px;
+    border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -452,8 +494,8 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 8px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 0;
+    border-top: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .dmv > div {
@@ -464,7 +506,7 @@ body {
 }
 
 .dmv > div::before {
-    font-size: 10px;
+    font-size: 0.875rem; /* 14px */
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -475,22 +517,22 @@ body {
 .dmv > div:nth-child(3)::before { content: "V"; }
 
 .d, .m, .v {
-    font-size: 14px;
+    font-family: 'Inter', monospace;
+    font-size: 1.125rem; /* 18px */
     font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 4px;
+    padding: 8px 24px;
+    border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);
-    min-width: 30px;
+    min-width: 120px;
     text-align: center;
 }
 
 /* 📝 Footer */
-.footer-text {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 12px;
+.footer-container {
+    text-align: center;
+    font-size: 60px;
     color: rgba(255, 255, 255, 0.5);
     font-weight: 400;
-    letter-spacing: 1px;
+    letter-spacing: 4px;
+    margin-top: 40px;
 }

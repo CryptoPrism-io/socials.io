@@ -4,50 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../core_templates/style3.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Crypto Dashboard Template 3</title>
 </head>
 <body>
-    {% for snaps in snap %}
-    <!-- Unified Bitcoin Dashboard Component -->
-    <div class="unified-btc-dashboard">
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
         <!-- Header Section with Branding and Last Update -->
         <div class="dashboard-header-section">
             <div class="crypto-prism-brand">
                 <div class="prism-triangle"></div>
                 <span class="brand-text">CRYPTO PRISM</span>
             </div>
-            <div class="last-update">LAST UPDATE: {{snaps['last_updated']}}</div>
-        </div>
-
-        <!-- Main BTC Information Section -->
-        <div class="btc-main-section">
-            <!-- BTC Identity and Price -->
-            <div class="btc-identity">
-                <div class="btc-logo-container">
-                    <img src="{{ snaps['logo'] }}" alt="Bitcoin Logo" class="btc-logo-img">
-                </div>
-                <div class="btc-info">
-                    <div class="btc-symbol">BTC</div>
-                    <div class="btc-price">{{snaps['price']}}</div>
-                </div>
-            </div>
-
-            <!-- Market Data Grid -->
-            <div class="market-data-grid">
-                <div class="market-item">
-                    <div class="market-label">Market Cap</div>
-                    <div class="market-value">{{snaps['market_cap']}}</div>
-                </div>
-                <div class="market-item">
-                    <div class="market-label">Volume 24H</div>
-                    <div class="market-value">{{snaps['volume24h']}}</div>
-                </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">{{ current_date if current_date else '18 Sep, 2025' }}</div>
+                <div class="last-update-time">{{ current_time if current_time else '7:44 pm' }}</div>
             </div>
         </div>
 
-        <!-- Performance and Sentiment Section -->
-        <div class="performance-sentiment-section">
+        {% for snaps in snap %}
+        <!-- Bitcoin Dashboard Card -->
+        <div class="btc-dashboard-card">
+            <!-- Main BTC Information Section -->
+            <div class="btc-main-section">
+                <!-- BTC Identity and Price -->
+                <div class="btc-identity">
+                    <div class="btc-logo-container">
+                        <img src="{{ snaps['logo'] }}" alt="Bitcoin Logo" class="btc-logo-img">
+                    </div>
+                    <div class="btc-info">
+                        <div class="btc-symbol">BTC</div>
+                        <div class="btc-price">{{snaps['price']}}</div>
+                    </div>
+                </div>
+
+                <!-- Market Data Grid -->
+                <div class="market-data-grid">
+                    <div class="market-item">
+                        <div class="market-label">Market Cap</div>
+                        <div class="market-value">{{snaps['market_cap']}}</div>
+                    </div>
+                    <div class="market-item">
+                        <div class="market-label">Volume 24H</div>
+                        <div class="market-value">{{snaps['volume24h']}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance and Sentiment Section -->
+            <div class="performance-sentiment-section">
             <!-- Performance Grid -->
             <div class="performance-container">
                 <div class="performance-title">Performance</div>
@@ -97,17 +103,16 @@
                 <div class="trend-title">Overall Trend</div>
                 <div class="trend-value">{{snaps['Trend']}}</div>
             </div>
+            </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
 
-    <!-- Top Gainers/Losers Layout -->
-    <div class="col-container" style="display: flex;">
-
-        <div class="col" style="position: absolute; left: 60px; top:255px">
-            <div class="top-gainer">
+        <!-- Top Gainers/Losers Layout -->
+        <div class="col-container">
+            <div class="col">
+                <div class="top-gainer">
                 {% for coin in coin2 %}
-                <div class="coin-card" style="margin-bottom: 10px;"> <!-- Adjusted margin -->
+                <div class="coin-card">
                     <div class="coin-stat">
                         <div>
                             <div class="logo"><img src="{{ coin.logo }}"></div>
@@ -128,27 +133,27 @@
 
                     <div class="dmv">
                         <div>
-                            
-                            <span class="d" style="color: {% if coin.Durability_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Durability_Score }}</span>
+
+                            <span class="d {% if coin.Durability_Score|float < 50 %}dmv-low{% elif coin.Durability_Score|float <= 70 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Durability_Score }}</span>
                         </div>
                         <div>
-                            
-                            <span class="m" style="color: {% if coin.Momentum_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Momentum_Score }}</span>
+
+                            <span class="m {% if coin.Momentum_Score|float < 50 %}dmv-low{% elif coin.Momentum_Score|float <= 70 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Momentum_Score }}</span>
                         </div>
                         <div>
-                            
-                            <span class="v" style="color: {% if coin.Valuation_Score    >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Valuation_Score }}</span>
+
+                            <span class="v {% if coin.Valuation_Score|float < 50 %}dmv-low{% elif coin.Valuation_Score|float <= 70 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Valuation_Score }}</span>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-        </div>
+            </div>
 
-        <div class="col" style="position: absolute; left: 610px; top:255px">
-            <div class="top-loser">
+            <div class="col">
+                <div class="top-loser">
                 {% for coin in coin1 %}
-                <div class="coin-card" style="margin-bottom: 10px;"> <!-- Adjusted margin -->
+                <div class="coin-card">
                     <div class="coin-stat">
                         <div>
                             <div class="logo"><img src="{{ coin.logo }}"></div>
@@ -169,25 +174,26 @@
 
                     <div class="dmv">
                         <div>
-                            
-                            <span class="d" style="color: {% if coin.Durability_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Durability_Score }}</span>
+
+                            <span class="d {% if coin.Durability_Score|float < 50 %}dmv-low{% elif coin.Durability_Score|float <= 70 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Durability_Score }}</span>
                         </div>
                         <div>
-                            
-                            <span class="m" style="color: {% if coin.Momentum_Score >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Momentum_Score }}</span>
+
+                            <span class="m {% if coin.Momentum_Score|float < 50 %}dmv-low{% elif coin.Momentum_Score|float <= 70 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Momentum_Score }}</span>
                         </div>
                         <div>
-                            
-                            <span class="v" style="color: {% if coin.Valuation_Score    >= 0 %}#00ff5f{% else %}#ff355b{% endif %};">{{ coin.Valuation_Score }}</span>
+
+                            <span class="v {% if coin.Valuation_Score|float < 50 %}dmv-low{% elif coin.Valuation_Score|float <= 70 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Valuation_Score }}</span>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="footer-text">Data Provided By</div>
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
 </body>
 </html>

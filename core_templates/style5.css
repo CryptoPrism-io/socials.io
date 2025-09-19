@@ -6,8 +6,8 @@
 }
 
 html, body {
-    width: 1080px;
-    height: 1080px;
+    width: 2160px;
+    height: 2700px;
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
     color: white;
@@ -34,6 +34,18 @@ body {
         text-shadow: 0 0 25px currentColor, 0 0 45px currentColor;
         transform: scale(1.02);
     }
+}
+
+/* 📱 Main Page Container */
+.main-container {
+    width: 2160px;
+    height: 2700px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 /* 🚀 Unified Bitcoin Dashboard Component - Template 5 */
@@ -70,23 +82,34 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* 📋 Standalone Header (outside cards) */
+.main-container > .dashboard-header-section {
+    padding: 0;
+    margin-bottom: 40px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    border-radius: 0;
+}
+
 .crypto-prism-brand {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
 .prism-triangle {
     width: 0;
     height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 12px solid #ff6b35;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 24px solid #ff6b35;
     filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.4));
 }
 
 .brand-text {
-    font-size: 14px;
+    font-size: 1.875rem; /* 30px */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
@@ -97,11 +120,29 @@ body {
 }
 
 .last-update {
-    font-size: 9px;
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+.last-update-label {
+    font-size: 1.5rem; /* 24px */
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 4px;
+}
+.last-update-date {
+    font-size: 2rem; /* 32px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.last-update-time {
+    font-size: 1.75rem; /* 28px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Inter', sans-serif;
 }
 
 /* 🪙 Ultra Compact BTC Information */
@@ -143,7 +184,7 @@ body {
 }
 
 .btc-symbol {
-    font-size: 14px;
+    font-size: 3.5rem; /* 56px equiv */
     font-weight: 700;
     background: linear-gradient(45deg, #f7931a, #ffffff, #f7931a);
     -webkit-background-clip: text;
@@ -152,7 +193,7 @@ body {
 }
 
 .btc-price {
-    font-size: 16px;
+    font-size: 5.25rem; /* 84px equiv */
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 25%, #e0e0e0 50%, #ffffff 75%);
     -webkit-background-clip: text;
@@ -175,14 +216,14 @@ body {
 }
 
 .market-label {
-    font-size: 8px;
+    font-size: 1.875rem; /* 30px equiv */
     color: rgba(255, 255, 255, 0.6);
     font-weight: 500;
     text-transform: uppercase;
 }
 
 .market-value {
-    font-size: 11px;
+    font-size: 2.75rem; /* 44px equiv */
     color: rgba(255, 255, 255, 0.9);
     font-weight: 700;
 }
@@ -312,6 +353,7 @@ body {
 }
 
 .time {
+    font-family: 'Inter', monospace;
     font-size: 28px;
     font-weight: 700;
     background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
@@ -324,6 +366,7 @@ body {
 
 /* 💰 Market Data Styling */
 .m-cap {
+    font-family: 'Inter', monospace;
     font-size: 24px;
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
@@ -334,6 +377,7 @@ body {
 }
 
 .pct-change {
+    font-family: 'Inter', monospace;
     font-size: 18px;
     font-weight: 700;
     padding: 4px 8px;
@@ -411,6 +455,7 @@ body {
 }
 
 .roww3 .m-cap {
+    font-family: 'Inter', monospace;
     font-size: 32px;
     font-weight: 800;
     background: linear-gradient(135deg, #00ccff, #00ffcc, #ccff00);
@@ -446,6 +491,7 @@ body {
 }
 
 .row4 .m-cap {
+    font-family: 'Inter', monospace;
     font-size: 26px;
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
@@ -456,3 +502,13 @@ body {
 }
 
 
+
+/* 📝 Footer */
+.footer-container {
+    text-align: center;
+    font-size: 1.875rem; /* 30px equiv */
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin-top: 40px;
+}
