@@ -42,7 +42,7 @@ body {
     padding: 60px;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 80px;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -53,7 +53,7 @@ body {
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     border-radius: 56px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
         0 24px 80px rgba(0, 0, 0, 0.4),
@@ -73,11 +73,11 @@ body {
     backdrop-filter: blur(30px) saturate(150%);
     -webkit-backdrop-filter: blur(30px) saturate(150%);
     border-radius: 48px;
-    border: 4px solid rgba(255, 255, 255, 0.8);
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
 
     box-shadow:
-        0 0 40px rgba(255, 255, 255, 0.3),
-        0 0 80px rgba(255, 255, 255, 0.15),
+        0 0 12px rgba(255, 255, 255, 0.09),
+        0 0 24px rgba(255, 255, 255, 0.045),
         0 16px 64px rgba(0, 0, 0, 0.4),
         inset 0 2px 0 rgba(255, 255, 255, 0.2);
 
@@ -104,17 +104,6 @@ body {
     width: 100%;
 }
 
-.treemap-container {
-    display: flex;
-    width: 100%;
-    height: 300px;
-    border-radius: 30px;
-    overflow: hidden;
-    border: 6px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-        0 0 30px rgba(0, 0, 0, 0.3),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
-}
 
 .treemap-cell {
     position: relative;
@@ -122,7 +111,8 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    border-right: 2px solid rgba(255, 255, 255, 0.2);
+    border-right: 0.5px solid rgba(255, 255, 255, 0.05);
+    z-index: 2;
 }
 
 .treemap-cell:last-child {
@@ -136,32 +126,61 @@ body {
 
 .btc-cell {
     background: linear-gradient(135deg,
-        #b8864d 0%,
-        #a67a44 50%,
-        #956e3b 100%);
+        #F7931A 0%,
+        #E8841A 50%,
+        #D9751A 100%);
     box-shadow:
-        0 0 20px rgba(248, 147, 26, 0.4),
+        0 0 25px rgba(247, 147, 26, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+/* Dark overlay covering the entire treemap container */
+.treemap-container {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.3),
         inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+/* Dark glassmorphism overlay covering entire treemap */
+.treemap-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .eth-cell {
     background: linear-gradient(135deg,
-        #7a8bac 0%,
-        #6f82a5 50%,
-        #64799e 100%);
+        #627EEA 0%,
+        #5A72E1 50%,
+        #5266D8 100%);
     box-shadow:
-        0 0 20px rgba(98, 126, 234, 0.4),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        0 0 25px rgba(98, 126, 234, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
 }
 
 .others-cell {
     background: linear-gradient(135deg,
-        #a085b8 0%,
-        #967cb1 50%,
-        #8c73aa 100%);
+        #8E9AAF 0%,
+        #7F8CA6 50%,
+        #707E9D 100%);
     box-shadow:
-        0 0 20px rgba(139, 92, 246, 0.4),
-        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        0 0 25px rgba(142, 154, 175, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
 }
 
 .cell-content {
@@ -169,15 +188,83 @@ body {
     color: white;
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 0;
+    border: none;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Cell header with logo and label */
+.cell-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+/* Cryptocurrency logos */
+.cell-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Others icon styling */
+.others-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Percentage change styling */
+.cell-change {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Color coding for percentage changes */
+.cell-change.positive {
+    color: #00FF88;
+}
+
+.cell-change.negative {
+    color: #FF4757;
 }
 
 .cell-label {
     font-size: 36px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 10px;
     letter-spacing: 2px;
-    font-family: 'Orbitron', monospace;
+    font-family: 'Inter', sans-serif;
 }
 
 .cell-percentage {
@@ -191,7 +278,7 @@ body {
 /* 📊 Enhanced Indicators Section - Horizontal Layout */
 .indicators-section {
     display: flex;
-    gap: 60px;
+    gap: 90px;
     width: 100%;
     flex-shrink: 0;
     justify-content: center;
@@ -206,10 +293,10 @@ body {
     background: rgba(0, 0, 0, 0.08);
     border-radius: 40px;
     padding: 50px 40px;
-    border: 4px solid rgba(255, 255, 255, 0.6);
+    border: 0.5px solid rgba(255, 255, 255, 0.06);
     box-shadow:
-        0 0 15px rgba(255, 255, 255, 0.2),
-        0 0 30px rgba(255, 255, 255, 0.1);
+        0 0 4.5px rgba(255, 255, 255, 0.06),
+        0 0 9px rgba(255, 255, 255, 0.03);
 }
 
 .speedometer-circle.enhanced {
@@ -420,7 +507,7 @@ body {
     align-items: flex-start;
     gap: 80px;
     padding-top: 40px;
-    border-top: 2px solid rgba(255, 255, 255, 0.1);
+    border-top: 0.5px solid rgba(255, 255, 255, 0.03);
 }
 
 /* 📊 Market Data Section - Side by Side Layout */
@@ -433,7 +520,7 @@ body {
     backdrop-filter: blur(15px) saturate(150%);
     -webkit-backdrop-filter: blur(15px) saturate(150%);
     border-radius: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
     box-shadow:
         0 0 20px rgba(255, 255, 255, 0.3),
         0 0 40px rgba(255, 255, 255, 0.15),
@@ -507,14 +594,14 @@ body {
 }
 
 .sentiment-count {
-    font-size: 40px;
+    font-size: 56px;
     font-weight: 800;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 30px currentColor;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 8px currentColor;
     font-family: 'Inter', sans-serif;
 }
 
 .sentiment-label {
-    font-size: 24px;
+    font-size: 28px;
     color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
@@ -525,7 +612,7 @@ body {
 }
 
 .trend-value {
-    font-size: 34px;
+    font-size: 56px;
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -559,7 +646,7 @@ body {
         #16a34a 100%
     );
     border-radius: 12px;
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.3),
         inset 0 2px 4px rgba(255, 255, 255, 0.1),
@@ -692,6 +779,18 @@ body {
     margin-top: 2px;
 }
 
+/* 📍 Fear & Greed Indicator Line */
+.fear-greed-indicator {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    z-index: 10;
+}
+
 /* 📊 Altseason Bullet Chart */
 .altseason-bullet-chart {
     margin: 30px 0;
@@ -711,7 +810,7 @@ body {
         rgba(51, 204, 51, 0.25) 100%
     );
     border-radius: 12px;
-    border: 3px solid rgba(255, 255, 255, 0.4);
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
     box-shadow:
         0 4px 12px rgba(0, 0, 0, 0.3),
         inset 0 2px 4px rgba(255, 255, 255, 0.1),
@@ -873,6 +972,18 @@ body {
     font-weight: 600;
     text-align: center;
     margin-top: 4px;
+}
+
+/* 📍 Altseason Indicator Line */
+.altseason-indicator {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    z-index: 10;
 }
 
 /* Color Classes */
@@ -1178,6 +1289,147 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 📰 Bitcoin News & Events Section */
+.bitcoin-news-section {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.news-card {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.news-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #F7931A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(247, 147, 26, 0.3);
+}
+
+.news-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.news-bullet {
+    color: #F7931A;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 2px;
+    min-width: 16px;
+}
+
+.news-text {
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+
+/* Different bullet color for next 24h events */
+.news-card:nth-child(2) .news-bullet {
+    color: #FFC107;
+}
+
+/* 👆 Swipe Left Indicator */
+.swipe-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding: 15px 25px;
+    background: rgba(247, 147, 26, 0.1);
+    border-radius: 50px;
+    border: 1px solid rgba(247, 147, 26, 0.2);
+    backdrop-filter: blur(10px);
+    animation: swipePulse 2s ease-in-out infinite;
+}
+
+.swipe-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #F7931A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.swipe-arrow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.arrow-line {
+    width: 20px;
+    height: 2px;
+    background: #F7931A;
+    border-radius: 1px;
+    animation: arrowSlide 2s ease-in-out infinite;
+}
+
+.arrow-tip {
+    font-size: 24px;
+    font-weight: 700;
+    color: #F7931A;
+    line-height: 1;
+    animation: arrowBounce 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes swipePulse {
+    0%, 100% {
+        background: rgba(247, 147, 26, 0.1);
+        border-color: rgba(247, 147, 26, 0.2);
+    }
+    50% {
+        background: rgba(247, 147, 26, 0.15);
+        border-color: rgba(247, 147, 26, 0.3);
+    }
+}
+
+@keyframes arrowSlide {
+    0%, 100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(8px);
+        opacity: 0.7;
+    }
+}
+
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
 }
 
 /* 📝 Footer */

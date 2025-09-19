@@ -10,6 +10,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v1.8.0] - 2025-09-19
+
+### 🚀 NEW: Template 6 - Dedicated Bitcoin Snapshot with AI News
+- **New Template 6**: Created dedicated Bitcoin-only snapshot page with comprehensive market analysis
+  - **Bitcoin Dashboard**: Full BTC price, market cap, 24H volume, and performance metrics (1D, 7D, 30D)
+  - **Market Sentiment**: Real-time bearish, neutral, and bullish sentiment counts with trend analysis
+  - **AI-Powered News**: Integrated Together AI API for dynamic Bitcoin news and events generation
+
+### 📰 NEW: Bitcoin News & Events System
+- **Past 24 Hours**: AI-generated insights on recent Bitcoin market developments
+- **Next 24 Hours**: Forward-looking analysis of key levels and events to watch
+- **Smart Fallback**: Placeholder content system when AI API is unavailable
+- **JSON Parsing**: Robust error handling and content validation for reliable news delivery
+
+### 🎨 NEW: Interactive Swipe Indicator
+- **Carousel Navigation**: Added animated "Swipe left for more" indicator for Instagram Stories
+- **Bitcoin Orange Branding**: Consistent #F7931A theming with glassmorphism effects
+- **Smooth Animations**: Multi-layer animations (swipePulse, arrowSlide, arrowBounce) for engagement
+- **Mobile-Optimized**: Instagram-friendly design with subtle, continuous animation loops
+
+### 🔧 ENHANCED: Template System Architecture
+- **Page Restructuring**: Moved Page 1 from Bitcoin dashboard to top 24 coins grid layout
+- **Continuity Flow**: Page 1 (ranks 1-24), Page 2 (ranks 25-48) for seamless coin progression
+- **Market Dominance Migration**: Relocated market dominance tree map from Page 1 to Page 5
+- **Database Optimization**: Updated queries for proper coin rank distribution across templates
+
+### 💻 TECHNICAL: AI Integration & Rendering Pipeline
+- **Together AI Integration**: Implemented Bitcoin-specific news generation with model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+- **render_page_6()**: New async function for Template 6 generation with news data integration
+- **Enhanced Error Handling**: Comprehensive fallback systems for API failures and JSON parsing errors
+- **Auto-Layout Architecture**: Maintained consistent glassmorphism and responsive design patterns
+
 ## [v1.1.0] - 2025-09-17
 
 ### 🎨 MAJOR: Unified Template Styling & Data Optimization
@@ -1138,4 +1170,4 @@ git log --oneline -- ".github/workflows/"
 
 **Validation**: Post-fix verification confirms Template 3 now displays with appropriate font sizes matching the established standards of Templates 1 and 2, with all text elements clearly readable and properly proportioned in the 2160px viewport.
 
-**Commit Hash**: [To be added after commit]
+**Commit Hash**: `f4e5015`
