@@ -28,7 +28,8 @@
       "Bash(for i in 3 4 5)",
       "Bash(do cp delete_folder/style$i.css delete_folder/style$i_backup.css)",
       "Bash(done)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []

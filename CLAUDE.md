@@ -2,101 +2,152 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
+## Common Development Commands
 
-This is a social media automation system called "socials.io" focused on automating customer acquisition through automated social media content creation and posting. The system primarily generates Instagram posts from data sources and uses various APIs for content creation and social media posting.
-
-## Key Commands
-
-### Running Scripts Locally
+### Environment Setup
 ```bash
-# Main Instagram post generation and publishing
-python instapost.py
+# Install core dependencies
+pip install -r requirements.txt
 
-# Push additional Instagram content
-python instapost_push.py
+# Install development dependencies
+pip install -r requirements-dev.txt
 
-# Generate Figma-based content
-python figma.py
+# Install Playwright browsers for screenshot generation
+playwright install chromium
+playwright install firefox
+playwright install webkit
 
-# Update Google Sheets data
-python gsheets.py
+# Windows UTF-8 setup (if needed)
+scripts/setup_windows_utf8.bat
 ```
 
-### GitHub Actions Workflows
-The project uses three automated workflows:
-
-- **Instagram Story Workflow** (`Instagram_Story.yml`): Runs daily at 00:30 UTC, executes both `instapost.py` and `instapost_push.py`
-- **Google Sheets Update** (`gsheets.yml`): Runs daily at 00:30 UTC, executes `gsheets.py`
-- **Figma Content Generation** (`figma.yml`): Manual trigger only, executes `figma.py`
-
-### Dependencies Installation
+### Testing
 ```bash
-# For Instagram posting workflow
-pip install together psycopg2 nest_asyncio requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib instagrapi playwright python-dotenv pillow sqlalchemy jinja2
+# Run structure validation tests
+python tests/test_path_structure.py
 
-# For Google Sheets workflow
-pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client pandas numpy matplotlib seaborn mysql-connector-python sqlalchemy requests psycopg2-binary gspread oauth2client gspread-dataframe
+# Run full test suite
+python -m pytest tests/ -v --tb=short
 
-# For Figma workflow
-pip install requests pandas gspread oauth2client google-api-python-client google-auth-httplib2 google-auth-oauthlib together Pillow instagrapi
+# Environment validation
+python scripts/validate_env.py
+python scripts/validate_project.py
+```
 
-# Install Playwright browsers (required for screenshot generation)
-playwright install chromium && playwright install firefox && playwright install webkit
+### Code Quality
+```bash
+# Linting
+flake8 src/
+pylint src/
+
+# Code formatting
+black src/
+isort src/
+
+# Security scanning
+bandit -r src/
+
+# Type checking
+mypy src/
+```
+
+### Main Application Scripts
+```bash
+# Generate Instagram content from database
+python src/scripts/instapost.py
+
+# Publish generated content to Instagram
+python src/scripts/instapost_push.py
+
+# Sync PostgreSQL data to Google Sheets
+python src/scripts/gsheets.py
+
+# Figma integration workflow
+python src/scripts/figma.py
 ```
 
 ## Architecture Overview
 
-### Core Components
+### Core Pipeline
+Socials.io is a **social media automation platform** that follows a multi-stage data pipeline:
 
-1. **Content Generation Pipeline**:
-   - `instapost.py`: Main Instagram content generator using Playwright for HTML-to-image conversion
-   - `instapost_push.py`: Secondary content publisher with enhanced error handling
-   - `figma.py`: Figma-based content integration
-   - `gsheets.py`: Google Sheets data synchronization
+1. **Data Sources** → PostgreSQL database, Google Sheets, Google Drive
+2. **Content Generation** → AI-powered content creation using Together AI API
+3. **Template Rendering** → HTML/CSS templates with Jinja2 dynamic data injection
+4. **Image Generation** → Playwright browser automation for HTML-to-image screenshots
+5. **Publishing** → Instagram API integration via instagrapi
 
-2. **HTML Templates & Styling**:
-   - Template files: `1.html` through `5.html` (base templates)
-   - Generated output: `1_output.html` through `5_output.html` (rendered with data)
-   - Corresponding CSS: `style.css` through `style5.css`
-   - Image outputs: `*.png` and `*.jpg` files generated from HTML templates
+### Key Components
 
-3. **Data Sources**:
-   - PostgreSQL database (GCP-hosted at 34.55.195.199)
-   - Google Sheets integration via gspread
-   - Google Drive API for file management
+#### Template System (`core_templates/`)
+- **HTML Templates**: `1.html` through `5.html` - Base templates with auto-layout architecture
+- **CSS Stylesheets**: `style.css` through `style5.css` - Flexbox-based layouts with glassmorphism effects
+- **Jinja2 Integration**: Dynamic data injection with proper path resolution
+- **Instagram Format**: Optimized for 1080x1080 square screenshots
+
+#### Main Scripts (`src/scripts/`)
+- **`instapost.py`**: Main content generation pipeline with HTML-to-image conversion
+- **`instapost_push.py`**: Enhanced content publishing with error handling and retry logic
+- **`gsheets.py`**: PostgreSQL to Google Sheets data synchronization
+- **`figma.py`**: Figma-based design workflow integration
+
+#### Output Structure (`output/`)
+- **`output/html/`**: Generated HTML files with live data (`*_output.html`)
+- **`output/images/`**: Final Instagram posts in JPG format for publishing
 
 ### Technology Stack
-
 - **Web Automation**: Playwright (async) for HTML screenshot generation
-- **Instagram API**: instagrapi for posting content
-- **AI Content**: Together AI API for content generation
-- **Template Engine**: Jinja2 for HTML template rendering
-- **Database**: PostgreSQL with SQLAlchemy ORM
-- **Google Services**: gspread, Google Drive API, Google Sheets API
-- **Image Processing**: Pillow (PIL)
+- **AI Content**: Together AI API for intelligent content and caption generation
+- **Instagram API**: instagrapi for automated posting and publishing
+- **Template Engine**: Jinja2 for dynamic HTML content rendering
+- **Database**: PostgreSQL + SQLAlchemy for data storage and management
+- **Google Services**: gspread, Google Drive/Sheets API for cloud data integration
 
-### Environment Variables Required
+### Automated Workflows (GitHub Actions)
+- **Instagram Content Pipeline** (`.github/workflows/Instagram_Story.yml`): Daily at 00:31 UTC
+  - Runs structure validation tests
+  - Executes `instapost.py` → `instapost_push.py` sequence
+  - Environment: Python 3.11, Ubuntu latest, Playwright Chromium
+- **Google Sheets Sync** (`.github/workflows/gsheets.yml`): Daily data synchronization
+- **Figma Integration** (`.github/workflows/figma.yml`): Manual trigger workflow
 
-All scripts require these environment variables:
+## Development Guidelines
+
+### Template Development
+- Templates use auto-layout container systems (no absolute positioning)
+- All templates must be Instagram-compatible (1080x1080 aspect ratio)
+- Use Poppins font family for brand consistency
+- Jinja2 variables for dynamic content injection
+- CSS uses flexbox layouts with glassmorphism design effects
+
+### Screenshot Generation
+- Playwright generates high-quality screenshots at 2160x2700 viewport
+- Images are saved as JPEG with 95% quality for Instagram optimization
+- Browser automation includes proper viewport scaling and media emulation
+
+### Database Integration
+- PostgreSQL connection via SQLAlchemy engine
+- Database credentials configured in environment variables
+- Data flows: PostgreSQL → Python processing → Jinja2 rendering → HTML → Screenshot
+
+### Environment Configuration
+Required environment variables:
 - `GCP_CREDENTIALS`: Google Cloud Platform service account JSON
-- `TOGETHER_API_KEY`: Together AI API key
-- `INSTAGRAM_DRIVE_FILE_ID`: Google Drive file ID for Instagram content
-- `CRYPTO_SPREADSHEET_KEY`: Google Sheets key for crypto data
-- `INSTAGRAM_USERNAME`: Instagram account username
-- `INSTAGRAM_PASSWORD`: Instagram account password
+- `TOGETHER_API_KEY`: Together AI API key for content generation
+- `INSTAGRAM_USERNAME/PASSWORD`: Instagram account credentials
+- `INSTAGRAM_DRIVE_FILE_ID`: Google Drive file ID for content storage
+- `CRYPTO_SPREADSHEET_KEY`: Google Sheets key for data source
 
-### Data Flow
+### Code Patterns
+- Async/await pattern for Playwright browser automation
+- SQLAlchemy engine initialization with connection pooling
+- Jinja2 Environment with FileSystemLoader for template rendering
+- Error handling with comprehensive retry logic in publishing workflows
 
-1. `gsheets.py` pulls data from PostgreSQL database and updates Google Sheets
-2. `instapost.py` reads data from Google Sheets, generates HTML content using Jinja2 templates, converts to images via Playwright, and posts to Instagram
-3. `instapost_push.py` performs additional content publishing with refined workflows
-4. `figma.py` integrates Figma-based design workflows
+## Important Notes
 
-### File Structure
-
-- **Scripts**: `*.py` files in root directory
-- **Templates**: `1.html` - `5.html` (base templates), `*_output.html` (rendered)
-- **Styles**: `style*.css` files
-- **Generated Images**: `*.png` and `*.jpg` files
-- **Config**: `.github/workflows/` for GitHub Actions automation
+- Never commit sensitive credentials to repository
+- All file paths use absolute path resolution for cross-platform compatibility
+- Windows UTF-8 encoding issues are handled by setup scripts in `scripts/`
+- Template customization requires updating both HTML and corresponding CSS files
+- Instagram posting respects API rate limits and account restrictions

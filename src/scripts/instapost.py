@@ -64,7 +64,7 @@ def fetch_data_as_dataframe():
     query_top_25 = """
       SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
       FROM crypto_listings_latest_1000
-      WHERE cmc_rank < 26
+      WHERE cmc_rank BETWEEN 2 AND 25
       """
 
     try:
