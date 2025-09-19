@@ -6,9 +6,19 @@ Checks if all required environment variables are properly set.
 import os
 from pathlib import Path
 
-# Load environment variables from .env file
+# Load environment variables from .env file using python-dotenv
+from dotenv import load_dotenv
+
+# Load environment variables from .env file using python-dotenv
 def load_env():
+    """Load environment variables from a .env file."""
     env_file = Path('.env')
+    if env_file.exists():
+        load_dotenv()
+        print("+ .env file loaded successfully")
+    else:
+        print("! .env file not found")
+    return
     if env_file.exists():
         with open(env_file, 'r') as f:
             for line in f:
