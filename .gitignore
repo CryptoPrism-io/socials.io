@@ -172,3 +172,7 @@ output/images/
 # core_templates/fonts/*.woff2
 # core_templates/fonts/*.woff
 # core_templates/fonts/*.ttf
+
+# Local data storage
+data/
+!data/.gitkeep

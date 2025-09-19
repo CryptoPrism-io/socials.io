@@ -30,19 +30,20 @@ def load_env():
     else:
         print("! .env file not found")
 
-# Required environment variables for socialio
+# Required environment variables for socialio (updated for local JSON storage)
 REQUIRED_VARS = [
-    'GCP_CREDENTIALS',
-    'TOGETHER_API_KEY',
-    'INSTAGRAM_DRIVE_FILE_ID',
     'CRYPTO_SPREADSHEET_KEY',
     'INSTAGRAM_USERNAME',
-    'INSTAGRAM_PASSWORD'
+    'INSTAGRAM_PASSWORD',
+    'INSTAGRAM_JSON_FILE'
 ]
 
 # Optional but recommended variables
 OPTIONAL_VARS = [
-    'OPENROUTER_API_KEY'
+    'OPENROUTER_API_KEY',
+    'TOGETHER_API_KEY',
+    'CMC_API_KEY',
+    'COINGECKO_API_KEY'
 ]
 
 def validate_environment():
