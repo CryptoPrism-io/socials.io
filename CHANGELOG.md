@@ -10,6 +10,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v1.8.0] - 2025-09-19
+
+### 🚀 NEW: Template 6 - Dedicated Bitcoin Snapshot with AI News
+- **New Template 6**: Created dedicated Bitcoin-only snapshot page with comprehensive market analysis
+  - **Bitcoin Dashboard**: Full BTC price, market cap, 24H volume, and performance metrics (1D, 7D, 30D)
+  - **Market Sentiment**: Real-time bearish, neutral, and bullish sentiment counts with trend analysis
+  - **AI-Powered News**: Integrated Together AI API for dynamic Bitcoin news and events generation
+
+### 📰 NEW: Bitcoin News & Events System
+- **Past 24 Hours**: AI-generated insights on recent Bitcoin market developments
+- **Next 24 Hours**: Forward-looking analysis of key levels and events to watch
+- **Smart Fallback**: Placeholder content system when AI API is unavailable
+- **JSON Parsing**: Robust error handling and content validation for reliable news delivery
+
+### 🎨 NEW: Interactive Swipe Indicator
+- **Carousel Navigation**: Added animated "Swipe left for more" indicator for Instagram Stories
+- **Bitcoin Orange Branding**: Consistent #F7931A theming with glassmorphism effects
+- **Smooth Animations**: Multi-layer animations (swipePulse, arrowSlide, arrowBounce) for engagement
+- **Mobile-Optimized**: Instagram-friendly design with subtle, continuous animation loops
+
+### 🔧 ENHANCED: Template System Architecture
+- **Page Restructuring**: Moved Page 1 from Bitcoin dashboard to top 24 coins grid layout
+- **Continuity Flow**: Page 1 (ranks 1-24), Page 2 (ranks 25-48) for seamless coin progression
+- **Market Dominance Migration**: Relocated market dominance tree map from Page 1 to Page 5
+- **Database Optimization**: Updated queries for proper coin rank distribution across templates
+
+### 💻 TECHNICAL: AI Integration & Rendering Pipeline
+- **Together AI Integration**: Implemented Bitcoin-specific news generation with model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+- **render_page_6()**: New async function for Template 6 generation with news data integration
+- **Enhanced Error Handling**: Comprehensive fallback systems for API failures and JSON parsing errors
+- **Auto-Layout Architecture**: Maintained consistent glassmorphism and responsive design patterns
+
 ## [v1.1.0] - 2025-09-17
 
 ### 🎨 MAJOR: Unified Template Styling & Data Optimization
@@ -974,3 +1006,168 @@ git log --oneline -- ".github/workflows/"
 **Research-Driven Implementation**: All changes based on comprehensive 2025 best practices analysis, ensuring technical decisions align with current Instagram algorithm preferences and user engagement patterns.
 
 **Commit Hash**: `7a613c4`
+
+---
+
+## [v1.7.0] - 2025-09-19 07:24 UTC
+
+### 🎯 MAJOR: Complete Template System Overhaul & 2160px Resolution Update
+
+### Changed
+- **Template Resolution Scaling**: Successfully scaled all templates from 1080px to 2160px resolution for high-quality viewport output
+  - **Template 1**: Removed `transform: scale(2)` and properly scaled main container to 2160x2700px with 2x font sizes
+  - **Template 2**: Applied similar scaling with proper flexbox auto-layout implementation
+  - **Template 3**: Major restructuring to remove absolute positioning and implement auto-layout architecture
+  - **Templates 4 & 5**: Consistent scaling applied across all templates for uniform high-resolution output
+
+- **Auto-Layout Architecture Implementation**: Eliminated problematic absolute positioning across template system
+  - **Flexbox-Based Layouts**: Converted all templates to use proper flexbox containers with natural document flow
+  - **Template 3 Critical Fix**: Removed absolute positioning from `.unified-btc-dashboard` and `.footer-text` elements
+  - **HTML Structure Improvements**: Wrapped BTC content in `.btc-dashboard-card` for proper layout containment
+  - **Consistent Spacing**: Implemented proper gap management using flexbox gaps instead of absolute coordinates
+
+- **Typography System Enhancement**: Implemented responsive font sizing using rem units
+  - **Initial Doubling**: Font sizes doubled for better screen coverage at 2160px resolution
+  - **User-Driven Adjustments**: Multiple refinements based on user feedback to achieve optimal readability
+  - **Template 3 Font Optimization**: Comprehensive font size reduction after user feedback about oversized text
+  - **Cross-Template Consistency**: Standardized font sizing approach across all 5 templates
+
+- **Footer Standardization**: Updated all template footers for brand consistency
+  - **Unified Branding**: Changed from "Data Provided By" to "cryptoprism.io" across all templates
+  - **CSS Class Standardization**: Converted footer elements to use consistent `.footer-container` class
+
+### Added
+- **Conditional DMV Score Coloring**: Implemented dynamic color system for Durability, Momentum, Volatility scores
+  - **Color Zones**: Below 50 (orange), 50-70 (yellow/gold), Above 70 (green)
+  - **CSS Classes**: `.dmv-low`, `.dmv-medium`, `.dmv-high` with appropriate color values
+  - **Jinja2 Logic**: Conditional template logic for automatic color assignment based on score values
+  - **Template 3 Integration**: Applied to DMV scores in top gainers/losers sections
+
+- **Enhanced Background System**: Restored gradient backgrounds while maintaining header consistency
+  - **User-Requested Reversion**: Initially implemented black backgrounds, then restored original gradients per user feedback
+  - **Header Preservation**: Maintained proper header styling while reverting background changes
+
+### Fixed
+- **Template 3 Critical Layout Issues**: Resolved missing Bitcoin dashboard section that was inadvertently hidden
+  - **User Feedback Resolution**: Fixed Bitcoin section visibility by adjusting `.btc-dashboard-card` padding and border-radius
+  - **Layout Restoration**: Restored proper Bitcoin dashboard display without compromising overall layout
+
+- **CMC Ranking Optimization**: Updated database queries to exclude Bitcoin from Template 2 display
+  - **Query Modification**: Changed from `WHERE cmc_rank < 26` to `WHERE cmc_rank BETWEEN 2 AND 25`
+  - **Template 2 Enhancement**: Now shows ranks 2-25, preventing Bitcoin duplication across templates
+
+- **Viewport Output Issues**: Resolved small output display in 2160px viewport
+  - **Scale Transform Removal**: Eliminated CSS transform scaling that caused display issues
+  - **Proper Dimensional Scaling**: Implemented native 2160px width containers with proportional height scaling
+  - **Cross-Template Application**: Applied viewport fixes consistently across all 5 templates
+
+### Removed
+- **Absolute Positioning Dependencies**: Eliminated brittle absolute positioning system
+  - **CSS Architecture Cleanup**: Removed position absolute declarations causing layout conflicts
+  - **HTML Inline Styles**: Removed problematic inline positioning styles from template HTML
+  - **Legacy Layout Constraints**: Freed templates from fixed pixel positioning limitations
+
+### Technical Implementation
+- **CSS Architecture Modernization**: Complete rewrite of layout systems using modern flexbox patterns
+  - **Main Container System**: Implemented consistent 2160x2700px containers with proper padding and gap management
+  - **Responsive Design Principles**: Auto-layout ensures content adapts naturally without manual positioning
+  - **Cross-Browser Compatibility**: Flexbox-based layouts provide consistent rendering across all environments
+
+- **Font System Standardization**: Developed rem-based typography system for consistent scaling
+  - **Proportional Scaling**: All font sizes scaled proportionally to maintain design hierarchy
+  - **User Feedback Integration**: Multiple iterations based on readability feedback and visual balance
+  - **Template-Specific Optimization**: Custom font adjustments for each template's content density
+
+- **Database Integration Enhancement**: Improved data querying for better template-specific content
+  - **Rank Filtering**: Smart CMC rank filtering to prevent content duplication between templates
+  - **Dynamic Data Binding**: Enhanced Jinja2 integration for real-time data updates
+
+### Rationale
+
+**High-Resolution Display Requirements**: The 2160px scaling addressed critical user needs for proper viewport utilization. The original 1080px templates were displaying too small in high-resolution environments, reducing readability and professional appearance.
+
+**Modern Layout Architecture**: Absolute positioning represented outdated CSS practices that created maintenance challenges and layout brittleness. The auto-layout implementation provides:
+- **Maintainable Code**: Easier to modify and enhance layouts without pixel-perfect calculations
+- **Responsive Behavior**: Content adapts naturally to different viewport sizes and content lengths
+- **Professional Standards**: Aligns with modern web development best practices for CSS layout
+
+**User Experience Enhancement**: The comprehensive typography improvements ensure:
+- **Optimal Readability**: Font sizes calibrated for 2160px resolution viewing
+- **Visual Hierarchy**: Proper scaling maintains design relationships and information hierarchy
+- **Cross-Template Consistency**: Unified typography system provides professional appearance
+
+**Brand Consistency**: Footer standardization and gradient background preservation maintain visual brand identity while improving technical implementation.
+
+**Data Visualization Enhancement**: DMV score coloring provides immediate visual feedback for cryptocurrency analysis, improving user comprehension of market data.
+
+**Technical Excellence**: The template system overhaul positions the project for:
+- **Future Scalability**: Clean architecture supports easy addition of new templates and features
+- **Maintenance Efficiency**: Auto-layout reduces debugging time and layout-related issues
+- **Cross-Platform Reliability**: Modern CSS ensures consistent rendering across different browsers and devices
+
+**Business Impact**: High-quality, properly scaled templates improve:
+- **Content Professionalism**: Better visual presentation for social media automation
+- **User Engagement**: Enhanced readability and visual appeal drive better audience interaction
+- **Competitive Advantage**: Modern template system positions content ahead of competitors using outdated layouts
+
+**User-Driven Development**: The iterative refinement process based on direct user feedback demonstrates responsive development approach, ensuring final output meets actual usage requirements rather than theoretical specifications.
+
+**Commit Hash**: `282a336`
+
+---
+
+## [v1.7.1] - 2025-09-19 09:00 UTC
+
+### 🎯 CRITICAL: Template 3 Font Scaling Fix - Achieved Cross-Template Consistency
+
+### Fixed
+- **Template 3 Typography Crisis**: Resolved severely undersized fonts that were causing readability issues in 2160px viewport
+  - **Font Scale Alignment**: Scaled all Template 3 fonts to match Templates 1 and 2 sizing standards
+  - **Header Text Enhancement**: Brand text increased from 2.5rem (40px) to 3.5rem (56px) for proper prominence
+  - **Date/Time Scaling**: Last update labels scaled from 1rem (16px) to 1.875rem (30px), dates from 1.375rem (22px) to 2.75rem (44px)
+  - **Coin Data Visibility**: Coin names scaled from 1.5rem (24px) to 2.75rem (44px), prices from 1.25rem (20px) to 2.5rem (40px)
+  - **Market Cap Readability**: Market values increased from 1.125rem (18px) to 2.125rem (34px)
+  - **DMV Score Enhancement**: D/M/V scores scaled from 1.125rem (18px) to 2.125rem (34px) for proper visibility
+  - **Percentage Changes**: Performance percentages scaled from 1.125rem (18px) to 2.125rem (34px)
+
+### Changed
+- **Typography Standardization**: Implemented consistent font scaling across all text elements in Template 3
+  - **BTC Symbol**: Scaled from 2rem (32px) to 3rem (48px) for brand consistency
+  - **BTC Price**: Enhanced from 2.5rem (40px) to 3.75rem (60px) for prominence
+  - **Market Labels**: Increased from 0.875rem (14px) to 1.5rem (24px) for readability
+  - **Performance Titles**: Scaled from 1rem (16px) to 1.875rem (30px) for section hierarchy
+  - **Sentiment Counts**: Enhanced from 1.5rem (24px) to 2.75rem (44px) for data emphasis
+  - **Trend Values**: Scaled from 1.375rem (22px) to 2.75rem (44px) for visual impact
+
+### Enhanced
+- **Cross-Template Visual Consistency**: Template 3 now perfectly aligns with Templates 1 and 2 font sizing standards
+  - **Professional Appearance**: All templates now maintain consistent visual hierarchy and readability
+  - **2160px Viewport Optimization**: Font sizes properly scaled for high-resolution display requirements
+  - **User Experience Improvement**: Eliminated "tiny text" issues that made Template 3 difficult to read
+  - **Brand Consistency**: Uniform typography standards across entire template system
+
+### Technical Implementation
+- **Comprehensive Font Scaling**: Updated 15+ CSS font-size declarations in `core_templates/style3.css`
+  - **Strategic Size Increases**: Applied 150-250% scaling factors to bring fonts in line with Templates 1-2
+  - **Proportional Relationships**: Maintained relative font hierarchy while scaling absolute sizes
+  - **Cross-Browser Compatibility**: rem-based units ensure consistent rendering across all environments
+
+### Rationale
+
+**Critical User Experience Issue**: Template 3 had significantly smaller fonts compared to Templates 1 and 2, creating an inconsistent and unprofessional user experience. The font sizes were so small they were barely readable in the 2160px viewport, undermining the entire template system's quality.
+
+**Typography Consistency Standards**: Professional template systems require uniform typography scaling across all variations. The disparity between templates created confusion and reduced the overall brand quality of the Instagram automation system.
+
+**Business Impact**: This fix ensures:
+- **Professional Presentation**: All templates now maintain consistent, readable typography for social media content
+- **User Engagement**: Properly sized text improves readability and engagement on Instagram posts
+- **Brand Credibility**: Consistent typography across templates reinforces professional brand standards
+- **Content Quality**: Template 3 posts now match the visual quality of Templates 1, 2, 4, and 5
+
+**Technical Excellence**: The scaling approach maintains design proportions while achieving size parity, ensuring Template 3 integrates seamlessly with the broader template ecosystem.
+
+**User-Driven Resolution**: Direct user feedback ("text is completely fucked up") led to immediate priority fixing of this critical typography issue, demonstrating responsive development approach.
+
+**Validation**: Post-fix verification confirms Template 3 now displays with appropriate font sizes matching the established standards of Templates 1 and 2, with all text elements clearly readable and properly proportioned in the 2160px viewport.
+
+**Commit Hash**: `f4e5015`

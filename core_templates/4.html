@@ -4,204 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../core_templates/style4.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Crypto Dashboard Template 4</title>
 </head>
 <body>
-    {% for snaps in snap %}
-    <!-- Unified Bitcoin Dashboard Component -->
-    <div class="unified-btc-dashboard">
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
         <!-- Header Section with Branding and Last Update -->
         <div class="dashboard-header-section">
             <div class="crypto-prism-brand">
                 <div class="prism-triangle"></div>
                 <span class="brand-text">CRYPTO PRISM</span>
             </div>
-            <div class="last-update">LAST UPDATE: {{snaps['last_updated']}}</div>
-        </div>
-
-        <!-- Main BTC Information Section -->
-        <div class="btc-main-section">
-            <!-- BTC Identity and Price -->
-            <div class="btc-identity">
-                <div class="btc-logo-container">
-                    <img src="{{ snaps['logo'] }}" alt="Bitcoin Logo" class="btc-logo-img">
-                </div>
-                <div class="btc-info">
-                    <div class="btc-symbol">BTC</div>
-                    <div class="btc-price">{{snaps['price']}}</div>
-                </div>
-            </div>
-
-            <!-- Market Data Grid -->
-            <div class="market-data-grid">
-                <div class="market-item">
-                    <div class="market-label">Market Cap</div>
-                    <div class="market-value">{{snaps['market_cap']}}</div>
-                </div>
-                <div class="market-item">
-                    <div class="market-label">Volume 24H</div>
-                    <div class="market-value">{{snaps['volume24h']}}</div>
-                </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">{{ current_date if current_date else '18 Sep, 2025' }}</div>
+                <div class="last-update-time">{{ current_time if current_time else '7:44 pm' }}</div>
             </div>
         </div>
 
-        <!-- Performance and Sentiment Section -->
-        <div class="performance-sentiment-section">
-            <!-- Performance Grid -->
-            <div class="performance-container">
-                <div class="performance-title">Performance</div>
-                <div class="performance-items">
-                    <div class="perf-item">
-                        <div class="perf-value {% if snaps['percent_change24h']|float > 0 %}positive{% elif snaps['percent_change24h']|float < 0 %}negative{% endif %}">
-                            {{ snaps['percent_change24h'] }}%
-                        </div>
-                        <div class="perf-label">1D</div>
-                    </div>
-                    <div class="perf-item">
-                        <div class="perf-value {% if snaps['percent_change7d']|float > 0 %}positive{% elif snaps['percent_change7d']|float < 0 %}negative{% endif %}">
-                            {{ snaps['percent_change7d'] }}%
-                        </div>
-                        <div class="perf-label">7D</div>
-                    </div>
-                    <div class="perf-item">
-                        <div class="perf-value {% if snaps['percent_change30d']|float > 0 %}positive{% elif snaps['percent_change30d']|float < 0 %}negative{% endif %}">
-                            {{ snaps['percent_change30d'] }}%
-                        </div>
-                        <div class="perf-label">30D</div>
-                    </div>
-                </div>
+        <!-- Long/Short Strategy Header -->
+        <div class="strategy-header">
+            <div class="strategy-section long-section">
+                <div class="strategy-label">PRISM Quant Select</div>
+                <div class="strategy-title long-title">LONG</div>
             </div>
-
-            <!-- Sentiment Analysis -->
-            <div class="sentiment-container">
-                <div class="sentiment-title">Market Sentiment</div>
-                <div class="sentiment-items">
-                    <div class="sentiment-item">
-                        <div class="sentiment-count bearish-count">{{snaps['bearish']}}</div>
-                        <div class="sentiment-label">Bearish</div>
-                    </div>
-                    <div class="sentiment-item">
-                        <div class="sentiment-count neutral-count">{{snaps['neutral']}}</div>
-                        <div class="sentiment-label">Neutral</div>
-                    </div>
-                    <div class="sentiment-item">
-                        <div class="sentiment-count bullish-count">{{snaps['bullish']}}</div>
-                        <div class="sentiment-label">Bullish</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Overall Trend -->
-            <div class="trend-container">
-                <div class="trend-title">Overall Trend</div>
-                <div class="trend-value">{{snaps['Trend']}}</div>
+            <div class="strategy-section short-section">
+                <div class="strategy-label">PRISM Quant Select</div>
+                <div class="strategy-title short-title">SHORT</div>
             </div>
         </div>
-    </div>
-    {% endfor %}
 
-    <!-- Strategy Header -->
-    <div class="strategy-header">
-        <div class="strategy-section long-section">
-            <div class="strategy-icon">🌱</div>
-            <div class="strategy-label">PRISM Quant Select</div>
-            <div class="strategy-title long-title">LONG</div>
-        </div>
-        <div class="strategy-section short-section">
-            <div class="strategy-icon">📈</div>
-            <div class="strategy-label">PRISM Quant Select</div>
-            <div class="strategy-title short-title">SHORT</div>
-        </div>
-    </div>
-
-    <!-- Main Container -->
-    <div class="div-container">
-        <div class="col-container">
-            {% for coin in coins1 %}
-            <div class="col">
-                <div class="coin-card">
+        <!-- Main Long/Short Content -->
+        <div class="longshort-container">
+            <!-- Long Positions Section -->
+            <div class="long-section-content">
+                {% for coin in coins1 %}
+                <div class="position-card long-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="{{ coin.logo }}">
+                        <div class="coin-logo">
+                            <img src="{{ coin.logo }}" alt="{{ coin.symbol }}">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">{{ coin.symbol }}</div>
-                                <div class="cmc-rank">#{{ coin.cmc_rank }}</div>
-                                <div class="m-cap">${{ coin.market_cap }} B</div>
-                                <div class="price">${{ coin.price }}</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">{{ coin.symbol }}</div>
+                            <div class="coin-rank">#{{ coin.cmc_rank }}</div>
                         </div>
+                        <div class="coin-price">${{ coin.price }}</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>{{ coin.m_rat_alpha }}</div>
-                            <div>{{ coin.d_rat_beta }}</div>
-                            <div>{{ coin.m_rat_omega }}</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">{{ coin.percent_change24h }}%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="{% if coin.percent_change24h > 0 %}positive{% else %}negative{% endif %}">
-                                    {{ coin.percent_change24h }}%
-                                </div>
-                                <div class="{% if coin.percent_change7d > 0 %}positive{% else %}negative{% endif %}">
-                                    {{ coin.percent_change7d }}%
-                                </div>
-                                <div class="{% if coin.percent_change30d > 0 %}positive{% else %}negative{% endif %}">
-                                    {{ coin.percent_change30d }}%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">{{ coin.market_cap }}B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">{{ coin.percent_change7d }}%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-    </div>
 
-    <div class="div-container">
-        <div class="col-container-2">
-            {% for coin in coins2 %}
-            <div class="col">
-                <div class="coin-card">
+            <!-- Short Positions Section -->
+            <div class="short-section-content">
+                {% for coin in coins2 %}
+                <div class="position-card short-card">
                     <div class="coin-header">
-                        <div class="logo">
-                            <img src="{{ coin.logo }}">
+                        <div class="coin-logo">
+                            <img src="{{ coin.logo }}" alt="{{ coin.symbol }}">
                         </div>
-                        <div class="coin-details">
-                            <div class="coin-info">
-                                <div class="name">{{ coin.symbol }}</div>
-                                <div class="cmc-rank">#{{ coin.cmc_rank }}</div>
-                                <div class="m-cap">${{ coin.market_cap }} B</div>
-                                <div class="price">${{ coin.price }}</div>
-                            </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">{{ coin.symbol }}</div>
+                            <div class="coin-rank">#{{ coin.cmc_rank }}</div>
                         </div>
+                        <div class="coin-price">${{ coin.price }}</div>
                     </div>
-                    <div class="coin-data">
-                        <div class="ratios">
-                            <div>{{ coin.m_rat_alpha }}</div>
-                            <div>{{ coin.d_rat_beta }}</div>
-                            <div>{{ coin.m_rat_omega }}</div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">{{ coin.percent_change24h }}%</div>
+                            <div class="metric-label">24h</div>
                         </div>
-                        <div class="pct-change">
-                            <div class="data">
-                                <div class="{% if coin.percent_change24h > 0 %}positive{% else %}negative{% endif %}">
-                                    {{ coin.percent_change24h }}%
-                                </div>
-                                <div class="{% if coin.percent_change7d > 0 %}positive{% else %}negative{% endif %}">
-                                    {{ coin.percent_change7d }}%
-                                </div>
-                                <div class="{% if coin.percent_change30d > 0 %}positive{% else %}negative{% endif %}">
-                                    {{ coin.percent_change30d }}%
-                                </div>
-                            </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">{{ coin.market_cap }}B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">{{ coin.percent_change7d }}%</div>
+                            <div class="ratio-label">7d</div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
     </div>
 </body>
 </html>
