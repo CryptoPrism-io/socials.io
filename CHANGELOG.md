@@ -1081,3 +1081,61 @@ git log --oneline -- ".github/workflows/"
 **User-Driven Development**: The iterative refinement process based on direct user feedback demonstrates responsive development approach, ensuring final output meets actual usage requirements rather than theoretical specifications.
 
 **Commit Hash**: `282a336`
+
+---
+
+## [v1.7.1] - 2025-09-19 09:00 UTC
+
+### 🎯 CRITICAL: Template 3 Font Scaling Fix - Achieved Cross-Template Consistency
+
+### Fixed
+- **Template 3 Typography Crisis**: Resolved severely undersized fonts that were causing readability issues in 2160px viewport
+  - **Font Scale Alignment**: Scaled all Template 3 fonts to match Templates 1 and 2 sizing standards
+  - **Header Text Enhancement**: Brand text increased from 2.5rem (40px) to 3.5rem (56px) for proper prominence
+  - **Date/Time Scaling**: Last update labels scaled from 1rem (16px) to 1.875rem (30px), dates from 1.375rem (22px) to 2.75rem (44px)
+  - **Coin Data Visibility**: Coin names scaled from 1.5rem (24px) to 2.75rem (44px), prices from 1.25rem (20px) to 2.5rem (40px)
+  - **Market Cap Readability**: Market values increased from 1.125rem (18px) to 2.125rem (34px)
+  - **DMV Score Enhancement**: D/M/V scores scaled from 1.125rem (18px) to 2.125rem (34px) for proper visibility
+  - **Percentage Changes**: Performance percentages scaled from 1.125rem (18px) to 2.125rem (34px)
+
+### Changed
+- **Typography Standardization**: Implemented consistent font scaling across all text elements in Template 3
+  - **BTC Symbol**: Scaled from 2rem (32px) to 3rem (48px) for brand consistency
+  - **BTC Price**: Enhanced from 2.5rem (40px) to 3.75rem (60px) for prominence
+  - **Market Labels**: Increased from 0.875rem (14px) to 1.5rem (24px) for readability
+  - **Performance Titles**: Scaled from 1rem (16px) to 1.875rem (30px) for section hierarchy
+  - **Sentiment Counts**: Enhanced from 1.5rem (24px) to 2.75rem (44px) for data emphasis
+  - **Trend Values**: Scaled from 1.375rem (22px) to 2.75rem (44px) for visual impact
+
+### Enhanced
+- **Cross-Template Visual Consistency**: Template 3 now perfectly aligns with Templates 1 and 2 font sizing standards
+  - **Professional Appearance**: All templates now maintain consistent visual hierarchy and readability
+  - **2160px Viewport Optimization**: Font sizes properly scaled for high-resolution display requirements
+  - **User Experience Improvement**: Eliminated "tiny text" issues that made Template 3 difficult to read
+  - **Brand Consistency**: Uniform typography standards across entire template system
+
+### Technical Implementation
+- **Comprehensive Font Scaling**: Updated 15+ CSS font-size declarations in `core_templates/style3.css`
+  - **Strategic Size Increases**: Applied 150-250% scaling factors to bring fonts in line with Templates 1-2
+  - **Proportional Relationships**: Maintained relative font hierarchy while scaling absolute sizes
+  - **Cross-Browser Compatibility**: rem-based units ensure consistent rendering across all environments
+
+### Rationale
+
+**Critical User Experience Issue**: Template 3 had significantly smaller fonts compared to Templates 1 and 2, creating an inconsistent and unprofessional user experience. The font sizes were so small they were barely readable in the 2160px viewport, undermining the entire template system's quality.
+
+**Typography Consistency Standards**: Professional template systems require uniform typography scaling across all variations. The disparity between templates created confusion and reduced the overall brand quality of the Instagram automation system.
+
+**Business Impact**: This fix ensures:
+- **Professional Presentation**: All templates now maintain consistent, readable typography for social media content
+- **User Engagement**: Properly sized text improves readability and engagement on Instagram posts
+- **Brand Credibility**: Consistent typography across templates reinforces professional brand standards
+- **Content Quality**: Template 3 posts now match the visual quality of Templates 1, 2, 4, and 5
+
+**Technical Excellence**: The scaling approach maintains design proportions while achieving size parity, ensuring Template 3 integrates seamlessly with the broader template ecosystem.
+
+**User-Driven Resolution**: Direct user feedback ("text is completely fucked up") led to immediate priority fixing of this critical typography issue, demonstrating responsive development approach.
+
+**Validation**: Post-fix verification confirms Template 3 now displays with appropriate font sizes matching the established standards of Templates 1 and 2, with all text elements clearly readable and properly proportioned in the 2160px viewport.
+
+**Commit Hash**: [To be added after commit]
