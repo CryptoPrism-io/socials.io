@@ -10,6 +10,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v2.1.0] - 2025-09-20 14:30 UTC
+
+### 🗂️ MAJOR: File Organization Restructuring & Template System Enhancement
+
+### Added
+- **Complete 19-Template System**: Extended from 6 to 19 professional Instagram templates
+  - Templates 7-16: Market analysis templates (Top Gainers/Losers, Breaking News, Liquidations, etc.)
+  - **Templates 17-19: Trading Performance Templates** (Trade History, Portfolio Dashboard, Trading Statistics)
+- **Descriptive Output Naming**: Professional file naming convention
+  - `16_output.html` → `meme_coin_tracker_output.html`
+  - `17_output.html` → `trade_history_output.html`
+  - `18_output.html` → `portfolio_dashboard_output.html`
+- **Complete Template Documentation**: Comprehensive guide with data requirements for all 19 templates
+- **Source Template Organization**: All HTML templates (1.html-19.html) now in core_templates/
+- **Complete CSS Coverage**: All 19 CSS files (style.css, style2-19.css) in core_templates/
+
+### Changed
+- **instapost.py Enhancement**: Extended support from templates 1-6 to full 1-19 range
+- **Automatic CSS Handling**: CSS files automatically copied to output during generation
+- **Clean File Structure**: Proper separation of source files vs generated content
+- **Template Data Logic**: Comprehensive data fetching for all template categories
+- **Professional Workflow**: Clean development process with version-controlled source files
+
+### Fixed
+- **CSS Path Resolution**: Fixed linking issues between templates and stylesheets
+- **File Duplication**: Removed duplicate CSS files from output directory
+- **Template Coverage**: All templates now have corresponding source files and stylesheets
+
+### Technical
+- **Mock Data Integration**: Rich mock data for immediate template testing
+- **Database Schema Documentation**: SQL tables defined for trading performance tracking
+- **Scalable Architecture**: Clean foundation for future template additions
+
+---
+
 ## [v2.0.0] - 2025-09-20 01:45 UTC
 
 ### 🚀 MAJOR: Complete Instagram Template System & AI Integration
