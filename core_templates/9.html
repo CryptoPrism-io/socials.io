@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style9.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Liquidations Dashboard</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">20 Sep, 2025</div>
+                <div class="last-update-time">01:27:32 AM</div>
+            </div>
+        </div>
+
+        <!-- Main Title Section -->
+        <div class="title-section">
+            <div class="main-title">⚡ Liquidations</div>
+            <div class="subtitle">24H Long vs Short Liquidations</div>
+        </div>
+
+        <!-- Total Liquidations Overview -->
+        <div class="liquidations-overview">
+            <div class="total-card">
+                <div class="total-amount">$847.2M</div>
+                <div class="total-label">Total Liquidated (24H)</div>
+            </div>
+            <div class="ratio-display">
+                <div class="ratio-item long">
+                    <div class="ratio-percentage">68%</div>
+                    <div class="ratio-label">LONGS</div>
+                    <div class="ratio-amount">$576.1M</div>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="ratio-item short">
+                    <div class="ratio-percentage">32%</div>
+                    <div class="ratio-label">SHORTS</div>
+                    <div class="ratio-amount">$271.1M</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exchange Breakdown -->
+        <div class="exchange-breakdown">
+            <div class="section-title">💼 Exchange Breakdown</div>
+            <div class="exchange-grid">
+                <div class="exchange-item">
+                    <div class="exchange-info">
+                        <div class="exchange-name">Binance</div>
+                        <div class="exchange-total">$312.4M</div>
+                    </div>
+                    <div class="liquidation-bars">
+                        <div class="bar-container">
+                            <div class="bar long" style="width: 72%"></div>
+                            <div class="bar-label">Longs: $224.9M</div>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar short" style="width: 28%"></div>
+                            <div class="bar-label">Shorts: $87.5M</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exchange-item">
+                    <div class="exchange-info">
+                        <div class="exchange-name">OKX</div>
+                        <div class="exchange-total">$198.7M</div>
+                    </div>
+                    <div class="liquidation-bars">
+                        <div class="bar-container">
+                            <div class="bar long" style="width: 64%"></div>
+                            <div class="bar-label">Longs: $127.2M</div>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar short" style="width: 36%"></div>
+                            <div class="bar-label">Shorts: $71.5M</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exchange-item">
+                    <div class="exchange-info">
+                        <div class="exchange-name">Bybit</div>
+                        <div class="exchange-total">$156.3M</div>
+                    </div>
+                    <div class="liquidation-bars">
+                        <div class="bar-container">
+                            <div class="bar long" style="width: 61%"></div>
+                            <div class="bar-label">Longs: $95.3M</div>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar short" style="width: 39%"></div>
+                            <div class="bar-label">Shorts: $61.0M</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exchange-item">
+                    <div class="exchange-info">
+                        <div class="exchange-name">BitMEX</div>
+                        <div class="exchange-total">$89.4M</div>
+                    </div>
+                    <div class="liquidation-bars">
+                        <div class="bar-container">
+                            <div class="bar long" style="width: 58%"></div>
+                            <div class="bar-label">Longs: $51.9M</div>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar short" style="width: 42%"></div>
+                            <div class="bar-label">Shorts: $37.5M</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exchange-item">
+                    <div class="exchange-info">
+                        <div class="exchange-name">Others</div>
+                        <div class="exchange-total">$90.4M</div>
+                    </div>
+                    <div class="liquidation-bars">
+                        <div class="bar-container">
+                            <div class="bar long" style="width: 75%"></div>
+                            <div class="bar-label">Longs: $67.8M</div>
+                        </div>
+                        <div class="bar-container">
+                            <div class="bar short" style="width: 25%"></div>
+                            <div class="bar-label">Shorts: $22.6M</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Liquidated Assets -->
+        <div class="top-assets">
+            <div class="section-title">🔥 Top Liquidated Assets</div>
+            <div class="assets-grid">
+                <div class="asset-item">
+                    <div class="asset-rank">#1</div>
+                    <div class="asset-info">
+                        <div class="asset-symbol">BTC</div>
+                        <div class="asset-name">Bitcoin</div>
+                    </div>
+                    <div class="asset-liquidations">
+                        <div class="liq-amount">$423.8M</div>
+                        <div class="liq-split">
+                            <span class="long-amount">L: $289.4M</span>
+                            <span class="short-amount">S: $134.4M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="asset-item">
+                    <div class="asset-rank">#2</div>
+                    <div class="asset-info">
+                        <div class="asset-symbol">ETH</div>
+                        <div class="asset-name">Ethereum</div>
+                    </div>
+                    <div class="asset-liquidations">
+                        <div class="liq-amount">$198.7M</div>
+                        <div class="liq-split">
+                            <span class="long-amount">L: $127.2M</span>
+                            <span class="short-amount">S: $71.5M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="asset-item">
+                    <div class="asset-rank">#3</div>
+                    <div class="asset-info">
+                        <div class="asset-symbol">SOL</div>
+                        <div class="asset-name">Solana</div>
+                    </div>
+                    <div class="asset-liquidations">
+                        <div class="liq-amount">$87.3M</div>
+                        <div class="liq-split">
+                            <span class="long-amount">L: $62.1M</span>
+                            <span class="short-amount">S: $25.2M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="asset-item">
+                    <div class="asset-rank">#4</div>
+                    <div class="asset-info">
+                        <div class="asset-symbol">XRP</div>
+                        <div class="asset-name">Ripple</div>
+                    </div>
+                    <div class="asset-liquidations">
+                        <div class="liq-amount">$45.6M</div>
+                        <div class="liq-split">
+                            <span class="long-amount">L: $28.9M</span>
+                            <span class="short-amount">S: $16.7M</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Analysis -->
+        <div class="market-analysis">
+            <div class="analysis-title">📈 Liquidation Analysis</div>
+            <div class="analysis-content">
+                <div class="analysis-point">
+                    <div class="point-icon">🎯</div>
+                    <div class="point-text">Long liquidations dominate at 68%, indicating overleveraged bulls caught in recent volatility</div>
+                </div>
+                <div class="analysis-point">
+                    <div class="point-icon">⚡</div>
+                    <div class="point-text">$847M total liquidations mark the highest 24H volume since Fed announcement</div>
+                </div>
+                <div class="analysis-point">
+                    <div class="point-icon">🔍</div>
+                    <div class="point-text">Bitcoin accounts for 50% of liquidations, showing concentrated leverage in flagship asset</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>

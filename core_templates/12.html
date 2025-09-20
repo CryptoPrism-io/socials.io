@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style12.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Whale Alerts & Exchange Flows</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Live Tracking</div>
+                <div class="last-update-date">20 Sep, 2025</div>
+                <div class="last-update-time">01:31:42 AM</div>
+            </div>
+        </div>
+
+        <!-- Main Title Section -->
+        <div class="title-section">
+            <div class="main-title">🐋 Whale Alerts</div>
+            <div class="subtitle">Large Transactions & Exchange Flows</div>
+        </div>
+
+        <!-- Exchange Flow Summary -->
+        <div class="flow-summary">
+            <div class="flow-card inflow">
+                <div class="flow-header">
+                    <div class="flow-icon">📥</div>
+                    <div class="flow-title">Exchange Inflows</div>
+                </div>
+                <div class="flow-amount">12,847 BTC</div>
+                <div class="flow-value">$1.51B</div>
+                <div class="flow-change negative">Bearish Signal</div>
+            </div>
+
+            <div class="flow-card outflow">
+                <div class="flow-header">
+                    <div class="flow-icon">📤</div>
+                    <div class="flow-title">Exchange Outflows</div>
+                </div>
+                <div class="flow-amount">18,923 BTC</div>
+                <div class="flow-value">$2.22B</div>
+                <div class="flow-change positive">Bullish Signal</div>
+            </div>
+
+            <div class="flow-card net">
+                <div class="flow-header">
+                    <div class="flow-icon">⚖️</div>
+                    <div class="flow-title">Net Flow</div>
+                </div>
+                <div class="flow-amount">-6,076 BTC</div>
+                <div class="flow-value">-$713M</div>
+                <div class="flow-change positive">Accumulation</div>
+            </div>
+        </div>
+
+        <!-- Recent Whale Transactions -->
+        <div class="whale-transactions">
+            <div class="section-title">⚡ Recent Whale Transactions (Last 4 Hours)</div>
+            <div class="transactions-list">
+                <div class="transaction-item large">
+                    <div class="tx-time">12 min ago</div>
+                    <div class="tx-details">
+                        <div class="tx-amount">2,547 BTC</div>
+                        <div class="tx-value">$298.7M</div>
+                        <div class="tx-type outflow">Exchange → Unknown Wallet</div>
+                        <div class="tx-exchange">Binance</div>
+                    </div>
+                    <div class="tx-status">
+                        <div class="status-indicator bearish"></div>
+                        <div class="status-text">Potential Sell Pressure</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item large">
+                    <div class="tx-time">28 min ago</div>
+                    <div class="tx-details">
+                        <div class="tx-amount">1,923 BTC</div>
+                        <div class="tx-value">$225.6M</div>
+                        <div class="tx-type inflow">Unknown Wallet → Exchange</div>
+                        <div class="tx-exchange">Coinbase</div>
+                    </div>
+                    <div class="tx-status">
+                        <div class="status-indicator bullish"></div>
+                        <div class="status-text">Institutional Buy</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item medium">
+                    <div class="tx-time">45 min ago</div>
+                    <div class="tx-details">
+                        <div class="tx-amount">1,256 BTC</div>
+                        <div class="tx-value">$147.3M</div>
+                        <div class="tx-type outflow">Kraken → Cold Storage</div>
+                        <div class="tx-exchange">Kraken</div>
+                    </div>
+                    <div class="tx-status">
+                        <div class="status-indicator neutral"></div>
+                        <div class="status-text">HODL Movement</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item medium">
+                    <div class="tx-time">1h 12m ago</div>
+                    <div class="tx-details">
+                        <div class="tx-amount">1,089 BTC</div>
+                        <div class="tx-value">$127.8M</div>
+                        <div class="tx-type internal">Whale → Whale</div>
+                        <div class="tx-exchange">Unknown</div>
+                    </div>
+                    <div class="tx-status">
+                        <div class="status-indicator neutral"></div>
+                        <div class="status-text">Internal Transfer</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item small">
+                    <div class="tx-time">1h 34m ago</div>
+                    <div class="tx-details">
+                        <div class="tx-amount">847 BTC</div>
+                        <div class="tx-value">$99.4M</div>
+                        <div class="tx-type outflow">Bitfinex → DeFi Protocol</div>
+                        <div class="tx-exchange">Bitfinex</div>
+                    </div>
+                    <div class="tx-status">
+                        <div class="status-indicator bullish"></div>
+                        <div class="status-text">DeFi Yield</div>
+                    </div>
+                </div>
+
+                <div class="transaction-item small">
+                    <div class="tx-time">2h 8m ago</div>
+                    <div class="tx-details">
+                        <div class="tx-amount">734 BTC</div>
+                        <div class="tx-value">$86.1M</div>
+                        <div class="tx-type inflow">Mining Pool → OKX</div>
+                        <div class="tx-exchange">OKX</div>
+                    </div>
+                    <div class="tx-status">
+                        <div class="status-indicator bearish"></div>
+                        <div class="status-text">Miner Selling</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exchange Rankings -->
+        <div class="exchange-rankings">
+            <div class="section-title">🏛️ Exchange Activity (24H)</div>
+            <div class="rankings-grid">
+                <div class="exchange-rank-item">
+                    <div class="rank-number">#1</div>
+                    <div class="exchange-info">
+                        <div class="exchange-name">Binance</div>
+                        <div class="exchange-volume">$2.47B volume</div>
+                    </div>
+                    <div class="flow-bars">
+                        <div class="bar-label">Inflows</div>
+                        <div class="flow-bar inflow-bar" style="width: 85%">$897M</div>
+                        <div class="bar-label">Outflows</div>
+                        <div class="flow-bar outflow-bar" style="width: 72%">$1.23B</div>
+                    </div>
+                    <div class="net-flow positive">+$333M</div>
+                </div>
+
+                <div class="exchange-rank-item">
+                    <div class="rank-number">#2</div>
+                    <div class="exchange-info">
+                        <div class="exchange-name">Coinbase</div>
+                        <div class="exchange-volume">$1.89B volume</div>
+                    </div>
+                    <div class="flow-bars">
+                        <div class="bar-label">Inflows</div>
+                        <div class="flow-bar inflow-bar" style="width: 68%">$567M</div>
+                        <div class="bar-label">Outflows</div>
+                        <div class="flow-bar outflow-bar" style="width: 55%">$891M</div>
+                    </div>
+                    <div class="net-flow negative">-$324M</div>
+                </div>
+
+                <div class="exchange-rank-item">
+                    <div class="rank-number">#3</div>
+                    <div class="exchange-info">
+                        <div class="exchange-name">OKX</div>
+                        <div class="exchange-volume">$1.23B volume</div>
+                    </div>
+                    <div class="flow-bars">
+                        <div class="bar-label">Inflows</div>
+                        <div class="flow-bar inflow-bar" style="width: 45%">$456M</div>
+                        <div class="bar-label">Outflows</div>
+                        <div class="flow-bar outflow-bar" style="width: 38%">$623M</div>
+                    </div>
+                    <div class="net-flow negative">-$167M</div>
+                </div>
+
+                <div class="exchange-rank-item">
+                    <div class="rank-number">#4</div>
+                    <div class="exchange-info">
+                        <div class="exchange-name">Bybit</div>
+                        <div class="exchange-volume">$987M volume</div>
+                    </div>
+                    <div class="flow-bars">
+                        <div class="bar-label">Inflows</div>
+                        <div class="flow-bar inflow-bar" style="width: 42%">$234M</div>
+                        <div class="bar-label">Outflows</div>
+                        <div class="flow-bar outflow-bar" style="width: 35%">$445M</div>
+                    </div>
+                    <div class="net-flow negative">-$211M</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Impact Analysis -->
+        <div class="impact-analysis">
+            <div class="section-title">📊 Market Impact Analysis</div>
+            <div class="impact-content">
+                <div class="impact-item">
+                    <div class="impact-icon">🎯</div>
+                    <div class="impact-text">Net outflows of 6,076 BTC indicate strong accumulation behavior among large holders</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-icon">⚡</div>
+                    <div class="impact-text">$298M whale transaction suggests institutional portfolio rebalancing ahead of Fed meeting</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-icon">🔍</div>
+                    <div class="impact-text">Binance leading outflows indicates retail investors taking profits at current levels</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-icon">📈</div>
+                    <div class="impact-text">DeFi yield movements suggest whales seeking alternative returns in current market</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>

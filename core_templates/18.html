@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style18.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Portfolio Dashboard</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Portfolio Dashboard</div>
+                <div class="last-update-date">{{ current_date }}</div>
+                <div class="last-update-time">{{ current_time }}</div>
+            </div>
+        </div>
+
+        <!-- Main Title Section -->
+        <div class="title-section">
+            <div class="main-title">💼 Portfolio Dashboard</div>
+            <div class="subtitle">Live Performance & Holdings</div>
+        </div>
+
+        <!-- Portfolio Overview -->
+        <div class="portfolio-overview">
+            <div class="total-value-card">
+                <div class="value-header">
+                    <div class="value-icon">💰</div>
+                    <div class="value-title">Total Portfolio Value</div>
+                </div>
+                <div class="total-value">{{ portfolio_overview.total_value_usd }}</div>
+                <div class="value-change positive">{{ portfolio_overview.value_change_7d }} ({{ portfolio_overview.percentage_7d }})</div>
+                <div class="value-period">Last 7 Days</div>
+            </div>
+
+            <div class="performance-metrics">
+                <div class="performance-item">
+                    <div class="perf-label">7D Change</div>
+                    <div class="perf-value positive">{{ portfolio_overview.percentage_7d }}</div>
+                    <div class="perf-amount">{{ portfolio_overview.value_change_7d }}</div>
+                </div>
+                <div class="performance-item">
+                    <div class="perf-label">30D Change</div>
+                    <div class="perf-value positive">{{ portfolio_overview.percentage_30d }}</div>
+                    <div class="perf-amount">{{ portfolio_overview.value_change_30d }}</div>
+                </div>
+                <div class="performance-item">
+                    <div class="perf-label">90D Change</div>
+                    <div class="perf-value positive">{{ portfolio_overview.percentage_90d }}</div>
+                    <div class="perf-amount">{{ portfolio_overview.value_change_90d }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asset Allocation -->
+        <div class="allocation-section">
+            <div class="section-title">📊 Asset Allocation</div>
+            <div class="allocation-grid">
+                {% for asset in portfolio_allocation %}
+                <div class="allocation-item">
+                    <div class="asset-header">
+                        <span class="asset-symbol">{{ asset.symbol }}</span>
+                        <span class="asset-percentage">{{ asset.percentage }}%</span>
+                    </div>
+                    <div class="asset-value">{{ asset.value }}</div>
+                    <div class="allocation-bar">
+                        <div class="allocation-fill" style="width: {{ asset.percentage }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Open Positions -->
+        <div class="positions-section">
+            <div class="section-title">📈 Current Open Positions</div>
+            <div class="positions-container">
+                {% for position in open_positions %}
+                <div class="position-item">
+                    <div class="position-header">
+                        <div class="position-symbol">{{ position.symbol }}</div>
+                        <div class="position-pnl {{ 'profit' if position.unrealized_pnl.startswith('+') else 'loss' }}">
+                            {{ position.unrealized_pnl }}
+                        </div>
+                    </div>
+
+                    <div class="position-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Size:</span>
+                            <span class="detail-value">{{ position.position_size }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Entry Avg:</span>
+                            <span class="detail-value">{{ position.entry_avg }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Current:</span>
+                            <span class="detail-value">{{ position.current_price }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">% Change:</span>
+                            <span class="detail-value {{ 'profit' if position.percentage.startswith('+') else 'loss' }}">
+                                {{ position.percentage }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="position-allocation">
+                        <div class="allocation-label">Portfolio Allocation</div>
+                        <div class="allocation-percentage">{{ position.allocation }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Risk Metrics -->
+        <div class="risk-section">
+            <div class="section-title">⚡ Risk Metrics</div>
+            <div class="risk-grid">
+                <div class="risk-item">
+                    <div class="risk-icon">📉</div>
+                    <div class="risk-content">
+                        <div class="risk-label">Max Drawdown</div>
+                        <div class="risk-value negative">{{ risk_metrics.max_drawdown }}</div>
+                    </div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-icon">📊</div>
+                    <div class="risk-content">
+                        <div class="risk-label">Volatility (30D)</div>
+                        <div class="risk-value">{{ risk_metrics.volatility_30d }}</div>
+                    </div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-icon">⚡</div>
+                    <div class="risk-content">
+                        <div class="risk-label">Sharpe Ratio</div>
+                        <div class="risk-value positive">{{ risk_metrics.sharpe_ratio }}</div>
+                    </div>
+                </div>
+                <div class="risk-item">
+                    <div class="risk-icon">🔗</div>
+                    <div class="risk-content">
+                        <div class="risk-label">Beta vs BTC</div>
+                        <div class="risk-value">{{ risk_metrics.beta_vs_btc }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>

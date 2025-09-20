@@ -195,6 +195,268 @@ def fetch_bitcoin_data(engine) -> Dict:
         print(f"Error fetching Bitcoin data: {e}")
         return {}
 
+async def fetch_template_data(template_num: int, engine) -> Dict:
+    """Fetch data for any template (1-19) with appropriate data structure."""
+    try:
+        # Get common timestamp data
+        common_data = {
+            'current_date': datetime.now(config.app.timezone).strftime(config.app.datetime_format),
+            'current_time': datetime.now(config.app.timezone).strftime(config.app.time_format)
+        }
+
+        if template_num <= 5:
+            # Templates 1-5: Multi-coin data with different slicing
+            coins_data = await fetch_data_top_24_coins(engine)
+            if coins_data.empty:
+                return {}
+
+            start_idx = (template_num - 1) * 24
+            end_idx = start_idx + 24
+            template_data = coins_data.iloc[start_idx:end_idx] if start_idx < len(coins_data) else coins_data.iloc[:24]
+
+            common_data['snap'] = [row.to_dict() for _, row in template_data.iterrows()]
+            return common_data
+
+        elif template_num == 6:
+            # Template 6: Bitcoin-specific data with AI analysis
+            btc_data = fetch_bitcoin_data(engine)
+            if not btc_data:
+                return {}
+
+            # Add Template 6 specific data structure
+            common_data.update({
+                'snap': [btc_data],
+                'market_vibes': {
+                    'overall_mood': 'Optimistic',
+                    'emoji': '🚀',
+                    'description': 'Strong momentum across major assets',
+                    'social_sentiment': 7.8
+                },
+                'giants': [btc_data],  # Can add ETH, BNB later
+                'catalysts': [
+                    {
+                        'event': 'Bitcoin ETF Decision',
+                        'date': '2024-01-10',
+                        'impact': 'High',
+                        'probability': 85
+                    }
+                ]
+            })
+            return common_data
+
+        elif template_num == 7:
+            # Template 7: Top Gainers & Losers
+            coins_data = await fetch_data_top_24_coins(engine)
+            if coins_data.empty:
+                return {}
+
+            # Sort by percent_change24h for gainers and losers
+            gainers = coins_data.nlargest(10, 'percent_change24h')
+            losers = coins_data.nsmallest(10, 'percent_change24h')
+
+            common_data.update({
+                'top_gainers': [row.to_dict() for _, row in gainers.iterrows()],
+                'top_losers': [row.to_dict() for _, row in losers.iterrows()]
+            })
+            return common_data
+
+        elif template_num >= 8 and template_num <= 16:
+            # Templates 8-16: Mock data for now (external APIs needed)
+            return generate_mock_data_for_template(template_num, common_data)
+
+        elif template_num >= 17 and template_num <= 19:
+            # Templates 17-19: Trading performance data (mock for now)
+            return generate_trading_mock_data(template_num, common_data)
+
+        else:
+            return {}
+
+    except Exception as e:
+        print(f"Error fetching data for template {template_num}: {e}")
+        return {}
+
+def generate_mock_data_for_template(template_num: int, base_data: Dict) -> Dict:
+    """Generate mock data for templates 8-16 that require external APIs."""
+    mock_data = base_data.copy()
+
+    if template_num == 8:  # Breaking News
+        mock_data['breaking_news'] = [
+            {
+                'headline': 'SEC Approves First Bitcoin ETF',
+                'timestamp': '2024-01-09T14:30:00Z',
+                'impact_rating': 'High',
+                'affected_coins': ['BTC', 'ETH'],
+                'social_buzz_score': 9.2,
+                'source': 'Reuters',
+                'category': 'Regulation'
+            }
+        ]
+    elif template_num == 9:  # Liquidations
+        mock_data.update({
+            'total_liquidations_24h': '$847.2M',
+            'long_liquidations': '$523.1M',
+            'short_liquidations': '$324.1M',
+            'long_short_ratio': 61.7
+        })
+    elif template_num == 10:  # Fear & Greed
+        mock_data.update({
+            'current_score': 67,
+            'current_label': 'Greed',
+            'trend_7d': '+12 points',
+            'components': {
+                'volatility': 15,
+                'momentum': 25,
+                'social_media': 20
+            }
+        })
+    # Add more mock data for templates 11-16 as needed
+
+    return mock_data
+
+def generate_trading_mock_data(template_num: int, base_data: Dict) -> Dict:
+    """Generate mock trading performance data for templates 17-19."""
+    mock_data = base_data.copy()
+
+    if template_num == 17:  # Trade History
+        mock_data.update({
+            'recent_trades': [
+                {
+                    'id': 'TRD_001',
+                    'symbol': 'BTC',
+                    'trade_type': 'LONG',
+                    'entry_date': '2024-01-05',
+                    'exit_date': '2024-01-08',
+                    'entry_price': '$42,150.00',
+                    'exit_price': '$44,280.00',
+                    'quantity': '0.5 BTC',
+                    'pnl_usd': '+$1,065.00',
+                    'pnl_percentage': '+5.05%',
+                    'duration': '3 days',
+                    'status': 'WIN',
+                    'risk_reward': '1:2.1'
+                }
+            ],
+            'trade_summary': {
+                'total_trades_shown': 10,
+                'winning_trades': 7,
+                'losing_trades': 3,
+                'total_pnl': '+$3,247.80',
+                'win_rate': '70%',
+                'best_trade': '+$1,950.00 (ETH LONG)',
+                'worst_trade': '-$420.00 (AVAX SHORT)'
+            }
+        })
+    elif template_num == 18:  # Portfolio Dashboard
+        mock_data.update({
+            'portfolio_overview': {
+                'total_value_usd': '$127,845.32',
+                'value_change_7d': '+$8,247.19',
+                'percentage_7d': '+6.9%',
+                'percentage_30d': '+23.0%',
+                'percentage_90d': '+55.4%'
+            },
+            'open_positions': [
+                {
+                    'symbol': 'BTC',
+                    'position_size': '2.1 BTC',
+                    'entry_avg': '$41,200.00',
+                    'current_price': '$43,247.82',
+                    'unrealized_pnl': '+$4,300.44',
+                    'percentage': '+4.97%',
+                    'allocation': '45.2%'
+                }
+            ],
+            'portfolio_allocation': [
+                {'symbol': 'BTC', 'percentage': 45.2, 'value': '$57,789.12'},
+                {'symbol': 'ETH', 'percentage': 32.1, 'value': '$41,057.89'},
+                {'symbol': 'SOL', 'percentage': 12.7, 'value': '$16,236.40'},
+                {'symbol': 'CASH', 'percentage': 10.0, 'value': '$12,784.53'}
+            ],
+            'risk_metrics': {
+                'max_drawdown': '-8.4%',
+                'volatility_30d': '12.3%',
+                'sharpe_ratio': 2.1,
+                'beta_vs_btc': 0.87
+            }
+        })
+    elif template_num == 19:  # Trading Statistics
+        mock_data.update({
+            'trading_statistics': {
+                'overall_stats': {
+                    'total_trades': 156,
+                    'winning_trades': 109,
+                    'losing_trades': 47,
+                    'win_rate': '69.9%',
+                    'total_pnl': '+$127,845.32',
+                    'average_win': '+$1,847.23',
+                    'average_loss': '-$642.18',
+                    'profit_factor': 2.87
+                },
+                'long_vs_short': {
+                    'long_trades': {
+                        'count': 98,
+                        'wins': 72,
+                        'win_rate': '73.5%',
+                        'total_pnl': '+$89,234.56'
+                    },
+                    'short_trades': {
+                        'count': 58,
+                        'wins': 37,
+                        'win_rate': '63.8%',
+                        'total_pnl': '+$38,610.76'
+                    }
+                },
+                'monthly_performance': [
+                    {'month': 'Dec 2024', 'return': '+18.7%', 'trades': 24},
+                    {'month': 'Nov 2024', 'return': '+12.3%', 'trades': 19},
+                    {'month': 'Oct 2024', 'return': '+8.9%', 'trades': 22}
+                ],
+                'best_assets': [
+                    {'symbol': 'SOL', 'trades': 23, 'win_rate': '82.6%', 'total_pnl': '+$23,456.78'},
+                    {'symbol': 'ETH', 'trades': 31, 'win_rate': '74.2%', 'total_pnl': '+$19,847.32'},
+                    {'symbol': 'BTC', 'trades': 45, 'win_rate': '68.9%', 'total_pnl': '+$31,234.67'}
+                ],
+                'streak_analysis': {
+                    'longest_winning_streak': 12,
+                    'longest_losing_streak': 4,
+                    'current_streak': '7 wins'
+                },
+                'risk_metrics': {
+                    'average_risk_reward': '1:2.3',
+                    'max_drawdown': '-12.4%',
+                    'calmar_ratio': 3.2,
+                    'sortino_ratio': 2.8
+                }
+            }
+        })
+
+    return mock_data
+
+def get_template_name(template_num: int) -> str:
+    """Get descriptive name for template output file."""
+    template_names = {
+        1: "market_overview",
+        2: "top_cryptocurrencies",
+        3: "ai_crypto_analysis",
+        4: "portfolio_tracker",
+        5: "trading_signals",
+        6: "crypto_vibes",
+        7: "top_gainers_losers",
+        8: "breaking_news",
+        9: "liquidations_dashboard",
+        10: "fear_greed_index",
+        11: "weekly_market_recap",
+        12: "whale_alerts",
+        13: "defi_tvl_rankings",
+        14: "crypto_calendar",
+        15: "layer2_activity",
+        16: "meme_coin_tracker",
+        17: "trade_history",
+        18: "portfolio_dashboard",
+        19: "trading_statistics"
+    }
+    return template_names.get(template_num, f"template_{template_num}")
+
 async def render_template(template_num: int, data: Dict, output_dir: Optional[str] = None) -> Optional[str]:
     """Render HTML from template with data."""
     try:
@@ -205,29 +467,59 @@ async def render_template(template_num: int, data: Dict, output_dir: Optional[st
 
         # Use config output directory if not specified
         output_dir = Path(output_dir) if output_dir else config.paths.html_output_dir
-        output_path = output_dir / f"{template_num}_output.html"
+
+        # Use descriptive naming for output files
+        template_name = get_template_name(template_num)
+        output_path = output_dir / f"{template_name}_output.html"
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html_content)
 
-        print(f"✓ Rendered template {template_num}: {output_path}")
+        # Copy corresponding CSS file to output directory
+        await copy_css_to_output(template_num, output_dir)
+
+        print(f"✓ Rendered template {template_num} ({template_name}): {output_path}")
         return str(output_path)
 
     except Exception as e:
         print(f"Error rendering template {template_num}: {e}")
         return None
 
+async def copy_css_to_output(template_num: int, output_dir: Path):
+    """Copy the corresponding CSS file from core_templates to output directory."""
+    try:
+        # Determine CSS filename based on template number
+        if template_num == 1:
+            css_filename = "style.css"
+        else:
+            css_filename = f"style{template_num}.css"
+
+        source_css = config.paths.templates_dir / css_filename
+        dest_css = output_dir / css_filename
+
+        # Copy CSS file if it exists
+        if source_css.exists():
+            import shutil
+            shutil.copy2(source_css, dest_css)
+            print(f"✓ Copied CSS: {css_filename}")
+        else:
+            print(f"⚠ CSS file not found: {css_filename}")
+
+    except Exception as e:
+        print(f"Error copying CSS for template {template_num}: {e}")
+
 async def convert_to_image(html_path: str, template_num: int):
     """Convert HTML file to Instagram-ready image."""
-    image_path = str(config.paths.get_image_output_path(template_num, config.image.format))
+    template_name = get_template_name(template_num)
+    image_path = str(config.paths.images_output_dir / f"{template_name}_output.{config.image.format}")
     await generate_image_from_html(html_path, image_path)
 
 async def main():
     """Main CLI entry point for instapost content generation."""
     parser = argparse.ArgumentParser(description='Instagram content generator for crypto socials')
-    parser.add_argument('--template', '-t', type=int, choices=[1,2,3,4,5,6], default=None,
-                       help='Generate specific template (1-6). If not specified, generates all.')
+    parser.add_argument('--template', '-t', type=int, choices=list(range(1,20)), default=None,
+                       help='Generate specific template (1-19). If not specified, generates all.')
     parser.add_argument('--dry-run', action='store_true',
                        help='Show what would be generated without actually running')
     parser.add_argument('--skip-generate', action='store_true',
@@ -276,7 +568,7 @@ async def main():
                 log_operation_end(logger, session_context, success=False, _log_error=str(e))
                 sys.exit(1)
 
-            templates_to_generate = [args.template] if args.template else [1,2,3,4,5,6]
+            templates_to_generate = [args.template] if args.template else list(range(1,20))
             templates_processed = 0
             templates_failed = 0
 
@@ -293,40 +585,15 @@ async def main():
                     })
 
                     # Fetch data based on template needs
-                    if template_num == 6:
-                        # Bitcoin snapshot template
-                        btc_data = fetch_bitcoin_data(engine)
-                        if not btc_data:
-                            logger.warning("Skipping Template 6: No Bitcoin data available", extra={
-                                "template_num": template_num,
-                                "event": "template_skipped",
-                                "reason": "no_bitcoin_data"
-                            })
-                            log_operation_end(logger, template_context, success=True, _log_skipped=True)
-                            continue
-                        data = {
-                            'snap': [btc_data],
-                            'current_date': datetime.now(config.app.timezone).strftime(config.app.datetime_format),
-                            'current_time': datetime.now(config.app.timezone).strftime(config.app.time_format)
-                        }
-                    else:
-                        # Multi-coin templates
-                        coins_data = await fetch_data_top_24_coins(engine)
-                        if coins_data.empty:
-                            logger.warning(f"Skipping Template {template_num}: No coin data available", extra={
-                                "template_num": template_num,
-                                "event": "template_skipped",
-                                "reason": "no_coin_data"
-                            })
-                            log_operation_end(logger, template_context, success=True, _log_skipped=True)
-                            continue
-
-                        # Split data for different templates (simplified logic)
-                        start_idx = 0 if template_num == 1 else (24 if template_num == 2 else (48 if template_num == 3 else (72 if template_num == 4 else (96 if template_num == 5 else 0))))
-                        end_idx = start_idx + 24
-                        template_data = coins_data.iloc[start_idx:end_idx]
-
-                        data = {'snap': [row.to_dict() for _, row in template_data.iterrows()]}
+                    data = await fetch_template_data(template_num, engine)
+                    if not data:
+                        logger.warning(f"Skipping Template {template_num}: No data available", extra={
+                            "template_num": template_num,
+                            "event": "template_skipped",
+                            "reason": "no_data_available"
+                        })
+                        log_operation_end(logger, template_context, success=True, _log_skipped=True)
+                        continue
 
                     # Render HTML
                     output_dir = Path(args.output_dir) if args.output_dir else None

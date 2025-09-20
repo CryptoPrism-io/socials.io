@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style17.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Trade History & Performance</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Trading Performance</div>
+                <div class="last-update-date">{{ current_date }}</div>
+                <div class="last-update-time">{{ current_time }}</div>
+            </div>
+        </div>
+
+        <!-- Main Title Section -->
+        <div class="title-section">
+            <div class="main-title">📊 Trade History & Performance</div>
+            <div class="subtitle">Recent Trading Activity & Results</div>
+        </div>
+
+        <!-- Performance Summary -->
+        <div class="performance-summary">
+            <div class="summary-stat">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <div class="stat-title">Win Rate</div>
+                    <div class="stat-value">{{ trade_summary.win_rate }}</div>
+                </div>
+            </div>
+            <div class="summary-stat">
+                <div class="stat-icon">💰</div>
+                <div class="stat-content">
+                    <div class="stat-title">Total P&L</div>
+                    <div class="stat-value profit">{{ trade_summary.total_pnl }}</div>
+                </div>
+            </div>
+            <div class="summary-stat">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <div class="stat-title">Best Trade</div>
+                    <div class="stat-value">{{ trade_summary.best_trade }}</div>
+                </div>
+            </div>
+            <div class="summary-stat">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <div class="stat-title">Total Trades</div>
+                    <div class="stat-value">{{ trade_summary.total_trades_shown }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Trades Section -->
+        <div class="trades-section">
+            <div class="section-title">📋 Recent Trading History</div>
+            <div class="trades-container">
+                {% for trade in recent_trades %}
+                <div class="trade-item {{ trade.status.lower() }}">
+                    <!-- Trade Header -->
+                    <div class="trade-header">
+                        <div class="trade-symbol">
+                            <span class="symbol">{{ trade.symbol }}</span>
+                            <span class="trade-type {{ trade.trade_type.lower() }}">{{ trade.trade_type }}</span>
+                        </div>
+                        <div class="trade-status {{ trade.status.lower() }}">
+                            {{ trade.status }}
+                        </div>
+                    </div>
+
+                    <!-- Trade Details -->
+                    <div class="trade-details">
+                        <div class="trade-prices">
+                            <div class="price-item">
+                                <span class="price-label">Entry:</span>
+                                <span class="price-value">{{ trade.entry_price }}</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Exit:</span>
+                                <span class="price-value">{{ trade.exit_price }}</span>
+                            </div>
+                        </div>
+
+                        <div class="trade-metrics">
+                            <div class="metric-item">
+                                <span class="metric-label">P&L:</span>
+                                <span class="metric-value {{ 'profit' if trade.pnl_usd.startswith('+') else 'loss' }}">
+                                    {{ trade.pnl_usd }} ({{ trade.pnl_percentage }})
+                                </span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Duration:</span>
+                                <span class="metric-value">{{ trade.duration }}</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">R:R:</span>
+                                <span class="metric-value">{{ trade.risk_reward }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trade Dates -->
+                    <div class="trade-dates">
+                        <span class="date-label">{{ trade.entry_date }} → {{ trade.exit_date }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Trade Statistics Grid -->
+        <div class="stats-grid">
+            <div class="stat-card wins">
+                <div class="stat-icon">✅</div>
+                <div class="stat-number">{{ trade_summary.winning_trades }}</div>
+                <div class="stat-label">Winning Trades</div>
+            </div>
+            <div class="stat-card losses">
+                <div class="stat-icon">❌</div>
+                <div class="stat-number">{{ trade_summary.losing_trades }}</div>
+                <div class="stat-label">Losing Trades</div>
+            </div>
+            <div class="stat-card best">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-number">{{ trade_summary.best_trade }}</div>
+                <div class="stat-label">Best Performance</div>
+            </div>
+            <div class="stat-card worst">
+                <div class="stat-icon">⚠️</div>
+                <div class="stat-number">{{ trade_summary.worst_trade }}</div>
+                <div class="stat-label">Worst Performance</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>

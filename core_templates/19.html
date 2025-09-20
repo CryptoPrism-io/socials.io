@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style19.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Trading Statistics & Analytics</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Trading Analytics</div>
+                <div class="last-update-date">{{ current_date }}</div>
+                <div class="last-update-time">{{ current_time }}</div>
+            </div>
+        </div>
+
+        <!-- Main Title Section -->
+        <div class="title-section">
+            <div class="main-title">📊 Trading Statistics & Analytics</div>
+            <div class="subtitle">Comprehensive Performance Analysis</div>
+        </div>
+
+        <!-- Overall Statistics -->
+        <div class="overall-stats">
+            <div class="stat-item primary">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ trading_statistics.overall_stats.win_rate }}</div>
+                    <div class="stat-label">Overall Win Rate</div>
+                    <div class="stat-detail">{{ trading_statistics.overall_stats.winning_trades }}/{{ trading_statistics.overall_stats.total_trades }} trades</div>
+                </div>
+            </div>
+            <div class="stat-item success">
+                <div class="stat-icon">💰</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ trading_statistics.overall_stats.total_pnl }}</div>
+                    <div class="stat-label">Total P&L</div>
+                    <div class="stat-detail">Profit Factor: {{ trading_statistics.overall_stats.profit_factor }}</div>
+                </div>
+            </div>
+            <div class="stat-item info">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ trading_statistics.overall_stats.average_win }}</div>
+                    <div class="stat-label">Average Win</div>
+                    <div class="stat-detail">Per winning trade</div>
+                </div>
+            </div>
+            <div class="stat-item warning">
+                <div class="stat-icon">📉</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ trading_statistics.overall_stats.average_loss }}</div>
+                    <div class="stat-label">Average Loss</div>
+                    <div class="stat-detail">Per losing trade</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Long vs Short Analysis -->
+        <div class="long-short-section">
+            <div class="section-title">⚡ Long vs Short Performance</div>
+            <div class="long-short-grid">
+                <div class="trade-type-card long">
+                    <div class="card-header">
+                        <div class="card-icon">📈</div>
+                        <div class="card-title">LONG Trades</div>
+                    </div>
+                    <div class="trade-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">Total Trades:</span>
+                            <span class="stat-value">{{ trading_statistics.long_vs_short.long_trades.count }}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Winning Trades:</span>
+                            <span class="stat-value">{{ trading_statistics.long_vs_short.long_trades.wins }}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Win Rate:</span>
+                            <span class="stat-value success">{{ trading_statistics.long_vs_short.long_trades.win_rate }}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Total P&L:</span>
+                            <span class="stat-value profit">{{ trading_statistics.long_vs_short.long_trades.total_pnl }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trade-type-card short">
+                    <div class="card-header">
+                        <div class="card-icon">📉</div>
+                        <div class="card-title">SHORT Trades</div>
+                    </div>
+                    <div class="trade-stats">
+                        <div class="stat-row">
+                            <span class="stat-label">Total Trades:</span>
+                            <span class="stat-value">{{ trading_statistics.long_vs_short.short_trades.count }}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Winning Trades:</span>
+                            <span class="stat-value">{{ trading_statistics.long_vs_short.short_trades.wins }}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Win Rate:</span>
+                            <span class="stat-value success">{{ trading_statistics.long_vs_short.short_trades.win_rate }}</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Total P&L:</span>
+                            <span class="stat-value profit">{{ trading_statistics.long_vs_short.short_trades.total_pnl }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Performance -->
+        <div class="monthly-section">
+            <div class="section-title">📅 Monthly Performance History</div>
+            <div class="monthly-grid">
+                {% for month in trading_statistics.monthly_performance %}
+                <div class="monthly-item">
+                    <div class="month-header">
+                        <div class="month-name">{{ month.month }}</div>
+                        <div class="month-return {{ 'positive' if month.return.startswith('+') else 'negative' }}">
+                            {{ month.return }}
+                        </div>
+                    </div>
+                    <div class="month-trades">{{ month.trades }} trades</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Best Performing Assets -->
+        <div class="assets-section">
+            <div class="section-title">🏆 Best Performing Assets</div>
+            <div class="assets-grid">
+                {% for asset in trading_statistics.best_assets %}
+                <div class="asset-item">
+                    <div class="asset-header">
+                        <div class="asset-symbol">{{ asset.symbol }}</div>
+                        <div class="asset-win-rate">{{ asset.win_rate }}</div>
+                    </div>
+                    <div class="asset-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Trades:</span>
+                            <span class="detail-value">{{ asset.trades }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Total P&L:</span>
+                            <span class="detail-value profit">{{ asset.total_pnl }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Streak Analysis & Risk Metrics -->
+        <div class="bottom-section">
+            <div class="streak-section">
+                <div class="section-title">🔥 Streak Analysis</div>
+                <div class="streak-grid">
+                    <div class="streak-item win">
+                        <div class="streak-icon">🔥</div>
+                        <div class="streak-number">{{ trading_statistics.streak_analysis.longest_winning_streak }}</div>
+                        <div class="streak-label">Longest Win Streak</div>
+                    </div>
+                    <div class="streak-item loss">
+                        <div class="streak-icon">❄️</div>
+                        <div class="streak-number">{{ trading_statistics.streak_analysis.longest_losing_streak }}</div>
+                        <div class="streak-label">Longest Loss Streak</div>
+                    </div>
+                    <div class="streak-item current">
+                        <div class="streak-icon">⚡</div>
+                        <div class="streak-number">{{ trading_statistics.streak_analysis.current_streak }}</div>
+                        <div class="streak-label">Current Streak</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="risk-metrics-section">
+                <div class="section-title">⚠️ Risk Metrics</div>
+                <div class="risk-metrics-grid">
+                    <div class="risk-metric">
+                        <div class="metric-label">Avg Risk:Reward</div>
+                        <div class="metric-value">{{ trading_statistics.risk_metrics.average_risk_reward }}</div>
+                    </div>
+                    <div class="risk-metric">
+                        <div class="metric-label">Max Drawdown</div>
+                        <div class="metric-value negative">{{ trading_statistics.risk_metrics.max_drawdown }}</div>
+                    </div>
+                    <div class="risk-metric">
+                        <div class="metric-label">Calmar Ratio</div>
+                        <div class="metric-value">{{ trading_statistics.risk_metrics.calmar_ratio }}</div>
+                    </div>
+                    <div class="risk-metric">
+                        <div class="metric-label">Sortino Ratio</div>
+                        <div class="metric-value">{{ trading_statistics.risk_metrics.sortino_ratio }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>
