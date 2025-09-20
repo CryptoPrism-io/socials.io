@@ -188,7 +188,7 @@ def fetch_bitcoin_data(engine) -> Dict:
             return {}
 
         btc = btc_df.iloc[0].to_dict()
-        btc['market_cap'] = bmp f"{btc['market_cap'] / 1e9:.1f} T" if btc['market_cap'] else 'N/A'
+        btc['market_cap'] = f"{btc['market_cap'] / 1e9:.1f} T" if btc['market_cap'] else 'N/A'
         btc['volume24h'] = f"{btc['volume24h'] / 1e9:.1f} B" if btc['volume24h'] else 'N/A'
         return btc
     except Exception as e:
