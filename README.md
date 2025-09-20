@@ -1,6 +1,6 @@
-# Socials.io: Complete Instagram Content Automation System v2.0
+# Socials.io: Complete Instagram Content Automation System v2.1.0
 
-A comprehensive social media automation platform featuring 16 professional Instagram templates, AI-powered market analysis, and real-time data integration. Transform crypto market data into engaging visual content through automated HTML-to-image conversion and intelligent publishing workflows.
+A comprehensive social media automation platform featuring 19 professional Instagram templates, AI-powered market analysis, and real-time data integration. Transform crypto market data into engaging visual content through automated HTML-to-image conversion and intelligent publishing workflows.
 
 ---
 
@@ -25,10 +25,11 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 - **`src/scripts/instapost.py`** - Main content generation pipeline with HTML-to-image conversion
 - **`src/scripts/instapost_push.py`** - Enhanced content publishing with advanced error handling
 
-### 🚀 Complete Instagram Template System (16 Templates)
+### 🚀 Complete Instagram Template System (19 Templates)
 - **Core Templates**: `core_templates/` directory with professional designs:
   - **Legacy Templates**: `1.html` through `5.html` (coin grids and market overviews)
   - **Advanced Templates**: `6.html` through `16.html` (specialized content types)
+  - **🆕 Trading Performance Templates**: `17.html` through `19.html` (transparency & credibility)
   - **AI-Powered Template 6**: Real-time market analysis with VIBES/GIANTS/CATALYSTS structure
   - **Comprehensive Coverage**: Every major crypto content category covered
 
@@ -40,6 +41,7 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 - **DeFi Ecosystem** (Template 13): TVL rankings, protocol analysis
 - **Scaling Solutions** (Template 15): Layer 2 comparisons, gas savings
 - **Meme Culture** (Template 16): Viral tracking with risk warnings
+- **🆕 Trading Performance** (Templates 17-19): Transparency, portfolio tracking, trading statistics
 
 - **Professional Design System**:
   - **Unified CRYPTO PRISM Branding**: Consistent visual identity across all templates
@@ -52,6 +54,38 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 - **Real-Time Data**: Live market data integration across all templates
 - **Generated Content**: `output/` directory with HTML and image outputs
 - **Dynamic Rendering**: Jinja2-powered template system with live data injection
+
+### 🆕 Trading Performance & Transparency Templates (17-19)
+
+**Build credibility through transparent trading performance:**
+
+#### 📊 **Template 17: Trade History & Performance**
+- **Recent Trades**: Last 10 completed trades with entry/exit details
+- **P&L Tracking**: Transparent profit/loss results in USD and percentage
+- **Win/Loss Analytics**: Clear success/failure indicators with color coding
+- **Risk Management**: Risk-reward ratios and trade duration tracking
+- **Performance Summary**: Overall stats and best/worst trade highlights
+
+#### 💼 **Template 18: Portfolio Dashboard**
+- **Real-Time Portfolio Value**: Current USD value with 7D/30D/90D performance
+- **Open Positions**: Active trades with current P&L and allocation percentages
+- **Asset Allocation**: Visual breakdown by cryptocurrency holdings
+- **Risk Metrics**: Professional metrics (Sharpe ratio, max drawdown, volatility)
+- **Balance History**: Portfolio value progression over time
+
+#### 📈 **Template 19: Trading Statistics & Analytics**
+- **Overall Performance**: Win rate, total P&L, profit factor, average win/loss
+- **Long vs Short Analysis**: Separate performance metrics for each trade type
+- **Monthly Performance**: Calendar view of monthly returns and trade counts
+- **Asset Performance**: Best performing cryptocurrencies by profitability
+- **Advanced Metrics**: Calmar ratio, Sortino ratio, streak analysis
+- **Professional Risk Assessment**: Comprehensive trading analytics
+
+**Why Trading Performance Templates Matter:**
+- **Build Trust**: Transparent P&L tracking proves real trading skills
+- **Demonstrate Expertise**: Professional risk metrics show sophisticated approach
+- **Create Accountability**: Honest win/loss ratios build follower confidence
+- **Establish Credibility**: Real results separate you from prediction-only accounts
 
 ## 📁 Project Structure
 
@@ -67,20 +101,29 @@ socials.io/
 │   │   ├── 📄 linkedin_auth.py      # LinkedIn authentication
 │   │   └── 📄 twitter_auth.py       # Twitter authentication
 │   └── 📁 utils/                    # Utility modules & helpers
-├── 📁 core_templates/               # Complete template system (16 templates)
+├── 📁 core_templates/               # Complete template system (19 templates)
 │   ├── 📄 1.html → 5.html           # Legacy coin grid templates
 │   ├── 📄 6.html                    # AI market analysis (VIBES/GIANTS/CATALYSTS)
-│   ├── 📄 style.css → style6.css    # Glassmorphism CSS stylesheets
-│   └── 📄 ... (Templates 7-16)     # Specialized content templates
-├── 📁 output/                       # Generated content output
-│   ├── 📁 html/                     # Generated HTML files
-│   │   ├── 📄 1_output.html → 5_output.html    # Legacy template outputs
-│   │   ├── 📄 6_output.html → 16_output.html   # Advanced template outputs
-│   │   ├── 📄 style6.css → style16.css         # Template-specific CSS
-│   │   └── 📄 test_cards.html       # Development testing file
-│   └── 📁 images/                   # Generated Instagram images
-│       ├── 📄 *.png                 # High-resolution PNG screenshots
-│       └── 📄 *.jpg                 # Instagram-optimized JPG outputs
+│   ├── 📄 7.html → 16.html          # Specialized content templates
+│   ├── 📄 17.html → 19.html         # 🆕 Trading performance templates
+│   └── 📄 style.css → style19.css   # Complete CSS stylesheet collection
+├── 📁 output/                       # Generated content output (excluded from git)
+│   ├── 📁 html/                     # Generated HTML files with descriptive naming
+│   │   ├── 📄 market_overview_output.html       # Template 1: Market Overview
+│   │   ├── 📄 crypto_vibes_output.html          # Template 6: AI Analysis
+│   │   ├── 📄 meme_coin_tracker_output.html     # Template 16: Meme Coins
+│   │   ├── 📄 trade_history_output.html         # Template 17: Trading Performance
+│   │   ├── 📄 portfolio_dashboard_output.html   # Template 18: Portfolio Tracking
+│   │   ├── 📄 trading_statistics_output.html    # Template 19: Trading Analytics
+│   │   └── 📄 ... (all 19 templates)           # Professional descriptive naming
+│   │   └── 📄 style*.css             # CSS files copied during generation
+│   └── 📁 images/                   # Generated Instagram images with descriptive naming
+│       ├── 📄 market_overview_output.jpg        # Template 1: Market Overview
+│       ├── 📄 meme_coin_tracker_output.jpg      # Template 16: Meme Coins
+│       ├── 📄 trade_history_output.jpg          # Template 17: Trading Performance
+│       ├── 📄 portfolio_dashboard_output.jpg    # Template 18: Portfolio Dashboard
+│       ├── 📄 trading_statistics_output.jpg     # Template 19: Trading Analytics
+│       └── 📄 ... (all 19 templates)           # Instagram-ready JPG outputs
 ├── 📁 src/utils/                    # AI & utility modules
 │   ├── 📄 openrouter_analyzer.py   # OpenRouter API integration
 │   └── 📄 text_highlighter.py      # Dynamic text highlighting
