@@ -1,6 +1,6 @@
-# Socials.io: Automated Social Media Content Generation & Publishing System
+# Socials.io: Complete Instagram Content Automation System v2.0
 
-An intelligent social media automation platform that transforms data-driven insights into engaging Instagram content through automated HTML-to-image conversion, AI-powered content generation, and seamless publishing workflows.
+A comprehensive social media automation platform featuring 16 professional Instagram templates, AI-powered market analysis, and real-time data integration. Transform crypto market data into engaging visual content through automated HTML-to-image conversion and intelligent publishing workflows.
 
 ---
 
@@ -25,18 +25,33 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 - **`src/scripts/instapost.py`** - Main content generation pipeline with HTML-to-image conversion
 - **`src/scripts/instapost_push.py`** - Enhanced content publishing with advanced error handling
 
-### Template System - Single Source of Truth
-- **Core Templates**: `core_templates/` directory contains:
-  - **HTML Templates**: `1.html` through `6.html` (base templates with auto-layout architecture)
-  - **CSS Stylesheets**: Unified `style.css` with enhanced glassmorphism effects and flexbox layouts
-  - **Modern Architecture**: Eliminated absolute positioning in favor of auto-layout container systems
-  - **Template 6**: Dedicated Bitcoin snapshot with AI-powered news and interactive swipe indicators
-- **Generated Content**: `output/` directory for all generated files:
-  - **HTML Output**: `output/html/` - Rendered templates with live data
-  - **Image Output**: `output/images/` - Final Instagram posts (JPG format)
-- **Dynamic Rendering**: Jinja2-powered data injection with proper path resolution
-- **Image Output**: Automated screenshot generation at 2160px high-resolution format for optimal viewport display
-- **6 Template System**: Complete template ecosystem from coin grids to Bitcoin-focused analytics
+### 🚀 Complete Instagram Template System (16 Templates)
+- **Core Templates**: `core_templates/` directory with professional designs:
+  - **Legacy Templates**: `1.html` through `5.html` (coin grids and market overviews)
+  - **Advanced Templates**: `6.html` through `16.html` (specialized content types)
+  - **AI-Powered Template 6**: Real-time market analysis with VIBES/GIANTS/CATALYSTS structure
+  - **Comprehensive Coverage**: Every major crypto content category covered
+
+#### 📊 Template Categories & Coverage
+- **Market Analysis** (Templates 6, 10): AI sentiment analysis, Fear & Greed Index
+- **Performance Tracking** (Templates 7, 11): Gainers/losers, weekly recaps
+- **News & Events** (Templates 8, 14): Breaking news, crypto calendar
+- **Trading Intelligence** (Templates 9, 12): Liquidations, whale alerts
+- **DeFi Ecosystem** (Template 13): TVL rankings, protocol analysis
+- **Scaling Solutions** (Template 15): Layer 2 comparisons, gas savings
+- **Meme Culture** (Template 16): Viral tracking with risk warnings
+
+- **Professional Design System**:
+  - **Unified CRYPTO PRISM Branding**: Consistent visual identity across all templates
+  - **Glassmorphism Effects**: Modern backdrop filters and transparency layers
+  - **Instagram Optimization**: Perfect 1080x1080 format with mobile-first design
+  - **Color-Coded Data**: Impact ratings, performance indicators, risk assessments
+  - **Animation Systems**: Subtle animations and hover effects for engagement
+
+- **AI Integration**: OpenRouter API with Claude 3.5 Sonnet for intelligent analysis
+- **Real-Time Data**: Live market data integration across all templates
+- **Generated Content**: `output/` directory with HTML and image outputs
+- **Dynamic Rendering**: Jinja2-powered template system with live data injection
 
 ## 📁 Project Structure
 
@@ -52,15 +67,23 @@ socials.io/
 │   │   ├── 📄 linkedin_auth.py      # LinkedIn authentication
 │   │   └── 📄 twitter_auth.py       # Twitter authentication
 │   └── 📁 utils/                    # Utility modules & helpers
-├── 📁 core_templates/               # Template system (single source of truth)
-│   ├── 📄 1.html → 5.html           # Auto-layout HTML templates
-│   └── 📄 style.css → style5.css    # Flexbox-based CSS stylesheets
+├── 📁 core_templates/               # Complete template system (16 templates)
+│   ├── 📄 1.html → 5.html           # Legacy coin grid templates
+│   ├── 📄 6.html                    # AI market analysis (VIBES/GIANTS/CATALYSTS)
+│   ├── 📄 style.css → style6.css    # Glassmorphism CSS stylesheets
+│   └── 📄 ... (Templates 7-16)     # Specialized content templates
 ├── 📁 output/                       # Generated content output
 │   ├── 📁 html/                     # Generated HTML files
-│   │   └── 📄 *_output.html         # Rendered templates with data
-│   └── 📁 images/                   # Generated images
-│       ├── 📄 *.png                 # PNG screenshots
-│       └── 📄 *.jpg                 # JPG final outputs
+│   │   ├── 📄 1_output.html → 5_output.html    # Legacy template outputs
+│   │   ├── 📄 6_output.html → 16_output.html   # Advanced template outputs
+│   │   ├── 📄 style6.css → style16.css         # Template-specific CSS
+│   │   └── 📄 test_cards.html       # Development testing file
+│   └── 📁 images/                   # Generated Instagram images
+│       ├── 📄 *.png                 # High-resolution PNG screenshots
+│       └── 📄 *.jpg                 # Instagram-optimized JPG outputs
+├── 📁 src/utils/                    # AI & utility modules
+│   ├── 📄 openrouter_analyzer.py   # OpenRouter API integration
+│   └── 📄 text_highlighter.py      # Dynamic text highlighting
 ├── 📁 config/                       # Configuration modules
 │   └── 📄 paths.py                  # Path configuration management
 ├── 📁 tests/                        # Test suite
