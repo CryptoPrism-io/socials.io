@@ -1171,3 +1171,89 @@ git log --oneline -- ".github/workflows/"
 **Validation**: Post-fix verification confirms Template 3 now displays with appropriate font sizes matching the established standards of Templates 1 and 2, with all text elements clearly readable and properly proportioned in the 2160px viewport.
 
 **Commit Hash**: `f4e5015`
+
+---
+
+## [v1.8.1] - 2025-09-22 (dev2 branch)
+
+### 🧹 CLEANUP: Project Structure Optimization & Code Quality Enhancement
+
+### Removed
+- **Obsolete Script Files**: Eliminated incomplete and redundant development files
+  - **`src/scripts/instapost_new.py`**: Removed incomplete stub with missing functionality (94 lines of incomplete code)
+  - **`src/scripts/instapost_restructured.py`**: Removed partially implemented script missing templates 3-6 (207 lines with incomplete functionality)
+  - **`config/paths.py`**: Removed outdated configuration with incorrect template paths pointing to non-existent `src/templates/` directory
+  - **`config/` directory**: Completely removed obsolete configuration system
+
+### Fixed
+- **Git Tracking Consistency**: Resolved inconsistent Git tracking that was causing VS Code folder dimming
+  - **Added Missing CSS Files**: `style3.css`, `style5.css`, and `style6.css` now properly tracked in Git
+  - **Unified File Tracking**: All output files now consistently tracked, eliminating mixed tracking status
+  - **VS Code Visual Fix**: Resolved folder opacity issues caused by inconsistent Git ignore patterns
+
+- **Local Server File References**: Updated `local_server.py` to use correct naming convention
+  - **Template Links**: Updated from descriptive names (`top_cryptocurrencies_output.html`) to standard format (`1_output.html` through `6_output.html`)
+  - **Consistent URLs**: All quick links now properly reference existing output files
+
+- **Orphaned File Cleanup**: Removed legacy image files with outdated naming convention
+  - **Deleted**: `ai_crypto_analysis_output.jpeg`, `crypto_vibes_output.jpeg`, `market_overview_output.jpeg`
+  - **Deleted**: `portfolio_tracker_output.jpeg`, `top_cryptocurrencies_output.jpeg`, `trading_signals_output.jpeg`
+
+### Enhanced
+- **Code Quality Standards**: Maintained only production-ready, fully functional scripts
+  - **Primary Script**: `src/scripts/instapost.py` - Complete implementation with all 6 templates (1007 lines)
+  - **Publishing Script**: `src/scripts/instapost_push.py` - Dedicated Instagram publishing functionality
+  - **Support Scripts**: Preserved `figma.py`, `gsheets.py`, authentication utilities
+
+- **File Naming Consistency**: Standardized all output files to numeric convention
+  - **HTML Output**: `1_output.html` through `6_output.html`
+  - **Image Output**: `1_output.jpg` through `6_output.jpg`
+  - **Template References**: All paths properly aligned with actual file structure
+
+### Rationale
+
+**Code Quality Improvement**: The removed scripts represented incomplete development attempts that could cause confusion and maintenance overhead:
+
+- **`instapost_new.py`**: Only contained basic structure with missing data functions and incorrect viewport settings (1080x1080 vs current 2160x2700)
+- **`instapost_restructured.py`**: Partially implemented with only templates 1-2, missing critical templates 3-6 functionality
+- **`config/paths.py`**: Referenced non-existent directory structure (`src/templates/` vs actual `core_templates/`)
+
+**Git Consistency Resolution**: Mixed tracking status was causing VS Code to display folders with reduced opacity, indicating version control uncertainty. Now all files have clear Git status:
+
+- ✅ **Tracked Files**: All production HTML, CSS, and image outputs properly version controlled
+- ✅ **Ignored Files**: `__pycache__/` correctly ignored with proper `.gitignore` configuration
+- ✅ **Clean Working Tree**: No inconsistent tracking patterns causing IDE visual issues
+
+**Maintenance Efficiency**: Keeping only the functional `instapost.py` script (1007 lines with complete template 1-6 implementation) eliminates:
+
+- **Development Confusion**: No more choosing between incomplete script versions
+- **Path Resolution Issues**: Single script with correct template paths and output naming
+- **Testing Overhead**: Only one script to maintain and validate
+
+**Professional Standards**: The cleanup aligns with enterprise development practices:
+
+- **Single Source of Truth**: One authoritative script for Instagram content generation
+- **Consistent Naming**: All files follow numeric convention without legacy descriptive names
+- **Clean Repository**: No orphaned files or incomplete development artifacts
+
+**Business Impact**: Streamlined codebase improves:
+
+- **Development Velocity**: Clear file structure reduces onboarding time for new developers
+- **Deployment Reliability**: No risk of accidentally using incomplete scripts in production
+- **Code Review Efficiency**: Reviewers focus on functional code rather than managing multiple incomplete versions
+
+**Technical Excellence**: The retained `instapost.py` script provides complete functionality:
+
+- ✅ **All 6 Templates**: Complete implementation covering all design variations
+- ✅ **Database Integration**: Full PostgreSQL connectivity with proper data fetching
+- ✅ **AI Integration**: Together AI API for Bitcoin news generation (Template 6)
+- ✅ **Screenshot Generation**: Playwright automation with 2160x2700 high-resolution output
+- ✅ **Error Handling**: Comprehensive exception handling and fallback systems
+
+**Future Development**: Clean codebase foundation supports:
+
+- **Easy Enhancement**: Single script easier to modify and extend
+- **Clear Dependencies**: No confusion about which files are actually used in production
+- **Efficient Testing**: Focus testing efforts on production code rather than incomplete experiments
+
+**Commit Hash**: `1409c6f`
