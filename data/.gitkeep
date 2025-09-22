@@ -1,0 +1,2 @@
+# Keep data directory in git but ignore contents
+# This directory is used for local JSON storage instead of Google Drive
