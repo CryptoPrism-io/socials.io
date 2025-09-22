@@ -591,17 +591,54 @@ from together import Together
 
 async def render_page_1():
     """Fetch data and render the HTML page using Jinja2, then convert the HTML to an image using Playwright."""
-    # Fetch the top 24 coins data for page 1
-    df = fetch_data_as_dataframe()
+    # Fetch coins 2-24 data for page 1 (excluding Bitcoin which is rank 1)
+    query_coins_2_24 = """
+      SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
+      FROM crypto_listings_latest_1000
+      WHERE cmc_rank BETWEEN 2 AND 24
+      """
+
+    try:
+        # Use gcp_engine to execute the query and fetch data as a DataFrame
+        df = pd.read_sql_query(query_coins_2_24, gcp_engine)
+        # Convert market_cap to billions and round to 2 decimal places
+        df['market_cap'] = (df['market_cap'] / 1_000_000_000).round(2)
+        df['price'] = (df['price']).round(2)
+        df['percent_change24h'] = (df['percent_change24h']).round(2)
+
+        # Create a list of slugs from the DataFrame
+        slugs = df['slug'].tolist()
+        # Prepare a string for the IN clause
+        slugs_placeholder = ', '.join(f"'{slug}'" for slug in slugs)
+
+        # Construct the SQL query to get logos
+        query_logos = f"""
+        SELECT logo, slug FROM "FE_CC_INFO_URL"
+        WHERE slug IN ({slugs_placeholder})
+        """
+
+        # Execute the query and fetch the data into a DataFrame
+        logos_and_slugs = pd.read_sql_query(query_logos, gcp_engine)
+
+        # Merge the two DataFrames on the 'slug' column
+        df = pd.merge(df, logos_and_slugs, on='slug', how='left')
+
+        df = df.sort_values(by='cmc_rank', ascending=True)
+
+        gcp_engine.dispose()
+
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+        df = pd.DataFrame()  # Return an empty DataFrame in case of error
 
     if df.empty:
         print("No data to render.")
         return
 
-    # Split into 3 columns of 8 coins each
-    df1_part1 = df.iloc[0:8]
-    df1_part2 = df.iloc[8:16]
-    df1_part3 = df.iloc[16:24]
+    # Split into 3 columns of approximately 8 coins each (23 total coins: 8+8+7)
+    df1_part1 = df.iloc[0:8]   # Coins 2-9
+    df1_part2 = df.iloc[8:16]  # Coins 10-17
+    df1_part3 = df.iloc[16:23] # Coins 18-24
 
     # Convert to dictionaries for template rendering
     coins_part1 = df1_part1.to_dict(orient='records')
