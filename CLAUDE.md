@@ -18,7 +18,7 @@ playwright install firefox
 playwright install webkit
 
 # Windows UTF-8 setup (if needed)
-scripts/setup_windows_utf8.bat
+scripts/setup/setup_windows_utf8.bat
 ```
 
 ### Testing
@@ -30,8 +30,8 @@ python tests/test_path_structure.py
 python -m pytest tests/ -v --tb=short
 
 # Environment validation
-python scripts/validate_env.py
-python scripts/validate_project.py
+python scripts/dev/validate_env.py
+python scripts/dev/validate_project.py
 ```
 
 ### Code Quality
@@ -54,16 +54,16 @@ mypy scripts/
 ### Main Application Scripts
 ```bash
 # Generate Instagram content from database
-python scripts/instapost.py
+python scripts/main/instapost.py
 
 # Publish generated content to Instagram
-python scripts/instapost_push.py
+python scripts/main/instapost_push.py
 
 # Sync PostgreSQL data to Google Sheets
-python scripts/gsheets.py
+python scripts/main/gsheets.py
 
 # Figma integration workflow
-python scripts/figma.py
+python scripts/main/figma.py
 ```
 
 ## Architecture Overview
@@ -73,7 +73,12 @@ python scripts/figma.py
 The project uses a clean, simplified directory structure for easy navigation and maintenance:
 
 ```
-├── scripts/             # ALL Python scripts (consolidated)
+├── scripts/             # ALL Python scripts (organized by function)
+│   ├── main/           # Core application scripts
+│   ├── auth/           # Authentication scripts
+│   ├── dev/            # Development & testing tools
+│   ├── setup/          # System setup & utilities
+│   └── config/         # Configuration & documentation
 ├── base_templates/      # ALL base HTML and CSS files
 ├── output_html/         # Generated HTML outputs + their CSS
 ├── output_images/       # Generated/screenshot images (.jpg)
@@ -82,6 +87,35 @@ The project uses a clean, simplified directory structure for easy navigation and
 ├── docs/                # Documentation
 └── .github/workflows/   # GitHub Actions automation
 ```
+
+### Scripts Organization
+
+The `scripts/` directory is organized into logical sub-folders for better maintainability:
+
+- **`main/`** - Core application functionality:
+  - `instapost.py` - Main content generation pipeline
+  - `instapost_push.py` - Instagram publishing
+  - `gsheets.py` - Google Sheets synchronization
+  - `figma.py` - Figma integration workflow
+
+- **`auth/`** - Authentication modules:
+  - `linkedin_auth.py` - LinkedIn authentication
+  - `twitter_auth.py` - Twitter authentication
+
+- **`dev/`** - Development and testing tools:
+  - `local_server.py` - Local development server
+  - `validate_env.py` - Environment validation
+  - `validate_project.py` - Project structure validation
+  - `test_unicode_system.py` - Unicode testing
+
+- **`setup/`** - System configuration utilities:
+  - `utf8_fix.py` - UTF-8 encoding fixes
+  - `setup_windows_utf8.bat` - Windows UTF-8 setup
+  - `setup_powershell_utf8.ps1` - PowerShell UTF-8 setup
+
+- **`config/`** - Configuration files and documentation:
+  - `.env.template` - Environment template
+  - Unicode troubleshooting documentation
 
 ### Core Pipeline
 Socials.io is a **social media automation platform** that follows a multi-stage data pipeline:
