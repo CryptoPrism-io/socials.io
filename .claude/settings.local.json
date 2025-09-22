@@ -29,7 +29,14 @@
       "Bash(do cp delete_folder/style$i.css delete_folder/style$i_backup.css)",
       "Bash(done)",
       "WebSearch",
-      "Bash(tee:*)"
+      "Bash(tee:*)",
+      "Bash(git fetch)",
+      "Bash(git symbolic-ref refs/remotes/origin/HEAD)",
+      "Bash(xargs:*)",
+      "Bash(dir:*)",
+      "Bash(del \"C:\\cpio_db\\socials.io\\output\\images\\ai_crypto_analysis_output.jpeg\")",
+      "Bash(rm:*)",
+      "Bash(git check-ignore:*)"
     ],
     "deny": [],
     "ask": []

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style6.css">
+    <link rel="stylesheet" href="../fonts/fonts.css">
     <title>Bitcoin Snapshot</title>
 </head>
 <body>
@@ -18,24 +18,24 @@
             </div>
             <div class="last-update">
                 <div class="last-update-label">Last Update</div>
-                <div class="last-update-date">22 Sep, 2025</div>
-                <div class="last-update-time">06:05:07 PM</div>
+                <div class="last-update-date">{{ current_date if current_date else '19 Sep, 2025' }}</div>
+                <div class="last-update-time">{{ current_time if current_time else '09:59:46 AM' }}</div>
             </div>
         </div>
 
         <!-- Bitcoin Dashboard Card -->
         <div class="btc-dashboard-card">
-        
+        {% for snaps in snap %}
         <!-- Main BTC Information Section -->
         <div class="btc-main-section">
             <!-- BTC Identity and Price -->
             <div class="btc-identity">
                 <div class="btc-logo-container">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="Bitcoin Logo" class="btc-logo-img">
+                    <img src="{{ snaps['logo'] }}" alt="Bitcoin Logo" class="btc-logo-img">
                 </div>
                 <div class="btc-info">
                     <div class="btc-symbol">BTC</div>
-                    <div class="btc-price">$$114754.56</div>
+                    <div class="btc-price">${{snaps['price']}}</div>
                 </div>
             </div>
 
@@ -43,11 +43,11 @@
             <div class="market-data-grid">
                 <div class="market-item">
                     <div class="market-label">Market Cap</div>
-                    <div class="market-value">$$2.29 T</div>
+                    <div class="market-value">${{snaps['market_cap']}}</div>
                 </div>
                 <div class="market-item">
                     <div class="market-label">Volume 24H</div>
-                    <div class="market-value">$$27.20 B</div>
+                    <div class="market-value">${{snaps['volume24h']}}</div>
                 </div>
             </div>
         </div>
@@ -59,20 +59,20 @@
                 <div class="performance-title">Performance</div>
                 <div class="performance-items">
                     <div class="perf-item">
-                        <div class="perf-value negative">
-                            -0.76%
+                        <div class="perf-value {% if snaps['percent_change24h']|float > 0 %}positive{% elif snaps['percent_change24h']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change24h'] }}%
                         </div>
                         <div class="perf-label">1D</div>
                     </div>
                     <div class="perf-item">
-                        <div class="perf-value negative">
-                            -0.43%
+                        <div class="perf-value {% if snaps['percent_change7d']|float > 0 %}positive{% elif snaps['percent_change7d']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change7d'] }}%
                         </div>
                         <div class="perf-label">7D</div>
                     </div>
                     <div class="perf-item">
-                        <div class="perf-value negative">
-                            -1.32%
+                        <div class="perf-value {% if snaps['percent_change30d']|float > 0 %}positive{% elif snaps['percent_change30d']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change30d'] }}%
                         </div>
                         <div class="perf-label">30D</div>
                     </div>
@@ -84,15 +84,15 @@
                 <div class="sentiment-title">Market Sentiment</div>
                 <div class="sentiment-items">
                     <div class="sentiment-item">
-                        <div class="sentiment-count bearish-count">3</div>
+                        <div class="sentiment-count bearish-count">{{snaps['bearish']}}</div>
                         <div class="sentiment-label">Bearish</div>
                     </div>
                     <div class="sentiment-item">
-                        <div class="sentiment-count neutral-count">16</div>
+                        <div class="sentiment-count neutral-count">{{snaps['neutral']}}</div>
                         <div class="sentiment-label">Neutral</div>
                     </div>
                     <div class="sentiment-item">
-                        <div class="sentiment-count bullish-count">13</div>
+                        <div class="sentiment-count bullish-count">{{snaps['bullish']}}</div>
                         <div class="sentiment-label">Bullish</div>
                     </div>
                 </div>
@@ -101,10 +101,10 @@
             <!-- Overall Trend -->
             <div class="trend-container">
                 <div class="trend-title">Overall Trend</div>
-                <div class="trend-value positive">Bullish</div>
+                <div class="trend-value {% if snaps['Trend'] == 'Bullish' %}positive{% elif snaps['Trend'] == 'Bearish' %}negative{% elif snaps['Trend'] == 'Consolidating' %}consolidating{% endif %}">{{snaps['Trend']}}</div>
             </div>
         </div>
-        
+        {% endfor %}
         </div>
 
         <!-- Bitcoin News & Events Section -->
@@ -113,22 +113,18 @@
             <div class="news-card">
                 <div class="news-title">Past 24 Hours</div>
                 <div class="news-items">
-                    
                     <div class="news-item">
                         <div class="news-bullet">•</div>
-                        <div class="news-text">Bitcoin maintains strong support above $117,000 level</div>
+                        <div class="news-text">BTC trading volume increased 15% amid institutional buying</div>
                     </div>
-                    
                     <div class="news-item">
                         <div class="news-bullet">•</div>
-                        <div class="news-text">Institutional buying continues with $200M+ inflows reported</div>
+                        <div class="news-text">Major ETF inflows continue to drive market momentum</div>
                     </div>
-                    
                     <div class="news-item">
                         <div class="news-bullet">•</div>
-                        <div class="news-text">On-chain metrics show healthy network activity</div>
+                        <div class="news-text">Technical indicators show sustained bullish divergence</div>
                     </div>
-                    
                 </div>
             </div>
 
@@ -136,22 +132,18 @@
             <div class="news-card">
                 <div class="news-title">Next 24 Hours - Watch For</div>
                 <div class="news-items">
-                    
                     <div class="news-item">
                         <div class="news-bullet">⚠</div>
-                        <div class="news-text">Watch for resistance test at $120,000 psychological level</div>
+                        <div class="news-text">Fed interest rate decision expected at 2 PM EST</div>
                     </div>
-                    
                     <div class="news-item">
                         <div class="news-bullet">⚠</div>
-                        <div class="news-text">US market open could drive increased volatility</div>
+                        <div class="news-text">Options expiry may increase volatility around $65K</div>
                     </div>
-                    
                     <div class="news-item">
                         <div class="news-bullet">⚠</div>
-                        <div class="news-text">Weekly options expiry may impact price action</div>
+                        <div class="news-text">Key resistance test at previous all-time high levels</div>
                     </div>
-                    
                 </div>
             </div>
         </div>
