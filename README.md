@@ -18,22 +18,23 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 ### Core Components (4 Specialized Scripts)
 
 #### 📊 **Data Collection & Management**
-- **`src/scripts/gsheets.py`** - PostgreSQL to Google Sheets data synchronization
-- **`src/scripts/figma.py`** - Figma-based design workflow integration
+- **`scripts/gsheets.py`** - PostgreSQL to Google Sheets data synchronization
+- **`scripts/figma.py`** - Figma-based design workflow integration
 
 #### 🎨 **Content Generation Engine**
-- **`src/scripts/instapost.py`** - Main content generation pipeline with HTML-to-image conversion
-- **`src/scripts/instapost_push.py`** - Enhanced content publishing with advanced error handling
+- **`scripts/instapost.py`** - Main content generation pipeline with HTML-to-image conversion
+- **`scripts/instapost_push.py`** - Enhanced content publishing with advanced error handling
 
-### Template System - Single Source of Truth
-- **Core Templates**: `core_templates/` directory contains:
+### Template System - Simplified Architecture
+- **Base Templates**: `base_templates/` directory contains:
   - **HTML Templates**: `1.html` through `6.html` (base templates with auto-layout architecture)
-  - **CSS Stylesheets**: Unified `style.css` with enhanced glassmorphism effects and flexbox layouts
+  - **CSS Stylesheets**: Dedicated `style1.css` through `style6.css` with enhanced glassmorphism effects
   - **Modern Architecture**: Eliminated absolute positioning in favor of auto-layout container systems
   - **Template 6**: Dedicated Bitcoin snapshot with AI-powered news and interactive swipe indicators
-- **Generated Content**: `output/` directory for all generated files:
-  - **HTML Output**: `output/html/` - Rendered templates with live data
-  - **Image Output**: `output/images/` - Final Instagram posts (JPG format)
+- **Generated Content**: Simplified output structure:
+  - **HTML Output**: `output_html/` - Rendered templates with live data + CSS files
+  - **Image Output**: `output_images/` - Final Instagram posts (JPG format)
+  - **Input Assets**: `input_images/` - Background images and input media files
 - **Dynamic Rendering**: Jinja2-powered data injection with proper path resolution
 - **Image Output**: Automated screenshot generation at 2160px high-resolution format for optimal viewport display
 - **6 Template System**: Complete template ecosystem from coin grids to Bitcoin-focused analytics
@@ -42,12 +43,23 @@ Socials.io operates on a **multi-source data pipeline** designed for automated c
 
 ```
 socials.io/
-├── 📁 src/                          # Source code directory
-│   ├── 📁 scripts/                  # Main application scripts
-│   │   ├── 📄 instapost.py          # Main content generation pipeline
-│   │   ├── 📄 instapost_push.py     # Enhanced publishing workflow
-│   │   ├── 📄 gsheets.py            # Google Sheets data synchronization
-│   │   ├── 📄 figma.py              # Figma integration workflow
+├── 📁 scripts/                      # ALL Python scripts (consolidated)
+│   ├── 📄 instapost.py              # Main content generation pipeline
+│   ├── 📄 instapost_push.py         # Enhanced publishing workflow
+│   ├── 📄 gsheets.py                # Google Sheets data synchronization
+│   ├── 📄 figma.py                  # Figma integration workflow
+│   ├── 📄 local_server.py           # Local development server
+│   └── 📄 validate_*.py             # Environment validation utilities
+├── 📁 base_templates/               # ALL base HTML and CSS files
+│   ├── 📄 1.html - 6.html           # Template HTML files
+│   ├── 📄 style1.css - style6.css   # Dedicated CSS stylesheets
+├── 📁 output_html/                  # Generated HTML outputs + CSS
+│   ├── 📄 *_output.html             # Rendered templates with live data
+│   └── 📄 style*.css                # CSS files for outputs
+├── 📁 output_images/                # Generated/screenshot images (.jpg)
+│   └── 📄 *_output.jpg              # Final Instagram posts
+├── 📁 input_images/                 # Imported/input images (.png)
+│   └── 📄 *.png                     # Background images and assets
 │   │   ├── 📄 instapost_new.py      # Development/experimental script
 │   │   ├── 📄 linkedin_auth.py      # LinkedIn authentication
 │   │   └── 📄 twitter_auth.py       # Twitter authentication

@@ -26,7 +26,7 @@ class CustomHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
     def __init__(self, *args, **kwargs):
         # Set the directory to serve from
-        super().__init__(*args, directory=str(Path.cwd() / "output"), **kwargs)
+        super().__init__(*args, directory=str(Path.cwd()), **kwargs)
 
     def end_headers(self):
         # Add CORS headers for cross-origin access
@@ -40,7 +40,7 @@ def main():
     PORT = 8000
 
     # Change to project root directory
-    os.chdir(Path(__file__).parent)
+    os.chdir(Path(__file__).parent.parent)
 
     # Get local IP address
     local_ip = get_local_ip()
@@ -51,21 +51,21 @@ def main():
 🌐 Socials.io Local Network Server Started
 ═══════════════════════════════════════════
 
-📂 Serving directory: {Path.cwd() / 'output'}
+📂 Serving directory: {Path.cwd()}
 🖥️  Local access:     http://localhost:{PORT}
 📱 Network access:    http://{local_ip}:{PORT}
 
 📋 Available endpoints:
-   • HTML outputs:    http://{local_ip}:{PORT}/html/
-   • Image outputs:   http://{local_ip}:{PORT}/images/
+   • HTML outputs:    http://{local_ip}:{PORT}/output_html/
+   • Image outputs:   http://{local_ip}:{PORT}/output_images/
 
 🔗 Quick links:
-   • Template 1: http://{local_ip}:{PORT}/html/1_output.html
-   • Template 2: http://{local_ip}:{PORT}/html/2_output.html
-   • Template 3: http://{local_ip}:{PORT}/html/3_output.html
-   • Template 4: http://{local_ip}:{PORT}/html/4_output.html
-   • Template 5: http://{local_ip}:{PORT}/html/5_output.html
-   • Template 6: http://{local_ip}:{PORT}/html/6_output.html
+   • Template 1: http://{local_ip}:{PORT}/output_html/1_output.html
+   • Template 2: http://{local_ip}:{PORT}/output_html/2_output.html
+   • Template 3: http://{local_ip}:{PORT}/output_html/3_output.html
+   • Template 4: http://{local_ip}:{PORT}/output_html/4_output.html
+   • Template 5: http://{local_ip}:{PORT}/output_html/5_output.html
+   • Template 6: http://{local_ip}:{PORT}/output_html/6_output.html
 
 💡 To test from other devices on your network:
    1. Connect devices to the same Wi-Fi network

@@ -10,6 +10,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v1.8.4] - 2025-09-23 (dev2 branch)
+
+### 🏗️ MAJOR: Project Structure Simplification & Template 4 Enhancement
+
+### Changed
+- **Complete Directory Restructure**: Simplified project structure for better maintainability
+  - **Scripts Consolidation**: Moved all Python scripts from `src/scripts/` to single `scripts/` directory
+  - **Template Organization**: Renamed `core_templates/` to `base_templates/` for clarity
+  - **Output Separation**: Split outputs into `output_html/` and `output_images/` directories
+  - **Input Management**: Created `input_images/` for background/input media files
+  - **Legacy Cleanup**: Removed complex nested `src/` and `output/` directory structures
+
+- **Documentation Updates**: Updated all project documentation for new structure
+  - **CLAUDE.md**: Added simplified directory structure diagram and updated all path references
+  - **GitHub Actions**: Updated 3 workflow files to reference new script paths
+  - **Local Server**: Enhanced with new directory structure and updated URL endpoints
+
+### Enhanced
+- **Template 4 Visual Improvements**: Implemented professional percentage change styling
+  - **Color-Coded Changes**: Added conditional green/red coloring for positive/negative percentages
+  - **Frame Styling**: Implemented glassmorphism background frames with borders and glow effects
+  - **Professional Polish**: Enhanced 24h and 7d percentage displays with backdrop blur and shadows
+  - **Visual Consistency**: Aligned Template 4 styling with other professional templates
+
+### Fixed
+- **Template 1 CSS Reference**: Resolved missing `style1.css` file causing layout fallback
+- **Path Resolution**: Fixed all template and output path references in Python scripts
+- **File Organization**: Eliminated duplicate CSS files and streamlined template assets
+
+### Added
+- **Simplified Structure Benefits**:
+  - **Easy Navigation**: 5 clear-purpose directories instead of complex nested structure
+  - **Logical Separation**: Scripts, templates, outputs, inputs clearly separated
+  - **Maintenance Efficiency**: Much easier to find and modify files
+  - **Developer Experience**: New developers immediately understand project structure
+
+### Technical Implementation
+- **Python Scripts**: Updated all path references from `src/scripts/` to `scripts/`
+- **HTML Templates**: Updated CSS references to use same-directory linking
+- **CSS Architecture**: Established dedicated CSS files for each template
+- **Output Pipeline**: Maintained full functionality while improving organization
+
+### Rationale
+**Extreme Simplification**: The restructure addresses complexity issues with the previous nested directory system. The new 5-folder structure (`scripts/`, `base_templates/`, `output_html/`, `output_images/`, `input_images/`) provides immediate clarity about file purposes and eliminates navigation confusion.
+
+**Template 4 Enhancement**: Professional percentage change styling improves visual hierarchy and user experience, making positive/negative performance immediately recognizable through color coding and frame effects.
+
+**Maintenance Excellence**: Simplified structure reduces onboarding time, eliminates file location confusion, and enables faster development cycles with clear separation of concerns.
+
+**Commit Hash**: `[pending]`
+
+---
+
 ## [v1.8.0] - 2025-09-19
 
 ### 🚀 NEW: Template 6 - Dedicated Bitcoin Snapshot with AI News
@@ -1257,6 +1310,100 @@ git log --oneline -- ".github/workflows/"
 - **Efficient Testing**: Focus testing efforts on production code rather than incomplete experiments
 
 **Commit Hash**: `1409c6f`
+
+---
+
+## [v1.8.3] - 2025-09-22 (dev2 branch)
+
+### 🎯 MAJOR: Template 1 Overhaul - Coin Grid Layout & Dedicated CSS Architecture
+
+### Changed
+- **Template 1 Layout Revolution**: Completely converted Template 1 from Bitcoin dashboard to coin grid layout
+  - **Data Range Update**: Changed from coins 1-24 to coins 2-24 (excluding Bitcoin rank 1)
+  - **HTML Structure Overhaul**: Replaced Bitcoin dashboard components with Template 2's card-based grid system
+  - **Layout Consistency**: Template 1 now displays same visual format as Template 2 but with different coin range
+  - **Visual Alignment**: Both templates now feature identical 3-column card layouts with glassmorphism effects
+
+- **CSS Organization Enhancement**: Implemented dedicated CSS file system for better maintainability
+  - **File Restructuring**: Renamed `style.css` to `style1.css` for proper template-specific organization
+  - **Template References**: Updated Template 1 HTML to reference dedicated `style1.css` file
+  - **Content Synchronization**: `style1.css` contains identical styling as `style2.css` for visual consistency
+  - **Organizational Clarity**: Each template now has dedicated CSS file matching its template number
+
+### Fixed
+- **Data Fetching Logic**: Modified `src/scripts/instapost.py` render_page_1 function for proper coin filtering
+  - **Database Query Update**: Changed from `WHERE cmc_rank BETWEEN 1 AND 24` to `WHERE cmc_rank BETWEEN 2 AND 24`
+  - **Bitcoin Exclusion**: Ensures Template 1 no longer shows Bitcoin (rank 1) to prevent duplication
+  - **Logo Integration**: Added proper logo URL fetching for all coins in Template 1 display
+  - **Template Continuity**: Template 1 (ranks 2-24) → Template 2 (ranks 25-48) creates logical progression
+
+- **Layout Visual Consistency**: Resolved styling discrepancies between Template 1 and Template 2
+  - **Card Layout Implementation**: Template 1 now displays proper coin cards instead of Bitcoin dashboard
+  - **Font Size Alignment**: Ensured consistent typography across both templates
+  - **Color Scheme Harmony**: Applied identical percentage change colors and styling effects
+  - **Spacing Consistency**: Maintained uniform card spacing and padding across templates
+
+### Added
+- **Template 1 Regeneration**: Created new Template 1 output with coin grid layout
+  - **Fresh Data Integration**: Template 1 now shows current cryptocurrency data in card format
+  - **Visual Verification**: Both Template 1 and Template 2 outputs regenerated with identical styling
+  - **Output Consistency**: All templates now properly render with updated 2160x2700 resolution
+
+### Removed
+- **Bitcoin Dashboard Components**: Eliminated Bitcoin-specific dashboard elements from Template 1
+  - **BTC Price Display**: Removed large Bitcoin price and market data sections
+  - **Market Sentiment Widgets**: Removed Fear & Greed Index and sentiment analysis components
+  - **Performance Metrics**: Removed Bitcoin-specific performance tracking (1D, 7D, 30D)
+  - **Unified Dashboard**: Eliminated complex multi-section Bitcoin dashboard layout
+
+### Technical Implementation
+- **HTML Template Restructuring**: Complete rewrite of `core_templates/1.html` structure
+  - **Grid System Adoption**: Implemented 3-column flexbox layout identical to Template 2
+  - **Jinja2 Variable Updates**: Changed template variables from Bitcoin data to coin list iterations
+  - **Dynamic Content Binding**: Proper integration of coin data (symbol, price, percentage change, market cap)
+  - **Responsive Design**: Maintained mobile-optimized card layout for Instagram format
+
+- **CSS Architecture Enhancement**: Established dedicated CSS file system
+  - **Style Isolation**: Each template now has isolated CSS file preventing cross-template conflicts
+  - **Maintenance Improvement**: Easier to modify individual template styling without affecting others
+  - **Version Control**: Dedicated CSS files enable better tracking of template-specific changes
+
+### Rationale
+
+**Layout Standardization**: The Template 1 overhaul addresses user requirement for consistent coin display format across templates. Previously, Template 1 showed a complex Bitcoin dashboard while Template 2 showed clean coin cards, creating visual inconsistency in the template system.
+
+**Data Flow Optimization**: By changing Template 1 to show coins 2-24 (excluding Bitcoin), the template system now provides logical data progression:
+- **Template 1**: Coins ranked 2-24 (top cryptocurrencies excluding Bitcoin)
+- **Template 2**: Coins ranked 25-48 (next tier of cryptocurrencies)
+- **Seamless Continuity**: Users can view comprehensive cryptocurrency rankings across both templates
+
+**Visual Consistency Benefits**: Unified card-based layout across templates provides:
+- **Professional Appearance**: Consistent Instagram post formatting improves brand recognition
+- **User Experience**: Familiar layout reduces cognitive load when viewing different templates
+- **Maintenance Efficiency**: Single layout pattern easier to update and enhance
+- **Social Media Optimization**: Uniform visual style improves Instagram feed aesthetics
+
+**CSS Organization Enhancement**: Dedicated CSS files provide:
+- **Template Isolation**: Changes to one template don't affect others
+- **Easier Debugging**: Template-specific styling issues easier to identify and fix
+- **Scalable Architecture**: New templates can be added with dedicated CSS files
+- **Development Efficiency**: Developers can focus on individual template styling
+
+**Business Impact**: The Template 1 overhaul delivers:
+- **Content Diversity**: Two templates now showing comprehensive cryptocurrency rankings (ranks 2-48)
+- **Brand Consistency**: Uniform visual presentation across Instagram automation system
+- **User Value**: More cryptocurrency data accessible through consistent, readable format
+- **Engagement Potential**: Professional card layout optimized for social media interaction
+
+**Technical Excellence**: The implementation demonstrates:
+- **Modern CSS Practices**: Flexbox-based layouts with proper responsive design
+- **Clean Architecture**: Dedicated CSS files with clear separation of concerns
+- **Data Integration**: Proper database queries with correct coin filtering and logo integration
+- **Template System Maturity**: Consistent template structure supporting future enhancements
+
+**User-Driven Development**: This overhaul directly addresses user feedback requesting Template 1 to "be similar to Template 2" while showing different coin ranges, demonstrating responsive development aligned with actual usage requirements.
+
+**Commit Hash**: `78a8c40`
 
 ---
 

@@ -38,7 +38,16 @@
       "Bash(rm:*)",
       "Bash(git check-ignore:*)",
       "Bash(fc /B 1.html carousel1.html)",
-      "Bash(git symbolic-ref:*)"
+      "Bash(git symbolic-ref:*)",
+      "Bash(for file in style1.css style2.css style3.css style4.css style5.css style6.css)",
+      "Bash(do echo \"=== Checking $file ===\")",
+      "Bash(if [ -f \"core_templates/$file\" ])",
+      "Bash([ -f \"core_templates/carousel/$file\" ])",
+      "Bash(then if diff \"core_templates/$file\" \"core_templates/carousel/$file\")",
+      "Bash(then echo \"EXACT DUPLICATE: $file\")",
+      "Bash(else echo \"DIFFERENT: $file\")",
+      "Bash(fi)",
+      "Bash(else echo \"FILE MISSING: $file\")"
     ],
     "deny": [],
     "ask": []
