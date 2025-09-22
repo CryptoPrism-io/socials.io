@@ -10,6 +10,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v1.8.5] - 2025-09-23 (dev2 branch)
+
+### 🔧 MAJOR: Scripts Directory Organization & Instagram Strategy Planning (Commit: b896dc4)
+
+### Changed
+- **Scripts Directory Restructure**: Organized `scripts/` into logical sub-folders for better maintainability
+  - **`scripts/main/`** - Core application scripts (instapost.py, instapost_push.py, gsheets.py, figma.py)
+  - **`scripts/auth/`** - Authentication modules (linkedin_auth.py, twitter_auth.py)
+  - **`scripts/dev/`** - Development & testing tools (local_server.py, validate_env.py, validate_project.py, test_unicode_system.py)
+  - **`scripts/setup/`** - System setup & utilities (utf8_fix.py, setup scripts for Windows/PowerShell)
+  - **`scripts/config/`** - Configuration files (.env.template, .env.backup, Unicode documentation)
+
+- **Path Updates**: Updated all internal references for new directory depth
+  - **Template paths**: Updated from `../base_templates` to `../../base_templates` (scripts/main/ depth)
+  - **Output paths**: Updated from `../output_html` to `../../output_html` and `../../output_images`
+  - **Verified functionality**: All 6 templates generating successfully with new structure
+
+- **GitHub Actions Updates**: Updated workflow files for new script locations
+  - **Instagram_Story.yml**: Updated to `scripts/main/instapost.py` and `scripts/main/instapost_push.py`
+  - **gsheets.yml**: Updated to `scripts/main/gsheets.py`
+  - **figma.yml**: Updated to `scripts/main/figma.py`
+
+- **Documentation Updates**
+  - **CLAUDE.md**: Added comprehensive scripts organization section with sub-folder descriptions
+  - **Updated commands**: All script execution examples reflect new paths
+  - **Enhanced structure diagram**: Shows scripts/ sub-folder organization
+
+### Added
+- **`INSTAGRAM_CAROUSEL_IMPROVEMENTS.md`** - Comprehensive strategy document for viral engagement
+  - **Content analysis**: Current strengths and gaps across all 6 templates
+  - **7 key improvement areas**: Hook/storytelling, actionable insights, educational value, engagement drivers, visual enhancements, CTAs, FOMO/social proof
+  - **Implementation phases**: Prioritized by impact vs effort (Quick wins → Content enhancements → Advanced features)
+  - **Template-specific improvements**: Tailored suggestions for each design
+  - **Engagement metrics tracking**: Saves, comments, shares, completion rates
+  - **Content calendar integration**: Daily updates, weekly themes, educational series
+
+### Benefits
+✅ **Better Organization** - Related scripts grouped together logically
+✅ **Easier Navigation** - Clear separation of concerns between main, dev, auth, setup, config
+✅ **Smoother Operations** - Developers can quickly find the right script for their task
+✅ **Enhanced Maintainability** - Better code organization for future development
+✅ **Strategic Planning** - Comprehensive roadmap for Instagram engagement optimization
+
+---
+
 ## [v1.8.4] - 2025-09-23 (dev2 branch)
 
 ### 🏗️ MAJOR: Project Structure Simplification & Template 4 Enhancement
