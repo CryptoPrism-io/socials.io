@@ -37,36 +37,51 @@ python scripts/validate_project.py
 ### Code Quality
 ```bash
 # Linting
-flake8 src/
-pylint src/
+flake8 scripts/
+pylint scripts/
 
 # Code formatting
-black src/
-isort src/
+black scripts/
+isort scripts/
 
 # Security scanning
-bandit -r src/
+bandit -r scripts/
 
 # Type checking
-mypy src/
+mypy scripts/
 ```
 
 ### Main Application Scripts
 ```bash
 # Generate Instagram content from database
-python src/scripts/instapost.py
+python scripts/instapost.py
 
 # Publish generated content to Instagram
-python src/scripts/instapost_push.py
+python scripts/instapost_push.py
 
 # Sync PostgreSQL data to Google Sheets
-python src/scripts/gsheets.py
+python scripts/gsheets.py
 
 # Figma integration workflow
-python src/scripts/figma.py
+python scripts/figma.py
 ```
 
 ## Architecture Overview
+
+### Simplified Directory Structure
+
+The project uses a clean, simplified directory structure for easy navigation and maintenance:
+
+```
+├── scripts/             # ALL Python scripts (consolidated)
+├── base_templates/      # ALL base HTML and CSS files
+├── output_html/         # Generated HTML outputs + their CSS
+├── output_images/       # Generated/screenshot images (.jpg)
+├── input_images/        # Imported/input images (.png backgrounds)
+├── tests/               # Testing infrastructure
+├── docs/                # Documentation
+└── .github/workflows/   # GitHub Actions automation
+```
 
 ### Core Pipeline
 Socials.io is a **social media automation platform** that follows a multi-stage data pipeline:
@@ -79,21 +94,22 @@ Socials.io is a **social media automation platform** that follows a multi-stage 
 
 ### Key Components
 
-#### Template System (`core_templates/`)
-- **HTML Templates**: `1.html` through `5.html` - Base templates with auto-layout architecture
-- **CSS Stylesheets**: `style.css` through `style5.css` - Flexbox-based layouts with glassmorphism effects
+#### Template System (`base_templates/`)
+- **HTML Templates**: `1.html` through `6.html` - Base templates with auto-layout architecture
+- **CSS Stylesheets**: `style1.css` through `style6.css` - Flexbox-based layouts with glassmorphism effects
 - **Jinja2 Integration**: Dynamic data injection with proper path resolution
 - **Instagram Format**: Optimized for 1080x1080 square screenshots
 
-#### Main Scripts (`src/scripts/`)
+#### Main Scripts (`scripts/`)
 - **`instapost.py`**: Main content generation pipeline with HTML-to-image conversion
 - **`instapost_push.py`**: Enhanced content publishing with error handling and retry logic
 - **`gsheets.py`**: PostgreSQL to Google Sheets data synchronization
 - **`figma.py`**: Figma-based design workflow integration
 
-#### Output Structure (`output/`)
-- **`output/html/`**: Generated HTML files with live data (`*_output.html`)
-- **`output/images/`**: Final Instagram posts in JPG format for publishing
+#### Output Structure (Simplified)
+- **`output_html/`**: Generated HTML files with live data (`*_output.html`)
+- **`output_images/`**: Final Instagram posts in JPG format for publishing
+- **`input_images/`**: Background images and input media files
 
 ### Technology Stack
 - **Web Automation**: Playwright (async) for HTML screenshot generation

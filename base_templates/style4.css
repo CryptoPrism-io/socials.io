@@ -288,6 +288,14 @@ body {
     font-size: 36px;
     font-weight: 700;
     font-family: 'Inter', monospace;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 80px;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .metric-label, .ratio-label {
@@ -297,9 +305,19 @@ body {
     text-transform: uppercase;
 }
 
-/* Color Classes */
-.positive { color: #00ff88; }
-.negative { color: #ff4444; }
+/* Color Classes with Enhanced Frame Styling */
+.positive {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.15) !important;
+    border-color: rgba(0, 255, 136, 0.3) !important;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+.negative {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.15) !important;
+    border-color: rgba(255, 68, 68, 0.3) !important;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+}
 
 /* 📝 Footer */
 .footer-container {

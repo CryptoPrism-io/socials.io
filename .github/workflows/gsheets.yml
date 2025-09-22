@@ -43,7 +43,7 @@ jobs:
         python tests/test_path_structure.py
 
     - name: Run Google Sheets update script
-      run: python src/scripts/gsheets.py
+      run: python scripts/gsheets.py
       env:
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../core_templates/style4.css">
+    <link rel="stylesheet" href="style4.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <title>Crypto Dashboard Template 4</title>
 </head>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="position-data">
                         <div class="position-metrics">
-                            <div class="metric-value">{{ coin.percent_change24h }}%</div>
+                            <div class="metric-value {{ 'positive' if coin.percent_change24h >= 0 else 'negative' }}">{{ coin.percent_change24h }}%</div>
                             <div class="metric-label">24h</div>
                         </div>
                         <div class="position-metrics">
@@ -61,7 +61,7 @@
                             <div class="metric-label">MCap</div>
                         </div>
                         <div class="position-ratio">
-                            <div class="ratio-value">{{ coin.percent_change7d }}%</div>
+                            <div class="ratio-value {{ 'positive' if coin.percent_change7d >= 0 else 'negative' }}">{{ coin.percent_change7d }}%</div>
                             <div class="ratio-label">7d</div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="position-data">
                         <div class="position-metrics">
-                            <div class="metric-value">{{ coin.percent_change24h }}%</div>
+                            <div class="metric-value {{ 'positive' if coin.percent_change24h >= 0 else 'negative' }}">{{ coin.percent_change24h }}%</div>
                             <div class="metric-label">24h</div>
                         </div>
                         <div class="position-metrics">
@@ -93,7 +93,7 @@
                             <div class="metric-label">MCap</div>
                         </div>
                         <div class="position-ratio">
-                            <div class="ratio-value">{{ coin.percent_change7d }}%</div>
+                            <div class="ratio-value {{ 'positive' if coin.percent_change7d >= 0 else 'negative' }}">{{ coin.percent_change7d }}%</div>
                             <div class="ratio-label">7d</div>
                         </div>
                     </div>

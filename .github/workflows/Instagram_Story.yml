@@ -39,7 +39,7 @@ jobs:
         python -m pytest tests/ -v --tb=short
 
     - name: Run Instagram post Script
-      run: python src/scripts/instapost.py
+      run: python scripts/instapost.py
       env:
         PYTHONIOENCODING: utf-8
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
@@ -50,7 +50,7 @@ jobs:
         INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
 
     - name: Run Instagram post push Script
-      run: python src/scripts/instapost_push.py
+      run: python scripts/instapost_push.py
       env:
         PYTHONIOENCODING: utf-8
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
