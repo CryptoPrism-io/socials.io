@@ -36,7 +36,8 @@
       "Bash(dir:*)",
       "Bash(del \"C:\\cpio_db\\socials.io\\output\\images\\ai_crypto_analysis_output.jpeg\")",
       "Bash(rm:*)",
-      "Bash(git check-ignore:*)"
+      "Bash(git check-ignore:*)",
+      "Bash(fc /B 1.html carousel1.html)"
     ],
     "deny": [],
     "ask": []
