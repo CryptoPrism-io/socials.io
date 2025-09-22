@@ -651,7 +651,7 @@ async def render_page_1():
     formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM
 
     # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', 'base_templates')
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'base_templates')
     env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('1.html')
 
@@ -665,7 +665,7 @@ async def render_page_1():
     )
 
     # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', 'output_html')
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_html')
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "1_output.html")
     with open(output_path, "w") as f:
@@ -674,7 +674,7 @@ async def render_page_1():
     print("Rendered page saved as 'output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', 'output_images')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_images')
     os.makedirs(image_dir, exist_ok=True)
     image_path = os.path.join(image_dir, "1_output.jpg")
     await generate_image_from_html(output_path, image_path)
@@ -721,7 +721,7 @@ async def render_page_2():
     formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM
 
     # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', 'base_templates')
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'base_templates')
     env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('2.html')
 
@@ -733,7 +733,7 @@ async def render_page_2():
                          current_time=formatted_time)
 
     # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', 'output_html')
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_html')
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "2_output.html")
     with open(output_path, "w") as f:
@@ -742,7 +742,7 @@ async def render_page_2():
     print("Rendered page saved as 'output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', 'output_images')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_images')
     os.makedirs(image_dir, exist_ok=True)
     image_path = os.path.join(image_dir, "2_output.jpg")
     await generate_image_from_html(output_path, image_path)
@@ -773,7 +773,7 @@ async def render_page_3():
     df3g_new = df3g.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', 'base_templates')
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'base_templates')
     env = Environment(loader=FileSystemLoader(template_dir)) 
     template = env.get_template('3.html')
 
@@ -782,7 +782,7 @@ async def render_page_3():
                              coin2=df3g_new)
 
     # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', 'output_html')
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_html')
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "3_output.html")
     with open(output_path, "w") as f:
@@ -791,7 +791,7 @@ async def render_page_3():
     print("Rendered page saved as 'output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', 'output_images')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_images')
     os.makedirs(image_dir, exist_ok=True)
     image_path = os.path.join(image_dir, "3_output.jpg")
     await generate_image_from_html(output_path, image_path)
@@ -815,7 +815,7 @@ async def render_page_4():
     short_positions = df_short.to_dict(orient='records')
 
     # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', 'base_templates')
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'base_templates')
     env = Environment(loader=FileSystemLoader(template_dir)) 
     template = env.get_template('4.html')
 
@@ -824,7 +824,7 @@ async def render_page_4():
                              coins2=short_positions)
 
     # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', 'output_html')
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_html')
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "4_output.html")
     with open(output_path, "w", encoding="utf-8") as f:
@@ -833,7 +833,7 @@ async def render_page_4():
     print("Rendered page saved as '4_output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', 'output_images')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_images')
     os.makedirs(image_dir, exist_ok=True)
     image_path = os.path.join(image_dir, "4_output.jpg")
     await generate_image_from_html(output_path, image_path)
@@ -863,7 +863,7 @@ async def render_page_5():
     formatted_time = now.strftime("%I:%M:%S %p")  # Example: 02:07:45 PM Monday
 
     # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', 'base_templates')
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'base_templates')
     env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('5.html')
 
@@ -878,7 +878,7 @@ async def render_page_5():
     )
 
     # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', 'output_html')
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_html')
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "5_output.html")
     with open(output_path, "w", encoding="utf-8") as f:
@@ -887,7 +887,7 @@ async def render_page_5():
     print("Rendered page saved as '5_output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', 'output_images')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_images')
     os.makedirs(image_dir, exist_ok=True)
     image_path = os.path.join(image_dir, "5_output.jpg")
     await generate_image_from_html(output_path, image_path)
@@ -1005,7 +1005,7 @@ async def render_page_6():
     formatted_time = now.strftime("%I:%M:%S %p")  # Example: 09:59:46 AM
 
     # Set up Jinja2 environment
-    template_dir = os.path.join(os.path.dirname(__file__), '..', 'base_templates')
+    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'base_templates')
     env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('6.html')
 
@@ -1018,7 +1018,7 @@ async def render_page_6():
     )
 
     # Save the output to an HTML file
-    output_dir = os.path.join(os.path.dirname(__file__), '..', 'output_html')
+    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_html')
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "6_output.html")
     with open(output_path, "w", encoding="utf-8") as f:
@@ -1027,7 +1027,7 @@ async def render_page_6():
     print("Rendered page saved as '6_output.html'.")
 
     # Use Playwright to convert the HTML file to an image
-    image_dir = os.path.join(os.path.dirname(__file__), '..', 'output_images')
+    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', 'output_images')
     os.makedirs(image_dir, exist_ok=True)
     image_path = os.path.join(image_dir, "6_output.jpg")
     await generate_image_from_html(output_path, image_path)

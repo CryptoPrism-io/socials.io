@@ -47,7 +47,8 @@
       "Bash(then echo \"EXACT DUPLICATE: $file\")",
       "Bash(else echo \"DIFFERENT: $file\")",
       "Bash(fi)",
-      "Bash(else echo \"FILE MISSING: $file\")"
+      "Bash(else echo \"FILE MISSING: $file\")",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

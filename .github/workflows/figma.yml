@@ -44,7 +44,7 @@ jobs:
         python tests/test_path_structure.py
 
     - name: Run Figma content generation script
-      run: python scripts/figma.py
+      run: python scripts/main/figma.py
       continue-on-error: true
       env:
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
