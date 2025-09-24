@@ -101,39 +101,122 @@
             <!-- Overall Trend -->
             <div class="trend-container">
                 <div class="trend-title">Overall Trend</div>
-                <div class="trend-value {% if snaps['Trend'] == 'Bullish' %}positive{% elif snaps['Trend'] == 'Bearish' %}negative{% elif snaps['Trend'] == 'Consolidating' %}consolidating{% endif %}">{{snaps['Trend']}}</div>
+                <div class="trend-value {% if snaps['Trend'] in ['Bullish+', 'Bullish'] %}positive{% elif snaps['Trend'] in ['Bearish', 'Bearish-'] %}negative{% else %}consolidating{% endif %}">{{snaps['Trend']}}</div>
             </div>
         </div>
         {% endfor %}
         </div>
 
-        <!-- Bitcoin News & Events Section -->
-        <div class="bitcoin-news-section">
-            <!-- Past 24 Hours -->
-            <div class="news-card">
-                <div class="news-title">Past 24 Hours</div>
-                <div class="news-items">
-                    {% for event in news_events.past_24h %}
-                    <div class="news-item">
-                        <div class="news-bullet">•</div>
-                        <div class="news-text">{{ event }}</div>
-                    </div>
-                    {% endfor %}
+        <!-- Fear and Greed Index Chart Section -->
+        <div class="fear-greed-chart-section">
+            {% for snaps in snap %}
+            <div class="chart-header">
+                <div class="chart-title">Fear & Greed Index</div>
+                <div class="current-index">
+                    <div class="current-value">{{ snaps['fear_greed_index'] }}</div>
+                    <div class="current-label fear-greed-{{ snaps['fear_greed_label'].replace(' ', '-').lower() }}">{{ snaps['fear_greed_label'] }}</div>
                 </div>
             </div>
 
-            <!-- Next 24 Hours -->
-            <div class="news-card">
-                <div class="news-title">Next 24 Hours - Watch For</div>
-                <div class="news-items">
-                    {% for event in news_events.next_24h %}
-                    <div class="news-item">
-                        <div class="news-bullet">⚠</div>
-                        <div class="news-text">{{ event }}</div>
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <!-- Y-axis labels for Fear/Greed -->
+                    <div class="y-axis-labels">
+                        <div class="y-label extreme-greed-zone">Extreme Greed<span class="y-value">100</span></div>
+                        <div class="y-label greed-zone">Greed<span class="y-value">75</span></div>
+                        <div class="y-label neutral-zone">Neutral<span class="y-value">55</span></div>
+                        <div class="y-label fear-zone">Fear<span class="y-value">45</span></div>
+                        <div class="y-label extreme-fear-zone">Extreme Fear<span class="y-value">0</span></div>
                     </div>
-                    {% endfor %}
+
+                    <!-- Chart area with background zones -->
+                    <div class="chart-area">
+                        <div class="zone-background extreme-greed-bg"></div>
+                        <div class="zone-background greed-bg"></div>
+                        <div class="zone-background neutral-bg"></div>
+                        <div class="zone-background fear-bg"></div>
+                        <div class="zone-background extreme-fear-bg"></div>
+
+                        <!-- Fear/Greed line chart -->
+                        <svg class="fear-greed-chart" viewBox="0 0 800 300">
+                            <defs>
+                                <linearGradient id="fearGreedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#ff4444;stop-opacity:0.8" />
+                                    <stop offset="25%" style="stop-color:#ff8800;stop-opacity:0.8" />
+                                    <stop offset="50%" style="stop-color:#ffdd00;stop-opacity:0.8" />
+                                    <stop offset="75%" style="stop-color:#88ff44;stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#44ff88;stop-opacity:0.8" />
+                                </linearGradient>
+                            </defs>
+
+                            <!-- Grid lines -->
+                            {% for i in range(5) %}
+                            <line x1="0" y1="{{ 60 * i }}" x2="800" y2="{{ 60 * i }}" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                            {% endfor %}
+
+                            <!-- Fear/Greed Index line -->
+                            <polyline
+                                fill="none"
+                                stroke="url(#fearGreedGradient)"
+                                stroke-width="3"
+                                points="{% for point in snaps['fear_greed_history'] %}{{ loop.index0 * 26.67 }},{{ 300 - (point.value * 3) }}{% if not loop.last %} {% endif %}{% endfor %}"
+                            />
+
+                            <!-- Data points -->
+                            {% for point in snaps['fear_greed_history'] %}
+                            <circle
+                                cx="{{ loop.index0 * 26.67 }}"
+                                cy="{{ 300 - (point.value * 3) }}"
+                                r="4"
+                                fill="{% if point.value <= 25 %}#ff4444{% elif point.value <= 45 %}#ff8800{% elif point.value <= 55 %}#ffdd00{% elif point.value <= 75 %}#88ff44{% else %}#44ff88{% endif %}"
+                                stroke="rgba(255,255,255,0.8)"
+                                stroke-width="2"
+                            />
+                            {% endfor %}
+                        </svg>
+                    </div>
+
+                    <!-- Price axis on the right -->
+                    <div class="price-axis">
+                        <div class="price-axis-title">BTC Price</div>
+                        {% for point in snaps['fear_greed_history'][::5] %}
+                        <div class="price-label" style="top: {{ 300 - (point.value * 3) }}px;">${{ "{:,.0f}".format(point.price) }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- X-axis labels (days) -->
+                <div class="x-axis-labels">
+                    <div class="x-label">30d ago</div>
+                    <div class="x-label">15d ago</div>
+                    <div class="x-label">Today</div>
                 </div>
             </div>
+
+            <!-- Legend -->
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color extreme-fear-color"></div>
+                    <span>Extreme Fear (0-25)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color fear-color"></div>
+                    <span>Fear (25-45)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color neutral-color"></div>
+                    <span>Neutral (45-55)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color greed-color"></div>
+                    <span>Greed (55-75)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color extreme-greed-color"></div>
+                    <span>Extreme Greed (75-100)</span>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
         <!-- Swipe Left Indicator -->

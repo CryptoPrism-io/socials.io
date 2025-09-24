@@ -1507,13 +1507,223 @@ body {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Hide bullet styles for paragraph format */
-.news-bullet {
-    display: none;
+/* Bitcoin Events Table Styling */
+.bitcoin-table-section {
+    margin-top: 60px;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(30px);
+    border-radius: 48px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.news-items {
-    display: none;
+.table-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #F7931A;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 12px rgba(247, 147, 26, 0.4);
+}
+
+.bitcoin-events-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.bitcoin-events-table thead {
+    background: linear-gradient(135deg, #F7931A 0%, #FF8C00 100%);
+}
+
+.bitcoin-events-table th {
+    padding: 25px 20px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #000;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.bitcoin-events-table th:first-child {
+    width: 25%;
+}
+
+.bitcoin-events-table th:nth-child(2) {
+    width: 50%;
+}
+
+.bitcoin-events-table th:last-child {
+    width: 25%;
+}
+
+.bitcoin-events-table td {
+    padding: 18px 20px;
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.bitcoin-events-table tr.alert-row {
+    background: rgba(247, 147, 26, 0.05);
+    border-left: 4px solid #F7931A;
+}
+
+.bitcoin-events-table tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Tag Styling */
+.tag {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tag.price-alert {
+    background: linear-gradient(135deg, #ff4757, #ff3742);
+    color: white;
+}
+
+.tag.technical-alert {
+    background: linear-gradient(135deg, #5352ed, #3742fa);
+    color: white;
+}
+
+.tag.news-alert {
+    background: linear-gradient(135deg, #2ed573, #20bf6b);
+    color: white;
+}
+
+.tag.volume-alert {
+    background: linear-gradient(135deg, #ffa502, #ff6348);
+    color: white;
+}
+
+.tag.whale-alert {
+    background: linear-gradient(135deg, #1e90ff, #0066cc);
+    color: white;
+}
+
+.tag.institutional-alert {
+    background: linear-gradient(135deg, #a55eea, #8b46ff);
+    color: white;
+}
+
+.tag.regulatory-alert {
+    background: linear-gradient(135deg, #fd79a8, #e84393);
+    color: white;
+}
+
+.tag.fed-alert {
+    background: linear-gradient(135deg, #fdcb6e, #e17055);
+    color: white;
+}
+
+.bitcoin-events-table tr td:first-child {
+    font-weight: 600;
+    color: #F7931A;
+}
+
+.bitcoin-events-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Sentiment Impact Color Styling */
+.sentiment-impact {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sentiment-bullish {
+    background: linear-gradient(135deg, #00C851 0%, #007E33 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 200, 81, 0.4);
+}
+
+.sentiment-bearish {
+    background: linear-gradient(135deg, #FF4444 0%, #CC0000 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+}
+
+.sentiment-neutral {
+    background: linear-gradient(135deg, #FF9500 0%, #FF6F00 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 149, 0, 0.4);
+}
+
+/* Error Container Styling */
+.news-error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    background: rgba(220, 53, 69, 0.1);
+    border: 2px solid rgba(220, 53, 69, 0.3);
+    border-radius: 24px;
+    text-align: center;
+    min-height: 400px;
+}
+
+.error-icon {
+    font-size: 120px;
+    margin-bottom: 30px;
+    filter: grayscale(50%);
+}
+
+.error-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.error-message {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+    line-height: 1.4;
+    max-width: 80%;
+}
+
+.error-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    max-width: 70%;
+    line-height: 1.5;
 }
 
 

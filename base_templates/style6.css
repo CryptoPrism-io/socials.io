@@ -1507,13 +1507,20 @@ body {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Hide bullet styles for paragraph format */
+/* News bullet and items styling (enabled for display) */
 .news-bullet {
-    display: none;
+    color: #F7931A;
+    font-size: 60px;
+    font-weight: 700;
+    margin-top: 6px;
+    min-width: 60px;
+    flex-shrink: 0;
 }
 
 .news-items {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 }
 
 
@@ -1647,6 +1654,54 @@ body {
         box-shadow: 0 4px 16px rgba(220, 20, 60, 0.6);
         transform: scale(1.02);
     }
+}
+
+/* Error Container Styling */
+.news-error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    background: rgba(220, 53, 69, 0.1);
+    border: 2px solid rgba(220, 53, 69, 0.3);
+    border-radius: 24px;
+    text-align: center;
+    min-height: 400px;
+}
+
+.error-icon {
+    font-size: 120px;
+    margin-bottom: 30px;
+    filter: grayscale(50%);
+}
+
+.error-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.error-message {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+    line-height: 1.4;
+    max-width: 80%;
+}
+
+.error-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    max-width: 70%;
+    line-height: 1.5;
 }
 
 /* Enhanced paragraph spacing for readability */
@@ -1939,6 +1994,71 @@ body {
     border-left-color: #ff8c00;
 }
 
+/* 📰 Bitcoin News & Events Section */
+.bitcoin-news-section {
+    display: flex;
+    gap: 60px;
+    margin-top: 60px;
+}
+
+.news-card {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 35px;
+    padding: 70px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    min-height: 500px;
+}
+
+.news-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #F7931A;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(247, 147, 26, 0.3);
+    line-height: 1.2;
+    margin-bottom: 50px;
+}
+
+.news-items {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    font-family: 'Inter', sans-serif;
+    padding: 20px 0;
+}
+
+.news-bullet {
+    color: #F7931A;
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 6px;
+    min-width: 50px;
+    flex-shrink: 0;
+}
+
+.news-text {
+    font-size: 40px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Different bullet color for next 24h events */
+.news-card:nth-child(2) .news-bullet {
+    color: #FFC107;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 1200px) {
     .category-header {
@@ -1946,15 +2066,403 @@ body {
         text-align: center;
         gap: 15px;
     }
-    
+
     .category-subtitle {
         margin-left: 0;
     }
-    
+
     .data-point {
         flex-direction: column;
         gap: 10px;
         text-align: center;
+    }
+}
+
+/* Sentiment Impact Color Styling */
+.sentiment-impact {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sentiment-bullish {
+    background: linear-gradient(135deg, #00C851 0%, #007E33 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 200, 81, 0.4);
+}
+
+.sentiment-bearish {
+    background: linear-gradient(135deg, #FF4444 0%, #CC0000 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+}
+
+.sentiment-neutral {
+    background: linear-gradient(135deg, #FF9500 0%, #FF6F00 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 149, 0, 0.4);
+}
+
+/* 📈 Fear & Greed Index Chart Section */
+.fear-greed-chart-section {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 56px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.4),
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15);
+    padding: 60px 70px;
+    margin-top: 40px;
+    flex-shrink: 0;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-title {
+    font-size: 3.75rem; /* 60px */
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.current-index {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.current-value {
+    font-size: 4.5rem; /* 72px */
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+}
+
+.current-label {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Fear/Greed label colors */
+.fear-greed-extreme-fear {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+.fear-greed-fear {
+    background: linear-gradient(135deg, #ea580c, #c2410c);
+    color: white;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4);
+}
+
+.fear-greed-neutral {
+    background: linear-gradient(135deg, #eab308, #ca8a04);
+    color: #000;
+    box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4);
+}
+
+.fear-greed-greed {
+    background: linear-gradient(135deg, #65a30d, #4d7c0f);
+    color: white;
+    box-shadow: 0 4px 12px rgba(101, 163, 13, 0.4);
+}
+
+.fear-greed-extreme-greed {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+}
+
+/* Chart container layout */
+.chart-container {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.chart-wrapper {
+    display: flex;
+    position: relative;
+    height: 400px;
+}
+
+.y-axis-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 180px;
+    height: 300px;
+    padding-right: 20px;
+    font-size: 1.5rem; /* 24px */
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+.y-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 12px;
+    margin: 5px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.y-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem; /* 20px */
+}
+
+/* Zone-specific y-axis styling */
+.extreme-greed-zone {
+    background: rgba(22, 163, 74, 0.2);
+    border-color: rgba(22, 163, 74, 0.3);
+    color: #16a34a;
+}
+
+.greed-zone {
+    background: rgba(101, 163, 13, 0.2);
+    border-color: rgba(101, 163, 13, 0.3);
+    color: #65a30d;
+}
+
+.neutral-zone {
+    background: rgba(234, 179, 8, 0.2);
+    border-color: rgba(234, 179, 8, 0.3);
+    color: #eab308;
+}
+
+.fear-zone {
+    background: rgba(234, 88, 12, 0.2);
+    border-color: rgba(234, 88, 12, 0.3);
+    color: #ea580c;
+}
+
+.extreme-fear-zone {
+    background: rgba(220, 38, 38, 0.2);
+    border-color: rgba(220, 38, 38, 0.3);
+    color: #dc2626;
+}
+
+/* Chart area with background zones */
+.chart-area {
+    position: relative;
+    flex: 1;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.zone-background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0.3;
+}
+
+.extreme-greed-bg {
+    top: 0;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(22, 163, 74, 0.4), rgba(22, 163, 74, 0.2));
+}
+
+.greed-bg {
+    top: 20%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(101, 163, 13, 0.4), rgba(101, 163, 13, 0.2));
+}
+
+.neutral-bg {
+    top: 40%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(234, 179, 8, 0.4), rgba(234, 179, 8, 0.2));
+}
+
+.fear-bg {
+    top: 60%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(234, 88, 12, 0.4), rgba(234, 88, 12, 0.2));
+}
+
+.extreme-fear-bg {
+    top: 80%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(220, 38, 38, 0.4), rgba(220, 38, 38, 0.2));
+}
+
+/* SVG chart styling */
+.fear-greed-chart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* Price axis */
+.price-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 120px;
+    height: 300px;
+    padding-left: 20px;
+    font-size: 1.125rem; /* 18px */
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+}
+
+.price-axis-title {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ff6b35, #f7931a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.price-label {
+    position: absolute;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    color: #f7931a;
+    font-weight: 700;
+    font-size: 0.875rem; /* 14px */
+    transform: translateY(-50%);
+}
+
+/* X-axis labels */
+.x-axis-labels {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 180px 0 20px;
+    font-size: 1.25rem; /* 20px */
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+}
+
+.x-label {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Legend */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem; /* 16px */
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.extreme-fear-color { background: #ff4444; }
+.fear-color { background: #ff8800; }
+.neutral-color { background: #ffdd00; }
+.greed-color { background: #88ff44; }
+.extreme-greed-color { background: #44ff88; }
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+    .chart-wrapper {
+        height: 350px;
+    }
+
+    .y-axis-labels {
+        width: 160px;
+        height: 250px;
+    }
+
+    .chart-area {
+        height: 250px;
+    }
+
+    .price-axis {
+        height: 250px;
+    }
+
+    .chart-title {
+        font-size: 3rem;
+    }
+
+    .current-value {
+        font-size: 3.5rem;
     }
 }
 
