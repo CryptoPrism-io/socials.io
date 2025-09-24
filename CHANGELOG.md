@@ -10,6 +10,128 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v2.0.0] - 2025-09-24 (dev2 branch)
+
+### 🚀 MAJOR: Complete Modular Architecture Migration & Individual Template Generators
+
+### Added
+- **Complete Modular Architecture System**: Implemented comprehensive modular script organization
+  - **`scripts/main/individual_posts/`**: Dedicated generators for each template (1-7)
+    - `generate_1_output.py` through `generate_7_output.py` - Individual template generators with HTML + screenshot
+    - `README.md` - Complete documentation with usage examples for all generators
+  - **`scripts/main/workflows/`**: Pipeline orchestration and automation
+    - `complete_workflow.py` - End-to-end generation + publishing pipeline
+    - `instagram_pipeline.py` - Content generation workflow orchestration
+    - `publishing_workflow.py` - Complete publishing pipeline with AI caption generation
+    - `generate_macro_news.py` - Macro news generation workflow
+  - **`scripts/main/content/`**: AI generation & templating system
+    - `ai_generation.py` - AI-powered content and caption generation
+    - `template_engine.py` - Jinja2 template rendering system
+  - **`scripts/main/data/`**: Database operations and data management
+    - `database.py` - PostgreSQL operations and data fetching
+    - `gsheets_sync.py` - Google Sheets synchronization (migrated)
+  - **`scripts/main/media/`**: Screenshot generation and media processing
+    - `screenshot.py` - Playwright HTML-to-image conversion system
+  - **`scripts/main/publishing/`**: Social media publishing infrastructure
+    - `instagram.py` - Instagram API integration with session management
+  - **`scripts/main/integrations/`**: External service APIs
+    - `figma_api.py` - Figma design workflow integration (migrated)
+    - `google_services.py` - Google Drive/Sheets API operations
+
+- **New Modular Entry Points**: Alternative scripts using new architecture
+  - `scripts/main/instapost_new.py` - Modular content generation entry point
+  - `scripts/main/instapost_push_new.py` - Modular publishing entry point
+
+- **Testing Infrastructure**: Comprehensive testing system
+  - `scripts/testing/` - Testing utilities and validation scripts
+
+### Changed
+- **Template System Enhancement**: Improved base templates with updated styling
+  - **Template 6**: Enhanced Bitcoin + Macro Intelligence with improved styling (`base_templates/6.html`, `base_templates/style6.css`)
+  - **Output Regeneration**: Updated all output HTML and images (1-7) with fresh data and styling
+  - **CSS Organization**: Improved styling consistency across templates
+
+- **Documentation Overhaul**: Updated CLAUDE.md with comprehensive modular architecture documentation
+  - **Architecture Overview**: Complete new modular structure documentation
+  - **Development Workflow**: New commands for modular vs. legacy script usage
+  - **Benefits Documentation**: Detailed explanation of modular architecture advantages
+  - **Migration Strategy**: Clear guidance on legacy vs. new script usage
+
+### Removed
+- **Carousel Template System**: Eliminated redundant carousel template structure
+  - Deleted `core_templates/carousel/` directory and all contents (6 HTML files + 1 CSS)
+  - Removed `INSTAGRAM_CAROUSEL_IMPROVEMENTS.md` (strategic document archived)
+  - Cleaned up duplicate template files and legacy image assets
+
+- **Legacy Files**: Cleaned up outdated development artifacts
+  - Removed `.cph/` directory with legacy problem files
+  - Deleted unused `image.png` from root directory
+  - Various orphaned files and temporary artifacts
+
+### Fixed
+- **Claude Code Integration**: Updated `.claude/settings.local.json` for better IDE integration
+- **Path Resolution**: Ensured all new modular scripts have proper path references
+- **Template Consistency**: Fixed styling and layout issues across all templates
+
+### Migration Benefits
+
+#### **Separation of Concerns**
+- **Database Operations**: Isolated in `data/` module for easy testing and modification
+- **Content Generation**: AI and template logic separated in `content/` module
+- **Media Processing**: Screenshot generation isolated in `media/` module
+- **Publishing**: Instagram API operations contained in `publishing/` module
+- **Integrations**: External services (Google, Figma) in `integrations/` module
+- **Workflows**: High-level orchestration in `workflows/` module
+
+#### **Development Workflow Options**
+```bash
+# Legacy monolithic approach (still functional)
+python scripts/main/instapost.py
+python scripts/main/instapost_push.py
+
+# New modular approach
+python scripts/main/instapost_new.py
+python scripts/main/instapost_push_new.py
+
+# Complete automation
+python scripts/main/workflows/complete_workflow.py
+
+# Individual template generation
+python scripts/main/individual_posts/generate_1_output.py
+python scripts/main/individual_posts/generate_7_output.py
+```
+
+#### **Scalability & Maintenance**
+- **Independent Testing**: Each module can be tested in isolation
+- **Easy Extension**: New features can be added to specific modules
+- **Reduced Complexity**: Smaller, focused files are easier to understand
+- **Reusability**: Components can be reused across different workflows
+- **Better Error Handling**: Issues can be isolated to specific modules
+
+### Rationale
+
+**Enterprise-Grade Architecture**: This represents the largest architectural improvement in the project's history, transitioning from monolithic scripts to a modular, enterprise-grade system that supports:
+
+**Scalability**: The new architecture can handle complex workflows, multiple social media platforms, and advanced AI integrations without becoming unwieldy.
+
+**Maintainability**: Smaller, focused modules are easier to understand, test, and modify. New team members can contribute to specific areas without understanding the entire system.
+
+**Flexibility**: Individual template generators allow for focused testing and development. Complete workflows support full automation, while modular components enable custom integrations.
+
+**Professional Standards**: The architecture follows modern Python project organization patterns, with clear separation of concerns and logical module boundaries.
+
+**Business Impact**:
+- **Development Velocity**: Teams can work on different modules simultaneously
+- **Quality Assurance**: Individual modules are easier to test comprehensively
+- **Feature Development**: New capabilities can be added without touching core systems
+- **Risk Mitigation**: Modular failures don't cascade across the entire system
+
+**Migration Strategy**: Legacy scripts remain fully functional, allowing gradual migration to the new architecture as needed. Teams can adopt modular components incrementally.
+
+**Commit Hash**: [To be added after commit]
+
+---
+
 ## [v1.9.0] - 2025-09-24 (dev2 branch)
 
 ### 🚀 MAJOR: Template 7 Market Intelligence with L2 AI Filtering System (Commit: e6f5061)
