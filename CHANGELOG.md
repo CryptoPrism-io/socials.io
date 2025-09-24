@@ -10,6 +10,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v2.1.0] - 2025-09-24 (dev2 branch)
+
+### 🎨 MINOR: Template 6 Dual-Axis Chart Enhancement
+
+### Added
+- **Dual-Axis Chart Visualization for Template 6**: Enhanced Fear & Greed Index chart with Bitcoin price overlay
+  - **Primary Y-Axis (Left)**: Fear & Greed Index scale (0-100) with sentiment-based color coding
+    - 100 (Extreme Greed): Bright Green (#44ff88)
+    - 75 (Greed): Light Green (#88ff44)
+    - 50 (Neutral): Orange (#ffdd00)
+    - 25 (Fear): Red (#ff8800)
+    - 0 (Extreme Fear): Dark Red (#ff4444)
+  - **Secondary Y-Axis (Right)**: Bitcoin price scale with dynamic min/max/mid labels in Bitcoin orange (#f7931a)
+  - **Real-time Data Integration**: Last 30 days Bitcoin price data from `1K_coins_ohlcv` PostgreSQL table
+  - **Enhanced Visual Design**: Both datasets plotted with proper scaling, gradient fills, and distinct styling
+  - **Improved Readability**: Y-axis labels with stroke outlines, enhanced font weights, and better contrast
+
+### Enhanced
+- **`scripts/main/data/database.py`**: Added Bitcoin historical price data fetching with exact user-specified query
+- **`base_templates/6.html`**: Complete dual-axis SVG chart implementation with expanded viewBox and repositioned elements
+- **`base_templates/style6.css`**: Enhanced Y-axis label styling with sentiment colors, stroke outlines, and improved visibility
+
+### Technical Details
+- **Chart Architecture**: Dual polyline system with shared X-axis (time) and independent Y-axis scaling
+- **Data Processing**: Dynamic price range calculation and Fear & Greed Index normalization for optimal chart utilization
+- **SVG Enhancement**: Expanded chart area (1100x400 viewBox) to accommodate Y-axis labels and improved spacing
+
 ## [v2.0.0] - 2025-09-24 (dev2 branch)
 
 ### 🚀 MAJOR: Complete Modular Architecture Migration & Individual Template Generators
@@ -128,7 +155,7 @@ python scripts/main/individual_posts/generate_7_output.py
 
 **Migration Strategy**: Legacy scripts remain fully functional, allowing gradual migration to the new architecture as needed. Teams can adopt modular components incrementally.
 
-**Commit Hash**: [To be added after commit]
+**Commit Hash**: `92b9d59`
 
 ---
 

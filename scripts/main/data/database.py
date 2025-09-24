@@ -159,13 +159,7 @@ def fetch_btc_snapshot():
 
             print(f"DEBUG 6-Category Trend: bullish={bullish_count}, bearish={bearish_count}, diff={bullish_count - bearish_count}, trend={trend_value}")
 
-        # Add market indicators (mock data - replace with real API calls)
-        import random
-
-        # Generate historical Fear and Greed Index data for chart (last 30 days)
-        fear_greed_history = []
-        current_btc_price = float(btc_data['price'].iloc[0].replace('$', '').replace(',', ''))
-
+        # Fetch real Fear & Greed Index data from database
         def get_fear_greed_label(value):
             if value <= 25:
                 return "Extreme Fear"
@@ -178,36 +172,122 @@ def fetch_btc_snapshot():
             else:
                 return "Extreme Greed"
 
-        for i in range(30):
-            # Generate realistic fear/greed values with some correlation to price movement
-            base_value = random.randint(20, 80)
-            # Add some price correlation (simplified)
-            price_factor = min(10, max(-10, (current_btc_price - 45000) / 5000))
-            fear_greed_value = max(0, min(100, base_value + price_factor))
+        # Get historical Fear & Greed Index data from database (last 30 days)
+        fear_greed_query = '''
+        SELECT
+            timestamp,
+            fear_greed_index,
+            sentiment
+        FROM "FE_FEAR_GREED_CMC"
+        ORDER BY timestamp DESC
+        LIMIT 30
+        '''
 
-            # Generate corresponding price for the chart
-            price_variation = random.uniform(-0.05, 0.05)  # ±5% variation
-            historical_price = current_btc_price * (1 + price_variation * (30-i)/30)
+        fear_greed_df = pd.read_sql_query(fear_greed_query, gcp_engine)
 
-            fear_greed_history.append({
-                'day': i + 1,
-                'value': int(fear_greed_value),
-                'price': round(historical_price, 2),
-                'label': get_fear_greed_label(fear_greed_value)
-            })
+        # Fetch Bitcoin historical price data (last 31 days - to match Fear & Greed data)
+        btc_price_query = '''
+        SELECT
+          "timestamp",
+          "slug",
+          "name",
+          "close"
+        FROM
+          "public"."1K_coins_ohlcv"
+        WHERE
+          "slug" = 'bitcoin'
+        ORDER BY
+          "timestamp" DESC
+        LIMIT
+          31
+        '''
 
-        # Current fear/greed index
-        current_fear_greed = random.randint(20, 80)
-        btc_data['fear_greed_index'] = current_fear_greed
-        btc_data['fear_greed_label'] = get_fear_greed_label(current_fear_greed)
+        btc_price_df = pd.read_sql_query(btc_price_query, gcp_engine)
+        print(f"🔍 Debug: btc_price_history has {len(btc_price_df)} entries")
 
-        # Store fear_greed_history as an attribute of the DataFrame instead of a column
-        # This avoids pandas assignment issues with complex objects
-        btc_data.attrs['fear_greed_history'] = fear_greed_history
+        # Convert to the format expected by the template (reverse order for chronological display)
+        fear_greed_history = []
+        # Process Bitcoin price data (reverse to match chronological order)
+        if not btc_price_df.empty:
+            btc_price_df = btc_price_df.iloc[::-1].reset_index(drop=True)  # Reverse for chronological order
 
-        altseason_value = random.randint(40, 120)
-        btc_data.loc[0, 'altseason_gauge'] = altseason_value
-        btc_data.loc[0, 'altseason_status'] = "Yes" if altseason_value > 100 else "No"
+            # Calculate price scaling for secondary y-axis
+            btc_prices = [float(row['close']) for _, row in btc_price_df.iterrows()]
+            btc_min_price = min(btc_prices)
+            btc_max_price = max(btc_prices)
+            print(f"💰 BTC price range: ${btc_min_price:.0f}-${btc_max_price:.0f}")
+
+        if not fear_greed_df.empty:
+            # Reverse to get chronological order (oldest to newest)
+            fear_greed_df = fear_greed_df.iloc[::-1].reset_index(drop=True)
+
+            # Calculate min/max for dynamic scaling
+            min_val = fear_greed_df['fear_greed_index'].min()
+            max_val = fear_greed_df['fear_greed_index'].max()
+
+            # Add some padding to the range for better visualization
+            range_padding = (max_val - min_val) * 0.2
+            scaled_min = max(0, min_val - range_padding)  # Don't go below 0
+            scaled_max = min(100, max_val + range_padding)  # Don't go above 100
+
+            print(f"📊 Fear & Greed data range: {min_val}-{max_val}, scaled: {scaled_min:.1f}-{scaled_max:.1f}")
+
+            for i, row in fear_greed_df.iterrows():
+                # Scale value to use full chart height (0-100 range mapped to 0-300px)
+                raw_value = int(row['fear_greed_index'])
+
+                # Map the actual data range to the full 0-100 display range for better visualization
+                if scaled_max > scaled_min:
+                    # Normalize to 0-1, then scale to utilize more of the chart space
+                    normalized = (raw_value - scaled_min) / (scaled_max - scaled_min)
+                    # Map to 20-80 range instead of 0-100 for better visual impact
+                    scaled_value = 20 + (normalized * 60)
+                else:
+                    scaled_value = raw_value
+
+                # Get corresponding Bitcoin price for this data point (if available)
+                btc_price = 0
+                if not btc_price_df.empty and i < len(btc_price_df):
+                    btc_price = float(btc_price_df.iloc[i]['close'])
+
+                fear_greed_history.append({
+                    'day': i + 1,
+                    'value': int(scaled_value),  # Use scaled value for chart positioning
+                    'raw_value': raw_value,     # Keep original for reference
+                    'price': btc_price,         # Bitcoin price for this data point
+                    'label': row['sentiment']   # Use actual sentiment from database
+                })
+
+        # Get current fear/greed index (most recent)
+        if not fear_greed_df.empty:
+            latest_fear_greed = fear_greed_df.iloc[-1]  # Last row after reversal = most recent
+            current_fear_greed = int(latest_fear_greed['fear_greed_index'])
+            current_fear_greed_label = latest_fear_greed['sentiment']
+        else:
+            # If no data available, use defaults (but this shouldn't happen)
+            current_fear_greed = 50
+            current_fear_greed_label = "Neutral"
+
+        btc_data.loc[0, 'fear_greed_index'] = current_fear_greed
+        btc_data.loc[0, 'fear_greed_label'] = current_fear_greed_label
+
+        # Store fear_greed_history as a column (will be handled properly in template)
+        # Note: We can't use DataFrame.attrs as they get lost in pandas operations
+        btc_data.loc[0, 'fear_greed_history_json'] = str(fear_greed_history)
+
+        # Add Bitcoin price scaling data for dual-axis chart
+        if not btc_price_df.empty:
+            btc_data.loc[0, 'btc_min_price'] = btc_min_price
+            btc_data.loc[0, 'btc_max_price'] = btc_max_price
+        else:
+            # Default values if no price data
+            btc_data.loc[0, 'btc_min_price'] = 0
+            btc_data.loc[0, 'btc_max_price'] = 120000
+
+        # Remove synthetic altseason data - use real data or remove entirely
+        # For now, setting to neutral values
+        btc_data.loc[0, 'altseason_gauge'] = 90  # Neutral value
+        btc_data.loc[0, 'altseason_status'] = "No"
 
         # Fetch logo
         logo_query = "SELECT logo, slug FROM \"FE_CC_INFO_URL\" WHERE slug = 'bitcoin'"

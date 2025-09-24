@@ -118,115 +118,125 @@
                 </div>
             </div>
 
-            <div class="chart-container">
-                <div class="chart-wrapper">
-                    <!-- Y-axis labels for Fear/Greed -->
-                    <div class="y-axis-labels">
-                        <div class="y-label extreme-greed-zone">Extreme Greed<span class="y-value">100</span></div>
-                        <div class="y-label greed-zone">Greed<span class="y-value">75</span></div>
-                        <div class="y-label neutral-zone">Neutral<span class="y-value">55</span></div>
-                        <div class="y-label fear-zone">Fear<span class="y-value">45</span></div>
-                        <div class="y-label extreme-fear-zone">Extreme Fear<span class="y-value">0</span></div>
-                    </div>
+            <!-- Pure Chart Container -->
+            <div class="pure-chart-container">
+                <svg class="pure-fear-greed-chart" viewBox="0 0 1100 400">
+                    <defs>
+                        <!-- Fear & Greed Index gradient -->
+                        <linearGradient id="fearGreedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ff4444;stop-opacity:0.9" />
+                            <stop offset="25%" style="stop-color:#ff8800;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#ffdd00;stop-opacity:0.9" />
+                            <stop offset="75%" style="stop-color:#88ff44;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#44ff88;stop-opacity:0.9" />
+                        </linearGradient>
 
-                    <!-- Chart area with background zones -->
-                    <div class="chart-area">
-                        <div class="zone-background extreme-greed-bg"></div>
-                        <div class="zone-background greed-bg"></div>
-                        <div class="zone-background neutral-bg"></div>
-                        <div class="zone-background fear-bg"></div>
-                        <div class="zone-background extreme-fear-bg"></div>
+                        <!-- Bitcoin price gradient -->
+                        <linearGradient id="btcPriceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#f7931a;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#ffb84d;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#f7931a;stop-opacity:0.9" />
+                        </linearGradient>
 
-                        <!-- Fear/Greed line chart -->
-                        <svg class="fear-greed-chart" viewBox="0 0 800 300">
-                            <defs>
-                                <linearGradient id="fearGreedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#ff4444;stop-opacity:0.8" />
-                                    <stop offset="25%" style="stop-color:#ff8800;stop-opacity:0.8" />
-                                    <stop offset="50%" style="stop-color:#ffdd00;stop-opacity:0.8" />
-                                    <stop offset="75%" style="stop-color:#88ff44;stop-opacity:0.8" />
-                                    <stop offset="100%" style="stop-color:#44ff88;stop-opacity:0.8" />
-                                </linearGradient>
-                            </defs>
+                        <!-- Gradient for area under Fear & Greed curve -->
+                        <linearGradient id="fearGreedAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:0.2" />
+                            <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:0.05" />
+                        </linearGradient>
 
-                            <!-- Grid lines -->
-                            {% for i in range(5) %}
-                            <line x1="0" y1="{{ 60 * i }}" x2="800" y2="{{ 60 * i }}" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
-                            {% endfor %}
+                        <!-- Gradient for area under Bitcoin curve -->
+                        <linearGradient id="btcAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f7931a;stop-opacity:0.15" />
+                            <stop offset="100%" style="stop-color:#f7931a;stop-opacity:0.03" />
+                        </linearGradient>
+                    </defs>
 
-                            <!-- Fear/Greed Index line -->
-                            <polyline
-                                fill="none"
-                                stroke="url(#fearGreedGradient)"
-                                stroke-width="3"
-                                points="{% for point in snaps['fear_greed_history'] %}{{ loop.index0 * 26.67 }},{{ 300 - (point.value * 3) }}{% if not loop.last %} {% endif %}{% endfor %}"
-                            />
+                    <!-- Subtle background grid -->
+                    {% for i in range(5) %}
+                    <line x1="100" y1="{{ 50 + (i * 75) }}" x2="1000" y2="{{ 50 + (i * 75) }}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    {% endfor %}
 
-                            <!-- Data points -->
-                            {% for point in snaps['fear_greed_history'] %}
-                            <circle
-                                cx="{{ loop.index0 * 26.67 }}"
-                                cy="{{ 300 - (point.value * 3) }}"
-                                r="4"
-                                fill="{% if point.value <= 25 %}#ff4444{% elif point.value <= 45 %}#ff8800{% elif point.value <= 55 %}#ffdd00{% elif point.value <= 75 %}#88ff44{% else %}#44ff88{% endif %}"
-                                stroke="rgba(255,255,255,0.8)"
-                                stroke-width="2"
-                            />
-                            {% endfor %}
-                        </svg>
-                    </div>
+                    {% for i in range(9) %}
+                    <line x1="{{ 100 + (i * 112.5) }}" y1="50" x2="{{ 100 + (i * 112.5) }}" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    {% endfor %}
 
-                    <!-- Price axis on the right -->
-                    <div class="price-axis">
-                        <div class="price-axis-title">BTC Price</div>
-                        {% for point in snaps['fear_greed_history'][::5] %}
-                        <div class="price-label" style="top: {{ 300 - (point.value * 3) }}px;">${{ "{:,.0f}".format(point.price) }}</div>
-                        {% endfor %}
-                    </div>
-                </div>
+                    <!-- Fear & Greed Index Y-axis labels (left side) -->
+                    <text x="25" y="58" text-anchor="middle" class="y-axis-label fear-greed-extreme">100</text>
+                    <text x="25" y="133" text-anchor="middle" class="y-axis-label fear-greed-high">75</text>
+                    <text x="25" y="208" text-anchor="middle" class="y-axis-label fear-greed-neutral">50</text>
+                    <text x="25" y="283" text-anchor="middle" class="y-axis-label fear-greed-low">25</text>
+                    <text x="25" y="358" text-anchor="middle" class="y-axis-label fear-greed-extreme-low">0</text>
 
-                <!-- X-axis labels (days) -->
-                <div class="x-axis-labels">
-                    <div class="x-label">30d ago</div>
-                    <div class="x-label">15d ago</div>
-                    <div class="x-label">Today</div>
-                </div>
+                    <!-- Bitcoin Price Y-axis labels (right side) -->
+                    {% for snaps in snap %}
+                    <text x="1075" y="58" text-anchor="middle" class="y-axis-label btc-price">${{ "{:,.0f}".format(snaps['btc_max_price']) }}</text>
+                    <text x="1075" y="208" text-anchor="middle" class="y-axis-label btc-price">${{ "{:,.0f}".format((snaps['btc_max_price'] + snaps['btc_min_price']) / 2) }}</text>
+                    <text x="1075" y="358" text-anchor="middle" class="y-axis-label btc-price">${{ "{:,.0f}".format(snaps['btc_min_price']) }}</text>
+                    {% endfor %}
+
+                    <!-- Area under the Bitcoin price curve -->
+                    <polygon
+                        fill="url(#btcAreaGradient)"
+                        points="100,350 {% for point in snaps['fear_greed_history'] %}{{ 100 + (loop.index0 * 30) }},{{ 350 - ((point.price - snaps['btc_min_price']) / (snaps['btc_max_price'] - snaps['btc_min_price']) * 300) }} {% endfor %}1000,350"
+                    />
+
+                    <!-- Area under the Fear & Greed curve -->
+                    <polygon
+                        fill="url(#fearGreedAreaGradient)"
+                        points="100,350 {% for point in snaps['fear_greed_history'] %}{{ 100 + (loop.index0 * 30) }},{{ 50 + ((100 - point.value) / 100 * 300) }} {% endfor %}1000,350"
+                    />
+
+                    <!-- Bitcoin Price line (secondary axis) -->
+                    <polyline
+                        fill="none"
+                        stroke="url(#btcPriceGradient)"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-dasharray="5,5"
+                        points="{% for point in snaps['fear_greed_history'] %}{{ 100 + (loop.index0 * 30) }},{{ 350 - ((point.price - snaps['btc_min_price']) / (snaps['btc_max_price'] - snaps['btc_min_price']) * 300) }}{% if not loop.last %} {% endif %}{% endfor %}"
+                    />
+
+                    <!-- Fear/Greed Index line (primary axis) -->
+                    <polyline
+                        fill="none"
+                        stroke="url(#fearGreedGradient)"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        points="{% for point in snaps['fear_greed_history'] %}{{ 100 + (loop.index0 * 30) }},{{ 50 + ((100 - point.value) / 100 * 300) }}{% if not loop.last %} {% endif %}{% endfor %}"
+                    />
+
+                    <!-- Bitcoin price data points -->
+                    {% for point in snaps['fear_greed_history'] %}
+                    <circle
+                        cx="{{ 100 + (loop.index0 * 30) }}"
+                        cy="{{ 350 - ((point.price - snaps['btc_min_price']) / (snaps['btc_max_price'] - snaps['btc_min_price']) * 300) }}"
+                        r="3"
+                        fill="#f7931a"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    {% endfor %}
+
+                    <!-- Fear & Greed data points -->
+                    {% for point in snaps['fear_greed_history'] %}
+                    <circle
+                        cx="{{ 100 + (loop.index0 * 30) }}"
+                        cy="{{ 50 + ((100 - point.value) / 100 * 300) }}"
+                        r="4"
+                        fill="{% if point.value <= 25 %}#ff4444{% elif point.value <= 45 %}#ff8800{% elif point.value <= 55 %}#ffdd00{% elif point.value <= 75 %}#88ff44{% else %}#44ff88{% endif %}"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    {% endfor %}
+                </svg>
             </div>
 
-            <!-- Legend -->
-            <div class="chart-legend">
-                <div class="legend-item">
-                    <div class="legend-color extreme-fear-color"></div>
-                    <span>Extreme Fear (0-25)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color fear-color"></div>
-                    <span>Fear (25-45)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color neutral-color"></div>
-                    <span>Neutral (45-55)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color greed-color"></div>
-                    <span>Greed (55-75)</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color extreme-greed-color"></div>
-                    <span>Extreme Greed (75-100)</span>
-                </div>
-            </div>
             {% endfor %}
         </div>
 
-        <!-- Swipe Left Indicator -->
-        <div class="swipe-indicator">
-            <div class="swipe-text">Swipe left for more</div>
-            <div class="swipe-arrow">
-                <span class="arrow-line"></span>
-                <span class="arrow-tip">›</span>
-            </div>
-        </div>
 
         <!-- Footer -->
         <div class="footer-container">cryptoprism.io</div>
