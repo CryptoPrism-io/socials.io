@@ -45,6 +45,7 @@ body {
     gap: 100px;
     overflow: hidden;
     box-sizing: border-box;
+    position: relative;
 }
 
 /* 🚀 Bitcoin Dashboard Card */
@@ -1398,84 +1399,6 @@ body {
     border-left: 3px solid #FFC107;
 }
 
-/* 👆 Swipe Left Indicator */
-.swipe-indicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    padding: 25px 40px;
-    background: rgba(247, 147, 26, 0.1);
-    border-radius: 60px;
-    border: 1px solid rgba(247, 147, 26, 0.2);
-    backdrop-filter: blur(10px);
-    animation: swipePulse 2s ease-in-out infinite;
-}
-
-.swipe-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 28px;
-    font-weight: 600;
-    color: #F7931A;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.swipe-arrow {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.arrow-line {
-    width: 20px;
-    height: 2px;
-    background: #F7931A;
-    border-radius: 1px;
-    animation: arrowSlide 2s ease-in-out infinite;
-}
-
-.arrow-tip {
-    font-size: 24px;
-    font-weight: 700;
-    color: #F7931A;
-    line-height: 1;
-    animation: arrowBounce 2s ease-in-out infinite;
-}
-
-/* Animations */
-@keyframes swipePulse {
-    0%, 100% {
-        background: rgba(247, 147, 26, 0.1);
-        border-color: rgba(247, 147, 26, 0.2);
-    }
-    50% {
-        background: rgba(247, 147, 26, 0.15);
-        border-color: rgba(247, 147, 26, 0.3);
-    }
-}
-
-@keyframes arrowSlide {
-    0%, 100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(8px);
-        opacity: 0.7;
-    }
-}
-
-@keyframes arrowBounce {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    50% {
-        transform: translateX(4px);
-    }
-}
 
 /* 📝 Footer */
 .footer-container {
@@ -2120,20 +2043,19 @@ body {
         inset 0 2px 0 rgba(255, 255, 255, 0.15);
     padding: 60px 70px;
     margin-top: 40px;
-    flex-shrink: 0;
 }
 
 .chart-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 50px;
-    padding-bottom: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .chart-title {
-    font-size: 3.75rem; /* 60px */
+    font-size: 4.0rem; /* 64px */
     font-weight: 800;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -2162,7 +2084,7 @@ body {
 }
 
 .current-label {
-    font-size: 2.25rem; /* 36px */
+    font-size: 2.2rem; /* 35px */
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -2204,265 +2126,158 @@ body {
     box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
 }
 
-/* Chart container layout */
-.chart-container {
+/* Pure Chart Container */
+.pure-chart-container {
+    width: 100%;
+    height: 500px;
+    margin-top: 30px;
     position: relative;
-    margin-bottom: 40px;
-}
-
-.chart-wrapper {
-    display: flex;
-    position: relative;
-    height: 400px;
-}
-
-.y-axis-labels {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 180px;
-    height: 300px;
-    padding-right: 20px;
-    font-size: 1.5rem; /* 24px */
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 600;
-}
-
-.y-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 15px;
-    border-radius: 12px;
-    margin: 5px 0;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.y-value {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.25rem; /* 20px */
-}
-
-/* Zone-specific y-axis styling */
-.extreme-greed-zone {
-    background: rgba(22, 163, 74, 0.2);
-    border-color: rgba(22, 163, 74, 0.3);
-    color: #16a34a;
-}
-
-.greed-zone {
-    background: rgba(101, 163, 13, 0.2);
-    border-color: rgba(101, 163, 13, 0.3);
-    color: #65a30d;
-}
-
-.neutral-zone {
-    background: rgba(234, 179, 8, 0.2);
-    border-color: rgba(234, 179, 8, 0.3);
-    color: #eab308;
-}
-
-.fear-zone {
-    background: rgba(234, 88, 12, 0.2);
-    border-color: rgba(234, 88, 12, 0.3);
-    color: #ea580c;
-}
-
-.extreme-fear-zone {
-    background: rgba(220, 38, 38, 0.2);
-    border-color: rgba(220, 38, 38, 0.3);
-    color: #dc2626;
-}
-
-/* Chart area with background zones */
-.chart-area {
-    position: relative;
-    flex: 1;
-    height: 300px;
-    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 24px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow:
-        inset 0 2px 4px rgba(255, 255, 255, 0.1),
-        0 4px 12px rgba(0, 0, 0, 0.3);
+        inset 0 2px 4px rgba(255, 255, 255, 0.05),
+        0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-.zone-background {
-    position: absolute;
-    left: 0;
-    right: 0;
-    opacity: 0.3;
+/* Y-Axis Label Styling */
+.y-axis-label {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    fill: rgba(255, 255, 255, 0.9) !important;
+    stroke: rgba(0, 0, 0, 0.3) !important;
+    stroke-width: 0.5px !important;
+    paint-order: stroke fill !important;
 }
 
-.extreme-greed-bg {
-    top: 0;
-    height: 20%;
-    background: linear-gradient(to bottom, rgba(22, 163, 74, 0.4), rgba(22, 163, 74, 0.2));
+/* Fear & Greed Index Y-axis labels with sentiment colors */
+.fear-greed-extreme {
+    fill: #44ff88 !important; /* Green - 100 */
+    stroke: rgba(0, 0, 0, 0.4) !important;
+    stroke-width: 1px !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
 }
 
-.greed-bg {
-    top: 20%;
-    height: 20%;
-    background: linear-gradient(to bottom, rgba(101, 163, 13, 0.4), rgba(101, 163, 13, 0.2));
+.fear-greed-high {
+    fill: #88ff44 !important; /* Light green - 75 */
+    stroke: rgba(0, 0, 0, 0.4) !important;
+    stroke-width: 1px !important;
+    font-size: 19px !important;
+    font-weight: 800 !important;
 }
 
-.neutral-bg {
-    top: 40%;
-    height: 20%;
-    background: linear-gradient(to bottom, rgba(234, 179, 8, 0.4), rgba(234, 179, 8, 0.2));
+.fear-greed-neutral {
+    fill: #ffdd00 !important; /* Orange - 50 */
+    stroke: rgba(0, 0, 0, 0.5) !important;
+    stroke-width: 1px !important;
+    font-size: 19px !important;
+    font-weight: 800 !important;
 }
 
-.fear-bg {
-    top: 60%;
-    height: 20%;
-    background: linear-gradient(to bottom, rgba(234, 88, 12, 0.4), rgba(234, 88, 12, 0.2));
+.fear-greed-low {
+    fill: #ff8800 !important; /* Red - 25 */
+    stroke: rgba(0, 0, 0, 0.4) !important;
+    stroke-width: 1px !important;
+    font-size: 19px !important;
+    font-weight: 800 !important;
 }
 
-.extreme-fear-bg {
-    top: 80%;
-    height: 20%;
-    background: linear-gradient(to bottom, rgba(220, 38, 38, 0.4), rgba(220, 38, 38, 0.2));
+.fear-greed-extreme-low {
+    fill: #ff4444 !important; /* Dark red - 0 */
+    stroke: rgba(0, 0, 0, 0.4) !important;
+    stroke-width: 1px !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
 }
 
-/* SVG chart styling */
-.fear-greed-chart {
-    position: absolute;
-    top: 0;
-    left: 0;
+/* Bitcoin price Y-axis labels - Enhanced visibility */
+.btc-price {
+    fill: #f7931a !important; /* Bitcoin orange */
+    stroke: rgba(0, 0, 0, 0.6) !important;
+    stroke-width: 1.5px !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    paint-order: stroke fill !important;
+}
+
+.pure-fear-greed-chart {
     width: 100%;
     height: 100%;
-    z-index: 2;
+    display: block;
 }
 
-/* Price axis */
-.price-axis {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 120px;
-    height: 300px;
-    padding-left: 20px;
-    font-size: 1.125rem; /* 18px */
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    position: relative;
-}
-
-.price-axis-title {
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
-    font-size: 1.5rem; /* 24px */
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.8);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #ff6b35, #f7931a);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.price-label {
-    position: absolute;
-    right: 0;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 4px 8px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
-    color: #f7931a;
-    font-weight: 700;
-    font-size: 0.875rem; /* 14px */
-    transform: translateY(-50%);
-}
-
-/* X-axis labels */
-.x-axis-labels {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 180px 0 20px;
-    font-size: 1.25rem; /* 20px */
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-}
-
-.x-label {
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* Legend */
-.chart-legend {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem; /* 16px */
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-    padding: 8px 15px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-}
-
-.legend-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.extreme-fear-color { background: #ff4444; }
-.fear-color { background: #ff8800; }
-.neutral-color { background: #ffdd00; }
-.greed-color { background: #88ff44; }
-.extreme-greed-color { background: #44ff88; }
-
-/* Responsive adjustments */
-@media (max-width: 1400px) {
-    .chart-wrapper {
-        height: 350px;
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    body {
+        width: 100%;
+        height: 100vh;
+        padding: 20px;
     }
 
-    .y-axis-labels {
-        width: 160px;
-        height: 250px;
+    .main-container {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        gap: 30px;
     }
 
-    .chart-area {
-        height: 250px;
+    .btc-dashboard-card {
+        padding: 30px;
+        border-radius: 20px;
     }
 
-    .price-axis {
-        height: 250px;
+    .btc-identity {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .btc-logo-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .btc-symbol {
+        font-size: 1.5rem;
+    }
+
+    .btc-price {
+        font-size: 2rem;
+    }
+
+    .market-data-grid {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .market-label,
+    .market-value {
+        font-size: 0.9rem;
+    }
+
+    .fear-greed-chart-section {
+        padding: 30px;
+        border-radius: 30px;
     }
 
     .chart-title {
-        font-size: 3rem;
+        font-size: 2rem;
     }
 
     .current-value {
-        font-size: 3.5rem;
+        font-size: 2.5rem;
+    }
+
+    .current-label {
+        font-size: 1rem;
+        padding: 6px 12px;
+    }
+
+    .pure-chart-container {
+        height: 300px;
+        border-radius: 16px;
     }
 }
-
