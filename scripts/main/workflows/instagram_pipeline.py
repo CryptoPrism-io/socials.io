@@ -255,7 +255,12 @@ async def render_page_6():
             'bearish': str(int(btc_row.get('bearish', 23))),  # bearish column from database
             'neutral': str(int(btc_row.get('neutral', 45))), # neutral column from database
             'bullish': str(int(btc_row.get('bullish', 32))),  # bullish column from database
-            'Trend': btc_row.get('Trend', 'Bullish')
+            'Trend': btc_row.get('Trend', 'Bullish'),
+            'fear_greed_index': btc_row.get('fear_greed_index', 50),  # Fear & Greed Index
+            'fear_greed_label': btc_row.get('fear_greed_label', 'Neutral'),  # Fear & Greed Label
+            'fear_greed_history': btc_data.attrs.get('fear_greed_history', [
+                {'day': i+1, 'value': 50, 'price': 50000, 'label': 'Neutral'} for i in range(30)
+            ])  # Fear & Greed History from DataFrame attributes
         }]
 
     # Get template renderer
@@ -290,6 +295,13 @@ async def render_page_6():
     # Save HTML
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(rendered_html)
+
+    # Copy CSS file to ensure styling works
+    import shutil
+    css_source = os.path.join(template_dir, 'style6.css')
+    css_dest = os.path.join(output_dir, 'style6.css')
+    if os.path.exists(css_source):
+        shutil.copy2(css_source, css_dest)
 
     # Generate screenshot
     try:

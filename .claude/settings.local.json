@@ -12,7 +12,10 @@
       "Bash(timeout:*)",
       "Bash(findstr:*)",
       "Bash(curl:*)",
-      "Bash(node server.js)"
+      "Bash(node server.js)",
+      "Bash(copy:*)",
+      "WebSearch",
+      "Bash(pip install:*)"
     ],
     "deny": [],
     "ask": []

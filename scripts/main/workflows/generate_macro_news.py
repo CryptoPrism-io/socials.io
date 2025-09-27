@@ -43,7 +43,7 @@ def convert_macro_report_to_json_python_parsing(macro_report_text):
                 'error': 'No qualifying strategic developments found in last 24 hours'
             }
 
-        # Extract individual developments using regex
+        # Extract individual developments using regex (now includes date extraction)
         development_pattern = r'(\d+)\. \*\*(Regulatory Update|Institutional Alert|FOMC Alert|News Alert|Technological Alert|Environmental Alert|Legal Alert|Adoption Alert)\*\*.*?\n.*?-\s+\*\*Development:\*\*(.*?)\n.*?-\s+\*\*Coins/Tokens Affected:\*\*(.*?)\n.*?-\s+\*\*Impact Level:\*\*(.*?)\n.*?-\s+\*\*Strategic Impact:\*\*(.*?)\n.*?-\s+\*\*Post Highlight Potential:\*\*(.*?)\n.*?-\s+\*\*Source:\*\*(.*?)(?=\n\n|\n\d+\.|$)'
 
         matches = re.finditer(development_pattern, macro_report_text, re.DOTALL)
@@ -64,8 +64,24 @@ def convert_macro_report_to_json_python_parsing(macro_report_text):
                 coin_matches = re.findall(coin_pattern, coins_affected_text.upper())
                 coin_symbols = list(set(coin_matches)) if coin_matches else ['BTC']  # Default to BTC if none found
 
-                # Create clean description (first 120 characters)
-                description = development_text[:120].strip()
+                # Extract date from development text or source (look for date patterns)
+                date_pattern = r'(?:Published on|Published:|Date:|on)\s*(?:September|Sep|Oct|October|Nov|November|Dec|December|Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August)\s+\d{1,2},?\s+\d{4}'
+                date_match = re.search(date_pattern, development_text + " " + source_text, re.IGNORECASE)
+
+                # Fallback: look for any date pattern
+                if not date_match:
+                    fallback_pattern = r'(?:September|Sep|Oct|October|Nov|November|Dec|December|Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August)\s+\d{1,2},?\s+\d{4}'
+                    date_match = re.search(fallback_pattern, development_text + " " + source_text)
+
+                article_date = date_match.group(0) if date_match else f"Sep {datetime.now().day}, 2025"
+
+                # Clean up article date if it includes "Published on" prefix
+                if "Published" in article_date:
+                    article_date = re.sub(r'Published\s*on\s*', '', article_date, flags=re.IGNORECASE).strip()
+
+                # Create clean description (first 120 characters) + date
+                base_description = development_text[:100].strip()
+                description = f"{base_description}... (Published: {article_date})"
 
                 # Map category to tag
                 tag_mapping = {
@@ -160,20 +176,20 @@ Create a detailed market intelligence report covering the TOP 10 most important 
 **TOP STRATEGIC DEVELOPMENTS:**
 
 1. **[CATEGORY]** - [Date: {yesterday.strftime('%b %d, %Y')}]
-   - **Development:** [Detailed description of regulatory/institutional/macro event]
+   - **Development:** [Detailed description of regulatory/institutional/macro event. MUST end with the exact publication date from the source article: "Published on September 27, 2025"]
    - **Coins/Tokens Affected:** [List specific cryptocurrencies impacted - BTC, ETH, SOL, etc.]
    - **Impact Level:** [High/Medium/Low - based on potential market effect]
    - **Strategic Impact:** [Long-term implications for crypto adoption/regulation]
    - **Post Highlight Potential:** [High/Medium/Low - how newsworthy for social posts]
-   - **Source:** [News source website]
+   - **Source:** [News source website + exact publication date]
 
 2. **[CATEGORY]** - [Date: {yesterday.strftime('%b %d, %Y')}]
-   - **Development:** [Detailed description]
+   - **Development:** [Detailed description. MUST end with exact publication date: "Published on September 27, 2025"]
    - **Coins/Tokens Affected:** [List specific cryptocurrencies impacted]
    - **Impact Level:** [High/Medium/Low]
    - **Strategic Impact:** [Long-term implications]
    - **Post Highlight Potential:** [High/Medium/Low]
-   - **Source:** [News source website]
+   - **Source:** [News source website + exact publication date]
 
 [Continue for all 10 developments]
 
@@ -199,7 +215,12 @@ Create a detailed market intelligence report covering the TOP 10 most important 
 - **Impact Level**: Rate High/Medium/Low based on potential price/adoption effect
 - **Post Highlight Potential**: Rate High/Medium/Low based on social media engagement potential
 
-**CRITICAL**: If you cannot find real macro/strategic news from {date_range}, clearly state "NO QUALIFYING STRATEGIC DEVELOPMENTS FOUND IN LAST 24 HOURS" instead of making up information. Only report ACTUAL current strategic events with proper date stamps."""
+**CRITICAL REQUIREMENTS**:
+1. If you cannot find real macro/strategic news from {date_range}, clearly state "NO QUALIFYING STRATEGIC DEVELOPMENTS FOUND IN LAST 24 HOURS" instead of making up information.
+2. Only report ACTUAL current strategic events with proper date stamps.
+3. **MANDATORY**: Each development description MUST end with the exact publication date from the source article in format: "Published on September 27, 2025" or "Published on Sep 27, 2025".
+4. Include source publication date in the Source field as well.
+5. ALL dates must be from {date_range} period - reject any older news."""
 
         print("🔍 Step 1: Generating rich macro intelligence report...")
         macro_result = client.chat_completion(

@@ -464,7 +464,7 @@ body {
 }
 
 .btc-price {
-    font-size: 6.5rem; /* 104px */
+    font-size: 6rem; /* 96px */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -2141,65 +2141,71 @@ body {
         0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-/* Y-Axis Label Styling */
+/* Y-Axis Label Styling - Enhanced Visibility */
 .y-axis-label {
     font-family: 'Inter', sans-serif !important;
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    fill: rgba(255, 255, 255, 0.9) !important;
-    stroke: rgba(0, 0, 0, 0.3) !important;
-    stroke-width: 0.5px !important;
+    font-size: 22px !important;
+    font-weight: 900 !important;
+    fill: rgba(255, 255, 255, 1) !important;
+    stroke: rgba(0, 0, 0, 0.8) !important;
+    stroke-width: 2px !important;
+    paint-order: stroke fill !important;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Fear & Greed Index Y-axis labels with bright sentiment colors */
+.fear-greed-extreme {
+    fill: #00ff88 !important; /* Bright Green - 100 */
+    stroke: rgba(0, 0, 0, 0.9) !important;
+    stroke-width: 2.5px !important;
+    font-size: 24px !important;
+    font-weight: 900 !important;
     paint-order: stroke fill !important;
 }
 
-/* Fear & Greed Index Y-axis labels with sentiment colors */
-.fear-greed-extreme {
-    fill: #44ff88 !important; /* Green - 100 */
-    stroke: rgba(0, 0, 0, 0.4) !important;
-    stroke-width: 1px !important;
-    font-size: 20px !important;
-    font-weight: 800 !important;
-}
-
 .fear-greed-high {
-    fill: #88ff44 !important; /* Light green - 75 */
-    stroke: rgba(0, 0, 0, 0.4) !important;
-    stroke-width: 1px !important;
-    font-size: 19px !important;
-    font-weight: 800 !important;
+    fill: #88ff00 !important; /* Bright Light Green - 75 */
+    stroke: rgba(0, 0, 0, 0.9) !important;
+    stroke-width: 2.5px !important;
+    font-size: 23px !important;
+    font-weight: 900 !important;
+    paint-order: stroke fill !important;
 }
 
 .fear-greed-neutral {
-    fill: #ffdd00 !important; /* Orange - 50 */
-    stroke: rgba(0, 0, 0, 0.5) !important;
-    stroke-width: 1px !important;
-    font-size: 19px !important;
-    font-weight: 800 !important;
+    fill: #ffee00 !important; /* Bright Yellow - 50 */
+    stroke: rgba(0, 0, 0, 0.9) !important;
+    stroke-width: 2.5px !important;
+    font-size: 23px !important;
+    font-weight: 900 !important;
+    paint-order: stroke fill !important;
 }
 
 .fear-greed-low {
-    fill: #ff8800 !important; /* Red - 25 */
-    stroke: rgba(0, 0, 0, 0.4) !important;
-    stroke-width: 1px !important;
-    font-size: 19px !important;
-    font-weight: 800 !important;
+    fill: #ff6600 !important; /* Bright Orange/Red - 25 */
+    stroke: rgba(0, 0, 0, 0.9) !important;
+    stroke-width: 2.5px !important;
+    font-size: 23px !important;
+    font-weight: 900 !important;
+    paint-order: stroke fill !important;
 }
 
 .fear-greed-extreme-low {
-    fill: #ff4444 !important; /* Dark red - 0 */
-    stroke: rgba(0, 0, 0, 0.4) !important;
-    stroke-width: 1px !important;
-    font-size: 20px !important;
-    font-weight: 800 !important;
+    fill: #ff0044 !important; /* Bright Dark Red - 0 */
+    stroke: rgba(0, 0, 0, 0.9) !important;
+    stroke-width: 2.5px !important;
+    font-size: 24px !important;
+    font-weight: 900 !important;
+    paint-order: stroke fill !important;
 }
 
-/* Bitcoin price Y-axis labels - Enhanced visibility */
-.btc-price {
-    fill: #f7931a !important; /* Bitcoin orange */
-    stroke: rgba(0, 0, 0, 0.6) !important;
-    stroke-width: 1.5px !important;
-    font-size: 16px !important;
-    font-weight: 800 !important;
+/* Bitcoin price Y-axis labels - Bright Blue Enhanced visibility */
+.y-axis-label.btc-price {
+    fill: #0088ff !important; /* Bright Blue */
+    stroke: rgba(0, 0, 0, 0.9) !important;
+    stroke-width: 2.5px !important;
+    font-size: 0.875rem !important;
+    font-weight: 900 !important;
     paint-order: stroke fill !important;
 }
 

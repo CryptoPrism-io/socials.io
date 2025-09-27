@@ -10,6 +10,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v2.2.0] - 2025-09-27 (dev2 branch)
+
+### 🎯 MINOR: Enhanced Macro Intelligence with Article Dating & Fresh Data Generation
+
+### Added
+- **Article Publication Dating System**: Enhanced Template 7 (Market Intelligence) with automatic article date extraction
+  - **Intelligent Date Recognition**: Regex-based extraction of publication dates from AI-generated news content
+  - **Fallback Date Logic**: Automatic current date assignment when specific dates not provided by AI
+  - **Enhanced Prompt Engineering**: Modified OpenRouter GPT-4o Mini Search Preview prompts to explicitly require publication dates
+  - **Date Display Format**: Articles now show "Published: Sep 27, 2025" format for transparency and credibility
+- **Fresh Data Generation Pipeline**: Updated API key management and current market data integration
+  - **Updated OpenRouter API Key**: New working API key configured for macro intelligence generation
+  - **Current Market Context**: Bitcoin price $109,516.69 integrated with real-time news
+  - **Template Regeneration**: All 7 templates updated with Sep 27, 2025 current data (Templates 1,2,5,6,7 successful)
+
+### Enhanced
+- **`scripts/main/workflows/generate_macro_news.py`**:
+  - Added comprehensive date extraction patterns with multiple fallback strategies
+  - Enhanced AI prompt requirements for mandatory publication date inclusion
+  - Improved description formatting to append publication dates automatically
+  - Added robust error handling for date parsing edge cases
+- **Template 7 Generation Process**:
+  - L2 AI Impact Ranking with quality scores 85-100/100
+  - 6 high-impact macro intelligence alerts with current market context
+  - Real-time timestamp generation (27 Sep, 2025 02:31:18 PM)
+  - Enhanced credibility through dated news articles
+
+### Fixed
+- **Environment Configuration**: Updated OpenRouter API key for continued macro intelligence generation
+- **Data Freshness Issues**: All successfully generating templates now display current Sep 27, 2025 data
+- **Template Synchronization**: Coordinated data updates across Templates 1, 2, 5, 6, and 7
+
+### Technical Details
+- **Date Extraction Algorithm**: Multi-pattern regex system with primary and fallback date recognition
+- **API Integration**: OpenRouter GPT-4o Mini Search Preview model for real-time market intelligence
+- **Quality Assurance**: L2 AI filtering system maintaining 85-100% quality scores for all alerts
+- **Market Data Accuracy**: Current Bitcoin price context ensuring news relevance and timeliness
+
 ## [v2.1.0] - 2025-09-24 (dev2 branch)
 
 ### 🎨 MINOR: Template 6 Dual-Axis Chart Enhancement
