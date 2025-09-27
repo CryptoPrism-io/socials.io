@@ -35,7 +35,7 @@
                 </div>
                 <div class="btc-info">
                     <div class="btc-symbol">BTC</div>
-                    <div class="btc-price">${{snaps['price']}}</div>
+                    <div class="btc-price">${{ snaps['price'] }}</div>
                 </div>
             </div>
 
@@ -43,11 +43,11 @@
             <div class="market-data-grid">
                 <div class="market-item">
                     <div class="market-label">Market Cap</div>
-                    <div class="market-value">${{snaps['market_cap']}}</div>
+                    <div class="market-value">${{ snaps['market_cap'] }}</div>
                 </div>
                 <div class="market-item">
                     <div class="market-label">Volume 24H</div>
-                    <div class="market-value">${{snaps['volume24h']}}</div>
+                    <div class="market-value">${{ snaps['volume24h'] }}</div>
                 </div>
             </div>
         </div>
@@ -84,15 +84,15 @@
                 <div class="sentiment-title">Market Sentiment</div>
                 <div class="sentiment-items">
                     <div class="sentiment-item">
-                        <div class="sentiment-count bearish-count">{{snaps['bearish']}}</div>
+                        <div class="sentiment-count bearish-count">{{ snaps['bearish']|int }}</div>
                         <div class="sentiment-label">Bearish</div>
                     </div>
                     <div class="sentiment-item">
-                        <div class="sentiment-count neutral-count">{{snaps['neutral']}}</div>
+                        <div class="sentiment-count neutral-count">{{ snaps['neutral']|int }}</div>
                         <div class="sentiment-label">Neutral</div>
                     </div>
                     <div class="sentiment-item">
-                        <div class="sentiment-count bullish-count">{{snaps['bullish']}}</div>
+                        <div class="sentiment-count bullish-count">{{ snaps['bullish']|int }}</div>
                         <div class="sentiment-label">Bullish</div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
             <div class="chart-header">
                 <div class="chart-title">Fear & Greed Index</div>
                 <div class="current-index">
-                    <div class="current-value">{{ snaps['fear_greed_index'] }}</div>
+                    <div class="current-value">{{ snaps['fear_greed_index']|int }}</div>
                     <div class="current-label fear-greed-{{ snaps['fear_greed_label'].replace(' ', '-').lower() }}">{{ snaps['fear_greed_label'] }}</div>
                 </div>
             </div>
@@ -133,9 +133,9 @@
 
                         <!-- Bitcoin price gradient -->
                         <linearGradient id="btcPriceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#f7931a;stop-opacity:0.9" />
-                            <stop offset="50%" style="stop-color:#ffb84d;stop-opacity:0.9" />
-                            <stop offset="100%" style="stop-color:#f7931a;stop-opacity:0.9" />
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.9" />
                         </linearGradient>
 
                         <!-- Gradient for area under Fear & Greed curve -->
@@ -146,8 +146,8 @@
 
                         <!-- Gradient for area under Bitcoin curve -->
                         <linearGradient id="btcAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#f7931a;stop-opacity:0.15" />
-                            <stop offset="100%" style="stop-color:#f7931a;stop-opacity:0.03" />
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.15" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.03" />
                         </linearGradient>
                     </defs>
 
@@ -169,9 +169,9 @@
 
                     <!-- Bitcoin Price Y-axis labels (right side) -->
                     {% for snaps in snap %}
-                    <text x="1075" y="58" text-anchor="middle" class="y-axis-label btc-price">${{ "{:,.0f}".format(snaps['btc_max_price']) }}</text>
-                    <text x="1075" y="208" text-anchor="middle" class="y-axis-label btc-price">${{ "{:,.0f}".format((snaps['btc_max_price'] + snaps['btc_min_price']) / 2) }}</text>
-                    <text x="1075" y="358" text-anchor="middle" class="y-axis-label btc-price">${{ "{:,.0f}".format(snaps['btc_min_price']) }}</text>
+                    <text x="1075" y="58" text-anchor="middle" class="y-axis-label btc-label">{{ "{:.0f}".format(snaps['btc_max_price']/1000) }}k</text>
+                    <text x="1075" y="208" text-anchor="middle" class="y-axis-label btc-label">{{ "{:.0f}".format(((snaps['btc_max_price'] + snaps['btc_min_price']) / 2)/1000) }}k</text>
+                    <text x="1075" y="358" text-anchor="middle" class="y-axis-label btc-label">{{ "{:.0f}".format(snaps['btc_min_price']/1000) }}k</text>
                     {% endfor %}
 
                     <!-- Area under the Bitcoin price curve -->
@@ -213,7 +213,7 @@
                         cx="{{ 100 + (loop.index0 * 30) }}"
                         cy="{{ 350 - ((point.price - snaps['btc_min_price']) / (snaps['btc_max_price'] - snaps['btc_min_price']) * 300) }}"
                         r="3"
-                        fill="#f7931a"
+                        fill="#3b82f6"
                         stroke="rgba(255,255,255,0.9)"
                         stroke-width="1.5"
                         opacity="0.8"

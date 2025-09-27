@@ -304,16 +304,28 @@ def generate_6_output_html():
         btc_data_df = fetch_btc_snapshot()
         if not btc_data_df.empty:
             btc_snapshots = btc_data_df.to_dict('records')
-            # Add fear_greed_history from DataFrame attributes to the first record
+            # Add fear_greed_history from DataFrame column to the first record
             if len(btc_snapshots) > 0:
-                if 'fear_greed_history' in btc_data_df.attrs:
-                    btc_snapshots[0]['fear_greed_history'] = btc_data_df.attrs['fear_greed_history']
+                if 'fear_greed_history_json' in btc_snapshots[0] and btc_snapshots[0]['fear_greed_history_json']:
+                    # Parse the JSON string back to list
+                    import ast
+                    try:
+                        btc_snapshots[0]['fear_greed_history'] = ast.literal_eval(btc_snapshots[0]['fear_greed_history_json'])
+                    except:
+                        # Fallback in case of parsing error
+                        btc_snapshots[0]['fear_greed_history'] = [
+                            {'day': i+1, 'value': 50, 'price': 0, 'label': 'Neutral'} for i in range(30)
+                        ]
                 else:
-                    # Fallback: create basic history if not in attrs
+                    # Fallback: create basic history if not available
                     btc_snapshots[0]['fear_greed_history'] = [
-                        {'day': i+1, 'value': 50, 'price': 50000, 'label': 'Neutral'} for i in range(30)
+                        {'day': i+1, 'value': 50, 'price': 0, 'label': 'Neutral'} for i in range(30)
                     ]
                 print(f"🔍 Debug: fear_greed_history has {len(btc_snapshots[0]['fear_greed_history'])} entries")
+            # Normalize numeric strings by stripping leading '$'
+            for snap in btc_snapshots:
+                for _k in ('price', 'market_cap', 'volume24h'):
+                    snap[_k] = snap[_k].lstrip('$')
         else:
             btc_snapshots = []
 
