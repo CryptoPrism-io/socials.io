@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="style4.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>Crypto Dashboard Template 3</title>
+    <title>Crypto Dashboard Template 4.2 - Short Calls</title>
 </head>
 <body>
     <!-- Main Container for Auto-Layout Scaling -->
@@ -23,95 +23,15 @@
             </div>
         </div>
 
-        {% for snaps in snap %}
-        <!-- Bitcoin Dashboard Card -->
-        <div class="btc-dashboard-card">
-            <!-- Main BTC Information Section -->
-            <div class="btc-main-section">
-                <!-- BTC Identity and Price -->
-                <div class="btc-identity">
-                    <div class="btc-logo-container">
-                        <img src="{{ snaps['logo'] }}" alt="Bitcoin Logo" class="btc-logo-img">
-                    </div>
-                    <div class="btc-info">
-                        <div class="btc-symbol">BTC</div>
-                        <div class="btc-price">{{snaps['price']}}</div>
-                    </div>
-                </div>
-
-                <!-- Market Data Grid -->
-                <div class="market-data-grid">
-                    <div class="market-item">
-                        <div class="market-label">Market Cap</div>
-                        <div class="market-value">{{snaps['market_cap']}}</div>
-                    </div>
-                    <div class="market-item">
-                        <div class="market-label">Volume 24H</div>
-                        <div class="market-value">{{snaps['volume24h']}}</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Performance and Sentiment Section -->
-            <div class="performance-sentiment-section">
-            <!-- Performance Grid -->
-            <div class="performance-container">
-                <div class="performance-title">Performance</div>
-                <div class="performance-items">
-                    <div class="perf-item">
-                        <div class="perf-value {% if snaps['percent_change24h']|float > 0 %}positive{% elif snaps['percent_change24h']|float < 0 %}negative{% endif %}">
-                            {{ snaps['percent_change24h'] }}%
-                        </div>
-                        <div class="perf-label">1D</div>
-                    </div>
-                    <div class="perf-item">
-                        <div class="perf-value {% if snaps['percent_change7d']|float > 0 %}positive{% elif snaps['percent_change7d']|float < 0 %}negative{% endif %}">
-                            {{ snaps['percent_change7d'] }}%
-                        </div>
-                        <div class="perf-label">7D</div>
-                    </div>
-                    <div class="perf-item">
-                        <div class="perf-value {% if snaps['percent_change30d']|float > 0 %}positive{% elif snaps['percent_change30d']|float < 0 %}negative{% endif %}">
-                            {{ snaps['percent_change30d'] }}%
-                        </div>
-                        <div class="perf-label">30D</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sentiment Analysis -->
-            <div class="sentiment-container">
-                <div class="sentiment-title">Market Sentiment</div>
-                <div class="sentiment-items">
-                    <div class="sentiment-item">
-                        <div class="sentiment-count bearish-count">{{snaps['bearish']}}</div>
-                        <div class="sentiment-label">Bearish</div>
-                    </div>
-                    <div class="sentiment-item">
-                        <div class="sentiment-count neutral-count">{{snaps['neutral']}}</div>
-                        <div class="sentiment-label">Neutral</div>
-                    </div>
-                    <div class="sentiment-item">
-                        <div class="sentiment-count bullish-count">{{snaps['bullish']}}</div>
-                        <div class="sentiment-label">Bullish</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Overall Trend -->
-            <div class="trend-container">
-                <div class="trend-title">Overall Trend</div>
-                <div class="trend-value">{{snaps['Trend']}}</div>
-            </div>
-            </div>
+        <!-- Short Calls Header -->
+        <div class="losers-header">
+            <h2 style="color: #ff355b; text-align: center; font-size: 2.5rem; margin: 20px 0;">📉 SHORT CALLS</h2>
         </div>
-        {% endfor %}
 
-        <!-- Top Gainers/Losers Layout -->
+        {% if left_positions or right_positions %}
         <div class="col-container">
             <div class="col">
-                <div class="top-gainer">
-                {% for coin in coin2 %}
+                {% for coin in left_positions %}
                 <div class="coin-card">
                     <div class="coin-stat">
                         <div>
@@ -130,29 +50,23 @@
                         </div>
                     </div>
 
-
                     <div class="dmv">
                         <div>
-
                             <span class="d {% if coin.Durability_Score|float < 0 %}dmv-low{% elif coin.Durability_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Durability_Score|round(1) if coin.Durability_Score else 'N/A' }}</span>
                         </div>
                         <div>
-
                             <span class="m {% if coin.Momentum_Score|float < 0 %}dmv-low{% elif coin.Momentum_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Momentum_Score|round(1) if coin.Momentum_Score else 'N/A' }}</span>
                         </div>
                         <div>
-
                             <span class="v {% if coin.Valuation_Score|float < 0 %}dmv-low{% elif coin.Valuation_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Valuation_Score|round(1) if coin.Valuation_Score else 'N/A' }}</span>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-            </div>
             </div>
 
             <div class="col">
-                <div class="top-loser">
-                {% for coin in coin1 %}
+                {% for coin in right_positions %}
                 <div class="coin-card">
                     <div class="coin-stat">
                         <div>
@@ -171,26 +85,31 @@
                         </div>
                     </div>
 
-
                     <div class="dmv">
                         <div>
-
                             <span class="d {% if coin.Durability_Score|float < 0 %}dmv-low{% elif coin.Durability_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Durability_Score|round(1) if coin.Durability_Score else 'N/A' }}</span>
                         </div>
                         <div>
-
                             <span class="m {% if coin.Momentum_Score|float < 0 %}dmv-low{% elif coin.Momentum_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Momentum_Score|round(1) if coin.Momentum_Score else 'N/A' }}</span>
                         </div>
                         <div>
-
                             <span class="v {% if coin.Valuation_Score|float < 0 %}dmv-low{% elif coin.Valuation_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Valuation_Score|round(1) if coin.Valuation_Score else 'N/A' }}</span>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-                </div>
             </div>
         </div>
+        {% else %}
+        <div class="no-data-message">
+            <h3 style="color: #ffffff; text-align: center; font-size: 1.8rem; margin: 50px 0;">
+                📊 No Short Call data available
+            </h3>
+            <p style="color: #888; text-align: center; font-size: 1.2rem;">
+                Unable to fetch short call positions
+            </p>
+        </div>
+        {% endif %}
 
         <!-- Footer -->
         <div class="footer-container">cryptoprism.io</div>

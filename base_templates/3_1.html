@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style3.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Crypto Dashboard Template 3.1 - Top Gainers</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">{{ current_date if current_date else '27 Sep, 2025' }}</div>
+                <div class="last-update-time">{{ current_time if current_time else '4:30 pm' }}</div>
+            </div>
+        </div>
+
+        <!-- Top Gainers Section -->
+        <div class="gainers-header">
+            <h2 style="color: #00ff5f; text-align: center; font-size: 2.5rem; margin: 20px 0;">🚀 TOP GAINERS (+2% or more)</h2>
+        </div>
+
+        {% if left_gainers or right_gainers %}
+        <div class="col-container">
+            <div class="col">
+                {% for coin in left_gainers %}
+                <div class="coin-card">
+                    <div class="coin-stat">
+                        <div>
+                            <div class="logo"><img src="{{ coin.logo }}"></div>
+                            <div class="left-col">
+                                <div class="coin-name">{{ coin.symbol }}</div>
+                                <div class="cmc-rank">#{{ coin.cmc_rank }}</div>
+                            </div>
+                        </div>
+
+                        <div class="mid-col">${{ coin.market_cap }} B</div>
+
+                        <div class="right-col">
+                            <div class="price">$ {{ coin.price }}</div>
+                            <div class="pct-change" style="color: #00ff5f; font-weight: bold;">+{{ coin.percent_change24h }} %</div>
+                        </div>
+                    </div>
+
+                    <div class="dmv">
+                        <div>
+                            <span class="d {% if coin.Durability_Score|float < 0 %}dmv-low{% elif coin.Durability_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Durability_Score|round(1) if coin.Durability_Score else 'N/A' }}</span>
+                        </div>
+                        <div>
+                            <span class="m {% if coin.Momentum_Score|float < 0 %}dmv-low{% elif coin.Momentum_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Momentum_Score|round(1) if coin.Momentum_Score else 'N/A' }}</span>
+                        </div>
+                        <div>
+                            <span class="v {% if coin.Valuation_Score|float < 0 %}dmv-low{% elif coin.Valuation_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Valuation_Score|round(1) if coin.Valuation_Score else 'N/A' }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="col">
+                {% for coin in right_gainers %}
+                <div class="coin-card">
+                    <div class="coin-stat">
+                        <div>
+                            <div class="logo"><img src="{{ coin.logo }}"></div>
+                            <div class="left-col">
+                                <div class="coin-name">{{ coin.symbol }}</div>
+                                <div class="cmc-rank">#{{ coin.cmc_rank }}</div>
+                            </div>
+                        </div>
+
+                        <div class="mid-col">${{ coin.market_cap }} B</div>
+
+                        <div class="right-col">
+                            <div class="price">$ {{ coin.price }}</div>
+                            <div class="pct-change" style="color: #00ff5f; font-weight: bold;">+{{ coin.percent_change24h }} %</div>
+                        </div>
+                    </div>
+
+                    <div class="dmv">
+                        <div>
+                            <span class="d {% if coin.Durability_Score|float < 0 %}dmv-low{% elif coin.Durability_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Durability_Score|round(1) if coin.Durability_Score else 'N/A' }}</span>
+                        </div>
+                        <div>
+                            <span class="m {% if coin.Momentum_Score|float < 0 %}dmv-low{% elif coin.Momentum_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Momentum_Score|round(1) if coin.Momentum_Score else 'N/A' }}</span>
+                        </div>
+                        <div>
+                            <span class="v {% if coin.Valuation_Score|float < 0 %}dmv-low{% elif coin.Valuation_Score|float <= 50 %}dmv-medium{% else %}dmv-high{% endif %}">{{ coin.Valuation_Score|round(1) if coin.Valuation_Score else 'N/A' }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="no-data-message">
+            <h3 style="color: #ffffff; text-align: center; font-size: 1.8rem; margin: 50px 0;">
+                📊 No Top Gainers (+2% or more) to show today
+            </h3>
+            <p style="color: #888; text-align: center; font-size: 1.2rem;">
+                All cryptocurrencies are performing below the +2% threshold
+            </p>
+        </div>
+        {% endif %}
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>
