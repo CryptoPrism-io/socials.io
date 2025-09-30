@@ -288,6 +288,14 @@ body {
     font-size: 36px;
     font-weight: 700;
     font-family: 'Inter', monospace;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 80px;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .metric-label, .ratio-label {
@@ -297,9 +305,220 @@ body {
     text-transform: uppercase;
 }
 
-/* Color Classes */
-.positive { color: #00ff88; }
-.negative { color: #ff4444; }
+/* Color Classes with Enhanced Frame Styling */
+.positive {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.15) !important;
+    border-color: rgba(0, 255, 136, 0.3) !important;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+.negative {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.15) !important;
+    border-color: rgba(255, 68, 68, 0.3) !important;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+}
+
+/* 🎯 Two-Column Layout (Template 4.1 & 4.2) */
+.col-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    flex: 1;
+    width: 100%;
+}
+
+.col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 🏆 Coin Cards */
+.coin-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 16px 64px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 30px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.coin-card:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 6px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.coin-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.coin-stat > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.coin-name {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.cmc-rank {
+    font-size: 1.5rem; /* 24px */
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+}
+
+.mid-col {
+    font-size: 2rem; /* 32px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    font-family: 'Inter', monospace;
+}
+
+.right-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.price {
+    font-size: 2rem; /* 32px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', monospace;
+}
+
+.pct-change {
+    font-size: 1.875rem; /* 30px */
+    font-weight: 700;
+    font-family: 'Inter', monospace;
+}
+
+/* 📊 DMV Scores Section */
+.dmv {
+    display: flex;
+    justify-content: space-around;
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dmv > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.dmv span {
+    font-size: 1.875rem; /* 30px */
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 100px;
+    text-align: center;
+    font-family: 'Inter', monospace;
+}
+
+.d::before {
+    content: "D";
+    display: block;
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.m::before {
+    content: "M";
+    display: block;
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.v::before {
+    content: "V";
+    display: block;
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+/* DMV Color Classes */
+.dmv-high {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.15) !important;
+    border-color: rgba(0, 255, 136, 0.3) !important;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.dmv-medium {
+    color: #ffcc02;
+    background: rgba(255, 204, 2, 0.15) !important;
+    border-color: rgba(255, 204, 2, 0.3) !important;
+    box-shadow: 0 0 15px rgba(255, 204, 2, 0.2);
+}
+
+.dmv-low {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.15) !important;
+    border-color: rgba(255, 68, 68, 0.3) !important;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+}
 
 /* 📝 Footer */
 .footer-container {
