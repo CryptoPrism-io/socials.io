@@ -35,8 +35,12 @@ def generate_3_output():
         output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
         output_path = os.path.join(output_dir, "3_output.html")
 
+        # Split data into gainers and losers
+        gainers_df = df[df['percent_change24h'] > 0].nlargest(10, 'percent_change24h')
+        losers_df = df[df['percent_change24h'] < 0].nsmallest(10, 'percent_change24h')
+
         # Render template
-        success = renderer.render_gainers_losers_page('3.html', df, output_path)
+        success = renderer.render_gainers_losers_page('3.html', gainers_df, losers_df, output_path)
 
         if success:
             print(f"✅ Template 3 HTML generated: {output_path}")

@@ -33,11 +33,14 @@ def fetch_crypto_data(query):
         return pd.DataFrame()
 
 def fetch_top_coins(start_rank=1, end_rank=24):
-    """Fetch top cryptocurrency data by rank range."""
+    """Fetch top cryptocurrency data by rank range with DMV scores."""
     query = f"""
-      SELECT slug, cmc_rank, last_updated, symbol, price, percent_change24h, market_cap, last_updated
-      FROM crypto_listings_latest_1000
-      WHERE cmc_rank BETWEEN {start_rank} AND {end_rank}
+      SELECT
+        c.slug, c.cmc_rank, c.last_updated, c.symbol, c.price, c.percent_change24h, c.market_cap,
+        d."Durability_Score", d."Momentum_Score", d."Valuation_Score"
+      FROM crypto_listings_latest_1000 c
+      LEFT JOIN "FE_DMV_SCORES" d ON c.slug = d.slug
+      WHERE c.cmc_rank BETWEEN {start_rank} AND {end_rank}
       """
 
     try:
@@ -392,7 +395,10 @@ def fetch_trading_opportunities(opportunity_type="long", limit=15):
           "FE_CC_INFO_URL"."logo",
           "FE_RATIOS"."m_rat_alpha",
           "FE_RATIOS"."d_rat_beta",
-          "FE_RATIOS"."m_rat_omega"
+          "FE_RATIOS"."m_rat_omega",
+          d."Durability_Score",
+          d."Momentum_Score",
+          d."Valuation_Score"
         FROM
           "FE_DMV_ALL"
         JOIN
@@ -407,10 +413,12 @@ def fetch_trading_opportunities(opportunity_type="long", limit=15):
           "FE_RATIOS"
         ON
           "FE_DMV_ALL"."slug" = "FE_RATIOS"."slug"
+        JOIN
+          "FE_DMV_SCORES" d ON "FE_DMV_ALL"."slug" = d.slug
         WHERE
           "crypto_listings_latest_1000"."cmc_rank" < 100
-          AND "FE_RATIOS"."d_rat_beta" > 1
-          AND "FE_RATIOS"."m_rat_omega" > 1
+          AND ("FE_RATIOS"."d_rat_beta" > 1 OR "FE_RATIOS"."d_rat_beta" IS NULL)
+          AND ("FE_RATIOS"."m_rat_omega" > 1 OR "FE_RATIOS"."m_rat_omega" IS NULL)
         ORDER BY
           "FE_DMV_ALL"."bullish" DESC
         LIMIT
@@ -434,7 +442,10 @@ def fetch_trading_opportunities(opportunity_type="long", limit=15):
           "FE_CC_INFO_URL"."logo",
           "FE_RATIOS"."m_rat_alpha",
           "FE_RATIOS"."d_rat_beta",
-          "FE_RATIOS"."m_rat_omega"
+          "FE_RATIOS"."m_rat_omega",
+          d."Durability_Score",
+          d."Momentum_Score",
+          d."Valuation_Score"
         FROM
           "FE_DMV_ALL"
         JOIN
@@ -449,10 +460,12 @@ def fetch_trading_opportunities(opportunity_type="long", limit=15):
           "FE_RATIOS"
         ON
           "FE_DMV_ALL"."slug" = "FE_RATIOS"."slug"
+        JOIN
+          "FE_DMV_SCORES" d ON "FE_DMV_ALL"."slug" = d.slug
         WHERE
           "crypto_listings_latest_1000"."cmc_rank" < 100
-          AND "FE_RATIOS"."d_rat_beta" > 1
-          AND "FE_RATIOS"."m_rat_omega" < 2
+          AND ("FE_RATIOS"."d_rat_beta" > 1 OR "FE_RATIOS"."d_rat_beta" IS NULL)
+          AND ("FE_RATIOS"."m_rat_omega" < 2 OR "FE_RATIOS"."m_rat_omega" IS NULL)
         ORDER BY
           "FE_DMV_ALL"."bearish" DESC
         LIMIT
@@ -462,14 +475,24 @@ def fetch_trading_opportunities(opportunity_type="long", limit=15):
     try:
         df = pd.read_sql_query(query, gcp_engine)
 
-        # Format numeric columns
-        df['market_cap'] = (df['market_cap'] / 1_000_000_000).round(2)
-        df['price'] = df['price'].round(2)
-        for col in ['percent_change24h', 'percent_change7d', 'percent_change30d']:
-            df[col] = df[col].round(2)
+        # Convert and format numeric columns with error handling
+        numeric_cols = ['market_cap', 'price', 'percent_change24h', 'percent_change7d', 'percent_change30d',
+                       'bullish', 'bearish', 'm_rat_alpha', 'd_rat_beta', 'm_rat_omega', 'Durability_Score', 'Momentum_Score', 'Valuation_Score']
 
-        for col in ['m_rat_alpha', 'd_rat_beta', 'm_rat_omega']:
-            df[col] = df[col].round(2)
+        for col in numeric_cols:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors='coerce')
+
+        # Format specific columns after conversion
+        if 'market_cap' in df.columns:
+            df['market_cap'] = (df['market_cap'] / 1_000_000_000).round(2)
+        if 'price' in df.columns:
+            df['price'] = df['price'].round(2)
+
+        # Round percentage and ratio columns
+        for col in ['percent_change24h', 'percent_change7d', 'percent_change30d', 'm_rat_alpha', 'd_rat_beta', 'm_rat_omega']:
+            if col in df.columns:
+                df[col] = df[col].round(2)
 
         return df
 

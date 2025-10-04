@@ -15,7 +15,8 @@
       "Bash(node server.js)",
       "Bash(copy:*)",
       "WebSearch",
-      "Bash(pip install:*)"
+      "Bash(pip install:*)",
+      "Bash(flake8:*)"
     ],
     "deny": [],
     "ask": []

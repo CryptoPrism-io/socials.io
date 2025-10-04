@@ -226,151 +226,164 @@ async def render_page_6():
     """Render page 6: Bitcoin snapshot with macro intelligence alerts."""
     print("🔄 Rendering Page 6: Bitcoin Snapshot with Macro Intelligence")
 
-    # Fetch BTC data and generate macro intelligence
-    btc_data = fetch_btc_snapshot()
-    news_events = generate_macro_intelligence_with_json_conversion()
-
-    if btc_data.empty:
-        print("❌ No BTC data available for Page 6")
-        return False
-
-    # Convert BTC data to correct format for the template
-    # The template expects a list of dictionaries with specific field names
-    btc_snapshot_formatted = []
-    if not btc_data.empty:
-        btc_row = btc_data.iloc[0]  # Take the first row
-        # Ensure logo exists, use Bitcoin SVG if not
-        logo_url = btc_row.get('logo', '')
-        if not logo_url or pd.isna(logo_url):
-            logo_url = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNGOUE4RDQiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTIiIGZpbGw9IiNGRkYiLz4KPHRleHQgeD0iMTYiIHk9IjI1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNGOUE4RDQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkI8L3RleHQ+PC9zdmc+'
-
-        btc_snapshot_formatted = [{
-            'logo': logo_url,
-            'price': btc_row.get('price', '$112,957'),  # Already formatted by database.py
-            'market_cap': btc_row.get('market_cap', '$2.2T'),  # Already formatted by database.py
-            'volume24h': btc_row.get('volume24h', '$45.1B'),  # Already formatted by database.py
-            'percent_change24h': btc_row.get('percent_change24h', '+1.84'),  # Already formatted by database.py
-            'percent_change7d': btc_row.get('percent_change7d', '+8.92'),  # Already formatted by database.py
-            'percent_change30d': btc_row.get('percent_change30d', '+12.34'),  # Already formatted by database.py
-            'bearish': str(int(btc_row.get('bearish', 23))),  # bearish column from database
-            'neutral': str(int(btc_row.get('neutral', 45))), # neutral column from database
-            'bullish': str(int(btc_row.get('bullish', 32))),  # bullish column from database
-            'Trend': btc_row.get('Trend', 'Bullish'),
-            'fear_greed_index': btc_row.get('fear_greed_index', 50),  # Fear & Greed Index
-            'fear_greed_label': btc_row.get('fear_greed_label', 'Neutral'),  # Fear & Greed Label
-            'fear_greed_history': btc_data.attrs.get('fear_greed_history', [
-                {'day': i+1, 'value': 50, 'price': 50000, 'label': 'Neutral'} for i in range(30)
-            ])  # Fear & Greed History from DataFrame attributes
-        }]
-
-    # Get template renderer
-    renderer = get_template_renderer()
-
-    # Prepare output paths
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
-    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_images')
-    output_path = os.path.join(output_dir, "6_output.html")
-    image_path = os.path.join(image_dir, "6_output.jpg")
-
-    # Create template data in the format expected by 6.html
-    from jinja2 import Environment, FileSystemLoader
-    from datetime import datetime
-    current_time = datetime.now()
-
-    template_data = {
-        'current_date': current_time.strftime('%d %b, %Y'),
-        'current_time': current_time.strftime('%I:%M:%S %p'),
-        'news_events': news_events,
-        'snap': btc_snapshot_formatted
-    }
-
-    # Setup Jinja2 template directly since the renderer might not handle our new format
-    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'base_templates')
-    env = Environment(loader=FileSystemLoader(template_dir))
-    template = env.get_template('6.html')
-
-    # Render HTML
-    rendered_html = template.render(**template_data)
-
-    # Save HTML
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(rendered_html)
-
-    # Copy CSS file to ensure styling works
-    import shutil
-    css_source = os.path.join(template_dir, 'style6.css')
-    css_dest = os.path.join(output_dir, 'style6.css')
-    if os.path.exists(css_source):
-        shutil.copy2(css_source, css_dest)
-
-    # Generate screenshot
     try:
+        # Step 1: Get macro intelligence alerts
+        print("🔍 Generating macro intelligence alerts...")
+        alerts_result = generate_macro_intelligence_with_json_conversion()
+
+        # Step 2: Get BTC snapshot data from database
+        btc_data_df = fetch_btc_snapshot()
+        if not btc_data_df.empty:
+            btc_snapshots = btc_data_df.to_dict('records')
+            # Add fear_greed_history from DataFrame column to the first record
+            if len(btc_snapshots) > 0:
+                if 'fear_greed_history_json' in btc_snapshots[0] and btc_snapshots[0]['fear_greed_history_json']:
+                    # Parse the JSON string back to list
+                    import ast
+                    try:
+                        btc_snapshots[0]['fear_greed_history'] = ast.literal_eval(btc_snapshots[0]['fear_greed_history_json'])
+                    except:
+                        # Fallback in case of parsing error
+                        btc_snapshots[0]['fear_greed_history'] = [
+                            {'day': i+1, 'value': 50, 'price': 0, 'label': 'Neutral'} for i in range(30)
+                        ]
+                else:
+                    # Fallback: create basic history if not available
+                    btc_snapshots[0]['fear_greed_history'] = [
+                        {'day': i+1, 'value': 50, 'price': 0, 'label': 'Neutral'} for i in range(30)
+                    ]
+                print(f"🔍 Debug: fear_greed_history has {len(btc_snapshots[0]['fear_greed_history'])} entries")
+            # Normalize numeric strings by stripping leading '$'
+            for snap in btc_snapshots:
+                for _k in ('price', 'market_cap', 'volume24h'):
+                    if _k in snap and snap[_k]:
+                        snap[_k] = snap[_k].lstrip('$')
+        else:
+            print("❌ No BTC data available for Page 6")
+            return False
+
+        # Step 3: Prepare template data
+        from datetime import datetime
+        current_time = datetime.now()
+
+        template_data = {
+            'current_date': current_time.strftime('%d %b, %Y'),
+            'current_time': current_time.strftime('%I:%M:%S %p'),
+            'news_events': alerts_result,
+            'snaps': btc_snapshots[0] if btc_snapshots else {}  # Pass as single dict, not list
+        }
+
+        print(f"📊 Template data prepared:")
+        print(f"   - Macro alerts: {len(alerts_result['alerts']) if alerts_result['success'] else 0}")
+        print(f"   - BTC snapshots: {len(btc_snapshots)}")
+        print(f"   - Current timestamp: {template_data['current_date']} {template_data['current_time']}")
+
+        # Step 4: Setup Jinja2 template
+        from jinja2 import Environment, FileSystemLoader
+        template_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'base_templates')
+        env = Environment(loader=FileSystemLoader(template_dir))
+        template = env.get_template('6.html')
+
+        # Step 5: Render HTML
+        rendered_html = template.render(**template_data)
+
+        # Step 6: Save to 6_output.html
+        output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
+        image_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_images')
+        output_path = os.path.join(output_dir, "6_output.html")
+        image_path = os.path.join(image_dir, "6_output.jpg")
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(rendered_html)
+
+        print(f"✅ Successfully generated: {output_path}")
+        print(f"📄 HTML file size: {len(rendered_html)} characters")
+
+        # Step 7: Also copy the CSS file if it doesn't exist
+        import shutil
+        css_source = os.path.join(template_dir, 'style6.css')
+        css_dest = os.path.join(output_dir, 'style6.css')
+
+        if not os.path.exists(css_dest):
+            if os.path.exists(css_source):
+                shutil.copy2(css_source, css_dest)
+                print("📁 Copied style6.css to output_html directory")
+
+        # Generate screenshot
         await generate_image_from_html(output_path, image_path)
-        print("✅ Page 6 (Macro Intelligence) completed successfully")
+        print(f"✅ Template 6 screenshot generated: {image_path}")
+        print("✅ Page 6 completed successfully")
         return True
-    except Exception as screenshot_error:
-        print(f"⚠️ Page 6 HTML generated but screenshot failed: {screenshot_error}")
+
+    except Exception as e:
+        print(f"❌ Page 6 generation error: {str(e)}")
         return False
 
 async def render_page_7():
     """Render page 7: Market Intelligence with L2 AI filtered top 5 news."""
     print("🔄 Rendering Page 7: Market Intelligence (L2 AI Filtered)")
 
-    # Import the generate_7_output function
-    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-    from generate_7_output import generate_macro_intelligence_with_json_conversion
-
-    # Generate high-quality filtered news alerts
-    alerts_result = generate_macro_intelligence_with_json_conversion()
-
-    if not alerts_result['success']:
-        print(f"❌ No market intelligence data available for Page 7: {alerts_result.get('error', 'Unknown error')}")
-        return False
-
-    # Prepare template data
-    from datetime import datetime
-    current_time = datetime.now()
-
-    template_data = {
-        'current_date': current_time.strftime('%d %b, %Y'),
-        'current_time': current_time.strftime('%I:%M:%S %p'),
-        'news_events': alerts_result
-    }
-
-    # Setup Jinja2 template
-    from jinja2 import Environment, FileSystemLoader
-    template_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'base_templates')
-    env = Environment(loader=FileSystemLoader(template_dir))
-    template = env.get_template('7.html')
-
-    # Render HTML
-    rendered_html = template.render(**template_data)
-
-    # Prepare output paths
-    output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
-    image_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_images')
-    output_path = os.path.join(output_dir, "7_output.html")
-    image_path = os.path.join(image_dir, "7_output.jpg")
-
-    # Save HTML
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(rendered_html)
-
-    # Copy CSS file if needed
-    import shutil
-    css_source = os.path.join(template_dir, 'style7.css')
-    css_dest = os.path.join(output_dir, 'style7.css')
-    if not os.path.exists(css_dest) and os.path.exists(css_source):
-        shutil.copy2(css_source, css_dest)
-
-    # Generate screenshot
     try:
+        # Generate high-quality filtered news alerts using the same function as Page 6
+        alerts_result = generate_macro_intelligence_with_json_conversion()
+
+        if not alerts_result['success']:
+            print(f"❌ No market intelligence data available for Page 7: {alerts_result.get('error', 'Unknown error')}")
+            return False
+
+        # Prepare template data
+        from datetime import datetime
+        current_time = datetime.now()
+
+        template_data = {
+            'current_date': current_time.strftime('%d %b, %Y'),
+            'current_time': current_time.strftime('%I:%M:%S %p'),
+            'news_events': alerts_result
+        }
+
+        print(f"📊 Template 7 data prepared:")
+        print(f"   - High-impact alerts: {len(alerts_result['alerts']) if alerts_result['success'] else 0}")
+        print(f"   - Current timestamp: {template_data['current_date']} {template_data['current_time']}")
+
+        # Setup Jinja2 template
+        from jinja2 import Environment, FileSystemLoader
+        template_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'base_templates')
+        env = Environment(loader=FileSystemLoader(template_dir))
+        template = env.get_template('7.html')
+
+        # Render HTML
+        rendered_html = template.render(**template_data)
+
+        # Prepare output paths
+        output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
+        image_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_images')
+        output_path = os.path.join(output_dir, "7_output.html")
+        image_path = os.path.join(image_dir, "7_output.jpg")
+
+        # Save HTML
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(rendered_html)
+
+        print(f"✅ Successfully generated: {output_path}")
+        print(f"📄 HTML file size: {len(rendered_html)} characters")
+
+        # Copy CSS file if needed
+        import shutil
+        css_source = os.path.join(template_dir, 'style7.css')
+        css_dest = os.path.join(output_dir, 'style7.css')
+        if not os.path.exists(css_dest) and os.path.exists(css_source):
+            shutil.copy2(css_source, css_dest)
+            print("📁 Copied style7.css to output_html directory")
+
+        # Generate screenshot
         await generate_image_from_html(output_path, image_path)
+        print(f"✅ Template 7 screenshot generated: {image_path}")
         print(f"✅ Page 7 (L2 AI Market Intelligence) completed successfully")
         print(f"📊 Generated with {len(alerts_result['alerts'])} high-impact alerts")
         return True
-    except Exception as screenshot_error:
-        print(f"⚠️ Page 7 HTML generated but screenshot failed: {screenshot_error}")
+
+    except Exception as e:
+        print(f"❌ Page 7 generation error: {str(e)}")
         return False
 
 async def run_complete_pipeline():

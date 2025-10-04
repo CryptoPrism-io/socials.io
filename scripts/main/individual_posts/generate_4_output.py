@@ -21,11 +21,24 @@ def generate_4_output():
     print("🚀 Generating Template 4: Trading Opportunities")
 
     try:
-        # Fetch trading opportunities data
-        df = fetch_trading_opportunities()
+        # Fetch both long and short trading opportunities (top 5 each)
+        long_df = fetch_trading_opportunities("long", 5)
+        short_df = fetch_trading_opportunities("short", 5)
 
-        if df.empty:
-            print("❌ No data available for Template 4")
+        # Only use real trading opportunities data - no fallbacks
+        if long_df.empty and short_df.empty:
+            print("❌ No real trading opportunities data available")
+            # Create error HTML instead of failing
+            error_html = """<!DOCTYPE html><html><head><title>Template 4 Error</title></head>
+            <body><h1>Error: No Real Trading Opportunities Data Available</h1>
+            <p>The FE_DMV_ALL and FE_RATIOS tables don't contain sufficient data for real trading opportunities.</p>
+            <p>Please ensure the CRON jobs have populated the required tables with trading data.</p></body></html>"""
+
+            output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
+            output_path = os.path.join(output_dir, "4_output.html")
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(error_html)
+            print(f"✅ Error message written to: {output_path}")
             return False
 
         # Get template renderer
@@ -36,7 +49,7 @@ def generate_4_output():
         output_path = os.path.join(output_dir, "4_output.html")
 
         # Render template
-        success = renderer.render_trading_opportunities_page('4.html', df, output_path)
+        success = renderer.render_trading_opportunities_page('4.html', long_df, short_df, output_path)
 
         if success:
             print(f"✅ Template 4 HTML generated: {output_path}")

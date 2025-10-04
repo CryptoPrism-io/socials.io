@@ -10,6 +10,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Minor (x.y.0)**: New features, workflow additions, template enhancements, non-breaking improvements
 - **Patch (x.y.z)**: Bug fixes, documentation updates, configuration tweaks, minor optimizations
 
+## [v2.3.0] - 2025-10-05 (dev2 branch)
+
+### 🚀 MINOR: Template 4 Split Architecture - Long/Short Call Separation & Content Regeneration
+
+### Added
+- **Template 4.1**: New dedicated Long Call Positions template
+  - `scripts/main/individual_posts/generate_4_1_output.py` - Standalone generator for long call opportunities
+  - `output_html/4_1_output.html` - Generated HTML output for long call positions
+  - `output_images/4_1_output.jpg` - Instagram-ready screenshot for long calls
+  - Accessible at: http://127.0.0.1:8080/4_1_output.html
+
+- **Template 4.2**: New dedicated Short Call Positions template
+  - `scripts/main/individual_posts/generate_4_2_output.py` - Standalone generator for short call opportunities
+  - `output_html/4_2_output.html` - Generated HTML output for short call positions
+  - `output_images/4_2_output.jpg` - Instagram-ready screenshot for short calls
+  - Accessible at: http://127.0.0.1:8080/4_2_output.html
+
+- **Local Development Server Enhancement**: Added support for all template variations
+  - Updated `scripts/dev/local_server.py` to serve 10 template outputs (1, 2, 3.1, 3.2, 4, 4.1, 4.2, 5, 6, 7)
+  - Background server capability for continuous development workflow
+  - Proper UTF-8 encoding support for all served files
+
+### Changed
+- **Template 4 Architecture**: Split original Template 4 into three components
+  - **Template 4**: Maintained as original trading opportunities template
+  - **Template 4.1**: Isolated long call positions for focused content
+  - **Template 4.2**: Isolated short call positions for focused content
+  - Better content organization and Instagram posting flexibility
+
+- **Content Regeneration**: Refreshed all templates with current market data (Oct 5, 2025)
+  - **Templates 1-2**: Top cryptocurrency rankings with latest price data
+  - **Templates 3.1-3.2**: Top gainers (+2% or more) and top losers (-2% or more)
+  - **Templates 4, 4.1, 4.2**: Trading opportunities with long/short call positions
+  - **Template 5**: Market overview with 6-category trend analysis (Bullish+)
+  - **Template 6**: Bitcoin + Macro Intelligence with dual-axis Fear & Greed chart
+  - **Template 7**: Market Intelligence with L2 AI filtering system
+
+### Enhanced
+- **CLAUDE.md Documentation**: Updated with Template 4.1 and 4.2 references
+  - Added direct links to new template outputs in local server section
+  - Updated individual post generators documentation
+  - Comprehensive command reference for all 10 templates
+
+- **Template Generation Workflow**: Improved parallel execution capability
+  - All 8 individual post generators can run concurrently
+  - Faster content generation for complete template suite
+  - Consistent HTML + screenshot generation across all templates
+
+### Technical Details
+- **Market Data Context**: Current Bitcoin price integrated at $109,516.69
+- **6-Category Trend Analysis**: Template 5 showing Bullish+ trend (15 bullish vs 3 bearish)
+- **Fear & Greed Range**: 30-day data range from 32-57 (scaled 27.0-62.0)
+- **BTC Price History**: 31 entries covering $109,049-$122,267 range
+- **Macro Intelligence**: Templates 6 and 7 showing 0 macro alerts (current market state)
+
+### Benefits
+✅ **Content Flexibility** - Template 4 split enables focused long/short call content
+✅ **Instagram Optimization** - 10 distinct templates for diverse posting strategy
+✅ **Development Efficiency** - Parallel generation of all templates via batch execution
+✅ **Fresh Market Data** - All templates updated with Oct 5, 2025 market snapshot
+✅ **Local Testing** - Enhanced server for rapid template review and verification
+
+**Commit Hash**: `dde0014`
+
+---
+
 ## [v2.2.0] - 2025-09-27 (dev2 branch)
 
 ### 🎯 MINOR: Enhanced Macro Intelligence with Article Dating & Fresh Data Generation

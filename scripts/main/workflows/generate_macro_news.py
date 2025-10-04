@@ -43,8 +43,8 @@ def convert_macro_report_to_json_python_parsing(macro_report_text):
                 'error': 'No qualifying strategic developments found in last 24 hours'
             }
 
-        # Extract individual developments using regex (now includes date extraction)
-        development_pattern = r'(\d+)\. \*\*(Regulatory Update|Institutional Alert|FOMC Alert|News Alert|Technological Alert|Environmental Alert|Legal Alert|Adoption Alert)\*\*.*?\n.*?-\s+\*\*Development:\*\*(.*?)\n.*?-\s+\*\*Coins/Tokens Affected:\*\*(.*?)\n.*?-\s+\*\*Impact Level:\*\*(.*?)\n.*?-\s+\*\*Strategic Impact:\*\*(.*?)\n.*?-\s+\*\*Post Highlight Potential:\*\*(.*?)\n.*?-\s+\*\*Source:\*\*(.*?)(?=\n\n|\n\d+\.|$)'
+        # Extract individual developments using regex
+        development_pattern = r'(\d+)\. \*\*(Regulatory Update|Institutional Alert|FOMC Alert|News Alert|Technological Alert|Environmental Alert|Legal Alert|Adoption Alert)\*\*.*?\n.*?-\s+\*\*Development:\*\*(.*?)\n.*?-\s+\*\*Coins/Tokens Affected:\*\*(.*?)\n.*?-\s+\*\*Impact Level:\*\*(.*?)\n.*?-\s+\*\*Market Sentiment:\*\*(.*?)\n.*?-\s+\*\*Strategic Impact:\*\*(.*?)\n.*?-\s+\*\*Post Highlight Potential:\*\*(.*?)\n.*?-\s+\*\*Source:\*\*(.*?)(?=\n\n|\n\d+\.|$)'
 
         matches = re.finditer(development_pattern, macro_report_text, re.DOTALL)
 
@@ -54,9 +54,10 @@ def convert_macro_report_to_json_python_parsing(macro_report_text):
                 development_text = match.group(3).strip()
                 coins_affected_text = match.group(4).strip()
                 impact_level_text = match.group(5).strip().split()[0] if len(match.group(5).strip().split()) > 0 else 'Medium'
-                strategic_impact = match.group(6).strip()
-                highlight_potential_text = match.group(7).strip().split()[0] if len(match.group(7).strip().split()) > 0 else 'Medium'
-                source_text = match.group(8).strip()
+                sentiment_text = match.group(6).strip().split()[0] if len(match.group(6).strip().split()) > 0 else 'Neutral'
+                strategic_impact = match.group(7).strip()
+                highlight_potential_text = match.group(8).strip().split()[0] if len(match.group(8).strip().split()) > 0 else 'Medium'
+                source_text = match.group(9).strip()
 
                 # Parse coins affected (extract coin symbols)
                 coin_symbols = []
@@ -103,7 +104,9 @@ def convert_macro_report_to_json_python_parsing(macro_report_text):
                     "tag": tag,
                     "source": source_text,
                     "coins_affected": coin_symbols,
+                    "coin_name": coin_symbols[0] if coin_symbols else 'BTC',
                     "impact_level": impact_level_text,
+                    "sentiment": sentiment_text,
                     "highlight_potential": highlight_potential_text
                 }
 
@@ -176,20 +179,22 @@ Create a detailed market intelligence report covering the TOP 10 most important 
 **TOP STRATEGIC DEVELOPMENTS:**
 
 1. **[CATEGORY]** - [Date: {yesterday.strftime('%b %d, %Y')}]
-   - **Development:** [Detailed description of regulatory/institutional/macro event. MUST end with the exact publication date from the source article: "Published on September 27, 2025"]
+   - **Development:** [Detailed description of regulatory/institutional/macro event]
    - **Coins/Tokens Affected:** [List specific cryptocurrencies impacted - BTC, ETH, SOL, etc.]
    - **Impact Level:** [High/Medium/Low - based on potential market effect]
+   - **Market Sentiment:** [Bullish/Bearish/Neutral - how this affects market sentiment]
    - **Strategic Impact:** [Long-term implications for crypto adoption/regulation]
    - **Post Highlight Potential:** [High/Medium/Low - how newsworthy for social posts]
-   - **Source:** [News source website + exact publication date]
+   - **Source:** [News source website]
 
 2. **[CATEGORY]** - [Date: {yesterday.strftime('%b %d, %Y')}]
-   - **Development:** [Detailed description. MUST end with exact publication date: "Published on September 27, 2025"]
+   - **Development:** [Detailed description]
    - **Coins/Tokens Affected:** [List specific cryptocurrencies impacted]
    - **Impact Level:** [High/Medium/Low]
+   - **Market Sentiment:** [Bullish/Bearish/Neutral]
    - **Strategic Impact:** [Long-term implications]
    - **Post Highlight Potential:** [High/Medium/Low]
-   - **Source:** [News source website + exact publication date]
+   - **Source:** [News source website]
 
 [Continue for all 10 developments]
 
@@ -213,14 +218,10 @@ Create a detailed market intelligence report covering the TOP 10 most important 
 **REQUIRED FIELDS FOR EACH DEVELOPMENT:**
 - **Coins/Tokens Affected**: Always specify which cryptocurrencies are directly impacted (BTC, ETH, SOL, USDT, USDC, ADA, DOT, MATIC, etc.)
 - **Impact Level**: Rate High/Medium/Low based on potential price/adoption effect
+- **Market Sentiment**: Rate Bullish/Bearish/Neutral based on how this news affects overall market sentiment
 - **Post Highlight Potential**: Rate High/Medium/Low based on social media engagement potential
 
-**CRITICAL REQUIREMENTS**:
-1. If you cannot find real macro/strategic news from {date_range}, clearly state "NO QUALIFYING STRATEGIC DEVELOPMENTS FOUND IN LAST 24 HOURS" instead of making up information.
-2. Only report ACTUAL current strategic events with proper date stamps.
-3. **MANDATORY**: Each development description MUST end with the exact publication date from the source article in format: "Published on September 27, 2025" or "Published on Sep 27, 2025".
-4. Include source publication date in the Source field as well.
-5. ALL dates must be from {date_range} period - reject any older news."""
+**CRITICAL**: If you cannot find real macro/strategic news from {date_range}, clearly state "NO QUALIFYING STRATEGIC DEVELOPMENTS FOUND IN LAST 24 HOURS" instead of making up information. Only report ACTUAL current strategic events with proper date stamps."""
 
         print("🔍 Step 1: Generating rich macro intelligence report...")
         macro_result = client.chat_completion(

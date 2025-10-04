@@ -88,9 +88,12 @@ class TemplateRenderer:
         gainers_data = gainers_df.to_dict(orient='records') if not gainers_df.empty else []
         losers_data = losers_df.to_dict(orient='records') if not losers_df.empty else []
 
+        datetime_info = self.get_current_datetime()
+
         context = {
             'coin1': losers_data,  # Top losers
-            'coin2': gainers_data  # Top gainers
+            'coin2': gainers_data,  # Top gainers
+            **datetime_info  # Include current_date and current_time
         }
 
         content = self.render_template(template_name, context)
@@ -101,9 +104,40 @@ class TemplateRenderer:
         long_positions = long_df.to_dict(orient='records') if not long_df.empty else []
         short_positions = short_df.to_dict(orient='records') if not short_df.empty else []
 
+        datetime_info = self.get_current_datetime()
+
         context = {
             'coins1': long_positions,
-            'coins2': short_positions
+            'coins2': short_positions,
+            **datetime_info  # Include current_date and current_time
+        }
+
+        content = self.render_template(template_name, context)
+        return self.save_rendered_html(content, output_path)
+
+    def render_long_positions_page(self, template_name, long_df, left_positions, right_positions, output_path):
+        """Render a long positions only page with 2-column layout."""
+        datetime_info = self.get_current_datetime()
+
+        context = {
+            'positions': long_df.to_dict(orient='records') if not long_df.empty else [],
+            'left_positions': left_positions,
+            'right_positions': right_positions,
+            **datetime_info  # Include current_date and current_time
+        }
+
+        content = self.render_template(template_name, context)
+        return self.save_rendered_html(content, output_path)
+
+    def render_short_positions_page(self, template_name, short_df, left_positions, right_positions, output_path):
+        """Render a short positions only page with 2-column layout."""
+        datetime_info = self.get_current_datetime()
+
+        context = {
+            'positions': short_df.to_dict(orient='records') if not short_df.empty else [],
+            'left_positions': left_positions,
+            'right_positions': right_positions,
+            **datetime_info  # Include current_date and current_time
         }
 
         content = self.render_template(template_name, context)
@@ -139,8 +173,15 @@ class TemplateRenderer:
         """Render Bitcoin snapshot page with news and events."""
         datetime_info = self.get_current_datetime()
 
+        # Convert btc_data to the format expected by the template
+        if not btc_data.empty:
+            # The template expects 'snaps' as a dictionary with direct access to properties
+            snaps_dict = btc_data.iloc[0].to_dict() if len(btc_data) > 0 else {}
+        else:
+            snaps_dict = {}
+
         context = {
-            'snap': btc_data.to_dict(orient='records') if not btc_data.empty else [],
+            'snaps': snaps_dict,  # Changed from 'snap' to 'snaps' and pass as dict
             'news_events': news_events,
             **datetime_info
         }
