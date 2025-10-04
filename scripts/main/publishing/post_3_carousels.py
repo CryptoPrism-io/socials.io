@@ -85,13 +85,13 @@ class ThreeCarouselPoster:
 
             prompts = {
                 "Carousel 1": """Create an engaging Instagram caption for a crypto carousel with 3 slides:
-1. Market Intelligence (AI-filtered top crypto news)
+1. Bitcoin + Macro Intelligence (Fear & Greed Index + BTC price data)
 2. Top Cryptocurrencies (ranks 2-24)
 3. Extended Cryptocurrencies (ranks 25-48)
 
 Caption should:
 - Be professional but engaging
-- Mention comprehensive market overview
+- Mention Bitcoin focus and comprehensive market overview
 - Include 3-5 relevant hashtags
 - Be under 150 characters
 - Include 1-2 emojis
@@ -154,13 +154,13 @@ Just return the caption, nothing else."""
     def _get_default_caption(self, carousel_name: str) -> str:
         """Get default captions for each carousel"""
         captions = {
-            "Carousel 1": """📊 Complete Crypto Market Overview
+            "Carousel 1": """📊 Bitcoin Intelligence + Market Overview
 
-🔍 AI-Filtered Market Intelligence
+🪙 Bitcoin + Macro Intelligence
 💎 Top 48 Cryptocurrencies
-📈 Real-time Market Data
+📈 Fear & Greed Index + Real-time Data
 
-#crypto #bitcoin #cryptocurrency #marketanalysis #trading""",
+#bitcoin #crypto #cryptocurrency #marketanalysis #trading""",
 
             "Carousel 2": """🚀 Today's Biggest Movers
 
@@ -222,9 +222,9 @@ Just return the caption, nothing else."""
         carousels = [
             {
                 "name": "Carousel 1",
-                "description": "Market Intelligence + Top Cryptos",
+                "description": "Bitcoin Intelligence + Top Cryptos",
                 "images": [
-                    str(output_dir / "7_output.jpg"),  # Market Intelligence
+                    str(output_dir / "6_output.jpg"),  # Bitcoin + Macro Intelligence
                     str(output_dir / "1_output.jpg"),  # Top Cryptos 2-24
                     str(output_dir / "2_output.jpg"),  # Extended Cryptos 25-48
                 ]

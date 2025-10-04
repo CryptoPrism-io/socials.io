@@ -43,7 +43,7 @@ jobs:
         python scripts/main/individual_posts/generate_3_2_output.py
         python scripts/main/individual_posts/generate_4_1_output.py
         python scripts/main/individual_posts/generate_4_2_output.py
-        python scripts/main/individual_posts/generate_7_output.py
+        python scripts/main/individual_posts/generate_6_output.py
       env:
         PYTHONIOENCODING: utf-8
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
