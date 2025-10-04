@@ -1,0 +1,2682 @@
+/* 🎨 Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 2160px;
+    height: 2700px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* Font families for different content types */
+.numeric {
+    font-family: 'Inter', sans-serif !important;
+}
+
+.text-content {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* 🔥 Darker CSS Background */
+body {
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #050505 70%, #000000 100%);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+/* 🌟 Static Styling - No Animations */
+
+/* 📱 Main Page Container */
+.main-container {
+    width: 2160px;
+    height: 2700px;
+<<<<<<< HEAD:core_templates/style6.css
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+=======
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+>>>>>>> dev2:output_html/style6.css
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 🚀 Bitcoin Dashboard Card */
+.btc-dashboard-card {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 56px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
+
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.4),
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15);
+
+<<<<<<< HEAD:core_templates/style6.css
+    padding: 70px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+=======
+    padding: 90px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+>>>>>>> dev2:output_html/style6.css
+    flex-shrink: 0;
+}
+
+/* 📊 Market Data Cards */
+.market-card {
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 48px;
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 0 12px rgba(255, 255, 255, 0.09),
+        0 0 24px rgba(255, 255, 255, 0.045),
+        0 16px 64px rgba(0, 0, 0, 0.4),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2);
+
+    padding: 0;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+/* 🎯 Market Dominance Section - Primary Focus */
+.dominance-section {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.dominance-card {
+    padding: 60px 80px;
+}
+
+/* 📊 Market Dominance Tree Map */
+.dominance-treemap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.treemap-cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-right: 0.5px solid rgba(255, 255, 255, 0.05);
+    z-index: 2;
+}
+
+.treemap-cell:last-child {
+    border-right: none;
+}
+
+.treemap-cell:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+.btc-cell {
+    background: linear-gradient(135deg,
+        #F7931A 0%,
+        #E8841A 50%,
+        #D9751A 100%);
+    box-shadow:
+        0 0 25px rgba(247, 147, 26, 0.5),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+/* Dark overlay covering the entire treemap container */
+.treemap-container {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+/* Dark glassmorphism overlay covering entire treemap */
+.treemap-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.eth-cell {
+    background: linear-gradient(135deg,
+        #627EEA 0%,
+        #5A72E1 50%,
+        #5266D8 100%);
+    box-shadow:
+        0 0 25px rgba(98, 126, 234, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+.others-cell {
+    background: linear-gradient(135deg,
+        #8E9AAF 0%,
+        #7F8CA6 50%,
+        #707E9D 100%);
+    box-shadow:
+        0 0 25px rgba(142, 154, 175, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.15);
+}
+
+.cell-content {
+    text-align: center;
+    color: white;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 0;
+    border: none;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Cell header with logo and label */
+.cell-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+/* Cryptocurrency logos */
+.cell-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Others icon styling */
+.others-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Percentage change styling */
+.cell-change {
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 0;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Color coding for percentage changes */
+.cell-change.positive {
+    color: #00FF88;
+}
+
+.cell-change.negative {
+    color: #FF4757;
+}
+
+.cell-label {
+    font-size: 36px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
+}
+
+.cell-percentage {
+    font-size: 48px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    font-family: 'Inter', sans-serif;
+}
+
+/* 📊 Enhanced Indicators Section - Horizontal Layout */
+.indicators-section {
+    display: flex;
+    gap: 90px;
+    width: 100%;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.fear-greed-container.enhanced,
+.altseason-container.enhanced {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    padding: 50px 40px;
+    border: 0.5px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 0 4.5px rgba(255, 255, 255, 0.06),
+        0 0 9px rgba(255, 255, 255, 0.03);
+}
+
+.speedometer-circle.enhanced {
+    width: 180px;
+    height: 90px;
+    border-radius: 180px 180px 0 0;
+}
+
+.speedometer-circle.enhanced .speedometer-needle {
+    height: 85px;
+}
+
+.speedometer-labels {
+    width: 180px;
+}
+
+.bullet-background.enhanced {
+    width: 360px;
+    height: 52px;
+}
+
+/* 📋 Compact Global Overview */
+.global-overview-compact {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.market-card.compact {
+    padding: 15px 25px;
+}
+
+.compact-overview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.overview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.overview-label {
+    font-size: 44px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.overview-value {
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 📋 Header Section with Branding and Last Update */
+.dashboard-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+<<<<<<< HEAD:core_templates/style6.css
+    padding-bottom: 20px;
+=======
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+>>>>>>> dev2:output_html/style6.css
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crypto-prism-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.prism-triangle {
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid #ff6b35;
+    filter: drop-shadow(0 4px 8px rgba(255, 107, 53, 0.4));
+}
+
+.brand-text {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 1.875rem; /* 30px */
+=======
+    font-size: 2.5rem; /* 40px */
+>>>>>>> dev2:output_html/style6.css
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    letter-spacing: 1.5px;
+}
+
+.last-update {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+.last-update-label {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 1.5rem; /* 24px */
+=======
+    font-size: 1.875rem; /* 30px */
+>>>>>>> dev2:output_html/style6.css
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.last-update-date {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 2rem; /* 32px */
+=======
+    font-size: 2.5rem; /* 40px */
+>>>>>>> dev2:output_html/style6.css
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+}
+.last-update-time {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 1.75rem; /* 28px */
+=======
+    font-size: 2.25rem; /* 36px */
+>>>>>>> dev2:output_html/style6.css
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Inter', sans-serif;
+}
+/* Bottom datetime styles no longer needed at bottom card */
+
+/* 🪙 Main BTC Information Section */
+.btc-main-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 80px;
+=======
+    gap: 120px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.btc-identity {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex: 1;
+}
+
+.btc-logo-container {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.btc-logo-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.btc-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.btc-symbol {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 3.5rem; /* 56px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btc-price {
+    font-size: 5.25rem; /* 84px */
+=======
+    font-size: 4.5rem; /* 72px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+.btc-price {
+    font-size: 6rem; /* 96px */
+>>>>>>> dev2:output_html/style6.css
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-clip: text;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
+<<<<<<< HEAD:core_templates/style6.css
+=======
+    line-height: 1.1;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.market-data-grid {
+    display: flex;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 60px;
+=======
+    gap: 80px;
+>>>>>>> dev2:output_html/style6.css
+    flex: 1;
+    justify-content: center;
+}
+
+.market-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.market-label {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 1.875rem; /* 30px */
+=======
+    font-size: 2.25rem; /* 36px */
+>>>>>>> dev2:output_html/style6.css
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+<<<<<<< HEAD:core_templates/style6.css
+}
+
+.market-value {
+    font-size: 2.75rem; /* 44px */
+=======
+    margin-bottom: 8px;
+}
+
+.market-value {
+    font-size: 3.5rem; /* 56px */
+>>>>>>> dev2:output_html/style6.css
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+}
+
+/* 📊 Performance and Sentiment Section */
+.performance-sentiment-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 80px;
+    padding-top: 40px;
+=======
+    gap: 100px;
+    padding-top: 60px;
+>>>>>>> dev2:output_html/style6.css
+    border-top: 0.5px solid rgba(255, 255, 255, 0.03);
+}
+
+/* 📊 Market Data Section - Side by Side Layout */
+.market-data-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    border-radius: 20px;
+    border: 0.5px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 40px rgba(255, 255, 255, 0.15),
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.performance-container, .sentiment-container, .trend-container, .fear-greed-container, .altseason-container {
+    flex: 1;
+}
+
+.dominance-container, .total-market-container {
+    flex: 1;
+}
+
+.performance-title, .sentiment-title, .trend-title, .fear-greed-title, .altseason-title {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 2.125rem; /* 34px */
+=======
+    font-size: 2.75rem; /* 44px */
+>>>>>>> dev2:output_html/style6.css
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+<<<<<<< HEAD:core_templates/style6.css
+    margin-bottom: 24px;
+=======
+    margin-bottom: 35px;
+>>>>>>> dev2:output_html/style6.css
+    text-align: center;
+}
+
+.performance-items {
+    display: flex;
+    justify-content: center;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 15px;
+=======
+    gap: 25px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.perf-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 4px;
+=======
+    gap: 10px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.perf-value {
+    font-size: 2.5rem; /* 40px */
+    font-weight: 700;
+<<<<<<< HEAD:core_templates/style6.css
+    padding: 12px 24px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    min-width: 130px;
+=======
+    padding: 20px 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    min-width: 150px;
+>>>>>>> dev2:output_html/style6.css
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.perf-label {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 44px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+=======
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 8px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.sentiment-items {
+    display: flex;
+    justify-content: center;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 15px;
+=======
+    gap: 25px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.sentiment-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 4px;
+}
+
+.sentiment-count {
+    font-size: 56px;
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 8px currentColor;
+    font-family: 'Inter', sans-serif;
+}
+
+.sentiment-label {
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+=======
+    gap: 10px;
+}
+
+.sentiment-count {
+    font-size: 64px;
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 8px currentColor;
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+}
+
+.sentiment-label {
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 8px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.trend-container {
+    text-align: center;
+}
+
+.trend-value {
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 56px;
+=======
+    font-size: 64px;
+>>>>>>> dev2:output_html/style6.css
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+<<<<<<< HEAD:core_templates/style6.css
+=======
+    line-height: 1;
+>>>>>>> dev2:output_html/style6.css
+}
+
+/* 📊 Fear & Greed Index Styling */
+/* 🌡️ Fear & Greed Speedometer */
+/* 📊 Fear & Greed Rainbow Chart */
+.fear-greed-bullet-chart {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fear-greed-background {
+    position: relative;
+    width: 312px;
+    height: 46px;
+    background: linear-gradient(to right,
+        #dc2626 0%,      /* Zone 1: Extreme Fear (0-20) - Red */
+        #dc2626 20%,
+        #ea580c 20%,     /* Zone 2: Fear (20-40) - Orange */
+        #ea580c 40%,
+        #eab308 40%,     /* Zone 3: Neutral (40-60) - Yellow */
+        #eab308 60%,
+        #65a30d 60%,     /* Zone 4: Greed (60-80) - Light Green */
+        #65a30d 80%,
+        #16a34a 80%,     /* Zone 5: Extreme Greed (80-100) - Green */
+        #16a34a 100%
+    );
+    border-radius: 12px;
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.fear-greed-background.enhanced {
+    width: 360px;
+    height: 52px;
+}
+
+.fear-greed-background::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border-radius: 9px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.fear-greed-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    border-radius: 12px;
+    min-width: 3px;
+    box-shadow:
+        0 0 12px rgba(255, 255, 255, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fear-greed-ticks {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.fear-tick {
+    position: absolute;
+    top: -8px;
+    width: 2px;
+    height: 39px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 1px;
+}
+
+.fear-tick-0 {
+    left: 0%;
+}
+
+.fear-tick-20 {
+    left: 20%;
+}
+
+.fear-tick-40 {
+    left: 40%;
+}
+
+.fear-tick-60 {
+    left: 60%;
+}
+
+.fear-tick-80 {
+    left: 80%;
+}
+
+.fear-tick-100 {
+    left: 100%;
+    transform: translateX(-100%);
+}
+
+.fear-greed-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 312px;
+    margin-top: 8px;
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.label-extreme-fear {
+    color: #dc2626;
+}
+
+.label-fear {
+    color: #ea580c;
+}
+
+.label-neutral {
+    color: #eab308;
+}
+
+.label-greed {
+    color: #65a30d;
+}
+
+.label-extreme-greed {
+    color: #16a34a;
+}
+
+.fear-greed-value {
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.fear-greed-label {
+    font-size: 44px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+/* 📍 Fear & Greed Indicator Line */
+.fear-greed-indicator {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    z-index: 10;
+}
+
+/* 📊 Altseason Bullet Chart */
+.altseason-bullet-chart {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bullet-background {
+    position: relative;
+    width: 156px;
+    height: 23px;
+    background: linear-gradient(to right,
+        rgba(255, 77, 77, 0.25) 0%,      /* Red zone (0-100) */
+        rgba(255, 77, 77, 0.25) 66.67%,
+        rgba(51, 204, 51, 0.25) 66.67%,  /* Green zone (100-150) */
+        rgba(51, 204, 51, 0.25) 100%
+    );
+    border-radius: 12px;
+    border: 0.5px solid rgba(255, 255, 255, 0.04);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.bullet-background::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    right: 1px;
+    bottom: 1px;
+    border-radius: 9px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.bullet-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(to right,
+        #ff3030 0%,      /* Bright red for values below 100 */
+        #ff4d4d 33%,
+        #ff6b35 66.67%,
+        #33cc33 66.67%,  /* Green for values above 100 */
+        #28a745 100%     /* Deep green */
+    );
+    border-radius: 9px;
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    transition: width 0.5s ease;
+}
+
+.bullet-threshold {
+    position: absolute;
+    top: -4px;
+    left: 66.67%; /* 100/150 = 66.67% */
+    width: 4px;
+    height: 31px;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.9) 100%
+    );
+    border-radius: 2px;
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.8),
+        0 0 16px rgba(255, 255, 255, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.bullet-threshold::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 4px solid rgba(255, 255, 255, 0.9);
+}
+
+.bullet-threshold::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 4px solid rgba(255, 255, 255, 0.9);
+}
+
+.bullet-ticks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.bullet-tick {
+    position: absolute;
+    top: -5px;
+    width: 1.5px;
+    height: 33px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 0.75px;
+}
+
+.bullet-tick-25 {
+    left: 16.67%; /* 25/150 */
+}
+
+.bullet-tick-50 {
+    left: 33.33%; /* 50/150 */
+}
+
+.bullet-tick-75 {
+    left: 50%; /* 75/150 */
+}
+
+.bullet-tick-100 {
+    left: 66.67%; /* 100/150 */
+    background: rgba(255, 255, 255, 0.6);
+    width: 3px;
+}
+
+.bullet-tick-125 {
+    left: 83.33%; /* 125/150 */
+}
+
+.bullet-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 156px;
+    margin-top: 6px;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.label-start {
+    color: #ff4d4d;
+}
+
+.label-threshold {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+}
+
+.label-end {
+    color: #33cc33;
+}
+
+.altseason-value {
+    font-size: 44px;
+    font-weight: 700;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+}
+
+.altseason-status {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* 📍 Altseason Indicator Line */
+.altseason-indicator {
+    position: absolute;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    z-index: 10;
+}
+
+/* Color Classes */
+.bearish-count { color: #ff4444; }
+.neutral-count { color: #ffb338; }
+.bullish-count { color: #00ff88; }
+
+.positive { color: #00ff88; }
+.negative { color: #ff4444; }
+.consolidating { color: #ff9500; }
+
+/* 🎯 Coin Grid Layout */
+<<<<<<< HEAD:core_templates/style6.css
+=======
+
+/* Color mappings for Fear & Greed Y-axis labels (left) */
+.fear-greed-extreme { fill: #16a34a; }
+.fear-greed-high { fill: #2ecc71; }
+.fear-greed-neutral { fill: #f59e0b; }
+.fear-greed-low { fill: #e11d48; }
+.fear-greed-extreme-low { fill: #991b1b; }
+
+/* BTC price right axis labels */
+.y-axis-label.btc-label { fill: #1E90FF; font-size: 0.875rem; }
+>>>>>>> dev2:output_html/style6.css
+.coin-grid {
+    position: absolute;
+    top: 420px;
+    left: 50px;
+    right: 50px;
+    bottom: 80px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* 💎 Individual Coin Cards */
+.coin-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px) saturate(150%);
+    -webkit-backdrop-filter: blur(15px) saturate(150%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 4px 16px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.coin-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 6px 24px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.coin-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.coin-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.coin-logo img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.coin-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.coin-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.coin-change {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.coin-prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.coin-price {
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.coin-mcap {
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+/* ⏰ Date and Time Styling */
+.date {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+}
+
+.time {
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 💰 Market Data Styling */
+.pct-change {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 60px;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.pct-change.positive {
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.15);
+    border-color: rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.pct-change.negative {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.15);
+    border-color: rgba(255, 68, 68, 0.3);
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+}
+
+/* 📊 Dominance Section Styling */
+.dominance-container {
+    padding: 25px;
+}
+
+.dominance-title {
+    font-size: 44px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+}
+
+.dominance-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.dominance-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.dominance-label {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dominance-value {
+    font-size: 20px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* 🌐 Total Market Section Styling */
+.total-market-container {
+    padding: 25px;
+}
+
+.total-market-title {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.total-market-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.market-metric-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.metric-label {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.metric-value {
+    font-size: 31px;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
+}
+
+/* 🎯 Market Segments Section Styling */
+.market-segments-container {
+    padding: 25px;
+}
+
+.segments-title {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+.segments-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.segment-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.segment-label {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.segment-value {
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* ⏰ Date Time Container */
+.datetime-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding: 20px 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 📰 Bitcoin News & Events Section */
+.bitcoin-news-section {
+    display: flex;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 30px;
+    margin-top: 30px;
+=======
+    gap: 60px;
+    margin-top: 60px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.news-card {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(20px);
+<<<<<<< HEAD:core_templates/style6.css
+    border-radius: 25px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+=======
+    border-radius: 35px;
+    padding: 70px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    min-height: 700px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.news-title {
+    font-family: 'Poppins', sans-serif;
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 18px;
+=======
+    font-size: 56px;
+>>>>>>> dev2:output_html/style6.css
+    font-weight: 700;
+    color: #F7931A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+<<<<<<< HEAD:core_templates/style6.css
+    margin-bottom: 20px;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(247, 147, 26, 0.3);
+=======
+    margin-bottom: 50px;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(247, 147, 26, 0.3);
+    line-height: 1.2;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.news-items {
+    display: flex;
+    flex-direction: column;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 12px;
+=======
+    gap: 50px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+=======
+    gap: 35px;
+    font-family: 'Inter', sans-serif;
+    padding: 25px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+}
+
+.news-item:hover {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 15px;
+    padding: 25px 20px;
+    margin: 0 -20px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+.news-bullet {
+    color: #F7931A;
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 2px;
+    min-width: 16px;
+}
+
+.news-text {
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+=======
+    font-size: 60px;
+    font-weight: 700;
+    margin-top: 6px;
+    min-width: 60px;
+    flex-shrink: 0;
+}
+
+.news-text {
+    font-size: 52px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+>>>>>>> dev2:output_html/style6.css
+}
+
+/* Different bullet color for next 24h events */
+.news-card:nth-child(2) .news-bullet {
+    color: #FFC107;
+}
+
+<<<<<<< HEAD:core_templates/style6.css
+=======
+/* Remove bottom border from last news item */
+.news-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* Improve news card hover effect */
+.news-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+/* Add visual distinction for different card types */
+.news-card:first-child {
+    border-left: 3px solid #F7931A;
+}
+
+.news-card:last-child {
+    border-left: 3px solid #FFC107;
+}
+
+>>>>>>> dev2:output_html/style6.css
+/* 👆 Swipe Left Indicator */
+.swipe-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+<<<<<<< HEAD:core_templates/style6.css
+    gap: 12px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding: 15px 25px;
+    background: rgba(247, 147, 26, 0.1);
+    border-radius: 50px;
+=======
+    gap: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding: 25px 40px;
+    background: rgba(247, 147, 26, 0.1);
+    border-radius: 60px;
+>>>>>>> dev2:output_html/style6.css
+    border: 1px solid rgba(247, 147, 26, 0.2);
+    backdrop-filter: blur(10px);
+    animation: swipePulse 2s ease-in-out infinite;
+}
+
+.swipe-text {
+    font-family: 'Inter', sans-serif;
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 16px;
+=======
+    font-size: 28px;
+>>>>>>> dev2:output_html/style6.css
+    font-weight: 600;
+    color: #F7931A;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.swipe-arrow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.arrow-line {
+    width: 20px;
+    height: 2px;
+    background: #F7931A;
+    border-radius: 1px;
+    animation: arrowSlide 2s ease-in-out infinite;
+}
+
+.arrow-tip {
+    font-size: 24px;
+    font-weight: 700;
+    color: #F7931A;
+    line-height: 1;
+    animation: arrowBounce 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes swipePulse {
+    0%, 100% {
+        background: rgba(247, 147, 26, 0.1);
+        border-color: rgba(247, 147, 26, 0.2);
+    }
+    50% {
+        background: rgba(247, 147, 26, 0.15);
+        border-color: rgba(247, 147, 26, 0.3);
+    }
+}
+
+@keyframes arrowSlide {
+    0%, 100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(8px);
+        opacity: 0.7;
+    }
+}
+
+@keyframes arrowBounce {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(4px);
+    }
+}
+
+/* 📝 Footer */
+.footer-container {
+    text-align: center;
+<<<<<<< HEAD:core_templates/style6.css
+    font-size: 30px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+=======
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-top: 30px;
+    padding: 20px 0;
+}
+
+/* News Paragraph Format Styles */
+.news-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.news-paragraph {
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-align: justify;
+    padding: 20px 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* News bullet and items styling (enabled for display) */
+.news-bullet {
+    color: #F7931A;
+    font-size: 60px;
+    font-weight: 700;
+    margin-top: 6px;
+    min-width: 60px;
+    flex-shrink: 0;
+}
+
+.news-items {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+
+
+/* Unified News Card Styling */
+.news-card.unified {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+}
+
+/* Visual Emphasis Styles for Important Keywords */
+.highlight-bullish {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    color: #000;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-shadow: none;
+    box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+}
+
+.price-highlight {
+    background: linear-gradient(135deg, #F7931A, #ff6b35);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 800;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(247, 147, 26, 0.4);
+}
+
+.institutional-highlight {
+    background: rgba(138, 43, 226, 0.8);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 1px solid rgba(138, 43, 226, 0.6);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.volume-highlight {
+    background: linear-gradient(135deg, #ff4757, #ff3742);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(255, 71, 87, 0.3);
+}
+
+.key-metric {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.positive-indicator {
+    background: linear-gradient(135deg, #32cd32, #228b22);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(50, 205, 50, 0.3);
+}
+
+.whale-activity {
+    background: linear-gradient(135deg, #4169e1, #1e3a8a);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(65, 105, 225, 0.3);
+}
+
+.resistance-level {
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #000;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-shadow: none;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+}
+
+.critical-point {
+    background: linear-gradient(135deg, #dc143c, #b22222);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(220, 20, 60, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.risk-factor {
+    background: rgba(255, 165, 0, 0.8);
+    color: #000;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 165, 0, 0.6);
+    text-shadow: none;
+}
+
+.market-catalyst {
+    background: linear-gradient(135deg, #9370db, #663399);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 8px rgba(147, 112, 219, 0.3);
+}
+
+/* Pulse animation for critical points */
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(220, 20, 60, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 4px 16px rgba(220, 20, 60, 0.6);
+        transform: scale(1.02);
+    }
+}
+
+/* Error Container Styling */
+.news-error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    background: rgba(220, 53, 69, 0.1);
+    border: 2px solid rgba(220, 53, 69, 0.3);
+    border-radius: 24px;
+    text-align: center;
+    min-height: 400px;
+}
+
+.error-icon {
+    font-size: 120px;
+    margin-bottom: 30px;
+    filter: grayscale(50%);
+}
+
+.error-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.error-message {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 30px;
+    line-height: 1.4;
+    max-width: 80%;
+}
+
+.error-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    max-width: 70%;
+    line-height: 1.5;
+}
+
+/* Enhanced paragraph spacing for readability */
+.news-paragraph {
+    line-height: 1.8;
+    letter-spacing: 0.4px;
+}
+
+/* Hover effects for highlighted elements */
+.highlight-bullish:hover,
+.price-highlight:hover,
+.institutional-highlight:hover,
+.volume-highlight:hover,
+.key-metric:hover,
+.positive-indicator:hover,
+.whale-activity:hover,
+.resistance-level:hover,
+.critical-point:hover,
+.risk-factor:hover,
+.market-catalyst:hover {
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+
+
+/* Analysis Table Structure */
+.analysis-table {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.analysis-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.analysis-row:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Category Labels */
+.category-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 300px;
+    flex-shrink: 0;
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 32px;
+}
+
+.category-icon {
+    font-size: 36px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.category-name {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* Category-specific styling */
+.price-category {
+    background: linear-gradient(135deg, #F7931A, #ff6b35);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(247, 147, 26, 0.3);
+}
+
+.sentiment-category {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.institutional-category {
+    background: linear-gradient(135deg, #8A2BE2, #663399);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+.whale-category {
+    background: linear-gradient(135deg, #4169E1, #1e3a8a);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(65, 105, 225, 0.3);
+}
+
+.critical-category {
+    background: linear-gradient(135deg, #DC143C, #b22222);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+}
+
+.risk-category {
+    background: linear-gradient(135deg, #FF8C00, #ff6b35);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+}
+
+/* Category Content */
+.category-content {
+    flex: 1;
+    font-size: 38px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    padding: 10px 0;
+    letter-spacing: 0.3px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 1200px) {
+    .analysis-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .category-label {
+        min-width: auto;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .category-content {
+        text-align: center;
+    }
+}
+
+
+
+/* New 3-Card Analysis Layout */
+.analysis-table-new {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.analysis-card {
+    background: rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(25px) saturate(150%);
+    border-radius: 25px;
+    padding: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.analysis-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Category Headers */
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.category-icon {
+    font-size: 48px;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+}
+
+.category-name {
+    font-family: 'Poppins', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.category-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: auto;
+    font-style: italic;
+}
+
+/* Data Points */
+.category-content-multi {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.data-point {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border-left: 4px solid;
+}
+
+.data-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.data-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sentiment-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+}
+
+/* Card-specific styling */
+.vibes-card {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 200, 255, 0.05));
+    border-left: 5px solid #007bff;
+}
+
+.vibes-card .category-name {
+    color: #00bfff;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.vibes-card .data-point {
+    border-left-color: #007bff;
+}
+
+.giants-card {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(75, 0, 130, 0.05));
+    border-left: 5px solid #8a2be2;
+}
+
+.giants-card .category-name {
+    color: #9370db;
+    text-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
+}
+
+.giants-card .data-point {
+    border-left-color: #8a2be2;
+}
+
+.catalysts-card {
+    background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 69, 0, 0.05));
+    border-left: 5px solid #ff8c00;
+}
+
+.catalysts-card .category-name {
+    color: #ff8c00;
+    text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+}
+
+.catalysts-card .data-point {
+    border-left-color: #ff8c00;
+}
+
+/* 📰 Bitcoin News & Events Section */
+.bitcoin-news-section {
+    display: flex;
+    gap: 60px;
+    margin-top: 60px;
+}
+
+.news-card {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(20px);
+    border-radius: 35px;
+    padding: 70px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    min-height: 500px;
+}
+
+.news-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #F7931A;
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(247, 147, 26, 0.3);
+    line-height: 1.2;
+    margin-bottom: 50px;
+}
+
+.news-items {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    font-family: 'Inter', sans-serif;
+    padding: 20px 0;
+}
+
+.news-bullet {
+    color: #F7931A;
+    font-size: 50px;
+    font-weight: 700;
+    margin-top: 6px;
+    min-width: 50px;
+    flex-shrink: 0;
+}
+
+.news-text {
+    font-size: 40px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Different bullet color for next 24h events */
+.news-card:nth-child(2) .news-bullet {
+    color: #FFC107;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 1200px) {
+    .category-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .category-subtitle {
+        margin-left: 0;
+    }
+
+    .data-point {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* Sentiment Impact Color Styling */
+.sentiment-impact {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sentiment-bullish {
+    background: linear-gradient(135deg, #00C851 0%, #007E33 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 200, 81, 0.4);
+}
+
+.sentiment-bearish {
+    background: linear-gradient(135deg, #FF4444 0%, #CC0000 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+}
+
+.sentiment-neutral {
+    background: linear-gradient(135deg, #FF9500 0%, #FF6F00 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 149, 0, 0.4);
+}
+
+/* 📈 Fear & Greed Index Chart Section */
+.fear-greed-chart-section {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 56px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.4),
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15);
+    padding: 60px 70px;
+    margin-top: 40px;
+    flex-shrink: 0;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-title {
+    font-size: 3.75rem; /* 60px */
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.current-index {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.current-value {
+    font-size: 4.5rem; /* 72px */
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+}
+
+.current-label {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Fear/Greed label colors */
+.fear-greed-extreme-fear {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+.fear-greed-fear {
+    background: linear-gradient(135deg, #ea580c, #c2410c);
+    color: white;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.4);
+}
+
+.fear-greed-neutral {
+    background: linear-gradient(135deg, #eab308, #ca8a04);
+    color: #000;
+    box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4);
+}
+
+.fear-greed-greed {
+    background: linear-gradient(135deg, #65a30d, #4d7c0f);
+    color: white;
+    box-shadow: 0 4px 12px rgba(101, 163, 13, 0.4);
+}
+
+.fear-greed-extreme-greed {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+}
+
+/* Chart container layout */
+.chart-container {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.chart-wrapper {
+    display: flex;
+    position: relative;
+    height: 400px;
+}
+
+.y-axis-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 180px;
+    height: 300px;
+    padding-right: 20px;
+    font-size: 1.5rem; /* 24px */
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+}
+
+.y-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 12px;
+    margin: 5px 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.y-value {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.25rem; /* 20px */
+}
+
+/* Zone-specific y-axis styling */
+.extreme-greed-zone {
+    background: rgba(22, 163, 74, 0.2);
+    border-color: rgba(22, 163, 74, 0.3);
+    color: #16a34a;
+}
+
+.greed-zone {
+    background: rgba(101, 163, 13, 0.2);
+    border-color: rgba(101, 163, 13, 0.3);
+    color: #65a30d;
+}
+
+.neutral-zone {
+    background: rgba(234, 179, 8, 0.2);
+    border-color: rgba(234, 179, 8, 0.3);
+    color: #eab308;
+}
+
+.fear-zone {
+    background: rgba(234, 88, 12, 0.2);
+    border-color: rgba(234, 88, 12, 0.3);
+    color: #ea580c;
+}
+
+.extreme-fear-zone {
+    background: rgba(220, 38, 38, 0.2);
+    border-color: rgba(220, 38, 38, 0.3);
+    color: #dc2626;
+}
+
+/* Chart area with background zones */
+.chart-area {
+    position: relative;
+    flex: 1;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.zone-background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 0.3;
+}
+
+.extreme-greed-bg {
+    top: 0;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(22, 163, 74, 0.4), rgba(22, 163, 74, 0.2));
+}
+
+.greed-bg {
+    top: 20%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(101, 163, 13, 0.4), rgba(101, 163, 13, 0.2));
+}
+
+.neutral-bg {
+    top: 40%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(234, 179, 8, 0.4), rgba(234, 179, 8, 0.2));
+}
+
+.fear-bg {
+    top: 60%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(234, 88, 12, 0.4), rgba(234, 88, 12, 0.2));
+}
+
+.extreme-fear-bg {
+    top: 80%;
+    height: 20%;
+    background: linear-gradient(to bottom, rgba(220, 38, 38, 0.4), rgba(220, 38, 38, 0.2));
+}
+
+/* SVG chart styling */
+.fear-greed-chart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* Price axis */
+.price-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 120px;
+    height: 300px;
+    padding-left: 20px;
+    font-size: 1.125rem; /* 18px */
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+}
+
+.price-axis-title {
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #ff6b35, #f7931a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.price-label {
+    position: absolute;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    color: #f7931a;
+    font-weight: 700;
+    font-size: 0.875rem; /* 14px */
+    transform: translateY(-50%);
+}
+
+/* X-axis labels */
+.x-axis-labels {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 180px 0 20px;
+    font-size: 1.25rem; /* 20px */
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+}
+
+.x-label {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Legend */
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem; /* 16px */
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.extreme-fear-color { background: #ff4444; }
+.fear-color { background: #ff8800; }
+.neutral-color { background: #ffdd00; }
+.greed-color { background: #88ff44; }
+.extreme-greed-color { background: #44ff88; }
+
+/* Responsive adjustments */
+@media (max-width: 1400px) {
+    .chart-wrapper {
+        height: 350px;
+    }
+
+    .y-axis-labels {
+        width: 160px;
+        height: 250px;
+    }
+
+    .chart-area {
+        height: 250px;
+    }
+
+    .price-axis {
+        height: 250px;
+    }
+
+    .chart-title {
+        font-size: 3rem;
+    }
+
+    .current-value {
+        font-size: 3.5rem;
+    }
+}
+
+>>>>>>> dev2:output_html/style6.css

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../core_templates/carousel/style4.css">
+    <link rel="stylesheet" href="../fonts/fonts.css">
+    <title>Crypto Dashboard Template 4</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">{{ current_date if current_date else '18 Sep, 2025' }}</div>
+                <div class="last-update-time">{{ current_time if current_time else '7:44 pm' }}</div>
+            </div>
+        </div>
+
+        <!-- Long/Short Strategy Header -->
+        <div class="strategy-header">
+            <div class="strategy-section long-section">
+                <div class="strategy-label">PRISM Quant Select</div>
+                <div class="strategy-title long-title">LONG</div>
+            </div>
+            <div class="strategy-section short-section">
+                <div class="strategy-label">PRISM Quant Select</div>
+                <div class="strategy-title short-title">SHORT</div>
+            </div>
+        </div>
+
+        <!-- Main Long/Short Content -->
+        <div class="longshort-container">
+            <!-- Long Positions Section -->
+            <div class="long-section-content">
+                {% for coin in coins1 %}
+                <div class="position-card long-card">
+                    <div class="coin-header">
+                        <div class="coin-logo">
+                            <img src="{{ coin.logo }}" alt="{{ coin.symbol }}">
+                        </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">{{ coin.symbol }}</div>
+                            <div class="coin-rank">#{{ coin.cmc_rank }}</div>
+                        </div>
+                        <div class="coin-price">${{ coin.price }}</div>
+                    </div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">{{ coin.percent_change24h }}%</div>
+                            <div class="metric-label">24h</div>
+                        </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">{{ coin.market_cap }}B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">{{ coin.percent_change7d }}%</div>
+                            <div class="ratio-label">7d</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Short Positions Section -->
+            <div class="short-section-content">
+                {% for coin in coins2 %}
+                <div class="position-card short-card">
+                    <div class="coin-header">
+                        <div class="coin-logo">
+                            <img src="{{ coin.logo }}" alt="{{ coin.symbol }}">
+                        </div>
+                        <div class="coin-info">
+                            <div class="coin-symbol">{{ coin.symbol }}</div>
+                            <div class="coin-rank">#{{ coin.cmc_rank }}</div>
+                        </div>
+                        <div class="coin-price">${{ coin.price }}</div>
+                    </div>
+                    <div class="position-data">
+                        <div class="position-metrics">
+                            <div class="metric-value">{{ coin.percent_change24h }}%</div>
+                            <div class="metric-label">24h</div>
+                        </div>
+                        <div class="position-metrics">
+                            <div class="metric-value">{{ coin.market_cap }}B</div>
+                            <div class="metric-label">MCap</div>
+                        </div>
+                        <div class="position-ratio">
+                            <div class="ratio-value">{{ coin.percent_change7d }}%</div>
+                            <div class="ratio-label">7d</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>

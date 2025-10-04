@@ -1,0 +1,345 @@
+/* 🎨 Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 2160px;
+    height: 2700px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* 🔥 Background to Match Other Templates */
+body {
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #050505 70%, #000000 100%);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+/* 📱 Main Page Container */
+.main-container {
+    width: 2160px;
+    height: 2700px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 📋 Header Section with Branding and Last Update */
+.dashboard-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.crypto-prism-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.prism-triangle {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 16px solid #ff6b35;
+    filter: drop-shadow(0 3px 6px rgba(255, 107, 53, 0.4));
+}
+
+.brand-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 42px;
+    font-weight: 500;
+    color: #ff6b35;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+}
+
+.last-update {
+    text-align: right;
+    font-family: 'Inter', sans-serif;
+}
+
+.last-update-label {
+    font-size: 28px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 4px;
+}
+
+.last-update-date {
+    font-size: 36px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 2px;
+}
+
+.last-update-time {
+    font-size: 32px;
+    font-weight: 400;
+    color: #ff6b35;
+    text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+}
+
+/* 📄 Page Title Section */
+.page-title-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.page-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 84px;
+    font-weight: 800;
+    color: #ff6b35;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+    margin-bottom: 20px;
+}
+
+.page-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+}
+
+/* 📊 Events Table Section */
+.events-table-section {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(30px);
+    border-radius: 36px;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.market-events-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.market-events-table thead {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c00 100%);
+}
+
+.market-events-table th {
+    padding: 30px 25px;
+    font-size: 42px;
+    font-weight: 700;
+    color: #000;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.market-events-table th:first-child {
+    width: 20%;
+}
+
+.market-events-table th:nth-child(2) {
+    width: 50%;
+}
+
+.market-events-table th:nth-child(3) {
+    width: 18%;
+}
+
+.market-events-table th:last-child {
+    width: 12%;
+}
+
+.market-events-table td {
+    padding: 25px;
+    font-size: 36px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    vertical-align: top;
+}
+
+.event-row {
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+}
+
+.event-row:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.2);
+}
+
+.category-cell {
+    font-weight: 600;
+    color: #ff6b35;
+    font-size: 32px;
+}
+
+.description-cell {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+    font-size: 30px;
+}
+
+.impact-cell {
+    text-align: center;
+}
+
+.date-cell {
+    font-weight: 600;
+    color: #ff6b35;
+    text-align: center;
+    font-size: 30px;
+}
+
+.coin-cell {
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    font-size: 38px;
+}
+
+.market-events-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 🎯 Sentiment Badge Styling */
+.sentiment-badge {
+    padding: 12px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 32px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+}
+
+.sentiment-bullish {
+    background: linear-gradient(135deg, #00C851 0%, #007E33 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 200, 81, 0.4);
+}
+
+.sentiment-bearish {
+    background: linear-gradient(135deg, #FF4444 0%, #CC0000 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4);
+}
+
+.sentiment-neutral {
+    background: linear-gradient(135deg, #FF9500 0%, #FF6F00 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 149, 0, 0.4);
+}
+
+/* ❌ Error Container Styling */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px;
+    background: rgba(220, 53, 69, 0.1);
+    border-radius: 24px;
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 120px;
+    margin-bottom: 30px;
+}
+
+.error-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #dc3545;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 36px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+}
+
+.error-note {
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* 📍 Footer Section */
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.source-info {
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+.brand-footer {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    color: #ff6b35;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+}
+
+/* 📱 Mobile responsiveness (if needed) */
+@media (max-width: 1200px) {
+    .main-container {
+        padding: 40px;
+        gap: 30px;
+    }
+
+    .page-title {
+        font-size: 60px;
+    }
+
+    .page-subtitle {
+        font-size: 32px;
+    }
+
+    .market-events-table th {
+        font-size: 32px;
+        padding: 20px 15px;
+    }
+
+    .market-events-table td {
+        font-size: 28px;
+        padding: 20px;
+    }
+}

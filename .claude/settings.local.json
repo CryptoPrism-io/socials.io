@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(ls:*)",
+      "Bash(dir:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(timeout:*)",
+      "Bash(findstr:*)",
+      "Bash(curl:*)",
+      "Bash(node server.js)",
+      "Bash(copy:*)",
+      "WebSearch",
+      "Bash(pip install:*)",
+      "Bash(flake8:*)",
+      "Bash(git rm:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
