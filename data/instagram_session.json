@@ -1,0 +1,57 @@
+{
+  "session_data": {
+    "uuids": {
+      "phone_id": "ee439a0a-71a2-4c60-ae8d-53fffac44f5e",
+      "uuid": "33b68eb6-49d8-44da-8dc9-a275f72c56a2",
+      "client_session_id": "6a6bc3a2-d70b-4332-b6bb-6a27dfd5c5aa",
+      "advertising_id": "49815083-6af2-4438-a5c3-37145c6f80ee",
+      "android_device_id": "android-b722e60728ddfd91",
+      "request_id": "763f768c-6efd-4407-9d19-185503016da5",
+      "tray_session_id": "e786191c-e00c-45f6-a859-41d946d78407"
+    },
+    "mid": "aM1BrgABAAGEnMyTYcqiD8QFSm0t",
+    "ig_u_rur": null,
+    "ig_www_claim": null,
+    "authorization_data": {
+      "ds_user_id": "68833054498",
+      "sessionid": "68833054498%3A6NXuYnpc8p7NDg%3A5%3AAYgPxo_Q9GfOdJKiWNlycuIwr-ZoMxANNhQ0_tgxYw"
+    },
+    "cookies": {},
+    "last_login": 1758282174.3394752,
+    "device_settings": {
+      "app_version": "269.0.0.18.75",
+      "android_version": 26,
+      "android_release": "8.0.0",
+      "dpi": "480dpi",
+      "resolution": "1080x1920",
+      "manufacturer": "OnePlus",
+      "device": "devitron",
+      "model": "6T Dev",
+      "cpu": "qcom",
+      "version_code": "314665256"
+    },
+    "user_agent": "Instagram 269.0.0.18.75 Android (26/8.0.0; 480dpi; 1080x1920; OnePlus; 6T Dev; devitron; qcom; en_US; 314665256)",
+    "country": "US",
+    "country_code": 1,
+    "locale": "en_US",
+    "timezone_offset": -14400
+  },
+  "metadata": {
+    "created_at": "2025-09-19T17:12:54.366840",
+    "last_updated": "2025-09-19T17:14:17.931399",
+    "last_fresh_login": "2025-09-19T17:14:17.931399",
+    "last_validated": "2025-09-19T17:14:17.931399",
+    "login_count": 2,
+    "device_uuids": {
+      "phone_id": "ee439a0a-71a2-4c60-ae8d-53fffac44f5e",
+      "uuid": "33b68eb6-49d8-44da-8dc9-a275f72c56a2",
+      "client_session_id": "6a6bc3a2-d70b-4332-b6bb-6a27dfd5c5aa",
+      "advertising_id": "49815083-6af2-4438-a5c3-37145c6f80ee",
+      "android_device_id": "android-b722e60728ddfd91",
+      "request_id": "763f768c-6efd-4407-9d19-185503016da5",
+      "tray_session_id": "e786191c-e00c-45f6-a859-41d946d78407"
+    },
+    "username": null,
+    "session_version": "1.0"
+  }
+}

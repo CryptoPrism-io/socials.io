@@ -1,0 +1,31 @@
+{
+  "generated_content": [],
+  "posts_history": [
+    {
+      "timestamp": "2025-09-19T16:45:40.879590",
+      "image_path": "output\\images\\6_output.jpg",
+      "template_name": "6_output",
+      "caption": "\ud83d\ude80 Crypto Market Update \ud83d\udcc8\n\nStay informed with the latest cryptocurrency trends and market movements.\n\nFollow us for daily insights! \ud83d\udc8e\n\n#crypto #bitcoin #ethereum #blockchain #investing #trading #cryptoprism #marketupdate #cryptocurrency #defi #web3 #hodl",
+      "media_id": "3725049544590229968",
+      "status": "success"
+    },
+    {
+      "timestamp": "2025-09-19T17:14:17.933240",
+      "image_path": "output\\images\\6_output.jpg",
+      "template_name": "6_output",
+      "caption": "\ud83d\ude80 Crypto Market Update \ud83d\udcc8\n\nStay informed with the latest cryptocurrency trends and market movements.\n\nFollow us for daily insights! \ud83d\udc8e\n\n#crypto #bitcoin #ethereum #blockchain #investing #trading #cryptoprism #marketupdate #cryptocurrency #defi #web3 #hodl",
+      "media_id": "3725063959372495156",
+      "status": "success"
+    }
+  ],
+  "last_updated": "2025-09-19T17:14:17.933255",
+  "templates_used": {},
+  "statistics": {
+    "total_posts": 2,
+    "successful_posts": 2,
+    "failed_posts": 0,
+    "templates_usage": {
+      "6_output": 2
+    }
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Market Events</title>
+    <link rel="stylesheet" href="style7.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">{{ current_date if current_date else '23 Sep, 2025' }}</div>
+                <div class="last-update-time">{{ current_time if current_time else '11:30:00 PM' }}</div>
+            </div>
+        </div>
+
+        <!-- Page Title -->
+        <div class="page-title-section">
+            <h1 class="page-title">MARKET INTELLIGENCE</h1>
+            <p class="page-subtitle">Real-time crypto market events and strategic developments</p>
+        </div>
+
+        <!-- Market Events Table -->
+        <div class="events-table-section">
+            {% if news_events.success %}
+            <table class="market-events-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Impact</th>
+                        <th>Most Affected</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alert in news_events.alerts %}
+                    <tr class="event-row">
+                        <td class="category-cell">{{ alert.category }}</td>
+                        <td class="description-cell">{{ alert.description }}</td>
+                        <td class="impact-cell">
+                            <span class="sentiment-badge sentiment-{{ alert.sentiment.lower() if alert.sentiment else 'neutral' }}">
+                                {{ alert.sentiment if alert.sentiment else 'Neutral' }}
+                            </span>
+                        </td>
+                        <td class="coin-cell">{{ alert.most_affected if alert.most_affected else (alert.coins_affected[0] if alert.coins_affected else 'BTC') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <!-- Show error message when data fails to load -->
+            <div class="error-container">
+                <div class="error-icon">⚠️</div>
+                <div class="error-title">Market Data Unavailable</div>
+                <div class="error-message">{{ news_events.error }}</div>
+                <div class="error-note">Real-time market intelligence will display when available.</div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Footer with source attribution -->
+        <div class="footer-section">
+            <div class="source-info">Data sources: SEC, Major exchanges, Financial institutions</div>
+            <div class="brand-footer">CRYPTOPRISM.IO</div>
+        </div>
+    </div>
+</body>
+</html>

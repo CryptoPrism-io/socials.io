@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style6.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Bitcoin Snapshot</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">05 Oct, 2025</div>
+                <div class="last-update-time">01:18:33 AM</div>
+            </div>
+        </div>
+
+        <!-- Bitcoin Dashboard Card -->
+        <div class="btc-dashboard-card">
+        
+        <!-- Main BTC Information Section -->
+        <div class="btc-main-section">
+            <!-- BTC Identity and Price -->
+            <div class="btc-identity">
+                <div class="btc-logo-container">
+                    <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="Bitcoin Logo" class="btc-logo-img">
+                </div>
+                <div class="btc-info">
+                    <div class="btc-symbol">BTC</div>
+                    <div class="btc-price">$122132.24</div>
+                </div>
+            </div>
+
+            <!-- Market Data Grid -->
+            <div class="market-data-grid">
+                <div class="market-item">
+                    <div class="market-label">Market Cap</div>
+                    <div class="market-value">$2.43 T</div>
+                </div>
+                <div class="market-item">
+                    <div class="market-label">Volume 24H</div>
+                    <div class="market-value">$83.73 B</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance and Sentiment Section -->
+        <div class="performance-sentiment-section">
+            <!-- Performance Grid -->
+            <div class="performance-container">
+                <div class="performance-title">Performance</div>
+                <div class="performance-items">
+                    <div class="perf-item">
+                        <div class="perf-value positive">
+                            1.63%
+                        </div>
+                        <div class="perf-label">1D</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-value positive">
+                            11.51%
+                        </div>
+                        <div class="perf-label">7D</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-value positive">
+                            9.29%
+                        </div>
+                        <div class="perf-label">30D</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentiment Analysis -->
+            <div class="sentiment-container">
+                <div class="sentiment-title">Market Sentiment</div>
+                <div class="sentiment-items">
+                    <div class="sentiment-item">
+                        <div class="sentiment-count bearish-count">3</div>
+                        <div class="sentiment-label">Bearish</div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-count neutral-count">5</div>
+                        <div class="sentiment-label">Neutral</div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-count bullish-count">15</div>
+                        <div class="sentiment-label">Bullish</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overall Trend -->
+            <div class="trend-container">
+                <div class="trend-title">Overall Trend</div>
+                <div class="trend-value positive">Bullish+</div>
+            </div>
+        </div>
+        
+        </div>
+
+        <!-- Fear and Greed Index Chart Section -->
+        <div class="fear-greed-chart-section">
+            
+            <div class="chart-header">
+                <div class="chart-title">Fear & Greed Index</div>
+                <div class="current-index">
+                    <div class="current-value">57</div>
+                    <div class="current-label fear-greed-neutral">Neutral</div>
+                </div>
+            </div>
+
+            <!-- Pure Chart Container -->
+            <div class="pure-chart-container">
+                <svg class="pure-fear-greed-chart" viewBox="0 0 1100 400">
+                    <defs>
+                        <!-- Fear & Greed Index gradient -->
+                        <linearGradient id="fearGreedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ff4444;stop-opacity:0.9" />
+                            <stop offset="25%" style="stop-color:#ff8800;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#ffdd00;stop-opacity:0.9" />
+                            <stop offset="75%" style="stop-color:#88ff44;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#44ff88;stop-opacity:0.9" />
+                        </linearGradient>
+
+                        <!-- Bitcoin price gradient -->
+                        <linearGradient id="btcPriceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.9" />
+                        </linearGradient>
+
+                        <!-- Gradient for area under Fear & Greed curve -->
+                        <linearGradient id="fearGreedAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:0.2" />
+                            <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:0.05" />
+                        </linearGradient>
+
+                        <!-- Gradient for area under Bitcoin curve -->
+                        <linearGradient id="btcAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.15" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.03" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Subtle background grid -->
+                    
+                    <line x1="100" y1="50" x2="1000" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    
+                    <line x1="100" y1="125" x2="1000" y2="125" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    
+                    <line x1="100" y1="200" x2="1000" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    
+                    <line x1="100" y1="275" x2="1000" y2="275" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    
+                    <line x1="100" y1="350" x2="1000" y2="350" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    
+
+                    
+                    <line x1="100.0" y1="50" x2="100.0" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+                    <line x1="212.5" y1="50" x2="212.5" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+                    <line x1="325.0" y1="50" x2="325.0" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+                    <line x1="437.5" y1="50" x2="437.5" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+                    <line x1="550.0" y1="50" x2="550.0" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+                    <line x1="662.5" y1="50" x2="662.5" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+                    <line x1="775.0" y1="50" x2="775.0" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+                    <line x1="887.5" y1="50" x2="887.5" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+                    <line x1="1000.0" y1="50" x2="1000.0" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    
+
+                    <!-- Fear & Greed Index Y-axis labels (left side) -->
+                    <text x="25" y="58" text-anchor="middle" class="y-axis-label fear-greed-extreme">100</text>
+                    <text x="25" y="133" text-anchor="middle" class="y-axis-label fear-greed-high">75</text>
+                    <text x="25" y="208" text-anchor="middle" class="y-axis-label fear-greed-neutral">50</text>
+                    <text x="25" y="283" text-anchor="middle" class="y-axis-label fear-greed-low">25</text>
+                    <text x="25" y="358" text-anchor="middle" class="y-axis-label fear-greed-extreme-low">0</text>
+
+                    <!-- Bitcoin Price Y-axis labels (right side) -->
+                    
+                    <text x="1075" y="58" text-anchor="middle" class="y-axis-label btc-label">122k</text>
+                    <text x="1075" y="208" text-anchor="middle" class="y-axis-label btc-label">116k</text>
+                    <text x="1075" y="358" text-anchor="middle" class="y-axis-label btc-label">109k</text>
+                    
+
+                    <!-- Area under the Bitcoin price curve -->
+                    <polygon
+                        fill="url(#btcAreaGradient)"
+                        points="100,350 100,289.30825793233134 130,311.9970995657943 160,313.64521463902605 190,323.32099541722044 220,301.91891506952817 250,281.404543446359 280,293.6812573074594 310,238.64386452999605 340,203.41310503844184 370,189.9297343381504 400,193.35879651864357 430,205.6802132252308 460,204.83544727999487 490,173.09710317216135 520,181.60137621064666 550,166.42358956585574 580,199.29745247326426 610,198.54626589521956 640,207.98532191992473 670,266.0365629081708 700,282.6967510056728 730,252.8691109394635 760,350.0 790,334.93914035581855 820,335.64024793783 850,280.2422423095612 880,228.54280001960984 910,236.35765372044494 940,132.11100428901844 970,85.98192434868702 1000,350"
+                    />
+
+                    <!-- Area under the Fear & Greed curve -->
+                    <polygon
+                        fill="url(#fearGreedAreaGradient)"
+                        points="100,350 100,203.0 130,218.00000000000003 160,218.00000000000003 190,224.0 220,215.0 250,203.0 280,209.0 310,188.0 340,173.0 370,158.0 400,164.0 430,167.0 460,173.0 490,167.0 520,167.0 550,164.0 580,182.0 610,182.0 640,188.0 670,224.0 700,230.0 730,218.00000000000003 760,266.0 790,254.00000000000003 820,254.00000000000003 850,230.0 880,209.0 910,215.0 940,167.0 970,137.0 1000,350"
+                    />
+
+                    <!-- Bitcoin Price line (secondary axis) -->
+                    <polyline
+                        fill="none"
+                        stroke="url(#btcPriceGradient)"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-dasharray="5,5"
+                        points="100,289.30825793233134 130,311.9970995657943 160,313.64521463902605 190,323.32099541722044 220,301.91891506952817 250,281.404543446359 280,293.6812573074594 310,238.64386452999605 340,203.41310503844184 370,189.9297343381504 400,193.35879651864357 430,205.6802132252308 460,204.83544727999487 490,173.09710317216135 520,181.60137621064666 550,166.42358956585574 580,199.29745247326426 610,198.54626589521956 640,207.98532191992473 670,266.0365629081708 700,282.6967510056728 730,252.8691109394635 760,350.0 790,334.93914035581855 820,335.64024793783 850,280.2422423095612 880,228.54280001960984 910,236.35765372044494 940,132.11100428901844 970,85.98192434868702"
+                    />
+
+                    <!-- Fear/Greed Index line (primary axis) -->
+                    <polyline
+                        fill="none"
+                        stroke="url(#fearGreedGradient)"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        points="100,203.0 130,218.00000000000003 160,218.00000000000003 190,224.0 220,215.0 250,203.0 280,209.0 310,188.0 340,173.0 370,158.0 400,164.0 430,167.0 460,173.0 490,167.0 520,167.0 550,164.0 580,182.0 610,182.0 640,188.0 670,224.0 700,230.0 730,218.00000000000003 760,266.0 790,254.00000000000003 820,254.00000000000003 850,230.0 880,209.0 910,215.0 940,167.0 970,137.0"
+                    />
+
+                    <!-- Bitcoin price data points -->
+                    
+                    <circle
+                        cx="100"
+                        cy="289.30825793233134"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="130"
+                        cy="311.9970995657943"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="160"
+                        cy="313.64521463902605"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="190"
+                        cy="323.32099541722044"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="220"
+                        cy="301.91891506952817"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="250"
+                        cy="281.404543446359"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="280"
+                        cy="293.6812573074594"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="310"
+                        cy="238.64386452999605"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="340"
+                        cy="203.41310503844184"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="370"
+                        cy="189.9297343381504"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="400"
+                        cy="193.35879651864357"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="430"
+                        cy="205.6802132252308"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="460"
+                        cy="204.83544727999487"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="490"
+                        cy="173.09710317216135"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="520"
+                        cy="181.60137621064666"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="550"
+                        cy="166.42358956585574"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="580"
+                        cy="199.29745247326426"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="610"
+                        cy="198.54626589521956"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="640"
+                        cy="207.98532191992473"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="670"
+                        cy="266.0365629081708"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="700"
+                        cy="282.6967510056728"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="730"
+                        cy="252.8691109394635"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="760"
+                        cy="350.0"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="790"
+                        cy="334.93914035581855"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="820"
+                        cy="335.64024793783"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="850"
+                        cy="280.2422423095612"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="880"
+                        cy="228.54280001960984"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="910"
+                        cy="236.35765372044494"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="940"
+                        cy="132.11100428901844"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+                    <circle
+                        cx="970"
+                        cy="85.98192434868702"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    
+
+                    <!-- Fear & Greed data points -->
+                    
+                    <circle
+                        cx="100"
+                        cy="203.0"
+                        r="4"
+                        fill="#ffdd00"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="130"
+                        cy="218.00000000000003"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="160"
+                        cy="218.00000000000003"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="190"
+                        cy="224.0"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="220"
+                        cy="215.0"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="250"
+                        cy="203.0"
+                        r="4"
+                        fill="#ffdd00"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="280"
+                        cy="209.0"
+                        r="4"
+                        fill="#ffdd00"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="310"
+                        cy="188.0"
+                        r="4"
+                        fill="#ffdd00"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="340"
+                        cy="173.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="370"
+                        cy="158.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="400"
+                        cy="164.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="430"
+                        cy="167.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="460"
+                        cy="173.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="490"
+                        cy="167.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="520"
+                        cy="167.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="550"
+                        cy="164.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="580"
+                        cy="182.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="610"
+                        cy="182.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="640"
+                        cy="188.0"
+                        r="4"
+                        fill="#ffdd00"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="670"
+                        cy="224.0"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="700"
+                        cy="230.0"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="730"
+                        cy="218.00000000000003"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="760"
+                        cy="266.0"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="790"
+                        cy="254.00000000000003"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="820"
+                        cy="254.00000000000003"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="850"
+                        cy="230.0"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="880"
+                        cy="209.0"
+                        r="4"
+                        fill="#ffdd00"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="910"
+                        cy="215.0"
+                        r="4"
+                        fill="#ff8800"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="940"
+                        cy="167.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                    <circle
+                        cx="970"
+                        cy="137.0"
+                        r="4"
+                        fill="#88ff44"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    
+                </svg>
+            </div>
+
+            
+        </div>
+
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>

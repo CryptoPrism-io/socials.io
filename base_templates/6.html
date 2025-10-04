@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style6.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Bitcoin Snapshot</title>
+</head>
+<body>
+    <!-- Main Container for Auto-Layout Scaling -->
+    <div class="main-container">
+        <!-- Header Section with Branding and Last Update -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="last-update">
+                <div class="last-update-label">Last Update</div>
+                <div class="last-update-date">{{ current_date if current_date else '19 Sep, 2025' }}</div>
+                <div class="last-update-time">{{ current_time if current_time else '09:59:46 AM' }}</div>
+            </div>
+        </div>
+
+        <!-- Bitcoin Dashboard Card -->
+        <div class="btc-dashboard-card">
+        {% for snaps in snap %}
+        <!-- Main BTC Information Section -->
+        <div class="btc-main-section">
+            <!-- BTC Identity and Price -->
+            <div class="btc-identity">
+                <div class="btc-logo-container">
+                    <img src="{{ snaps['logo'] }}" alt="Bitcoin Logo" class="btc-logo-img">
+                </div>
+                <div class="btc-info">
+                    <div class="btc-symbol">BTC</div>
+                    <div class="btc-price">${{ snaps['price'] }}</div>
+                </div>
+            </div>
+
+            <!-- Market Data Grid -->
+            <div class="market-data-grid">
+                <div class="market-item">
+                    <div class="market-label">Market Cap</div>
+                    <div class="market-value">${{ snaps['market_cap'] }}</div>
+                </div>
+                <div class="market-item">
+                    <div class="market-label">Volume 24H</div>
+                    <div class="market-value">${{ snaps['volume24h'] }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance and Sentiment Section -->
+        <div class="performance-sentiment-section">
+            <!-- Performance Grid -->
+            <div class="performance-container">
+                <div class="performance-title">Performance</div>
+                <div class="performance-items">
+                    <div class="perf-item">
+                        <div class="perf-value {% if snaps['percent_change24h']|float > 0 %}positive{% elif snaps['percent_change24h']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change24h'] }}%
+                        </div>
+                        <div class="perf-label">1D</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-value {% if snaps['percent_change7d']|float > 0 %}positive{% elif snaps['percent_change7d']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change7d'] }}%
+                        </div>
+                        <div class="perf-label">7D</div>
+                    </div>
+                    <div class="perf-item">
+                        <div class="perf-value {% if snaps['percent_change30d']|float > 0 %}positive{% elif snaps['percent_change30d']|float < 0 %}negative{% endif %}">
+                            {{ snaps['percent_change30d'] }}%
+                        </div>
+                        <div class="perf-label">30D</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentiment Analysis -->
+            <div class="sentiment-container">
+                <div class="sentiment-title">Market Sentiment</div>
+                <div class="sentiment-items">
+                    <div class="sentiment-item">
+                        <div class="sentiment-count bearish-count">{{ snaps['bearish']|int }}</div>
+                        <div class="sentiment-label">Bearish</div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-count neutral-count">{{ snaps['neutral']|int }}</div>
+                        <div class="sentiment-label">Neutral</div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-count bullish-count">{{ snaps['bullish']|int }}</div>
+                        <div class="sentiment-label">Bullish</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overall Trend -->
+            <div class="trend-container">
+                <div class="trend-title">Overall Trend</div>
+                <div class="trend-value {% if snaps['Trend'] in ['Bullish+', 'Bullish'] %}positive{% elif snaps['Trend'] in ['Bearish', 'Bearish-'] %}negative{% else %}consolidating{% endif %}">{{snaps['Trend']}}</div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+
+        <!-- Fear and Greed Index Chart Section -->
+        <div class="fear-greed-chart-section">
+            {% for snaps in snap %}
+            <div class="chart-header">
+                <div class="chart-title">Fear & Greed Index</div>
+                <div class="current-index">
+                    <div class="current-value">{{ snaps['fear_greed_index']|int }}</div>
+                    <div class="current-label fear-greed-{{ snaps['fear_greed_label'].replace(' ', '-').lower() }}">{{ snaps['fear_greed_label'] }}</div>
+                </div>
+            </div>
+
+            <!-- Pure Chart Container -->
+            <div class="pure-chart-container">
+                <svg class="pure-fear-greed-chart" viewBox="0 0 1100 400">
+                    <defs>
+                        <!-- Fear & Greed Index gradient -->
+                        <linearGradient id="fearGreedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#ff4444;stop-opacity:0.9" />
+                            <stop offset="25%" style="stop-color:#ff8800;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#ffdd00;stop-opacity:0.9" />
+                            <stop offset="75%" style="stop-color:#88ff44;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#44ff88;stop-opacity:0.9" />
+                        </linearGradient>
+
+                        <!-- Bitcoin price gradient -->
+                        <linearGradient id="btcPriceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.9" />
+                            <stop offset="50%" style="stop-color:#60a5fa;stop-opacity:0.9" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.9" />
+                        </linearGradient>
+
+                        <!-- Gradient for area under Fear & Greed curve -->
+                        <linearGradient id="fearGreedAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:0.2" />
+                            <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:0.05" />
+                        </linearGradient>
+
+                        <!-- Gradient for area under Bitcoin curve -->
+                        <linearGradient id="btcAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.15" />
+                            <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.03" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Subtle background grid -->
+                    {% for i in range(5) %}
+                    <line x1="100" y1="{{ 50 + (i * 75) }}" x2="1000" y2="{{ 50 + (i * 75) }}" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                    {% endfor %}
+
+                    {% for i in range(9) %}
+                    <line x1="{{ 100 + (i * 112.5) }}" y1="50" x2="{{ 100 + (i * 112.5) }}" y2="350" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                    {% endfor %}
+
+                    <!-- Fear & Greed Index Y-axis labels (left side) -->
+                    <text x="25" y="58" text-anchor="middle" class="y-axis-label fear-greed-extreme">100</text>
+                    <text x="25" y="133" text-anchor="middle" class="y-axis-label fear-greed-high">75</text>
+                    <text x="25" y="208" text-anchor="middle" class="y-axis-label fear-greed-neutral">50</text>
+                    <text x="25" y="283" text-anchor="middle" class="y-axis-label fear-greed-low">25</text>
+                    <text x="25" y="358" text-anchor="middle" class="y-axis-label fear-greed-extreme-low">0</text>
+
+                    <!-- Bitcoin Price Y-axis labels (right side) -->
+                    {% for snaps in snap %}
+                    <text x="1075" y="58" text-anchor="middle" class="y-axis-label btc-label">{{ "{:.0f}".format(snaps['btc_max_price']/1000) }}k</text>
+                    <text x="1075" y="208" text-anchor="middle" class="y-axis-label btc-label">{{ "{:.0f}".format(((snaps['btc_max_price'] + snaps['btc_min_price']) / 2)/1000) }}k</text>
+                    <text x="1075" y="358" text-anchor="middle" class="y-axis-label btc-label">{{ "{:.0f}".format(snaps['btc_min_price']/1000) }}k</text>
+                    {% endfor %}
+
+                    <!-- Area under the Bitcoin price curve -->
+                    <polygon
+                        fill="url(#btcAreaGradient)"
+                        points="100,350 {% for point in snaps['fear_greed_history'] %}{{ 100 + (loop.index0 * 30) }},{{ 350 - ((point.price - snaps['btc_min_price']) / (snaps['btc_max_price'] - snaps['btc_min_price']) * 300) }} {% endfor %}1000,350"
+                    />
+
+                    <!-- Area under the Fear & Greed curve -->
+                    <polygon
+                        fill="url(#fearGreedAreaGradient)"
+                        points="100,350 {% for point in snaps['fear_greed_history'] %}{{ 100 + (loop.index0 * 30) }},{{ 50 + ((100 - point.value) / 100 * 300) }} {% endfor %}1000,350"
+                    />
+
+                    <!-- Bitcoin Price line (secondary axis) -->
+                    <polyline
+                        fill="none"
+                        stroke="url(#btcPriceGradient)"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-dasharray="5,5"
+                        points="{% for point in snaps['fear_greed_history'] %}{{ 100 + (loop.index0 * 30) }},{{ 350 - ((point.price - snaps['btc_min_price']) / (snaps['btc_max_price'] - snaps['btc_min_price']) * 300) }}{% if not loop.last %} {% endif %}{% endfor %}"
+                    />
+
+                    <!-- Fear/Greed Index line (primary axis) -->
+                    <polyline
+                        fill="none"
+                        stroke="url(#fearGreedGradient)"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        points="{% for point in snaps['fear_greed_history'] %}{{ 100 + (loop.index0 * 30) }},{{ 50 + ((100 - point.value) / 100 * 300) }}{% if not loop.last %} {% endif %}{% endfor %}"
+                    />
+
+                    <!-- Bitcoin price data points -->
+                    {% for point in snaps['fear_greed_history'] %}
+                    <circle
+                        cx="{{ 100 + (loop.index0 * 30) }}"
+                        cy="{{ 350 - ((point.price - snaps['btc_min_price']) / (snaps['btc_max_price'] - snaps['btc_min_price']) * 300) }}"
+                        r="3"
+                        fill="#3b82f6"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="1.5"
+                        opacity="0.8"
+                    />
+                    {% endfor %}
+
+                    <!-- Fear & Greed data points -->
+                    {% for point in snaps['fear_greed_history'] %}
+                    <circle
+                        cx="{{ 100 + (loop.index0 * 30) }}"
+                        cy="{{ 50 + ((100 - point.value) / 100 * 300) }}"
+                        r="4"
+                        fill="{% if point.value <= 25 %}#ff4444{% elif point.value <= 45 %}#ff8800{% elif point.value <= 55 %}#ffdd00{% elif point.value <= 75 %}#88ff44{% else %}#44ff88{% endif %}"
+                        stroke="rgba(255,255,255,0.9)"
+                        stroke-width="2"
+                    />
+                    {% endfor %}
+                </svg>
+            </div>
+
+            {% endfor %}
+        </div>
+
+
+        <!-- Footer -->
+        <div class="footer-container">cryptoprism.io</div>
+    </div>
+</body>
+</html>
