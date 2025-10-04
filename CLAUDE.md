@@ -34,6 +34,34 @@ python scripts/dev/validate_env.py
 python scripts/dev/validate_project.py
 ```
 
+### Local Development Server
+```bash
+# Generate content and serve HTML outputs locally on port 8080
+# Step 1: Generate all available templates
+python scripts/main/individual_posts/generate_1_output.py
+python scripts/main/individual_posts/generate_2_output.py
+python scripts/main/individual_posts/generate_3_1_output.py
+python scripts/main/individual_posts/generate_3_2_output.py
+python scripts/main/individual_posts/generate_4_output.py
+python scripts/main/individual_posts/generate_5_output.py
+python scripts/main/individual_posts/generate_6_output.py
+python scripts/main/individual_posts/generate_7_output.py
+
+# Step 2: Start local server (serves only HTML outputs from output_html/ directory)
+python scripts/dev/local_server.py
+
+# Accessible at: http://127.0.0.1:8080/
+# Direct links:
+# - Template 1: http://127.0.0.1:8080/1_output.html
+# - Template 2: http://127.0.0.1:8080/2_output.html
+# - Template 3.1: http://127.0.0.1:8080/3_1_output.html (Top Gainers >2%)
+# - Template 3.2: http://127.0.0.1:8080/3_2_output.html (Top Losers <-2%)
+# - Template 4: http://127.0.0.1:8080/4_output.html
+# - Template 5: http://127.0.0.1:8080/5_output.html
+# - Template 6: http://127.0.0.1:8080/6_output.html
+# - Template 7: http://127.0.0.1:8080/7_output.html
+```
+
 ### Code Quality
 ```bash
 # Linting
@@ -99,8 +127,11 @@ python generate_1_output.py
 # Template 2: Extended Cryptocurrencies (ranks 25-48)
 python generate_2_output.py
 
-# Template 3: Top Gainers and Losers
-python generate_3_output.py
+# Template 3.1: Top Gainers (+2% or more)
+python generate_3_1_output.py
+
+# Template 3.2: Top Losers (-2% or more)
+python generate_3_2_output.py
 
 # Template 4: Trading Opportunities
 python generate_4_output.py
