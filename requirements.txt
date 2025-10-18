@@ -3,7 +3,7 @@
 # Versions pinned for production stability (major.minor)
 
 # AI and API
-together~=4.1
+together~=1.5
 requests~=2.31
 psycopg2-binary~=2.9
 python-dotenv~=1.0
