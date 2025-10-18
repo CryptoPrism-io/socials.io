@@ -214,7 +214,7 @@ Just return the caption, nothing else."""
         Post all 3 carousels with delays between them
 
         Args:
-            delay_between_posts: Seconds to wait between posts (default: 5 minutes)
+            delay_between_posts: Seconds to wait between posts (default: 1 minute)
         """
         output_dir = Path("output_images")
 
@@ -320,8 +320,8 @@ def main():
         logger.error("❌ Failed to load session. Exiting.")
         return
 
-    # Post all carousels with 5-minute delays
-    results = poster.post_all_carousels(delay_between_posts=300)
+    # Post all carousels with 1-minute delays
+    results = poster.post_all_carousels(delay_between_posts=60)
 
     # Exit with appropriate code
     if all(r['success'] for r in results):

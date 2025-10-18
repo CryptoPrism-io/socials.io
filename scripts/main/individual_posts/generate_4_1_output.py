@@ -13,7 +13,7 @@ from datetime import datetime
 # Add parent directories to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from data.database import fetch_trading_opportunities, close_connection
+from data.database import fetch_trading_opportunities
 from content.template_engine import get_template_renderer
 from media.screenshot import generate_image_from_html
 
@@ -74,8 +74,6 @@ def generate_4_1_output():
     except Exception as e:
         print(f"❌ Template 4.1 generation error: {str(e)}")
         return False
-    finally:
-        close_connection()
 
 async def generate_4_1_with_screenshot():
     """Generate Template 4.1 with screenshot"""

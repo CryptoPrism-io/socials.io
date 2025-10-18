@@ -12,7 +12,7 @@ from datetime import datetime
 # Add parent directories to path for imports
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from data.database import fetch_top_coins, close_connection
+from data.database import fetch_top_coins
 from content.template_engine import get_template_renderer
 from media.screenshot import generate_image_from_html
 
@@ -79,8 +79,6 @@ def generate_3_2_output():
     except Exception as e:
         print(f"❌ Template 3.2 generation error: {str(e)}")
         return False
-    finally:
-        close_connection()
 
 async def generate_3_2_with_screenshot():
     """Generate Template 3.2 with screenshot"""
