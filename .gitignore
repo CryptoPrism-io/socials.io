@@ -176,3 +176,4 @@ output/images/
 # Local data storage
 data/
 !data/.gitkeep
+!data/instagram_session.json

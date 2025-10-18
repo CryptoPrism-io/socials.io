@@ -29,7 +29,7 @@ except ImportError:
     print("Missing instagrapi. Install with: pip install instagrapi")
     sys.exit(1)
 
-from session_manager import InstagramSessionManager
+from scripts.main.publishing.session_manager import InstagramSessionManager
 
 # Configure logging
 logging.basicConfig(

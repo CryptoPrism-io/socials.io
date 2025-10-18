@@ -46,6 +46,10 @@ jobs:
         python scripts/main/individual_posts/generate_6_output.py
       env:
         PYTHONIOENCODING: utf-8
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         CRYPTO_SPREADSHEET_KEY: ${{ secrets.CRYPTO_SPREADSHEET_KEY }}
