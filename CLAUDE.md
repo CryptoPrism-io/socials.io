@@ -9,373 +9,318 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # Install core dependencies
 pip install -r requirements.txt
 
-# Install development dependencies
-pip install -r requirements-dev.txt
-
 # Install Playwright browsers for screenshot generation
 playwright install chromium
-playwright install firefox
-playwright install webkit
 
 # Windows UTF-8 setup (if needed)
 scripts/setup/setup_windows_utf8.bat
+
+# Create Instagram session (CRITICAL - do this first!)
+python scripts/auth/create_instagram_session.py
 ```
 
-### Testing
+### Testing & Validation
 ```bash
-# Run structure validation tests
+# Run structure validation
 python tests/test_path_structure.py
-
-# Run full test suite
-python -m pytest tests/ -v --tb=short
 
 # Environment validation
 python scripts/dev/validate_env.py
 python scripts/dev/validate_project.py
+
+# Full test suite (when available)
+python -m pytest tests/ -v --tb=short
 ```
 
-### Local Development Server
+### Local Development
 ```bash
-# Generate content and serve HTML outputs locally on port 8080
-# Step 1: Generate all available templates
-python scripts/main/individual_posts/generate_1_output.py
-python scripts/main/individual_posts/generate_2_output.py
-python scripts/main/individual_posts/generate_3_1_output.py
-python scripts/main/individual_posts/generate_3_2_output.py
-python scripts/main/individual_posts/generate_4_output.py
-python scripts/main/individual_posts/generate_5_output.py
-python scripts/main/individual_posts/generate_6_output.py
-python scripts/main/individual_posts/generate_7_output.py
+# Generate individual templates
+python scripts/main/individual_posts/generate_6_output.py   # Bitcoin + Macro Intelligence
+python scripts/main/individual_posts/generate_7_output.py   # Market Intelligence (L2 AI)
 
-# Step 2: Start local server (serves only HTML outputs from output_html/ directory)
+# Preview generated content at http://127.0.0.1:8080/
 python scripts/dev/local_server.py
-
-# Accessible at: http://127.0.0.1:8080/
-# Direct links:
-# - Template 1: http://127.0.0.1:8080/1_output.html
-# - Template 2: http://127.0.0.1:8080/2_output.html
-# - Template 3.1: http://127.0.0.1:8080/3_1_output.html (Top Gainers >2%)
-# - Template 3.2: http://127.0.0.1:8080/3_2_output.html (Top Losers <-2%)
-# - Template 4: http://127.0.0.1:8080/4_output.html
-# - Template 5: http://127.0.0.1:8080/5_output.html
-# - Template 6: http://127.0.0.1:8080/6_output.html
-# - Template 7: http://127.0.0.1:8080/7_output.html
 ```
 
-### Code Quality
+### Instagram Session Management
 ```bash
-# Linting
-flake8 scripts/
-pylint scripts/
+# Create new session (30-day lifecycle, rate-limited to once per 7 days)
+python scripts/auth/create_instagram_session.py
 
-# Code formatting
-black scripts/
-isort scripts/
+# Check session health
+python scripts/auth/instagram_session_status.py
 
-# Security scanning
-bandit -r scripts/
-
-# Type checking
-mypy scripts/
+# CRITICAL: Always use session manager for Instagram operations
+# Never login repeatedly with username/password - triggers Instagram security alerts
 ```
 
-### Main Application Scripts
-
-#### Legacy Scripts (Monolithic)
+### 3-Carousel Instagram Posting (Primary System - v2.4.0)
 ```bash
-# Generate Instagram content from database
-python scripts/main/instapost.py
+# Generate all 7 required templates
+python scripts/main/individual_posts/generate_1_output.py    # Top Cryptos 2-24
+python scripts/main/individual_posts/generate_2_output.py    # Extended 25-48
+python scripts/main/individual_posts/generate_3_1_output.py  # Top Gainers
+python scripts/main/individual_posts/generate_3_2_output.py  # Top Losers
+python scripts/main/individual_posts/generate_4_1_output.py  # Long Calls
+python scripts/main/individual_posts/generate_4_2_output.py  # Short Calls
+python scripts/main/individual_posts/generate_6_output.py    # Bitcoin Intelligence
 
-# Publish generated content to Instagram
-python scripts/main/instapost_push.py
-
-# Sync PostgreSQL data to Google Sheets
-python scripts/main/gsheets.py
-
-# Figma integration workflow
-python scripts/main/figma.py
+# Post 3 carousels to Instagram (with AI captions)
+python scripts/main/publishing/post_3_carousels.py
 ```
 
-#### New Modular Scripts (Recommended)
-```bash
-# Generate Instagram content using modular architecture
-python scripts/main/instapost_new.py
+## High-Level Architecture
 
-# Publish generated content using modular architecture
-python scripts/main/instapost_push_new.py
-
-# Complete workflow: generation + publishing
-python scripts/main/workflows/complete_workflow.py
-
-# Individual workflow components
-python scripts/main/workflows/instagram_pipeline.py
-python scripts/main/workflows/publishing_workflow.py
-
-# Migrated integrations
-python scripts/main/data/gsheets_sync.py
-python scripts/main/integrations/figma_api.py
+### Data Flow Pipeline
+```
+PostgreSQL Database → Python Data Fetching → Jinja2 Template Rendering →
+HTML Generation → Playwright Screenshot (2160x2700 viewport) →
+JPG Image (1080x1080, 95% quality) → Instagram Posting (instagrapi)
 ```
 
-#### Individual Post Generators (Templates 1-7)
-```bash
-# Generate specific templates individually with HTML + screenshot
-cd scripts/main/individual_posts
+### 3-Carousel System (v2.4.0 - Primary Automation)
+Daily automated Instagram posting at 02:00 UTC via GitHub Actions:
 
-# Template 1: Top Cryptocurrencies (ranks 2-24)
-python generate_1_output.py
+**Carousel 1** (3 slides): Bitcoin Intelligence + Market Overview
+- Template 6: Bitcoin + Macro Intelligence (Fear & Greed Index + BTC Price dual-axis chart)
+- Template 1: Top Cryptocurrencies (ranks 2-24)
+- Template 2: Extended Cryptocurrencies (ranks 25-48)
 
-# Template 2: Extended Cryptocurrencies (ranks 25-48)
-python generate_2_output.py
+**Carousel 2** (2 slides): Market Movers
+- Template 3.1: Top Gainers (+2% or more in 24h)
+- Template 3.2: Top Losers (-2% or more in 24h)
 
-# Template 3.1: Top Gainers (+2% or more)
-python generate_3_1_output.py
+**Carousel 3** (2 slides): Trading Opportunities
+- Template 4.1: Long Call Positions (bullish opportunities)
+- Template 4.2: Short Call Positions (bearish opportunities)
 
-# Template 3.2: Top Losers (-2% or more)
-python generate_3_2_output.py
+Each carousel gets AI-generated captions via OpenRouter API (GPT-4o-mini). 5-minute delays between posts.
 
-# Template 4: Trading Opportunities
-python generate_4_output.py
+### Module Organization (Modular Architecture)
 
-# Template 5: Market Overview
-python generate_5_output.py
+**Core Modules** (`scripts/main/`):
+- `individual_posts/` - 9 standalone template generators (PRIMARY system)
+- `publishing/session_manager.py` - Instagram session lifecycle (30-day persistence, 7-day rate-limiting)
+- `publishing/post_3_carousels.py` - 3-carousel automation system
+- `content/openrouter_client.py` - AI content generation (replaces Together AI)
+- `content/template_engine.py` - Jinja2 template rendering
+- `media/screenshot.py` - Playwright HTML-to-image conversion
+- `data/database.py` - PostgreSQL operations via SQLAlchemy
+- `workflows/` - Complete pipeline orchestration (generation + publishing)
 
-# Template 6: Bitcoin + Macro Intelligence
-python generate_6_output.py
+**Authentication** (`scripts/auth/`):
+- `create_instagram_session.py` - Create persistent session (CRITICAL step)
+- `instagram_session_status.py` - Monitor session health and age
 
-# Template 7: Market Intelligence (L2 AI Filtered)
-python generate_7_output.py
+**Development Tools** (`scripts/dev/`):
+- `local_server.py` - Preview HTML outputs on port 8080
+- `validate_env.py` - Environment variable validation
+
+### Instagram Session Management (CRITICAL)
+
+**Why it matters**: Frequent username/password logins trigger Instagram security alerts, 2FA challenges, and account lockouts.
+
+**Session Lifecycle**:
+1. Create session once: `scripts/auth/create_instagram_session.py`
+2. Session stored: `data/instagram_session.json` (also backed up to `sessions/`)
+3. 30-day validity with automatic metadata tracking
+4. Rate-limiting: 7-day minimum between fresh logins (168 hours)
+5. All publishing scripts use session instead of credentials
+
+**Key Methods**:
+- `get_smart_client()` - Load existing session or create new (respects rate-limiting)
+- `get_client_bypass_validation()` - Bypass instagrapi ~2.1 validation bugs for stale sessions
+- `force_refresh_session()` - Emergency refresh (bypasses rate-limiting)
+
+**NEVER** repeatedly login with username/password. **ALWAYS** use session manager.
+
+### Template System
+
+**10 Template Variations** (`base_templates/`):
+- Templates 1-7 (11 HTML files total due to splits: 3_1/3_2, 4_1/4_2)
+- Auto-layout flexbox architecture (no absolute positioning)
+- Dedicated CSS stylesheets (style1.css → style7.css)
+- Instagram-optimized: 1080x1080 output from 2160x2700 viewport
+- Jinja2 dynamic data injection with proper path resolution
+
+**Template 6 & 7 Special Features**:
+- Template 6: Dual-axis chart (Fear & Greed Index + Bitcoin Price)
+- Template 7: L2 AI filtering (web search + quality validation)
+
+### GitHub Actions Workflows
+
+**Primary**: `.github/workflows/Instagram_3_Carousels.yml` (Daily 02:00 UTC)
+- Generates 7 templates → Posts 3 carousels with AI captions
+- Python 3.11, Ubuntu latest, Playwright Chromium
+- Secrets: INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD, OPENROUTER_API_KEY, GCP_CREDENTIALS
+
+**Secondary**:
+- `Instagram_Story.yml` - Legacy single carousel (00:31 UTC, superseded)
+- `gsheets.yml` - Google Sheets sync (00:31 UTC)
+- `figma.yml` - Manual trigger only
+
+## Code Architecture Patterns
+
+### Database Operations
+```python
+# PostgreSQL via SQLAlchemy with connection pooling
+from scripts.main.data.database import fetch_top_coins, fetch_btc_snapshot
+
+# Clean connection lifecycle - always close connections
+coins = fetch_top_coins(start_rank=2, end_rank=24)
 ```
 
-## Architecture Overview
+### Template Rendering
+```python
+# Jinja2 with absolute path resolution
+from scripts.main.content.template_engine import render_template
 
-### Simplified Directory Structure
-
-The project uses a clean, simplified directory structure for easy navigation and maintenance:
-
+html = render_template('6.html', context={
+    'btc_data': btc_snapshot,
+    'news_items': ai_generated_news
+})
 ```
-├── scripts/             # ALL Python scripts (organized by function)
-│   ├── main/           # Core application scripts
-│   │   ├── individual_posts/  # Individual template generators (1-7)
-│   │   ├── workflows/         # Pipeline orchestration
-│   │   ├── content/           # AI generation & templating
-│   │   ├── data/              # Database operations
-│   │   ├── media/             # Screenshot generation
-│   │   ├── publishing/        # Instagram posting
-│   │   └── integrations/      # External APIs
-│   ├── auth/           # Authentication scripts
-│   ├── dev/            # Development & testing tools
-│   ├── setup/          # System setup & utilities
-│   └── config/         # Configuration & documentation
-├── base_templates/      # ALL base HTML and CSS files
-├── output_html/         # Generated HTML outputs + their CSS
-├── output_images/       # Generated/screenshot images (.jpg)
-├── input_images/        # Imported/input images (.png backgrounds)
-├── tests/               # Testing infrastructure
-├── docs/                # Documentation
-├── archive/             # Archived files and deprecated content
-│   ├── research_docs/   # Research documents and analysis
-│   ├── test_artifacts/  # Coverage reports and test cache
-│   ├── old_templates/   # Deprecated template directories
-│   ├── strategy_docs/   # Planning and strategy documents
-│   └── old_structure/   # Previous project structure
-└── .github/workflows/   # GitHub Actions automation
-```
-
-### Scripts Organization
-
-The `scripts/` directory is organized into logical sub-folders for better maintainability:
-
-- **`main/`** - Core application functionality:
-  - **Legacy Scripts (Monolithic)**:
-    - `instapost.py` - Main content generation pipeline
-    - `instapost_push.py` - Instagram publishing
-    - `gsheets.py` - Google Sheets synchronization
-    - `figma.py` - Figma integration workflow
-  - **New Modular Scripts**:
-    - `instapost_new.py` - Modular content generation entry point
-    - `instapost_push_new.py` - Modular publishing entry point
-  - **Modular Components**:
-    - `content/` - Content creation and AI generation
-      - `ai_generation.py` - AI content & caption generation
-      - `template_engine.py` - Jinja2 template rendering
-    - `publishing/` - Social media publishing
-      - `instagram.py` - Instagram API & posting logic
-    - `data/` - Data management & sync
-      - `database.py` - PostgreSQL operations
-      - `gsheets_sync.py` - Google Sheets synchronization (migrated)
-    - `media/` - Media processing & generation
-      - `screenshot.py` - Playwright HTML-to-image conversion
-    - `integrations/` - External service APIs
-      - `figma_api.py` - Figma design workflow (migrated)
-      - `google_services.py` - Google Drive/Sheets APIs
-    - `workflows/` - Complete pipeline orchestration
-      - `instagram_pipeline.py` - Full Instagram content workflow
-      - `publishing_workflow.py` - Complete publishing workflow
-      - `complete_workflow.py` - End-to-end generation + publishing
-    - `individual_posts/` - Standalone template generators
-      - `generate_1_output.py` - Template 1: Top Cryptocurrencies
-      - `generate_2_output.py` - Template 2: Extended Cryptocurrencies
-      - `generate_3_output.py` - Template 3: Top Gainers and Losers
-      - `generate_4_output.py` - Template 4: Trading Opportunities
-      - `generate_5_output.py` - Template 5: Market Overview
-      - `generate_6_output.py` - Template 6: Bitcoin + Macro Intelligence
-      - `generate_7_output.py` - Template 7: Market Intelligence (L2 AI)
-      - `README.md` - Complete documentation and usage examples
-
-- **`auth/`** - Authentication modules:
-  - `linkedin_auth.py` - LinkedIn authentication
-  - `twitter_auth.py` - Twitter authentication
-
-- **`dev/`** - Development and testing tools:
-  - `local_server.py` - Local development server
-  - `validate_env.py` - Environment validation
-  - `validate_project.py` - Project structure validation
-  - `test_unicode_system.py` - Unicode testing
-
-- **`setup/`** - System configuration utilities:
-  - `utf8_fix.py` - UTF-8 encoding fixes
-  - `setup_windows_utf8.bat` - Windows UTF-8 setup
-  - `setup_powershell_utf8.ps1` - PowerShell UTF-8 setup
-
-- **`config/`** - Configuration files and documentation:
-  - `.env.template` - Environment template
-  - Unicode troubleshooting documentation
-
-### Core Pipeline
-Socials.io is a **social media automation platform** that follows a multi-stage data pipeline:
-
-1. **Data Sources** → PostgreSQL database, Google Sheets, Google Drive
-2. **Content Generation** → AI-powered content creation using Together AI API
-3. **Template Rendering** → HTML/CSS templates with Jinja2 dynamic data injection
-4. **Image Generation** → Playwright browser automation for HTML-to-image screenshots
-5. **Publishing** → Instagram API integration via instagrapi
-
-### Key Components
-
-#### Template System (`base_templates/`)
-- **HTML Templates**: `1.html` through `6.html` - Base templates with auto-layout architecture
-- **CSS Stylesheets**: `style1.css` through `style6.css` - Flexbox-based layouts with glassmorphism effects
-- **Jinja2 Integration**: Dynamic data injection with proper path resolution
-- **Instagram Format**: Optimized for 1080x1080 square screenshots
-
-#### Main Scripts (`scripts/main/`)
-
-**Legacy Monolithic Scripts:**
-- **`instapost.py`**: Main content generation pipeline with HTML-to-image conversion
-- **`instapost_push.py`**: Enhanced content publishing with error handling and retry logic
-- **`gsheets.py`**: PostgreSQL to Google Sheets data synchronization
-- **`figma.py`**: Figma-based design workflow integration
-
-**New Modular Architecture:**
-- **`workflows/complete_workflow.py`**: Complete end-to-end Instagram automation
-- **`workflows/instagram_pipeline.py`**: Content generation pipeline orchestration
-- **`workflows/publishing_workflow.py`**: Publishing pipeline with AI caption generation
-- **`data/database.py`**: PostgreSQL operations and data fetching
-- **`content/template_engine.py`**: Jinja2 template rendering system
-- **`content/ai_generation.py`**: AI-powered content and caption generation
-- **`media/screenshot.py`**: Playwright HTML-to-image conversion
-- **`publishing/instagram.py`**: Instagram API integration with session management
-- **`integrations/google_services.py`**: Google Drive/Sheets API operations
-
-#### Output Structure (Simplified)
-- **`output_html/`**: Generated HTML files with live data (`*_output.html`)
-- **`output_images/`**: Final Instagram posts in JPG format for publishing
-- **`input_images/`**: Background images and input media files
-
-### Technology Stack
-- **Web Automation**: Playwright (async) for HTML screenshot generation
-- **AI Content**: OpenRouter API for intelligent content and caption generation
-- **Instagram API**: instagrapi for automated posting and publishing
-- **Template Engine**: Jinja2 for dynamic HTML content rendering
-- **Database**: PostgreSQL + SQLAlchemy for data storage and management
-- **Google Services**: gspread, Google Drive/Sheets API for cloud data integration
-
-### Automated Workflows (GitHub Actions)
-- **Instagram Content Pipeline** (`.github/workflows/Instagram_Story.yml`): Daily at 00:31 UTC
-  - Runs structure validation tests
-  - Executes `instapost.py` → `instapost_push.py` sequence
-  - Environment: Python 3.11, Ubuntu latest, Playwright Chromium
-- **Google Sheets Sync** (`.github/workflows/gsheets.yml`): Daily data synchronization
-- **Figma Integration** (`.github/workflows/figma.yml`): Manual trigger workflow
-
-### Modular Architecture Benefits
-
-The new modular architecture provides several advantages for future development:
-
-#### **Separation of Concerns**
-- **Database Operations**: Isolated in `data/` module for easy testing and modification
-- **Content Generation**: AI and template logic separated in `content/` module
-- **Media Processing**: Screenshot generation isolated in `media/` module
-- **Publishing**: Instagram API operations contained in `publishing/` module
-- **Integrations**: External services (Google, Figma) in `integrations/` module
-- **Workflows**: High-level orchestration in `workflows/` module
-
-#### **Development Workflow**
-```bash
-# For content generation only
-python scripts/main/workflows/instagram_pipeline.py
-
-# For publishing only (requires existing images)
-python scripts/main/workflows/publishing_workflow.py
-
-# For complete automation
-python scripts/main/workflows/complete_workflow.py
-
-# For individual component testing
-python scripts/main/data/database.py
-python scripts/main/content/ai_generation.py
-```
-
-#### **Scalability & Maintenance**
-- **Independent Testing**: Each module can be tested in isolation
-- **Easy Extension**: New features can be added to specific modules
-- **Reduced Complexity**: Smaller, focused files are easier to understand
-- **Reusability**: Components can be reused across different workflows
-- **Better Error Handling**: Issues can be isolated to specific modules
-
-#### **Migration Strategy**
-- Legacy scripts (`instapost.py`, `instapost_push.py`) remain functional
-- New modular scripts (`instapost_new.py`, `instapost_push_new.py`) use new architecture
-- Gradual migration: teams can migrate workflows incrementally
-- Complete workflow available for end-to-end automation
-
-## Development Guidelines
-
-### Template Development
-- Templates use auto-layout container systems (no absolute positioning)
-- All templates must be Instagram-compatible (1080x1080 aspect ratio)
-- Use Poppins font family for brand consistency
-- Jinja2 variables for dynamic content injection
-- CSS uses flexbox layouts with glassmorphism design effects
 
 ### Screenshot Generation
-- Playwright generates high-quality screenshots at 2160x2700 viewport
-- Images are saved as JPEG with 95% quality for Instagram optimization
-- Browser automation includes proper viewport scaling and media emulation
+```python
+# Playwright async pattern with proper viewport scaling
+from scripts.main.media.screenshot import generate_screenshot
+import asyncio
 
-### Database Integration
-- PostgreSQL connection via SQLAlchemy engine
-- Database credentials configured in environment variables
-- Data flows: PostgreSQL → Python processing → Jinja2 rendering → HTML → Screenshot
+await generate_screenshot(
+    html_file='output_html/6_output.html',
+    output_file='output_images/6_output.jpg',
+    width=2160, height=2700  # Instagram viewport
+)
+```
 
-### Environment Configuration
-Required environment variables:
-- `GCP_CREDENTIALS`: Google Cloud Platform service account JSON
-- `OPENROUTER_API_KEY`: OpenRouter API key for AI content generation (replaces Together AI)
-- `INSTAGRAM_USERNAME/PASSWORD`: Instagram account credentials
-- `INSTAGRAM_DRIVE_FILE_ID`: Google Drive file ID for content storage
-- `CRYPTO_SPREADSHEET_KEY`: Google Sheets key for data source
+### AI Content Generation
+```python
+# OpenRouter API (replaces Together AI)
+from scripts.main.content.openrouter_client import OpenRouterClient
 
-### Code Patterns
-- Async/await pattern for Playwright browser automation
-- SQLAlchemy engine initialization with connection pooling
-- Jinja2 Environment with FileSystemLoader for template rendering
-- Error handling with comprehensive retry logic in publishing workflows
+client = OpenRouterClient()
+caption = client.generate_caption(
+    model="openai/gpt-4o-mini",  # Cheapest GPT-4 option
+    prompt="Generate Instagram caption for crypto market update..."
+)
+```
 
-## Important Notes
+### Instagram Session Usage
+```python
+# ALWAYS use session manager
+from scripts.main.publishing.session_manager import InstagramSessionManager
 
-- Never commit sensitive credentials to repository
-- All file paths use absolute path resolution for cross-platform compatibility
-- Windows UTF-8 encoding issues are handled by setup scripts in `scripts/`
-- Template customization requires updating both HTML and corresponding CSS files
-- Instagram posting respects API rate limits and account restrictions
+session_mgr = InstagramSessionManager(session_file="data/instagram_session.json")
+client = session_mgr.get_client_bypass_validation()  # For stale sessions
+
+# Post carousel
+media = client.album_upload(paths=[...], caption=ai_caption)
+```
+
+## Environment Variables
+
+**Required** (in `.env` file):
+```bash
+# Database
+DB_HOST=your_postgresql_host
+DB_NAME=dbcp
+DB_USER=your_username
+DB_PASSWORD=your_password
+
+# AI Content Generation
+OPENROUTER_API_KEY=your_key_here  # Replaces TOGETHER_API_KEY
+
+# Instagram
+INSTAGRAM_USERNAME=your_username
+INSTAGRAM_PASSWORD=your_password
+
+# Google Cloud
+GCP_CREDENTIALS={"type": "service_account", ...}
+CRYPTO_SPREADSHEET_KEY=your_sheets_key
+```
+
+## Critical Production Notes
+
+### Session Management
+- Session files in `data/` and `sessions/` are .gitignored (contain auth tokens)
+- 7-day rate-limiting prevents Instagram security blocks
+- Session metadata tracks: creation date, login count, device UUIDs, validation timestamps
+
+### Together AI → OpenRouter Migration
+- **Old**: `TOGETHER_API_KEY` (deprecated, removed from requirements.txt)
+- **New**: `OPENROUTER_API_KEY` with `openai/gpt-4o-mini` model
+- All AI caption generation now uses OpenRouter API
+
+### Template Split Architecture (v2.3.0+)
+- Template 3 split: 3.html → 3_1.html (Gainers) + 3_2.html (Losers)
+- Template 4 split: 4.html → 4_1.html (Long) + 4_2.html (Short)
+- Maintains backward compatibility with base templates
+
+### Windows UTF-8 Handling
+- Windows doesn't default to UTF-8 encoding
+- Run `scripts/setup/setup_windows_utf8.bat` if encountering encoding errors
+- Troubleshooting docs: `scripts/config/UNICODE_TROUBLESHOOTING.md`
+
+### Playwright Best Practices
+- Always use async/await pattern
+- Set viewport to 2160x2700 for Instagram-optimized screenshots
+- Images saved as JPEG 95% quality (Instagram optimization)
+- Browser cleanup in try/finally blocks
+
+### Instagram API Compliance
+- 5-minute delays between carousel posts (rate-limiting)
+- Session persistence prevents security alerts
+- Respect Instagram ToS and posting frequency limits
+- Never use force_refresh_session() unless absolutely necessary
+
+## Common Pitfalls
+
+1. **Forgetting to create session**: Run `scripts/auth/create_instagram_session.py` first
+2. **Using wrong AI API**: Use `OPENROUTER_API_KEY`, not `TOGETHER_API_KEY`
+3. **Absolute positioning in templates**: Use flexbox auto-layout instead
+4. **Template path errors**: Use absolute path resolution in Jinja2
+5. **Session rate-limiting**: Wait 7 days between fresh logins
+6. **Windows UTF-8**: Run setup script if encoding errors occur
+7. **Committing session files**: Both `data/` and `sessions/` are .gitignored
+
+## Development Workflow
+
+### Adding New Templates
+1. Create HTML in `base_templates/X.html` with flexbox layout
+2. Create CSS in `base_templates/styleX.css`
+3. Create generator in `scripts/main/individual_posts/generate_X_output.py`
+4. Follow existing generator pattern (see `individual_posts/README.md`)
+5. Test with local server: `python scripts/dev/local_server.py`
+6. Update 3-carousel workflow if needed
+
+### Modifying Existing Templates
+1. Edit base template in `base_templates/`
+2. Update corresponding CSS in same directory
+3. Test generation: `python scripts/main/individual_posts/generate_X_output.py`
+4. Preview: http://127.0.0.1:8080/X_output.html
+5. Verify screenshot output in `output_images/`
+
+### Troubleshooting Instagram 403 Errors
+1. Check session age: `python scripts/auth/instagram_session_status.py`
+2. If expired, create new: `python scripts/auth/create_instagram_session.py`
+3. Verify credentials in `.env` file
+4. Ensure not hitting 7-day rate-limit
+
+## Production Hardening (TODO.md)
+
+**P0 Critical**:
+- Session management rate-limiting (✅ DONE)
+- OpenRouter API migration (✅ DONE)
+- Dependency cleanup (requirements.txt duplicates)
+- Script consolidation (multiple instapost variants)
+
+**P1 Important**:
+- Configuration module (pydantic-settings for env vars)
+- Structured logging with correlation IDs
+- Type checking with mypy
+
+**P2 Longer Term**:
+- Package structure (pyproject.toml)
+- Containerization with Dockerfile
+- Pre-commit hooks
