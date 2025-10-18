@@ -454,7 +454,7 @@ body {
 
 .coin-price {
     font-family: 'Inter', monospace;
-    font-size: 2.75rem; /* 44px - Standardized across all templates */
+    font-size: 2.5rem; /* 40px - Standardized to match Template 3 .price */
     font-weight: 700;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
     -webkit-background-clip: text;
