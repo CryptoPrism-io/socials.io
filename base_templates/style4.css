@@ -376,20 +376,20 @@ body {
 }
 
 .logo {
-    width: 70px;
-    height: 70px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
     flex-shrink: 0;
 }
 
 .logo img {
-    width: 60px;
-    height: 60px;
+    width: 128px;
+    height: 128px;
     border-radius: 50%;
 }
 
@@ -400,7 +400,7 @@ body {
 }
 
 .coin-name {
-    font-size: 2.25rem; /* 36px */
+    font-size: 2.75rem; /* 44px */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.95);
 }
@@ -434,7 +434,7 @@ body {
 }
 
 .pct-change {
-    font-size: 1.875rem; /* 30px */
+    font-size: 2.125rem; /* 34px */
     font-weight: 700;
     font-family: 'Inter', monospace;
 }
@@ -456,14 +456,14 @@ body {
 }
 
 .dmv span {
-    font-size: 1.875rem; /* 30px */
+    font-size: 2.125rem; /* 34px */
     font-weight: 700;
-    padding: 8px 20px;
-    border-radius: 12px;
+    padding: 8px 24px;
+    border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    min-width: 100px;
+    min-width: 120px;
     text-align: center;
     font-family: 'Inter', monospace;
 }
