@@ -132,7 +132,7 @@ Just return the caption, nothing else."""
             }
 
             data = {
-                "model": "meta-llama/llama-3.1-8b-instruct:free",
+                "model": "openai/gpt-4o-mini",
                 "messages": [{"role": "user", "content": prompts.get(carousel_name, prompts["Carousel 1"])}]
             }
 
