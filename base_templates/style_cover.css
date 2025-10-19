@@ -75,7 +75,7 @@ body::before {
 }
 
 .brand-text {
-    font-size: 3.5rem; /* 56px */
+    font-size: 4.5rem; /* 72px - Larger */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
@@ -92,7 +92,7 @@ body::before {
 }
 
 .last-update-label {
-    font-size: 1.875rem; /* 30px */
+    font-size: 2.5rem; /* 40px - Larger */
     color: rgba(255, 255, 255, 0.55);
     font-weight: 600;
     text-transform: uppercase;
@@ -100,7 +100,7 @@ body::before {
 }
 
 .last-update-time {
-    font-size: 2.125rem; /* 34px */
+    font-size: 2.75rem; /* 44px - Larger */
     font-weight: 600;
     color: rgba(255, 255, 255, 0.75);
     font-family: 'Poppins', sans-serif;
@@ -131,7 +131,7 @@ body::before {
 
 /* 📝 Cover Title - Largest Element (Golden Ratio) */
 .cover-title {
-    font-size: 5.25rem; /* 84px - Largest */
+    font-size: 6.75rem; /* 108px - Larger */
     font-weight: 800;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
     -webkit-background-clip: text;
@@ -147,7 +147,7 @@ body::before {
 
 /* 📅 Cover Date - Medium Element */
 .cover-date {
-    font-size: 2.75rem; /* 44px - Medium */
+    font-size: 3.5rem; /* 56px - Larger */
     font-weight: 700;
     color: rgba(255, 255, 255, 0.9);
     padding: 20px 40px;
@@ -161,9 +161,9 @@ body::before {
     box-shadow: 0 0 30px rgba(255, 107, 53, 0.2);
 }
 
-/* 💬 Cover Subtitle (Sentiment Hook) - Smallest Element */
+/* 💬 Cover Subtitle (Sentiment Hook) */
 .cover-subtitle {
-    font-size: 2.125rem; /* 34px - Smallest */
+    font-size: 2.75rem; /* 44px - Larger */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.75);
     font-style: italic;
@@ -174,7 +174,7 @@ body::before {
 /* 🔗 Footer Brand */
 .footer-brand {
     text-align: center;
-    font-size: 1.875rem; /* 30px */
+    font-size: 2.5rem; /* 40px - Larger */
     font-weight: 400;
     color: rgba(255, 255, 255, 0.4);
     letter-spacing: 3px;

@@ -68,7 +68,7 @@ body::before {
 }
 
 .brand-name {
-    font-size: 3.5rem; /* 56px */
+    font-size: 4.5rem; /* 72px - Larger */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
@@ -103,7 +103,7 @@ body::before {
 
 /* 💬 Thank You Title - Largest Element */
 .thank-you-title {
-    font-size: 5.25rem; /* 84px - Largest */
+    font-size: 6.75rem; /* 108px - Larger */
     font-weight: 800;
     letter-spacing: -2px;
     line-height: 1.1;
@@ -115,7 +115,7 @@ body::before {
 }
 
 .thank-you-subtitle {
-    font-size: 2.125rem; /* 34px - Smallest */
+    font-size: 2.75rem; /* 44px - Larger */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.75);
     line-height: 1.6;
@@ -155,19 +155,19 @@ body::before {
 }
 
 .action-icon {
-    font-size: 5rem; /* 80px */
+    font-size: 6.5rem; /* 104px - Larger */
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
 }
 
 .action-title {
-    font-size: 3.5rem; /* 56px - Medium */
+    font-size: 4.5rem; /* 72px - Larger */
     font-weight: 700;
     letter-spacing: -1px;
     color: rgba(255, 255, 255, 0.95);
 }
 
 .action-desc {
-    font-size: 1.875rem; /* 30px - Smallest */
+    font-size: 2.5rem; /* 40px - Larger */
     font-weight: 400;
     color: rgba(255, 255, 255, 0.6);
     text-align: center;
@@ -179,7 +179,7 @@ body::before {
 }
 
 .cta-tagline {
-    font-size: 2.125rem; /* 34px */
+    font-size: 2.75rem; /* 44px - Larger */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.75);
     letter-spacing: 1px;

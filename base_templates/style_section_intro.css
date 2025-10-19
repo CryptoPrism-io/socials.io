@@ -75,7 +75,7 @@ body::before {
 }
 
 .brand-text {
-    font-size: 3.5rem; /* 56px */
+    font-size: 4.5rem; /* 72px - Larger */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
@@ -85,10 +85,10 @@ body::before {
 }
 
 .section-badge {
-    font-size: 2.75rem; /* 44px */
+    font-size: 3.5rem; /* 56px - Larger */
     font-weight: 800;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,15 +122,15 @@ body::before {
     justify-content: center;
 }
 
-/* 🎭 Section Emoji - Reduced from 12rem to 6rem */
+/* 🎭 Section Emoji */
 .section-emoji {
-    font-size: 6rem; /* 96px - Reduced */
+    font-size: 8rem; /* 128px - Larger */
     filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
 }
 
 /* 📝 Section Title - Largest Element */
 .section-title {
-    font-size: 5.25rem; /* 84px - Largest */
+    font-size: 6.75rem; /* 108px - Larger */
     font-weight: 800;
     text-align: center;
     letter-spacing: -2px;
@@ -144,9 +144,9 @@ body::before {
     max-width: 1600px;
 }
 
-/* 📄 Section Description - Smallest Element */
+/* 📄 Section Description */
 .section-description {
-    font-size: 2.125rem; /* 34px - Smallest */
+    font-size: 2.75rem; /* 44px - Larger */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.75);
     line-height: 1.6;
@@ -161,7 +161,7 @@ body::before {
 }
 
 .expect-title {
-    font-size: 3.5rem; /* 56px - Medium */
+    font-size: 4.5rem; /* 72px - Larger */
     font-weight: 700;
     margin-bottom: 30px;
     text-align: center;
@@ -185,7 +185,7 @@ body::before {
     background: rgba(255, 255, 255, 0.04);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 1.875rem; /* 30px */
+    font-size: 2.5rem; /* 40px - Larger */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
     transition: all 0.3s ease;
@@ -198,7 +198,7 @@ body::before {
 }
 
 .bullet {
-    font-size: 2.5rem; /* 40px */
+    font-size: 3.25rem; /* 52px - Larger */
     font-weight: 700;
     color: #ff6b35;
     flex-shrink: 0;
