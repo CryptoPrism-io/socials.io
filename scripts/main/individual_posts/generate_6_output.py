@@ -361,15 +361,14 @@ def generate_6_output_html():
         print(f"✅ Successfully generated: {output_html_path}")
         print(f"📄 HTML file size: {len(rendered_html)} characters")
 
-        # Step 7: Also copy the CSS file if it doesn't exist
+        # Step 7: Copy the CSS file (always to get latest changes)
         import shutil
         css_source = os.path.join(template_dir, 'style6.css')
         css_dest = os.path.join(os.path.dirname(output_html_path), 'style6.css')
 
-        if not os.path.exists(css_dest):
-            if os.path.exists(css_source):
-                shutil.copy2(css_source, css_dest)
-                print("📁 Copied style6.css to output_html directory")
+        if os.path.exists(css_source):
+            shutil.copy2(css_source, css_dest)
+            print("📁 Copied style6.css to output_html directory")
 
         return {
             'success': True,
