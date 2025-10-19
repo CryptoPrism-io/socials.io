@@ -96,6 +96,14 @@ async def generate_section_intro(section_key):
         'top_cryptos': '11'
     }
 
+    # Map section keys to background images (1-5 repeating pattern)
+    background_images = {
+        'bitcoin': '3.png',        # Slide 03
+        'trading': '5.png',        # Slide 05
+        'movers': '3.png',         # Slide 08 (cycles: 1,2,3,4,5,1,2,3)
+        'top_cryptos': '1.png'     # Slide 11 (cycles: 1,2,3,4,5,1,2,3,4,5,1)
+    }
+
     try:
         # Initialize template renderer
         renderer = TemplateRenderer()
@@ -110,8 +118,11 @@ async def generate_section_intro(section_key):
         output_dir.mkdir(parents=True, exist_ok=True)
         output_image.parent.mkdir(parents=True, exist_ok=True)
 
+        # Add background image to context
+        section_context = {**section, 'background_image': background_images[section_key]}
+
         # Render template
-        html_content = renderer.render_template('section_intro.html', section)
+        html_content = renderer.render_template('section_intro.html', section_context)
 
         if not html_content:
             print(f"❌ Failed to render section intro template for {section_key}")

@@ -14,9 +14,9 @@ html, body {
     position: relative;
 }
 
-/* 🔥 CSS Background - Using Custom Input Image */
+/* 🔥 CSS Background - Dynamically injected via template */
 body {
-    background-image: url('../input_images/5.png');
+    /* Background image set via inline style in template */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
