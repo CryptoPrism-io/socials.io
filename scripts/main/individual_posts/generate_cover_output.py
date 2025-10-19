@@ -102,6 +102,18 @@ async def generate_cover_output():
             f.write(html_content)
         print(f"✅ Cover HTML generated: {output_html}")
 
+        # Copy CSS files to output_html directory
+        import shutil
+        base_templates_dir = Path(__file__).parent.parent.parent.parent / 'base_templates'
+        css_files = ['style_cover.css', 'style_base.css']
+
+        for css_file in css_files:
+            css_source = base_templates_dir / css_file
+            css_dest = output_dir / css_file
+            if css_source.exists() and not css_dest.exists():
+                shutil.copy2(css_source, css_dest)
+                print(f"📁 Copied {css_file} to output_html directory")
+
         # Generate screenshot
         await generate_image_from_html(
             output_html_file=str(output_html),
