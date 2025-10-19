@@ -1,0 +1,201 @@
+/* 🎨 Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 2160px;
+    height: 2700px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* 🔥 CSS Background - Matching Templates 1, 2, 3 */
+body {
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #050505 70%, #000000 100%);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+/* 📱 Main Page Container */
+.main-container {
+    width: 2160px;
+    height: 2700px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 📋 Header Section */
+.dashboard-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.crypto-prism-brand {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.prism-triangle {
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 64px solid #ff6b35;
+    filter: drop-shadow(0 16px 32px rgba(255, 107, 53, 0.4));
+}
+
+.brand-text {
+    font-size: 3.5rem; /* 56px */
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 6px;
+}
+
+.section-badge {
+    font-size: 2.75rem; /* 44px */
+    font-weight: 800;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: rgba(255, 107, 53, 0.1);
+    border: 3px solid #ff6b35;
+    color: #ff6b35;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+}
+
+/* 🎴 Main Intro Glass Card */
+.intro-glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 16px 64px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+    flex: 1;
+    justify-content: center;
+}
+
+/* 🎭 Section Emoji - Reduced from 12rem to 6rem */
+.section-emoji {
+    font-size: 6rem; /* 96px - Reduced */
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+}
+
+/* 📝 Section Title - Largest Element */
+.section-title {
+    font-size: 5.25rem; /* 84px - Largest */
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+    max-width: 1600px;
+}
+
+/* 📄 Section Description - Smallest Element */
+.section-description {
+    font-size: 2.125rem; /* 34px - Smallest */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    max-width: 1500px;
+}
+
+/* 📋 What to Expect Section */
+.expect-section {
+    width: 100%;
+    max-width: 1700px;
+    margin-top: 20px;
+}
+
+.expect-title {
+    font-size: 3.5rem; /* 56px - Medium */
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase;
+}
+
+.expect-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.expect-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 36px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.875rem; /* 30px */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.expect-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(10px);
+}
+
+.bullet {
+    font-size: 2.5rem; /* 40px */
+    font-weight: 700;
+    color: #ff6b35;
+    flex-shrink: 0;
+}
+
+/* 🔗 Footer Brand */
+.footer-brand {
+    text-align: center;
+    font-size: 1.875rem; /* 30px */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
+}

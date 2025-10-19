@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ section_title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_section_intro.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <div class="dashboard-header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="section-badge">{{ section_number }}</div>
+        </div>
+
+        <!-- Main Content Glass Card -->
+        <div class="intro-glass-card">
+            <!-- Section Emoji -->
+            <div class="section-emoji">{{ section_emoji }}</div>
+
+            <!-- Section Title -->
+            <h1 class="section-title">
+                {{ section_title }}
+            </h1>
+
+            <!-- Section Description -->
+            <p class="section-description">
+                {{ section_description }}
+            </p>
+
+            <!-- What to Expect Section -->
+            <div class="expect-section">
+                <h2 class="expect-title">What to Expect</h2>
+                <ul class="expect-list">
+                    {% for item in expect_items %}
+                    <li class="expect-item">
+                        <span class="bullet">▸</span>
+                        <span>{{ item }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-brand">
+            cryptoprism.io
+        </div>
+    </div>
+</body>
+</html>

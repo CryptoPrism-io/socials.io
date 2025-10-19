@@ -1,0 +1,168 @@
+/* 🎨 Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 2160px;
+    height: 2700px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* 🔥 CSS Background - Matching Templates 1, 2, 3 */
+body {
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.06) 0%, transparent 50%),
+        linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #050505 70%, #000000 100%);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+/* 📱 Main Page Container */
+.main-container {
+    width: 2160px;
+    height: 2700px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 📋 Header Section with Branding and Last Update */
+.dashboard-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.crypto-prism-brand {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.prism-triangle {
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 64px solid #ff6b35;
+    filter: drop-shadow(0 16px 32px rgba(255, 107, 53, 0.4));
+}
+
+.brand-text {
+    font-size: 3.5rem; /* 56px */
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 6px;
+}
+
+.last-update {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.last-update-label {
+    font-size: 1.875rem; /* 30px */
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.last-update-time {
+    font-size: 2.125rem; /* 34px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 🎴 Main Cover Glass Card */
+.cover-glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 16px 64px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 120px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: center;
+    flex: 1;
+    justify-content: center;
+}
+
+/* 📝 Cover Title - Largest Element (Golden Ratio) */
+.cover-title {
+    font-size: 5.25rem; /* 84px - Largest */
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow:
+        0 0 40px rgba(255, 255, 255, 0.2),
+        0 8px 32px rgba(0, 0, 0, 0.3);
+    letter-spacing: -2px;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+/* 📅 Cover Date - Medium Element */
+.cover-date {
+    font-size: 2.75rem; /* 44px - Medium */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 107, 53, 0.15),
+        rgba(255, 107, 53, 0.05)
+    );
+    border-radius: 16px;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.2);
+}
+
+/* 💬 Cover Subtitle (Sentiment Hook) - Smallest Element */
+.cover-subtitle {
+    font-size: 2.125rem; /* 34px - Smallest */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 1400px;
+}
+
+/* 🔗 Footer Brand */
+.footer-brand {
+    text-align: center;
+    font-size: 1.875rem; /* 30px */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
+}
