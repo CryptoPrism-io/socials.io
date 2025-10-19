@@ -67,7 +67,7 @@ async def generate_cta_output():
         for css_file in css_files:
             css_source = base_templates_dir / css_file
             css_dest = output_dir / css_file
-            if css_source.exists() and not css_dest.exists():
+            if css_source.exists():
                 shutil.copy2(css_source, css_dest)
                 print(f"📁 Copied {css_file} to output_html directory")
 
