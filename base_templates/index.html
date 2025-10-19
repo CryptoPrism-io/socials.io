@@ -71,38 +71,48 @@
                 </div>
             </div>
 
-            <!-- Right Column: Quick Stats -->
+            <!-- Market Snapshot Section (40% vertical space) -->
             <div class="stats-column">
                 <h2 class="stats-title">Market Snapshot</h2>
 
-                <!-- Fear & Greed Card -->
-                <div class="stat-card">
-                    <div class="stat-label">Fear & Greed Index</div>
-                    <div class="stat-value">{{ fear_greed_value }}</div>
-                    <div class="stat-subtitle">{{ fear_greed_label }}</div>
-                </div>
+                <!-- Horizontal Row 1: Fear & Greed + Bitcoin Price -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <div class="stat-label">Fear & Greed Index</div>
+                            <div class="stat-subtitle">{{ fear_greed_label }}</div>
+                        </div>
+                        <div class="stat-value">{{ fear_greed_value }}</div>
+                    </div>
 
-                <!-- Bitcoin Price Card -->
-                <div class="stat-card">
-                    <div class="stat-label">Bitcoin Price</div>
-                    <div class="stat-value">${{ btc_price }}</div>
-                    <div class="stat-subtitle {{ 'positive' if btc_change_24h >= 0 else 'negative' }}">
-                        {{ '+' if btc_change_24h >= 0 else '' }}{{ btc_change_24h }}% (24h)
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <div class="stat-label">Bitcoin Price</div>
+                            <div class="stat-subtitle {{ 'positive' if btc_change_24h >= 0 else 'negative' }}">
+                                {{ '+' if btc_change_24h >= 0 else '' }}{{ btc_change_24h }}% (24h)
+                            </div>
+                        </div>
+                        <div class="stat-value">${{ btc_price }}</div>
                     </div>
                 </div>
 
-                <!-- Top Gainer Card -->
-                <div class="stat-card">
-                    <div class="stat-label">Top Gainer</div>
-                    <div class="stat-value">{{ top_gainer_symbol }}</div>
-                    <div class="stat-subtitle positive">+{{ top_gainer_change }}%</div>
-                </div>
+                <!-- Horizontal Row 2: Top Gainer + Top Loser -->
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <div class="stat-label">Top Gainer</div>
+                            <div class="stat-subtitle positive">+{{ top_gainer_change }}%</div>
+                        </div>
+                        <div class="stat-value">{{ top_gainer_symbol }}</div>
+                    </div>
 
-                <!-- Top Loser Card -->
-                <div class="stat-card">
-                    <div class="stat-label">Top Loser</div>
-                    <div class="stat-value">{{ top_loser_symbol }}</div>
-                    <div class="stat-subtitle negative">{{ top_loser_change }}%</div>
+                    <div class="stat-card">
+                        <div class="stat-info">
+                            <div class="stat-label">Top Loser</div>
+                            <div class="stat-subtitle negative">{{ top_loser_change }}%</div>
+                        </div>
+                        <div class="stat-value">{{ top_loser_symbol }}</div>
+                    </div>
                 </div>
             </div>
         </div>

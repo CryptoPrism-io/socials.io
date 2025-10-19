@@ -120,15 +120,15 @@ body::before {
     text-transform: uppercase;
 }
 
-/* 🔲 Two-Column Grid */
+/* 🔲 Vertical Layout - 60% What's Inside, 40% Market Snapshot */
 .index-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 40px;
     flex: 1;
 }
 
-/* 📋 Sections Glass Card (Left Column) */
+/* 📋 Sections Glass Card (60% of vertical space) */
 .sections-glass-card {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(30px) saturate(150%);
@@ -145,6 +145,7 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    flex: 0 0 60%;
 }
 
 .sections-title {
@@ -212,11 +213,12 @@ body::before {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* 📊 Stats Column (Right Column) */
+/* 📊 Stats Column (40% of vertical space with horizontal layout) */
 .stats-column {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    flex: 0 0 40%;
 }
 
 .stats-title {
@@ -225,6 +227,13 @@ body::before {
     letter-spacing: -1px;
     color: rgba(255, 255, 255, 0.95);
     margin-bottom: 10px;
+}
+
+/* Horizontal stats row wrapper */
+.stats-row {
+    display: flex;
+    gap: 30px;
+    flex: 1;
 }
 
 .stat-card {
@@ -239,12 +248,14 @@ body::before {
         0 8px 32px rgba(0, 0, 0, 0.2),
         inset 0 2px 0 rgba(255, 255, 255, 0.1);
 
-    padding: 36px;
+    padding: 30px 40px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 20px;
     transition: all 0.3s ease;
+    flex: 1;
 }
 
 .stat-card:hover {
@@ -254,27 +265,33 @@ body::before {
         0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* Left side: label and subtitle info */
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
 .stat-label {
-    font-size: 1.875rem; /* 30px - Smallest */
+    font-size: 1.875rem; /* 30px */
     font-weight: 600;
     color: rgba(255, 255, 255, 0.6);
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-align: center;
 }
 
 .stat-value {
-    font-size: 2.75rem; /* 44px - Medium */
+    font-size: 3rem; /* 48px - Large and bold */
     font-weight: 800;
     letter-spacing: -1px;
     color: rgba(255, 255, 255, 0.95);
-    text-align: center;
+    white-space: nowrap;
 }
 
 .stat-subtitle {
-    font-size: 2.125rem; /* 34px */
+    font-size: 1.75rem; /* 28px */
     font-weight: 600;
-    text-align: center;
 }
 
 .stat-subtitle.positive {
