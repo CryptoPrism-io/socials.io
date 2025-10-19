@@ -65,15 +65,24 @@ async def generate_index_output():
 
         if btc_data is not None and not btc_data.empty:
             btc_row = btc_data.iloc[0]
-            fear_greed_value = btc_row.get('fear_greed_value')
+            fear_greed_value = btc_row.get('fear_greed_index')  # Fixed: column name is 'fear_greed_index' not 'fear_greed_value'
             price_raw = btc_row.get('price', 0)
             # Convert price to float if it's a string
             try:
-                price_float = float(price_raw)
+                # Remove '$' if present in the price string
+                price_str = str(price_raw).replace('$', '')
+                price_float = float(price_str)
                 btc_price = f"{price_float:,.0f}"
             except (ValueError, TypeError):
                 btc_price = str(price_raw)
-            btc_change_24h = round(btc_row.get('percent_change_24h', 0), 2)
+
+            # Get percent_change_24h - handle string format
+            percent_change_raw = btc_row.get('percent_change_24h', 0)
+            try:
+                btc_change_24h = round(float(percent_change_raw), 2)
+            except (ValueError, TypeError):
+                btc_change_24h = 0
+
             print(f"  📊 Fear & Greed: {fear_greed_value}")
             print(f"  ₿ BTC Price: ${btc_price}")
             print(f"  📈 BTC Change: {btc_change_24h}%")
