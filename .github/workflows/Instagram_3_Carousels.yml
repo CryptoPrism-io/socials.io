@@ -1,4 +1,4 @@
-name: Instagram 3-Carousel Daily Post
+name: Instagram Mega-Carousel Daily Post
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch: {}  # Allow manual trigger
 
 jobs:
-  generate_and_post_carousels:
+  generate_and_post_mega_carousel:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,15 +35,8 @@ jobs:
       env:
         PYTHONIOENCODING: utf-8
 
-    - name: Generate all template outputs
-      run: |
-        python scripts/main/individual_posts/generate_1_output.py
-        python scripts/main/individual_posts/generate_2_output.py
-        python scripts/main/individual_posts/generate_3_1_output.py
-        python scripts/main/individual_posts/generate_3_2_output.py
-        python scripts/main/individual_posts/generate_4_1_output.py
-        python scripts/main/individual_posts/generate_4_2_output.py
-        python scripts/main/individual_posts/generate_6_output.py
+    - name: Generate and Post Mega-Carousel (14 slides)
+      run: python scripts/main/publishing/post_mega_carousel.py
       env:
         PYTHONIOENCODING: utf-8
         DB_HOST: ${{ secrets.DB_HOST }}
@@ -53,14 +46,8 @@ jobs:
         GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         CRYPTO_SPREADSHEET_KEY: ${{ secrets.CRYPTO_SPREADSHEET_KEY }}
-
-    - name: Post 3 Carousels to Instagram
-      run: python scripts/main/publishing/post_3_carousels.py
-      env:
-        PYTHONIOENCODING: utf-8
         INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
         INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
-        OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
     - name: Upload artifacts (if needed)
       if: always()
