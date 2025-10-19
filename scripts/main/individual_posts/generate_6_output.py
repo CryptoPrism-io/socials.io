@@ -352,8 +352,8 @@ def generate_6_output_html():
         # Step 5: Render HTML
         rendered_html = template.render(**template_data)
 
-        # Step 6: Save to 6_output.html
-        output_html_path = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html', '6_output.html')
+        # Step 6: Save to 04_bitcoin_intelligence_output.html
+        output_html_path = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html', '04_bitcoin_intelligence_output.html')
 
         with open(output_html_path, 'w', encoding='utf-8') as f:
             f.write(rendered_html)
@@ -401,8 +401,8 @@ async def generate_6_with_screenshot():
 
         output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
         image_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_images')
-        output_path = os.path.join(output_dir, "6_output.html")
-        image_path = os.path.join(image_dir, "6_output.jpg")
+        output_path = os.path.join(output_dir, "04_bitcoin_intelligence_output.html")
+        image_path = os.path.join(image_dir, "04_bitcoin_intelligence_output.jpg")
 
         await generate_image_from_html(output_path, image_path)
         print(f"✅ Template 6 screenshot generated: {image_path}")

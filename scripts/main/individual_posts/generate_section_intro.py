@@ -88,14 +88,23 @@ async def generate_section_intro(section_key):
     section = SECTIONS[section_key]
     print(f"📸 Generating Section Intro: {section['section_title']}...")
 
+    # Map section keys to slide numbers
+    slide_numbers = {
+        'bitcoin': '03',
+        'trading': '05',
+        'movers': '08',
+        'top_cryptos': '11'
+    }
+
     try:
         # Initialize template renderer
         renderer = TemplateRenderer()
 
         # Prepare output paths
         output_dir = Path(__file__).parent.parent.parent.parent / 'output_html'
-        output_html = output_dir / f'section_intro_{section_key}_output.html'
-        output_image = Path(__file__).parent.parent.parent.parent / 'output_images' / f'section_intro_{section_key}_output.jpg'
+        slide_num = slide_numbers[section_key]
+        output_html = output_dir / f'{slide_num}_section_{section_key}_output.html'
+        output_image = Path(__file__).parent.parent.parent.parent / 'output_images' / f'{slide_num}_section_{section_key}_output.jpg'
 
         # Ensure directories exist
         output_dir.mkdir(parents=True, exist_ok=True)

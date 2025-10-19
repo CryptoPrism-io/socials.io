@@ -33,7 +33,7 @@ def generate_1_output():
 
         # Prepare output paths
         output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
-        output_path = os.path.join(output_dir, "1_output.html")
+        output_path = os.path.join(output_dir, "12_top_cryptos_2_24_output.html")
 
         # Render template
         success = renderer.render_coins_page('1.html', df, output_path)
@@ -62,8 +62,8 @@ async def generate_1_with_screenshot():
     try:
         output_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_html')
         image_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'output_images')
-        output_path = os.path.join(output_dir, "1_output.html")
-        image_path = os.path.join(image_dir, "1_output.jpg")
+        output_path = os.path.join(output_dir, "12_top_cryptos_2_24_output.html")
+        image_path = os.path.join(image_dir, "12_top_cryptos_2_24_output.jpg")
 
         await generate_image_from_html(output_path, image_path)
         print(f"✅ Template 1 screenshot generated: {image_path}")

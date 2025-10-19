@@ -224,25 +224,25 @@ Just return the caption, nothing else."""
                 "name": "Carousel 1",
                 "description": "Bitcoin Intelligence + Top Cryptos",
                 "images": [
-                    str(output_dir / "6_output.jpg"),  # Bitcoin + Macro Intelligence
-                    str(output_dir / "1_output.jpg"),  # Top Cryptos 2-24
-                    str(output_dir / "2_output.jpg"),  # Extended Cryptos 25-48
+                    str(output_dir / "04_bitcoin_intelligence_output.jpg"),  # Bitcoin + Macro Intelligence
+                    str(output_dir / "12_top_cryptos_2_24_output.jpg"),  # Top Cryptos 2-24
+                    str(output_dir / "13_top_cryptos_25_48_output.jpg"),  # Extended Cryptos 25-48
                 ]
             },
             {
                 "name": "Carousel 2",
                 "description": "Top Gainers & Losers",
                 "images": [
-                    str(output_dir / "3_1_output.jpg"),  # Top Gainers
-                    str(output_dir / "3_2_output.jpg"),  # Top Losers
+                    str(output_dir / "09_movers_gainers_output.jpg"),  # Top Gainers
+                    str(output_dir / "10_movers_losers_output.jpg"),  # Top Losers
                 ]
             },
             {
                 "name": "Carousel 3",
                 "description": "Long/Short Call Positions",
                 "images": [
-                    str(output_dir / "4_1_output.jpg"),  # Long Calls
-                    str(output_dir / "4_2_output.jpg"),  # Short Calls
+                    str(output_dir / "06_trading_long_calls_output.jpg"),  # Long Calls
+                    str(output_dir / "07_trading_short_calls_output.jpg"),  # Short Calls
                 ]
             }
         ]

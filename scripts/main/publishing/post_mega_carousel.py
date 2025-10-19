@@ -55,20 +55,20 @@ async def generate_all_slides():
     # Define generation sequence
     generators = [
         # (slide_number, script_name, output_file, description)
-        (1, 'generate_cover_output.py', 'cover_output.jpg', 'Cover'),
-        (2, 'generate_index_output.py', 'index_output.jpg', 'Index'),
-        (3, 'generate_section_intro.py bitcoin', 'section_intro_bitcoin_output.jpg', 'Section Intro - Bitcoin'),
-        (4, 'generate_6_output.py', '6_output.jpg', 'Bitcoin & Market Intelligence'),
-        (5, 'generate_section_intro.py trading', 'section_intro_trading_output.jpg', 'Section Intro - Trading'),
-        (6, 'generate_4_1_output.py', '4_1_output.jpg', 'Long Call Positions'),
-        (7, 'generate_4_2_output.py', '4_2_output.jpg', 'Short Call Positions'),
-        (8, 'generate_section_intro.py movers', 'section_intro_movers_output.jpg', 'Section Intro - Market Movers'),
-        (9, 'generate_3_1_output.py', '3_1_output.jpg', 'Top Gainers'),
-        (10, 'generate_3_2_output.py', '3_2_output.jpg', 'Top Losers'),
-        (11, 'generate_section_intro.py top_cryptos', 'section_intro_top_cryptos_output.jpg', 'Section Intro - Top Cryptos'),
-        (12, 'generate_1_output.py', '1_output.jpg', 'Top Cryptos 2-24'),
-        (13, 'generate_2_output.py', '2_output.jpg', 'Extended Cryptos 25-48'),
-        (14, 'generate_cta_output.py', 'cta_output.jpg', 'CTA'),
+        (1, 'generate_cover_output.py', '01_cover_output.jpg', 'Cover'),
+        (2, 'generate_index_output.py', '02_index_output.jpg', 'Index'),
+        (3, 'generate_section_intro.py bitcoin', '03_section_bitcoin_output.jpg', 'Section Intro - Bitcoin'),
+        (4, 'generate_6_output.py', '04_bitcoin_intelligence_output.jpg', 'Bitcoin & Market Intelligence'),
+        (5, 'generate_section_intro.py trading', '05_section_trading_output.jpg', 'Section Intro - Trading'),
+        (6, 'generate_4_1_output.py', '06_trading_long_calls_output.jpg', 'Long Call Positions'),
+        (7, 'generate_4_2_output.py', '07_trading_short_calls_output.jpg', 'Short Call Positions'),
+        (8, 'generate_section_intro.py movers', '08_section_movers_output.jpg', 'Section Intro - Market Movers'),
+        (9, 'generate_3_1_output.py', '09_movers_gainers_output.jpg', 'Top Gainers'),
+        (10, 'generate_3_2_output.py', '10_movers_losers_output.jpg', 'Top Losers'),
+        (11, 'generate_section_intro.py top_cryptos', '11_section_top_cryptos_output.jpg', 'Section Intro - Top Cryptos'),
+        (12, 'generate_1_output.py', '12_top_cryptos_2_24_output.jpg', 'Top Cryptos 2-24'),
+        (13, 'generate_2_output.py', '13_top_cryptos_25_48_output.jpg', 'Extended Cryptos 25-48'),
+        (14, 'generate_cta_output.py', '14_cta_output.jpg', 'CTA'),
     ]
 
     slides = []

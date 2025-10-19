@@ -40,8 +40,8 @@ async def generate_cta_output():
 
         # Prepare output paths
         output_dir = Path(__file__).parent.parent.parent.parent / 'output_html'
-        output_html = output_dir / 'cta_output.html'
-        output_image = Path(__file__).parent.parent.parent.parent / 'output_images' / 'cta_output.jpg'
+        output_html = output_dir / '14_cta_output.html'
+        output_image = Path(__file__).parent.parent.parent.parent / 'output_images' / '14_cta_output.jpg'
 
         # Ensure directories exist
         output_dir.mkdir(parents=True, exist_ok=True)

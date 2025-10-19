@@ -83,8 +83,8 @@ async def generate_cover_output():
 
         # Prepare output paths
         output_dir = Path(__file__).parent.parent.parent.parent / 'output_html'
-        output_html = output_dir / 'cover_output.html'
-        output_image = Path(__file__).parent.parent.parent.parent / 'output_images' / 'cover_output.jpg'
+        output_html = output_dir / '01_cover_output.html'
+        output_image = Path(__file__).parent.parent.parent.parent / 'output_images' / '01_cover_output.jpg'
 
         # Ensure directories exist
         output_dir.mkdir(parents=True, exist_ok=True)
