@@ -7,6 +7,7 @@ Individual post generator for Template 1
 import os
 import sys
 import asyncio
+import shutil
 from datetime import datetime
 
 # Add parent directories to path for imports
@@ -40,6 +41,15 @@ def generate_1_output():
 
         if success:
             print(f"✅ Template 1 HTML generated: {output_path}")
+
+            # Copy CSS file to output_html directory (always copy to get latest changes)
+            template_dir = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'base_templates')
+            css_source = os.path.join(template_dir, 'style1.css')
+            css_dest = os.path.join(output_dir, 'style1.css')
+            if os.path.exists(css_source):
+                shutil.copy2(css_source, css_dest)
+                print(f"📁 Copied style1.css to output_html directory")
+
             return True
         else:
             print("❌ Template 1 rendering failed")

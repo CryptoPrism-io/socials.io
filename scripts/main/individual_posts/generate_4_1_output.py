@@ -8,6 +8,7 @@ Uses sentiment analysis and trading ratios to identify bullish opportunities
 import os
 import sys
 import asyncio
+import shutil
 from datetime import datetime
 
 # Add parent directories to path for imports
@@ -69,6 +70,14 @@ def generate_4_1_output():
             f.write(html_content)
 
         print(f"✅ Template 4.1 HTML generated: {output_path}")
+
+        # Copy CSS file to output_html directory (always copy to get latest changes)
+        css_source = os.path.join(template_dir, 'style4.css')
+        css_dest = os.path.join(output_dir, 'style4.css')
+        if os.path.exists(css_source):
+            shutil.copy2(css_source, css_dest)
+            print(f"📁 Copied style4.css to output_html directory")
+
         return True
 
     except Exception as e:
