@@ -309,14 +309,23 @@ body {
     font-style: italic;
 }
 
+/* Standardized footer */
+.footer-brand {
+    text-align: center;
+    font-size: 2.5rem; /* 40px - Standardized */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
+}
+
+/* Legacy footer class for backward compatibility */
 .brand-footer {
-    font-family: 'Orbitron', monospace;
-    font-size: 32px;
-    font-weight: 700;
-    color: #ff6b35;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    text-align: center;
+    font-size: 2.5rem; /* 40px - Standardized */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
 }
 
 /* 📱 Mobile responsiveness (if needed) */

@@ -1424,15 +1424,24 @@ body::before {
 }
 
 
-/* 📝 Footer */
+/* 📝 Footer - Standardized */
+.footer-brand {
+    text-align: center;
+    font-size: 2.5rem; /* 40px - Standardized */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
+}
+
+/* Legacy footer class for backward compatibility */
 .footer-container {
     text-align: center;
-    font-size: 40px;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 2.5rem; /* 40px - Standardized */
     font-weight: 400;
-    letter-spacing: 2px;
-    margin-top: 30px;
-    padding: 20px 0;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
 }
 
 /* News Paragraph Format Styles */

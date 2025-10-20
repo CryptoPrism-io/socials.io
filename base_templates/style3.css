@@ -549,12 +549,22 @@ body::before {
     text-align: center;
 }
 
-/* 📝 Footer */
+/* 📝 Footer - Standardized */
+.footer-brand {
+    text-align: center;
+    font-size: 2.5rem; /* 40px - Standardized */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
+}
+
+/* Legacy footer class for backward compatibility */
 .footer-container {
     text-align: center;
-    font-size: 60px;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 2.5rem; /* 40px - Standardized */
     font-weight: 400;
-    letter-spacing: 4px;
-    margin-top: 40px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
 }
