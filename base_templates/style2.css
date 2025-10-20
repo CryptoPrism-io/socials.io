@@ -111,14 +111,14 @@ body::before {
 }
 
 .brand-text {
-    font-size: 1.875rem; /* 30px */
+    font-size: 3.5rem; /* 56px - Standardized */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
-    letter-spacing: 3px;
+    letter-spacing: 6px;
 }
 
 .last-update {

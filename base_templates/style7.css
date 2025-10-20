@@ -62,12 +62,13 @@ body {
 }
 
 .brand-text {
-    font-family: 'Orbitron', monospace;
-    font-size: 42px;
-    font-weight: 500;
-    color: #ff6b35;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: 3.5rem; /* 56px - Standardized */
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 6px;
     text-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
 }
 

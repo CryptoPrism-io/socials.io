@@ -98,7 +98,7 @@ body::before {
 }
 
 .brand-text {
-    font-size: 1.875rem; /* 30px */
+    font-size: 3.5rem; /* 56px - Standardized */
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
