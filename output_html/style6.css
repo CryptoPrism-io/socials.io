@@ -54,6 +54,7 @@ body::before {
     padding: 80px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 100px;
     overflow: hidden;
     box-sizing: border-box;
@@ -63,11 +64,17 @@ body::before {
 
 /* 🚀 Bitcoin Dashboard Card */
 .btc-dashboard-card {
-    background: rgba(0, 0, 0, 0.1);
+    border-radius: 56px;
+    border: 2px solid transparent;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)) padding-box,
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0.3) 100%
+        ) border-box;
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border-radius: 56px;
-    border: 0.5px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
         0 24px 80px rgba(0, 0, 0, 0.4),

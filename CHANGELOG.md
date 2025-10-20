@@ -12,6 +12,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.3.4] - 2025-10-20
+
+### 🎨 Changed
+- **Enhanced Card Borders & Content Centering** - 2-phase visual enhancement for content cards (slides 04, 06, 07, 09, 10, 12, 13)
+  - **Phase 1**: Gradient white borders for better visibility
+    - Replaced subtle `0.5px solid rgba(255,255,255,0.05)` border with 2px gradient border
+    - New gradient: 30% → 15% → 30% opacity creates elegant shimmer effect
+    - Uses dual-background technique: padding-box + border-box
+    - Updated: `style1.css`, `style2.css`, `style3.css`, `style4.css`, `style6.css` (.coin-card, .btc-dashboard-card)
+  - **Phase 2**: Vertical content centering
+    - Added `justify-content: center` to `.main-container` in all content slides
+    - Content now perfectly centered vertically within page (eliminates bottom spacing)
+    - Updated: `style1.css`, `style2.css`, `style3.css`, `style4.css`, `style6.css`
+
+### ✨ Impact
+- **Visible Borders**: Card borders now clearly visible (4x thicker with gradient effect)
+- **Better Definition**: Cards stand out more against background with elegant gradient shimmer
+- **Balanced Layout**: Content vertically centered - no more awkward empty space at bottom
+- **Professional Polish**: Refined glassmorphism with improved depth and structure
+- **Maintained Aesthetic**: Gradient borders complement existing dark glassmorphism design
+
+### 🔧 Technical Details
+- **Affected Slides**: 04 (Bitcoin Intelligence), 06-07 (Trading), 09-10 (Market Movers), 12-13 (Top Cryptos)
+- **Production Post**: https://www.instagram.com/p/DQCsKE1gXL0/ (165.2 seconds generation time)
+- Border technique: `linear-gradient()` in both padding-box and border-box layers
+- Centering applies only to content slides (intro slides unaffected)
+- All 14 slides regenerated with enhanced borders and centering
+
+### 📦 Commits
+- Coming next (after git operations)
+
+---
+
 ## [v2.3.3] - 2025-10-20
 
 ### 🎨 Changed
