@@ -12,6 +12,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.3.2] - 2025-10-20
+
+### 🎨 Changed
+- **Design Standardization Across All Templates**: 5-phase standardization of 14-slide mega-carousel for visual consistency
+  - **Phase 1**: Standardized "CRYPTO PRISM" brand text to 3.5rem (56px) across all templates
+    - Updated `style1.css`, `style2.css`, `style3.css`, `style4.css`, `style5.css`, `style6.css`, `style7.css`
+    - Unified gradient styling and 6px letter-spacing
+  - **Phase 2**: Added section titles with `.section-title-header` class (4rem, 700 weight, 2px letter-spacing)
+    - Content slides now display "// SECTION TITLE" format
+    - Updated: 1.html, 2.html, 3_1.html, 3_2.html, 4_1.html, 4_2.html, 6.html
+  - **Phase 3**: Standardized footer to `.footer-brand` class (2.5rem/40px, rgba(255,255,255,0.4))
+    - Maintained legacy classes (`.footer-container`, `.footer-text`) for backward compatibility
+    - Updated all CSS and HTML files
+  - **Phase 5**: Removed redundant "Last Update" label text from all templates
+    - Kept date/time display only (cleaner, more professional design)
+    - Updated: index.html, 1.html, 2.html, 3_1.html, 3_2.html, 4_1.html, 4_2.html, 6.html
+
+### ✨ Impact
+- **Unified Brand Identity**: Consistent "CRYPTO PRISM" branding across all 14 slides
+- **Professional Section Headers**: Clear, standardized section titles using "// " prefix format
+- **Cleaner Footer Design**: Uniform footer styling throughout the carousel
+- **Reduced Visual Clutter**: Removal of redundant "Last Update" label improves readability
+
+### 🔧 Technical Details
+- **Production Post**: https://www.instagram.com/p/DQCZSk-AUAt/ (162.8 seconds generation time)
+- All 14 slides regenerated with standardized design elements
+- Maintained backward compatibility with legacy CSS classes
+
+### 📦 Commits
+- `ba66e9d` - feat: Remove 'Last Update' label from all templates (Phase 5)
+- `50b8fed` - feat: Standardize footer class and styling across all templates (Phase 3)
+- `c310f92` - feat: Add section titles to content pages with standardized styling (Phase 2)
+- `7ea98b1` - feat: Standardize CRYPTO PRISM brand text size across all templates (Phase 1)
+
+---
+
 ## [v2.3.1] - 2025-10-20
 
 ### 🎨 Changed
