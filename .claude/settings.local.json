@@ -17,7 +17,20 @@
       "WebSearch",
       "Bash(pip install:*)",
       "Bash(flake8:*)",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Bash(for file in generate_3_1_output.py generate_3_2_output.py generate_4_1_output.py generate_4_2_output.py generate_6_output.py)",
+      "Bash(do sed -i '/finally:/,+1d' \"$file\")",
+      "Bash(done)",
+      "Bash(for file in base_templates/style{1,2,3,4}.css)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(for i in 1 2 3 4)",
+      "Bash(do echo \"=== Template $i ===\")",
+      "Bash(for file in base_templates/style_cover.css base_templates/style_index.css base_templates/style_section_intro.css base_templates/style1.css base_templates/style2.css base_templates/style3.css base_templates/style_cta.css)",
+      "Bash(for file in scripts/main/individual_posts/generate_*.py)",
+      "Bash(echo \"Template to CSS mapping:\n01 cover -> style_cover.css ✓\n02 index -> style_index.css ✓\n03 section_intro -> style_section_intro.css ✓\n04 bitcoin (6) -> style6.css ✓\n05 section_intro -> style_section_intro.css ✓\n06 trading long (4_1) -> style4.css ✗\n07 trading short (4_2) -> style4.css ✗\n08 section_intro -> style_section_intro.css ✓\n09 gainers (3_1) -> style3.css ✗\n10 losers (3_2) -> style3.css ✗\n11 section_intro -> style_section_intro.css ✓\n12 top cryptos (1) -> style1.css ✗\n13 extended (2) -> style2.css ✗\n14 cta -> style_cta.css ✓\")",
+      "Bash(echo \"Slide 06 (Long Calls) - Template 4.1 -> style4.css\nSlide 07 (Short Calls) - Template 4.2 -> style4.css\nSlide 09 (Gainers) - Template 3.1 -> style3.css\nSlide 10 (Losers) - Template 3.2 -> style3.css\nSlide 12 (Top Cryptos 2-24) - Template 1 -> style1.css\nSlide 13 (Extended 25-48) - Template 2 -> style2.css\")"
     ],
     "deny": [],
     "ask": []

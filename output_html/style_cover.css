@@ -14,9 +14,9 @@ html, body {
     position: relative;
 }
 
-/* 🔥 CSS Background - Dynamically injected via template */
+/* 🔥 CSS Background - Using Custom Input Image */
 body {
-    /* Background image set via inline style in template */
+    background-image: url('../input_images/1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -50,13 +50,13 @@ body::before {
     z-index: 1;
 }
 
-/* 📋 Header Section */
+/* 📋 Header Section with Branding and Last Update */
 .dashboard-header-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .crypto-prism-brand {
@@ -75,32 +75,39 @@ body::before {
 }
 
 .brand-text {
-    font-size: 3.5rem; /* 56px - Standardized */
-    font-weight: 400;
+    font-size: 4.5rem; /* 72px - Larger */
+    font-weight: 800;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    letter-spacing: 6px;
+}
+
+.last-update {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.last-update-label {
+    font-size: 2.5rem; /* 40px - Larger */
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 600;
+    text-transform: uppercase;
     letter-spacing: 4px;
 }
 
-.section-badge {
-    font-size: 3.5rem; /* 56px - Larger */
-    font-weight: 800;
-    width: 120px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    background: rgba(255, 107, 53, 0.1);
-    border: 3px solid #ff6b35;
-    color: #ff6b35;
-    box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+.last-update-time {
+    font-size: 2.75rem; /* 44px - Larger */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Poppins', sans-serif;
 }
 
-/* 🎴 Main Intro Glass Card - Bitcoin Intelligence Glassmorphism */
-.intro-glass-card {
+/* 🎴 Main Cover Glass Card - Bitcoin Intelligence Glassmorphism Formula */
+.cover-glass-card {
     background: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
@@ -112,7 +119,7 @@ body::before {
         0 12px 40px rgba(0, 0, 0, 0.3),
         inset 0 2px 0 rgba(255, 255, 255, 0.15);
 
-    padding: 80px 60px;
+    padding: 120px 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -122,94 +129,54 @@ body::before {
     justify-content: center;
 }
 
-/* 🎭 Section Emoji */
-.section-emoji {
-    font-size: 8rem; /* 128px - Larger */
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
-}
-
-/* 📝 Section Title - Largest Element */
-.section-title {
+/* 📝 Cover Title - Largest Element (Golden Ratio) */
+.cover-title {
     font-size: 6.75rem; /* 108px - Larger */
     font-weight: 800;
-    text-align: center;
-    letter-spacing: -2px;
-    line-height: 1.1;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+    text-shadow:
+        0 0 40px rgba(255, 255, 255, 0.2),
+        0 8px 32px rgba(0, 0, 0, 0.3);
+    letter-spacing: -2px;
+    line-height: 1.1;
     text-transform: uppercase;
-    max-width: 1600px;
 }
 
-/* 📄 Section Description */
-.section-description {
+/* 📅 Cover Date - Medium Element */
+.cover-date {
+    font-size: 3.5rem; /* 56px - Larger */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 107, 53, 0.15),
+        rgba(255, 107, 53, 0.05)
+    );
+    border-radius: 16px;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.2);
+}
+
+/* 💬 Cover Subtitle (Sentiment Hook) */
+.cover-subtitle {
     font-size: 2.75rem; /* 44px - Larger */
     font-weight: 500;
     color: rgba(255, 255, 255, 0.75);
-    line-height: 1.6;
-    max-width: 1500px;
-}
-
-/* 📋 What to Expect Section */
-.expect-section {
-    width: 100%;
-    max-width: 1700px;
-    margin-top: 20px;
-}
-
-.expect-title {
-    font-size: 4.5rem; /* 72px - Larger */
-    font-weight: 700;
-    margin-bottom: 30px;
-    text-align: center;
-    letter-spacing: -1px;
-    color: rgba(255, 255, 255, 0.95);
-    text-transform: uppercase;
-}
-
-.expect-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.expect-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 28px 36px;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 2.5rem; /* 40px - Larger */
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s ease;
-    text-align: left;
-}
-
-.expect-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateX(10px);
-}
-
-.bullet {
-    font-size: 3.25rem; /* 52px - Larger */
-    font-weight: 700;
-    color: #ff6b35;
-    flex-shrink: 0;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 1400px;
 }
 
 /* 🔗 Footer Brand */
 .footer-brand {
     text-align: center;
-    font-size: 1.875rem; /* 30px */
+    font-size: 2.5rem; /* 40px - Larger */
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.4);
     letter-spacing: 3px;
     margin-top: auto;
 }

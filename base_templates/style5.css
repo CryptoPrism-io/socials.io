@@ -110,13 +110,13 @@ body {
 
 .brand-text {
     font-size: 3.5rem; /* 56px - Standardized */
-    font-weight: 800;
+    font-weight: 400;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
-    letter-spacing: 6px;
+    letter-spacing: 4px;
 }
 
 .last-update {
@@ -508,7 +508,7 @@ body {
     text-align: center;
     font-size: 2.5rem; /* 40px - Standardized */
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.6);
     letter-spacing: 3px;
     margin-top: auto;
 }

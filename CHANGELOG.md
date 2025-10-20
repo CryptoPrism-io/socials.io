@@ -12,6 +12,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.3.3] - 2025-10-20
+
+### 🎨 Changed
+- **Design Refinement: Lighter Branding & Inline Titles** - 3-phase refinement of 12 middle slides (02-13) for improved readability and visual hierarchy
+  - **Phase 1**: Lighter brand text styling
+    - Reduced `.brand-text` font-weight from `800` → `400` (lighter, more elegant)
+    - Tightened letter-spacing from `6px` → `4px` (better visual balance)
+    - Updated: `style_index.css`, `style_section_intro.css`, `style1-7.css` (9 CSS files)
+  - **Phase 2**: Inline page titles with brand header (7 content pages only)
+    - Moved section titles from standalone position to same line as "CRYPTO PRISM"
+    - New format: `CRYPTO PRISM  // PAGE TITLE` (horizontal layout)
+    - Added `.page-title-text` class (font-weight: 300, opacity: 0.5, less emphasized)
+    - Updated: 1.html, 2.html, 3_1.html, 3_2.html, 4_1.html, 4_2.html, 6.html
+    - Section intro pages (index, section_intro) remain title-free as intended
+  - **Phase 3**: Brighter footer for better visibility
+    - Increased `.footer-brand` opacity from `rgba(255,255,255,0.4)` → `rgba(255,255,255,0.6)` (+50% brightness)
+    - Updated all 9 CSS files affecting slides 02-13
+
+### ✨ Impact
+- **Refined Typography**: Lighter brand text (400 weight) creates more sophisticated, less bold appearance
+- **Cleaner Headers**: Inline page titles save vertical space and create better visual flow
+- **Improved Hierarchy**: Page titles visually de-emphasized (lighter weight, lower opacity) compared to brand
+- **Enhanced Readability**: Brighter footer (60% vs 40% opacity) improves legibility without overwhelming design
+- **Consistent Experience**: All middle slides (02-13) now share unified styling; Cover (01) and CTA (14) retain distinct designs
+
+### 🔧 Technical Details
+- **Scope**: Changes affect slides 02-13 only (Cover and CTA excluded intentionally)
+- **Production Post**: https://www.instagram.com/p/DQCcJtXgYux/ (171.0 seconds generation time)
+- All 14 slides regenerated with refined typography and layout
+- New CSS class `.page-title-text` added to content templates for inline titles
+- Maintained full backward compatibility with existing styles
+
+### 📦 Commits
+- Coming next (Phase 1-3 commits to be added after git operations)
+
+---
+
 ## [v2.3.2] - 2025-10-20
 
 ### 🎨 Changed

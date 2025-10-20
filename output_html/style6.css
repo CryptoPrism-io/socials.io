@@ -23,19 +23,31 @@ html, body {
     font-family: 'Poppins', sans-serif !important;
 }
 
-/* 🔥 Darker CSS Background */
+/* 🔥 CSS Background - Using Custom Input Image */
 body {
-    background:
-        radial-gradient(ellipse at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(255, 0, 255, 0.06) 0%, transparent 50%),
-        linear-gradient(135deg, #000000 0%, #0a0a0a 30%, #050505 70%, #000000 100%);
-    background-size: 100% 100%;
+    background-image: url('../input_images/4.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
+    position: relative;
+}
+
+/* Dark overlay to dim the background image (30% opacity) */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
 }
 
 /* 🌟 Static Styling - No Animations */
 
-/* 📱 Main Page Container */
+/* 📱 Main Page Container - Above overlay */
 .main-container {
     width: 2160px;
     height: 2700px;
@@ -46,6 +58,7 @@ body {
     overflow: hidden;
     box-sizing: border-box;
     position: relative;
+    z-index: 1;
 }
 
 /* 🚀 Bitcoin Dashboard Card */
@@ -381,14 +394,22 @@ body {
 }
 
 .brand-text {
-    font-size: 2.5rem; /* 40px */
-    font-weight: 800;
+    font-size: 3.5rem; /* 56px - Standardized */
+    font-weight: 400;
     background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
-    letter-spacing: 1.5px;
+    letter-spacing: 4px;
+}
+
+.page-title-text {
+    font-size: 3.5rem; /* 56px - Same as brand */
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 2px;
+    margin-left: 20px;
 }
 
 .last-update {
@@ -415,6 +436,17 @@ body {
     color: rgba(255, 255, 255, 0.75);
     font-family: 'Inter', sans-serif;
 }
+
+/* 📝 Section Title Header */
+.section-title-header {
+    font-size: 4rem; /* 64px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 /* Bottom datetime styles no longer needed at bottom card */
 
 /* 🪙 Main BTC Information Section */
@@ -1400,15 +1432,24 @@ body {
 }
 
 
-/* 📝 Footer */
+/* 📝 Footer - Standardized */
+.footer-brand {
+    text-align: center;
+    font-size: 2.5rem; /* 40px - Standardized */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 3px;
+    margin-top: auto;
+}
+
+/* Legacy footer class for backward compatibility */
 .footer-container {
     text-align: center;
-    font-size: 40px;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 2.5rem; /* 40px - Standardized */
     font-weight: 400;
-    letter-spacing: 2px;
-    margin-top: 30px;
-    padding: 20px 0;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
 }
 
 /* News Paragraph Format Styles */

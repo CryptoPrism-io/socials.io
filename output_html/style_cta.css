@@ -1,0 +1,205 @@
+/* 🎨 Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 2160px;
+    height: 2700px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* 🔥 CSS Background - Using Custom Input Image */
+body {
+    background-image: url('../input_images/4.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Dark overlay to dim the background image (30% opacity) */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+/* 📱 Main Page Container */
+.main-container {
+    width: 2160px;
+    height: 2700px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+/* 🎨 Logo Hero */
+.logo-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.prism-triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid #ff6b35;
+    filter: drop-shadow(0 16px 40px rgba(255, 107, 53, 0.5));
+}
+
+.brand-name {
+    font-size: 4.5rem; /* 72px - Larger */
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 6px;
+}
+
+/* 🎴 Main CTA Glass Card */
+.cta-glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        0 16px 64px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    text-align: center;
+    flex: 1;
+    width: 100%;
+    max-width: 1900px;
+}
+
+/* 💬 Thank You Title - Largest Element */
+.thank-you-title {
+    font-size: 6.75rem; /* 108px - Larger */
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+.thank-you-subtitle {
+    font-size: 2.75rem; /* 44px - Larger */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    max-width: 1400px;
+    margin-bottom: 20px;
+}
+
+/* 🎯 Actions Grid */
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 100%;
+    max-width: 1700px;
+}
+
+.action-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.4),
+        0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.action-icon {
+    font-size: 6.5rem; /* 104px - Larger */
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+.action-title {
+    font-size: 4.5rem; /* 72px - Larger */
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.action-desc {
+    font-size: 2.5rem; /* 40px - Larger */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+
+/* 📝 CTA Footer */
+.cta-footer {
+    margin-top: 20px;
+}
+
+.cta-tagline {
+    font-size: 2.75rem; /* 44px - Larger */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 1px;
+}
+
+/* 📱 Handle Display */
+.handle-display {
+    font-size: 2.75rem; /* 44px - Medium */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+/* 🔗 Footer Brand */
+.footer-brand {
+    text-align: center;
+    font-size: 1.875rem; /* 30px */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 3px;
+    margin-top: auto;
+}
