@@ -12,6 +12,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.3.1] - 2025-10-20
+
+### 🎨 Changed
+- **Glassmorphism Enhancement**: Applied Bitcoin Intelligence dark glassmorphism across index and section intro templates
+  - Updated `style_index.css`: Darker glassmorphism (`rgba(0,0,0,0.1)`) for `.sections-glass-card` and `.stat-card`
+  - Updated `style_section_intro.css`: Darker glassmorphism for `.intro-glass-card`
+  - Stronger blur: `blur(28px) saturate(180%)` (previously `blur(30px) saturate(150%)`)
+  - Larger border radius: `56px` (previously `32px/24px`)
+  - Thinner borders: `0.5px` (previously `2px`)
+  - Enhanced shadows for consistent depth across all slides
+
+### ✨ Impact
+- **Unified Visual Design**: Creates consistent dark glassmorphism aesthetic across:
+  - Slide 01 (Cover)
+  - Slide 02 (Index)
+  - Slides 03, 05, 08, 11 (All section intros)
+  - Slide 04 (Bitcoin Intelligence)
+- **Premium Look**: Darker, more sophisticated glass cards with enhanced depth and blur effects
+- **Better Cohesion**: All intro slides now match the Bitcoin Intelligence slide style
+
+### 🔧 Technical Details
+- Regenerated affected slides: 02 (index), 03, 05, 08, 11 (section intros)
+- Verified mega-carousel generation: All 14 slides generated successfully
+- Posted test carousel to Instagram: https://www.instagram.com/p/DQCKm37gagt/
+- Execution time: 166.3 seconds for full 14-slide generation
+
+### 📦 Commits
+- `33906e5` - feat: Apply Bitcoin Intelligence glassmorphism to index and section intro templates
+
+---
+
 ## 🚀 PRODUCTION RELEASE - dev2 → main Merge (2025-10-05)
 
 ### 🎯 Major Branch Merge: 15 Commits from dev2 to main
