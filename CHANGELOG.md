@@ -39,10 +39,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### 🔧 Technical Details
 - Regenerated affected slides: 02, 03, 05, 06, 07, 08, 09, 10, 11, 12, 13 (11 slides total)
 - Verified mega-carousel generation: All 14 slides generated successfully
-- Posted test carousel to Instagram: https://www.instagram.com/p/DQCKm37gagt/
-- Execution time: 166.3 seconds for full 14-slide generation
+- **Production Post**: https://www.instagram.com/p/DQCS5eWAc-V/ (181.0 seconds generation time)
+- Test carousel: https://www.instagram.com/p/DQCKm37gagt/
 
 ### 📦 Commits
+- `57a9cbd` - docs: Update changelog v2.3.1 with complete glassmorphism implementation
 - `567fed2` - feat: Apply Bitcoin Intelligence glassmorphism to all content slide templates
 - `33906e5` - feat: Apply Bitcoin Intelligence glassmorphism to index and section intro templates
 
