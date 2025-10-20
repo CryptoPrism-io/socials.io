@@ -134,6 +134,16 @@ body::before {
     font-family: 'Inter', sans-serif;
 }
 
+/* 📝 Section Title Header */
+.section-title-header {
+    font-size: 4rem; /* 64px */
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 /* 🚀 Long/Short Strategy Header */
 .strategy-header {
     display: flex;
