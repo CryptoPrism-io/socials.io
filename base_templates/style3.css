@@ -60,18 +60,18 @@ body::before {
     box-sizing: border-box;
 }
 
-/* 🚀 Bitcoin Dashboard Card - Template 3 */
+/* 🚀 Bitcoin Dashboard Card - Template 3 - Bitcoin Intelligence Glassmorphism */
 .btc-dashboard-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border-radius: 24px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 56px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
-        0 16px 64px rgba(0, 0, 0, 0.3),
-        0 8px 32px rgba(0, 0, 0, 0.2),
-        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+        0 24px 80px rgba(0, 0, 0, 0.4),
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15);
 
     padding: 40px;
     display: flex;
@@ -389,18 +389,18 @@ body::before {
     border: 1px solid rgba(255, 68, 68, 0.3);
 }
 
-/* 💎 Enhanced Coin Cards for Template 3 */
+/* 💎 Enhanced Coin Cards for Template 3 - Bitcoin Intelligence Glassmorphism */
 .coin-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(30px) saturate(150%);
-    -webkit-backdrop-filter: blur(30px) saturate(150%);
-    border-radius: 32px;
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 56px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
-        0 16px 64px rgba(0, 0, 0, 0.3),
-        0 8px 32px rgba(0, 0, 0, 0.2),
-        inset 0 2px 0 rgba(255, 255, 255, 0.1);
+        0 24px 80px rgba(0, 0, 0, 0.4),
+        0 12px 40px rgba(0, 0, 0, 0.3),
+        inset 0 2px 0 rgba(255, 255, 255, 0.15);
 
     padding: 30px;
     margin-bottom: 24px;
