@@ -12,6 +12,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.4.0] - 2025-10-21
+
+### ✨ Added
+- **Instagram Story Teaser Automation** - Psychological FOMO-driven story system to drive carousel traffic
+  - New template: `base_templates/story_teaser.html` (Instagram Story 1080x1920 format)
+  - New script: `scripts/main/publishing/post_story_teaser.py` (automated generation & posting)
+  - New workflow: `.github/workflows/Instagram_Story_Teaser.yml` (dependent workflow)
+  - Hook selection logic: FOMO (>15% mover), Urgency (>10% volatility), Scarcity (default)
+  - Dynamic market data: Top gainer, top loser, Bitcoin price from PostgreSQL
+  - Fibonacci-based font hierarchy for professional visual design
+
+### 🎨 Design System
+- **Fibonacci Font Hierarchy** (Golden ratio 1.618 relationships):
+  - Hook text: 72px (4.5rem) - Base size
+  - CTA text: 55px (3.4rem) - 33px × 1.618
+  - Section headers: 45px (2.8rem) - 72px × 0.618
+  - Crypto names: 33px (2.06rem) - 25% increase for emphasis
+- **Reversed Gradients** (dark→light for better contrast):
+  - Hook & CTA: `#cccccc → #e0e0e0 → #ffffff` (3-color progression)
+- **50-50 Color Gradients** for crypto names:
+  - FLOKI (gainer): `#ffffff 0% → #10b981 50%` (white to green)
+  - FET (loser): `#ffffff 0% → #ef4444 50%` (white to red)
+  - BITCOIN: `#f7931a → #ffcc02 → #fff9e6` (yellow gradient)
+- **Glowing CTA Card**:
+  - Border: 3px solid white (60% opacity) with dual glow shadows (30px + 60px)
+  - Makes CTA stand out as primary action element
+- **"What's Inside" Section**:
+  - 2x2 grid of bright white capsules (`rgba(255,255,255,0.95)`)
+  - Dark green text (#065f46) for strong contrast
+  - Content: Bitcoin Intelligence, Trading Long & Short Calls, Top Gainers & Losers, Top 48 Cryptos
+  - Font: 24px (1.5rem) bold for readability
+- **Typography**: Inter font throughout (replaced Poppins)
+- **Spacing**: 150px gaps between sections (doubled from 75px)
+
+### 🔄 Changed
+- **Workflow Architecture** - Separated story teaser into dependent workflow
+  - Modified: `.github/workflows/Instagram_3_Carousels.yml` (removed story steps)
+  - Story now runs automatically **only after** successful carousel post
+  - Clean separation of concerns: carousel-only vs. story-only workflows
+  - 30-minute delay preserved for Instagram rate-limiting
+  - Better error isolation: story failure doesn't affect carousel
+
+### 🚀 Workflow Execution Flow
+```
+Daily at 02:00 UTC:
+├─ Instagram_3_Carousels.yml runs
+│  └─ Posts 14-slide mega-carousel
+│     └─ On SUCCESS → Triggers Instagram_Story_Teaser.yml
+│        └─ Waits 30 minutes
+│           └─ Posts story teaser (redirects to carousel)
+```
+
+### 📊 Story Teaser Features
+- **Psychological Hooks**: FOMO, Urgency, Scarcity triggers based on market conditions
+- **Scarcity Framing**: "Your 60-second crypto edge" positioning
+- **Real-time Data**: Live top gainer, loser, BTC price
+- **Glassmorphism Design**: Matches carousel brand aesthetic
+- **Background**: Uses `input_images/1.png` with geometric patterns
+- **Call-to-Action**: "CHECK LATEST POST FOR YOUR 60-SECOND CRYPTO EDGE" (all caps, glowing border)
+
+### 🔧 Technical Details
+- **Template Engine**: Jinja2 for dynamic data injection
+- **Screenshot**: Playwright headless browser (1080x1920 → JPG 95% quality)
+- **Instagram API**: Instagrapi via session manager (30-day persistent sessions)
+- **Data Source**: PostgreSQL (fetch_top_coins, fetch_btc_snapshot)
+- **Secrets Required**: DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD
+
+### 📦 Files Added
+- `.github/workflows/Instagram_Story_Teaser.yml` - Dependent workflow
+- `base_templates/story_teaser.html` - Story template with Fibonacci design
+- `scripts/main/publishing/post_story_teaser.py` - Automation script
+- `output_html/story_teaser_output.html` - Generated HTML (gitignored)
+- `output_images/story_teaser_output.jpg` - Generated image (gitignored)
+
+### 📦 Commit
+- `12ec4bd` - feat: Add Instagram Story Teaser automation with workflow dependency
+
+---
+
 ## [v2.3.4] - 2025-10-20
 
 ### 🎨 Changed
