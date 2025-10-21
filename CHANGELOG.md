@@ -82,13 +82,23 @@ Daily at 02:00 UTC:
 
 ### 📦 Files Added
 - `.github/workflows/Instagram_Story_Teaser.yml` - Dependent workflow
+- `.github/workflows/Instagram_Mega_Carousel.yml` - Renamed from Instagram_3_Carousels.yml
 - `base_templates/story_teaser.html` - Story template with Fibonacci design
 - `scripts/main/publishing/post_story_teaser.py` - Automation script
 - `output_html/story_teaser_output.html` - Generated HTML (gitignored)
 - `output_images/story_teaser_output.jpg` - Generated image (gitignored)
 
-### 📦 Commit
+### 📦 Commits
 - `12ec4bd` - feat: Add Instagram Story Teaser automation with workflow dependency
+- `efd7305` - docs: Update CHANGELOG with v2.4.0
+- `d45984b` - refactor: Rename Instagram_3_Carousels.yml to Instagram_Mega_Carousel.yml
+- `25b7832` - docs: Update CHANGELOG to reflect workflow rename
+
+### 📅 Status
+- **Production Ready**: All changes committed and pushed to main
+- **Next Review**: 7 days (2025-10-28)
+- **Workflow Test**: Will run automatically tomorrow at 02:00 UTC
+- **Expected Behavior**: Mega-carousel posts → 30min delay → Story teaser posts
 
 ---
 
