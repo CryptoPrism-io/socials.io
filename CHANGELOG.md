@@ -48,7 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### 🔄 Changed
 - **Workflow Architecture** - Separated story teaser into dependent workflow
-  - Modified: `.github/workflows/Instagram_3_Carousels.yml` (removed story steps)
+  - Renamed: `Instagram_3_Carousels.yml` → `Instagram_Mega_Carousel.yml` (better naming convention)
+  - Modified: `.github/workflows/Instagram_Mega_Carousel.yml` (removed story steps)
   - Story now runs automatically **only after** successful carousel post
   - Clean separation of concerns: carousel-only vs. story-only workflows
   - 30-minute delay preserved for Instagram rate-limiting
