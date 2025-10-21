@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080, height=1920">
+    <title>Instagram Story Teaser - Crypto Prism</title>
+    <style>
+        /* 🎨 Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 1080px;
+            height: 1920px;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            position: relative;
+        }
+
+        /* 🔥 Background - Using input_images/1.png */
+        body {
+            background-image: url('../input_images/1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* Dark overlay to enhance readability (30% opacity) */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
+
+        /* 📱 Main Container with 5% left/right, 10% top, 22% bottom margins */
+        .story-container {
+            width: 1080px;
+            height: 1920px;
+            /* 5% left/right = 54px each side, 10% top = 192px, 22% bottom = 422px */
+            padding: 192px 54px 422px 54px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 📋 Header Section - Brand + Date/Time */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .crypto-prism-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .prism-triangle {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 32px solid #ff6b35;
+            filter: drop-shadow(0 8px 16px rgba(255, 107, 53, 0.4));
+        }
+
+        .brand-text {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 400;
+            background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .datetime-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1px;
+        }
+
+        .date-display {
+            font-size: 1.375rem; /* 22px */
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .time-display {
+            font-size: 1.0625rem; /* 17px */
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.75);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* 🎯 Content Sections */
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 150px; /* Doubled from 75px */
+            flex: 1;
+        }
+
+        /* 💭 Hook Section - Two lines (subtitle removed) */
+        .hook-section {
+            text-align: center;
+        }
+
+        .hook-text {
+            font-size: 4.5rem; /* 72px - Fibonacci base */
+            font-weight: 700;
+            background: linear-gradient(135deg, #cccccc 0%, #e0e0e0 33%, #ffffff 66%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+        }
+
+        /* 📊 Market Stats Card - Glassmorphism with 3-column grid */
+        .market-stats-card {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border-radius: 28px;
+            border: 0.5px solid rgba(255, 255, 255, 0.05);
+
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.4),
+                0 6px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+            padding: 20px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        /* THREE-COLUMN GRID: Icon | Label | Value */
+        .stat-row {
+            display: grid;
+            grid-template-columns: 50px 1fr auto;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .stat-row:first-child {
+            padding-top: 0;
+        }
+
+        .stat-icon {
+            font-size: 2.2rem; /* 35px */
+            text-align: center;
+            justify-self: center;
+        }
+
+        .stat-label {
+            font-size: 2.06rem; /* 33px - increased by 25% from 1.65rem (Fibonacci ratio 1.618) */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            justify-self: start;
+        }
+
+        /* Individual gradients for each crypto - 50-50 split */
+        .stat-label.gainer {
+            background: linear-gradient(135deg, #ffffff 0%, #10b981 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label.loser {
+            background: linear-gradient(135deg, #ffffff 0%, #ef4444 50%, #ef4444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label.bitcoin {
+            background: linear-gradient(135deg, #f7931a 0%, #ffcc02 50%, #fff9e6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-value {
+            font-size: 2.2rem; /* 35px */
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: rgba(255, 255, 255, 0.95);
+            justify-self: end;
+        }
+
+        .stat-value.positive {
+            color: #10b981;
+        }
+
+        .stat-value.negative {
+            color: #ef4444;
+        }
+
+        /* ✅ Benefits Section - Individual Glassmorphic Boxes */
+        .benefits-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .benefits-header {
+            font-size: 2.8rem; /* 45px - Fibonacci relationship with hook (72 * 0.618 ≈ 45) */
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        /* Benefits list - 2x2 grid of bright white capsules */
+        .benefits-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .benefit-item {
+            font-size: 1.5rem; /* 24px - reduced for better fit */
+            color: #065f46; /* Dark green text */
+            font-weight: 700; /* Bold */
+            letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 18px;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow:
+                0 8px 24px rgba(255, 255, 255, 0.3),
+                0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+
+        /* 🎯 CTA Section - Glassmorphism with Glowing White Border */
+        .cta-card {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border-radius: 28px;
+            border: 3px solid rgba(255, 255, 255, 0.6);
+
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.4),
+                0 6px 20px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                0 0 30px rgba(255, 255, 255, 0.4),
+                0 0 60px rgba(255, 255, 255, 0.2);
+
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .cta-text {
+            font-size: 3.4rem; /* 55px - Fibonacci relationship (33 * 1.618 ≈ 55) */
+            font-weight: 700;
+            line-height: 1.25;
+            max-width: 95%;
+            margin: 0 auto;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-green {
+            background: linear-gradient(135deg, #cccccc 0%, #e0e0e0 33%, #ffffff 66%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .cta-blue {
+            color: #3b82f6;
+            font-weight: 700;
+        }
+
+        .cta-normal {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        /* 🔗 Footer */
+        .footer-brand {
+            text-align: center;
+            font-size: 1.6rem; /* 26px */
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1.5px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="story-container">
+        <!-- Header: Brand + Date/Time -->
+        <div class="header-section">
+            <div class="crypto-prism-brand">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="datetime-section">
+                <div class="date-display" id="date-display"></div>
+                <div class="time-display" id="time-display"></div>
+            </div>
+        </div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Hook Section - Two lines (subtitle removed) -->
+            <div class="hook-section">
+                <div class="hook-text">While you were<br>sleeping...</div>
+            </div>
+
+            <!-- Market Stats Card - THREE COLUMNS -->
+            <div class="market-stats-card">
+                <div class="stat-row">
+                    <div class="stat-icon">🚀</div>
+                    <div class="stat-label gainer">FLOKI</div>
+                    <div class="stat-value positive">+17.4%</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">📉</div>
+                    <div class="stat-label loser">FET</div>
+                    <div class="stat-value negative">-6.2%</div>
+                </div>
+                <div class="stat-row">
+                    <div class="stat-icon">₿</div>
+                    <div class="stat-label bitcoin">Bitcoin</div>
+                    <div class="stat-value">$110,198</div>
+                </div>
+            </div>
+
+            <!-- Benefits Section - Simple Text List -->
+            <div class="benefits-container">
+                <div class="benefits-header">What's Inside</div>
+                <div class="benefits-list">
+                    <div class="benefit-item">Bitcoin Intelligence</div>
+                    <div class="benefit-item">Trading Long & Short Calls</div>
+                    <div class="benefit-item">Top Gainers & Losers</div>
+                    <div class="benefit-item">Top 48 Cryptos</div>
+                </div>
+            </div>
+
+            <!-- CTA Card -->
+            <div class="cta-card">
+                <div class="cta-text">
+                    <span class="cta-green">Check latest post for your 60-second crypto edge</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-brand">cryptoprism.io</div>
+    </div>
+
+    <script>
+        // Set current date and time
+        const now = new Date();
+
+        // Format date: "Oct 21, 2025"
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
+        const formattedDate = now.toLocaleDateString('en-US', options);
+        document.getElementById('date-display').textContent = formattedDate;
+
+        // Format time: "6:41:51 PM"
+        const hours = now.getHours() % 12 || 12;
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+        document.getElementById('time-display').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+    </script>
+</body>
+</html>
