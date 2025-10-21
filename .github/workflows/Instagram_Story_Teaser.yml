@@ -1,0 +1,64 @@
+name: Instagram Story Teaser Post
+
+on:
+  workflow_run:
+    workflows: ["Instagram Mega-Carousel Daily Post"]
+    types:
+      - completed
+  workflow_dispatch: {}  # Allow manual trigger
+
+jobs:
+  post_story_teaser:
+    runs-on: ubuntu-latest
+    # Only run if the mega-carousel workflow succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install python-dotenv requests
+        playwright install chromium
+      env:
+        PYTHONIOENCODING: utf-8
+
+    - name: Wait 30 minutes before posting story
+      run: sleep 1800  # Instagram rate-limiting buffer
+
+    - name: Post Instagram Story Teaser
+      run: python scripts/main/publishing/post_story_teaser.py
+      env:
+        PYTHONIOENCODING: utf-8
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        INSTAGRAM_USERNAME: ${{ secrets.INSTAGRAM_USERNAME }}
+        INSTAGRAM_PASSWORD: ${{ secrets.INSTAGRAM_PASSWORD }}
+
+    - name: Upload story artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: instagram-story-output
+        path: |
+          output_html/story_teaser_output.html
+          output_images/story_teaser_output.jpg
+        retention-days: 7
