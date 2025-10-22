@@ -1,0 +1,457 @@
+/* Bitcoin Intelligence Story - Instagram Story Format (1080x1920) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 1080px;
+    height: 1920px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    color: white;
+}
+
+body {
+    background-image: url('../input_images/1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Dark overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+/* Main Story Container */
+.story-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+/* Header */
+.story-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.prism-triangle {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 25px solid #ff6b35;
+    filter: drop-shadow(0 4px 12px rgba(255, 107, 53, 0.5));
+}
+
+.brand-text {
+    font-size: 32px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff6b35, #f7931a, #ffcc02);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+}
+
+.story-timestamp {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+/* Hook Section */
+.hook-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.hook-text {
+    font-size: 56px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #cccccc 0%, #e0e0e0 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 15px;
+}
+
+.hook-subtitle {
+    font-size: 28px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 1px;
+}
+
+/* Bitcoin Price Card */
+.btc-price-card {
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.btc-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.btc-logo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(247, 147, 26, 0.3);
+}
+
+.btc-label {
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 2px;
+}
+
+.btc-price-main {
+    font-size: 72px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 50%, #e0e0e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    letter-spacing: -2px;
+}
+
+.btc-stats-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.stat-item {
+    flex: 1;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.stat-value.positive {
+    color: #00ff9f;
+}
+
+.stat-value.negative {
+    color: #ff5555;
+}
+
+.stat-value.trend-badge {
+    color: #ffffff;
+    background: linear-gradient(135deg, #00ccff, #00ffcc);
+    font-size: 24px;
+}
+
+/* Fear & Greed Card */
+.fear-greed-card {
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.fg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.fg-title {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b35, #f7931a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.fg-value-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.fg-value {
+    font-size: 56px;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.fg-label {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fg-label.fear-greed-extreme-fear {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+.fg-label.fear-greed-fear {
+    background: #ea580c;
+    color: #ffffff;
+}
+
+.fg-label.fear-greed-neutral {
+    background: #eab308;
+    color: #000000;
+}
+
+.fg-label.fear-greed-greed {
+    background: #65a30d;
+    color: #ffffff;
+}
+
+.fg-label.fear-greed-extreme-greed {
+    background: #16a34a;
+    color: #ffffff;
+}
+
+/* Fear & Greed Bar */
+.fg-bar-container {
+    margin-top: 25px;
+}
+
+.fg-bar {
+    position: relative;
+    height: 50px;
+    background: linear-gradient(
+        to right,
+        #dc2626 0%,
+        #dc2626 20%,
+        #ea580c 20%,
+        #ea580c 40%,
+        #eab308 40%,
+        #eab308 60%,
+        #65a30d 60%,
+        #65a30d 80%,
+        #16a34a 80%,
+        #16a34a 100%
+    );
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.fg-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: width 0.5s ease;
+}
+
+.fg-marker {
+    position: absolute;
+    top: -10px;
+    width: 6px;
+    height: 70px;
+    background: #ffffff;
+    border-radius: 3px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transform: translateX(-3px);
+}
+
+.fg-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding: 0 10px;
+}
+
+.fg-label-left,
+.fg-label-right {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fg-label-left {
+    color: #ff5555;
+}
+
+.fg-label-right {
+    color: #00ff9f;
+}
+
+/* Sentiment Card */
+.sentiment-card {
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border-radius: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.sentiment-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.sentiment-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.sentiment-box {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sentiment-box.bearish {
+    border: 2px solid rgba(255, 85, 85, 0.5);
+}
+
+.sentiment-box.neutral {
+    border: 2px solid rgba(255, 204, 2, 0.5);
+}
+
+.sentiment-box.bullish {
+    border: 2px solid rgba(0, 255, 159, 0.5);
+}
+
+.sentiment-count {
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.sentiment-box.bearish .sentiment-count {
+    color: #ff5555;
+}
+
+.sentiment-box.neutral .sentiment-count {
+    color: #ffcc02;
+}
+
+.sentiment-box.bullish .sentiment-count {
+    color: #00ff9f;
+}
+
+.sentiment-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* CTA Section */
+.cta-section {
+    margin-top: auto;
+}
+
+.cta-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 30px;
+    padding: 35px;
+    text-align: center;
+    box-shadow:
+        0 0 30px rgba(255, 255, 255, 0.2),
+        0 0 60px rgba(255, 255, 255, 0.1);
+}
+
+.cta-text {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #cccccc 0%, #e0e0e0 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.cta-subtitle {
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.5px;
+}
+
+/* Footer */
+.story-footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.footer-brand {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 2px;
+}

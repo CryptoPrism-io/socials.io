@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_bitcoin_story.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Bitcoin Intelligence Story</title>
+</head>
+<body>
+    <div class="story-container">
+        <!-- Header Branding -->
+        <div class="story-header">
+            <div class="brand-container">
+                <div class="prism-triangle"></div>
+                <span class="brand-text">CRYPTO PRISM</span>
+            </div>
+            <div class="story-timestamp">{{ current_time }}</div>
+        </div>
+
+        <!-- Hook Section -->
+        <div class="hook-section">
+            <div class="hook-text">BITCOIN MARKET INTELLIGENCE</div>
+            <div class="hook-subtitle">Live Fear & Greed Analysis</div>
+        </div>
+
+        <!-- Bitcoin Price Card -->
+        {% for snaps in snap %}
+        <div class="btc-price-card">
+            <div class="btc-header">
+                <img src="{{ snaps['logo'] }}" alt="BTC" class="btc-logo">
+                <div class="btc-label">BITCOIN</div>
+            </div>
+            <div class="btc-price-main">${{ snaps['price'] }}</div>
+            <div class="btc-stats-row">
+                <div class="stat-item">
+                    <div class="stat-label">24H</div>
+                    <div class="stat-value {% if snaps['percent_change24h']|float > 0 %}positive{% else %}negative{% endif %}">
+                        {{ snaps['percent_change24h'] }}%
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">7D</div>
+                    <div class="stat-value {% if snaps['percent_change7d']|float > 0 %}positive{% else %}negative{% endif %}">
+                        {{ snaps['percent_change7d'] }}%
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">TREND</div>
+                    <div class="stat-value trend-badge">{{ snaps['Trend'] }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fear & Greed Index -->
+        <div class="fear-greed-card">
+            <div class="fg-header">
+                <div class="fg-title">Fear & Greed Index</div>
+                <div class="fg-value-container">
+                    <div class="fg-value">{{ snaps['fear_greed_index']|int }}</div>
+                    <div class="fg-label fear-greed-{{ snaps['fear_greed_label'].replace(' ', '-').lower() }}">
+                        {{ snaps['fear_greed_label'] }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fear & Greed Bar Chart -->
+            <div class="fg-bar-container">
+                <div class="fg-bar">
+                    <div class="fg-fill" style="width: {{ snaps['fear_greed_index'] }}%"></div>
+                    <div class="fg-marker" style="left: {{ snaps['fear_greed_index'] }}%"></div>
+                </div>
+                <div class="fg-labels">
+                    <span class="fg-label-left">FEAR</span>
+                    <span class="fg-label-right">GREED</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Sentiment -->
+        <div class="sentiment-card">
+            <div class="sentiment-title">Market Sentiment</div>
+            <div class="sentiment-grid">
+                <div class="sentiment-box bearish">
+                    <div class="sentiment-count">{{ snaps['bearish']|int }}</div>
+                    <div class="sentiment-label">Bearish</div>
+                </div>
+                <div class="sentiment-box neutral">
+                    <div class="sentiment-count">{{ snaps['neutral']|int }}</div>
+                    <div class="sentiment-label">Neutral</div>
+                </div>
+                <div class="sentiment-box bullish">
+                    <div class="sentiment-count">{{ snaps['bullish']|int }}</div>
+                    <div class="sentiment-label">Bullish</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-card">
+                <div class="cta-text">SEE FULL DUAL-AXIS CHART</div>
+                <div class="cta-subtitle">Visit @cryptoprism.io to learn more</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="story-footer">
+            <div class="footer-brand">cryptoprism.io</div>
+        </div>
+    </div>
+</body>
+</html>
