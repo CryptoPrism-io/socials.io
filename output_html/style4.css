@@ -348,16 +348,14 @@ body::before {
 
 /* Color Classes with Enhanced Frame Styling */
 .positive {
-    color: #00ff88;
-    background: rgba(0, 255, 136, 0.15) !important;
-    border-color: rgba(0, 255, 136, 0.3) !important;
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+    color: #00ff9f;
+    background: rgba(0, 255, 159, 0.15) !important;
+    border-color: rgba(0, 255, 159, 0.3) !important;
 }
 .negative {
-    color: #ff4444;
-    background: rgba(255, 68, 68, 0.15) !important;
-    border-color: rgba(255, 68, 68, 0.3) !important;
-    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+    color: #ff5555;
+    background: rgba(255, 85, 85, 0.15) !important;
+    border-color: rgba(255, 85, 85, 0.3) !important;
 }
 
 /* 🎯 Two-Column Layout (Template 4.1 & 4.2) */
@@ -479,8 +477,8 @@ body::before {
 }
 
 .pct-change {
-    font-size: 2.125rem; /* 34px */
-    font-weight: 700;
+    font-size: 3rem; /* 48px - Increased for better readability */
+    font-weight: 500;
     font-family: 'Inter', monospace;
 }
 
@@ -501,8 +499,8 @@ body::before {
 }
 
 .dmv span {
-    font-size: 2.125rem; /* 34px */
-    font-weight: 700;
+    font-size: 2.65rem; /* 42.5px - Increased by 25% for better visibility */
+    font-weight: 350;
     padding: 8px 24px;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);
@@ -545,24 +543,21 @@ body::before {
 
 /* DMV Color Classes */
 .dmv-high {
-    color: #00ff88;
-    background: rgba(0, 255, 136, 0.15) !important;
-    border-color: rgba(0, 255, 136, 0.3) !important;
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+    color: #00ff9f;
+    background: rgba(0, 255, 159, 0.15) !important;
+    border-color: rgba(0, 255, 159, 0.3) !important;
 }
 
 .dmv-medium {
     color: #ffcc02;
     background: rgba(255, 204, 2, 0.15) !important;
     border-color: rgba(255, 204, 2, 0.3) !important;
-    box-shadow: 0 0 15px rgba(255, 204, 2, 0.2);
 }
 
 .dmv-low {
-    color: #ff4444;
-    background: rgba(255, 68, 68, 0.15) !important;
-    border-color: rgba(255, 68, 68, 0.3) !important;
-    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+    color: #ff5555;
+    background: rgba(255, 85, 85, 0.15) !important;
+    border-color: rgba(255, 85, 85, 0.3) !important;
 }
 
 /* 📝 Footer - Standardized */

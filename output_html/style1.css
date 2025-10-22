@@ -353,12 +353,12 @@ body::before {
 }
 
 /* Color Classes */
-.bearish-count { color: #ff4444; }
+.bearish-count { color: #ff5555; }
 .neutral-count { color: #ffb338; }
-.bullish-count { color: #00ff88; }
+.bullish-count { color: #00ff9f; }
 
-.positive { color: #00ff88; }
-.negative { color: #ff4444; }
+.positive { color: #00ff9f; }
+.negative { color: #ff5555; }
 
 /* 🎯 Coin Grid Layout - Template 2 Style (Full 2160x2700 Coverage) */
 .col-container {
@@ -461,19 +461,19 @@ body::before {
 }
 
 .pct-change {
-    font-size: 2.125rem; /* 34px - Standardized across all templates */
-    font-weight: 600;
+    font-size: 3rem; /* 48px - Increased for better readability */
+    font-weight: 500;
     padding: 4px 16px;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.1);
 }
 
 .pct-change.positive {
-    color: #00ff88;
+    color: #00ff9f;
 }
 
 .pct-change.negative {
-    color: #ff4444;
+    color: #ff5555;
 }
 
 .price {

@@ -354,17 +354,17 @@ body::before {
 }
 
 /* Color Classes */
-.bearish-count { color: #ff4444; }
+.bearish-count { color: #ff5555; }
 .neutral-count { color: #ffb338; }
-.bullish-count { color: #00ff88; }
+.bullish-count { color: #00ff9f; }
 
-.positive { color: #00ff88; }
-.negative { color: #ff4444; }
+.positive { color: #00ff9f; }
+.negative { color: #ff5555; }
 
 /* DMV Score Color Classes */
 .dmv-low { color: #ff8c00; }      /* Orange for scores below 50 */
 .dmv-medium { color: #ffd700; }   /* Yellow-gold for scores 50-70 */
-.dmv-high { color: #00ff88; }     /* Green for scores above 70 */
+.dmv-high { color: #00ff9f; }     /* Green for scores above 70 */
 
 /* 📊 Template 3: Gainers/Losers Layout */
 .col-container {
@@ -513,8 +513,8 @@ body::before {
 
 .pct-change {
     font-family: 'Inter', monospace;
-    font-size: 2.125rem; /* 34px */
-    font-weight: 700;
+    font-size: 3rem; /* 48px - Increased for better readability */
+    font-weight: 500;
     padding: 8px 24px;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);
@@ -549,8 +549,8 @@ body::before {
 
 .d, .m, .v {
     font-family: 'Inter', monospace;
-    font-size: 2.125rem; /* 34px */
-    font-weight: 700;
+    font-size: 2.65rem; /* 42.5px - Increased by 25% for better visibility */
+    font-weight: 350;
     padding: 8px 24px;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);

@@ -12,6 +12,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.4.1] - 2025-10-23
+
+### 🎨 Changed
+- **Enhanced Typography for Better Readability** - Improved visibility of percentage changes and DMV scores
+  - Increased `.pct-change` font size by 25-60% across all templates:
+    - style1.css, style2.css, style3.css, style4.css: 2.125rem (34px) → **3rem (48px)**
+    - style6.css: 20px → **32px**
+  - Reduced `.pct-change` font weight for lighter, cleaner appearance: 600-700 → **500**
+  - Brightened colors for higher contrast and vibrancy:
+    - Green (positive): `#00ff88` → **`#00ff9f`** (brighter, more vivid)
+    - Red (negative): `#ff4444` → **`#ff5555`** (brighter, more saturated)
+  - Removed text shadows from percentage changes for clearer readability
+  - Increased DMV score font size by 25%: 2.125rem (34px) → **2.65rem (42.5px)**
+  - Reduced DMV score font weight by half: 700 → **350**
+  - Updated DMV color classes to match brighter percentage change colors
+
+### 📦 Files Modified
+- `base_templates/style1.css` - Template 1 (Top Cryptos 2-24)
+- `base_templates/style2.css` - Template 2 (Extended 25-48)
+- `base_templates/style3.css` - Templates 3.1 & 3.2 (Gainers/Losers)
+- `base_templates/style4.css` - Templates 4.1 & 4.2 (Long/Short Calls)
+- `base_templates/style6.css` - Template 6 (Bitcoin Intelligence)
+
+### 📊 Impact
+- **All 7 templates** regenerated with improved styling
+- Percentage changes now **larger, lighter weight, brighter, and clearer to read**
+- DMV scores no longer getting lost - **25% larger and much lighter weight**
+- Better visual hierarchy for Instagram carousel posts
+
+### 📅 Status
+- **Production Ready**: All styling changes applied and tested
+- **Next Review**: 7 days (2025-10-30)
+
+---
+
 ## [v2.4.0] - 2025-10-21
 
 ### ✨ Added

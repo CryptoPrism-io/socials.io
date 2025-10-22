@@ -1164,8 +1164,8 @@ body::before {
 
 /* 💰 Market Data Styling */
 .pct-change {
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 32px;
+    font-weight: 500;
     padding: 4px 8px;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.1);
@@ -1178,17 +1178,15 @@ body::before {
 }
 
 .pct-change.positive {
-    color: #00ff88;
-    background: rgba(0, 255, 136, 0.15);
-    border-color: rgba(0, 255, 136, 0.3);
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+    color: #00ff9f;
+    background: rgba(0, 255, 159, 0.15);
+    border-color: rgba(0, 255, 159, 0.3);
 }
 
 .pct-change.negative {
-    color: #ff4444;
-    background: rgba(255, 68, 68, 0.15);
-    border-color: rgba(255, 68, 68, 0.3);
-    box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+    color: #ff5555;
+    background: rgba(255, 85, 85, 0.15);
+    border-color: rgba(255, 85, 85, 0.3);
 }
 
 /* 📊 Dominance Section Styling */
