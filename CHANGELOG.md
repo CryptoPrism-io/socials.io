@@ -12,6 +12,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.5.0] - 2025-10-24
+
+### ✨ Added
+- **All 4 Instagram Stories Now Automated** - Complete story sequence with 1-hour intervals
+  - New workflow: `.github/workflows/Instagram_Story_Bitcoin.yml` (scheduled at 03:30 UTC)
+  - New workflow: `.github/workflows/Instagram_Story_Long_Calls.yml` (scheduled at 04:30 UTC)
+  - New workflow: `.github/workflows/Instagram_Story_Short_Calls.yml` (scheduled at 05:30 UTC)
+  - New script: `scripts/main/publishing/post_long_calls_story.py` (standalone long calls story)
+  - New script: `scripts/main/publishing/post_short_calls_story.py` (standalone short calls story)
+
+### 🔄 Changed
+- **Story Teaser Workflow Trigger** - Switched from workflow_run to cron schedule
+  - Modified: `.github/workflows/Instagram_Story_Teaser.yml`
+  - Changed trigger from `workflow_run` (dependent) to `schedule` (cron: "30 2 * * *")
+  - Maintains 30-minute buffer after mega-carousel (02:00 UTC → 02:30 UTC)
+  - All 4 workflows now use independent cron schedules for better reliability
+
+### 🚀 New Posting Schedule (UTC)
+```
+02:00 - Mega-Carousel (14 slides)
+02:30 - Story 1: Teaser (FOMO hook + market highlights)
+03:30 - Story 2: Bitcoin Intelligence (Fear & Greed + price analysis)
+04:30 - Story 3: Long Calls (top 3 bullish opportunities)
+05:30 - Story 4: Short Calls (top 3 bearish opportunities)
+```
+
+### 📦 Files Created
+- `.github/workflows/Instagram_Story_Bitcoin.yml` - Bitcoin Intelligence automation
+- `.github/workflows/Instagram_Story_Long_Calls.yml` - Long Calls automation
+- `.github/workflows/Instagram_Story_Short_Calls.yml` - Short Calls automation
+- `scripts/main/publishing/post_long_calls_story.py` - Long calls story script
+- `scripts/main/publishing/post_short_calls_story.py` - Short calls story script
+
+### 📦 Files Modified
+- `.github/workflows/Instagram_Story_Teaser.yml` - Changed trigger to cron schedule
+
+### 📊 Impact
+- **4 stories** posting daily with **1-hour intervals** between each
+- Better Instagram rate-limiting compliance (separate workflows vs. single 3.5-hour workflow)
+- All stories now have manual trigger support (`workflow_dispatch`) for testing
+- Independent failure handling - one story failure doesn't block others
+
+### 📅 Status
+- **Production Ready**: All workflows configured with cron schedules
+- **Next Review**: 7 days (2025-10-31)
+
+---
+
 ## [v2.4.1] - 2025-10-23
 
 ### 🎨 Changed

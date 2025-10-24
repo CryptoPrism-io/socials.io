@@ -1,12 +1,12 @@
-name: Instagram Story Teaser Post
+name: Instagram Story - Bitcoin Intelligence
 
 on:
   schedule:
-    - cron: "30 2 * * *"  # Daily at 02:30 UTC (30 min after mega-carousel)
+    - cron: "30 3 * * *"  # Daily at 03:30 UTC (1 hour after Story Teaser)
   workflow_dispatch: {}  # Allow manual trigger
 
 jobs:
-  post_story_teaser:
+  post_bitcoin_story:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,8 +35,8 @@ jobs:
       env:
         PYTHONIOENCODING: utf-8
 
-    - name: Post Instagram Story Teaser
-      run: python scripts/main/publishing/post_story_teaser.py
+    - name: Post Bitcoin Intelligence Story
+      run: python scripts/main/publishing/post_bitcoin_story.py
       env:
         PYTHONIOENCODING: utf-8
         DB_HOST: ${{ secrets.DB_HOST }}
@@ -50,8 +50,8 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: instagram-story-teaser-output
+        name: instagram-bitcoin-story-output
         path: |
-          output_html/story_teaser_output.html
-          output_images/story_teaser_output.jpg
+          output_html/bitcoin_story_output.html
+          output_images/bitcoin_story_output.jpg
         retention-days: 7
