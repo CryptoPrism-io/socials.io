@@ -12,6 +12,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.5.2] - 2025-10-24
+
+### 🐛 Fixed
+- **Bearish Trend Badge Color** - Changed from blue/cyan to red gradient for Bitcoin Intelligence story
+  - Added conditional CSS classes: `.trend-bearish` (red) and `.trend-bullish` (green)
+  - Updated `base_templates/bitcoin_story.html` with Jinja2 conditional logic
+  - Bearish: `linear-gradient(135deg, #ff5555, #ff3333)` (red gradient)
+  - Bullish: `linear-gradient(135deg, #00ff9f, #00cc7f)` (green gradient)
+
+### 🎨 Changed
+- **Replaced Pure White with Gradients** - Enhanced visual depth across all stories
+  - Bitcoin Intelligence story:
+    - Fear & Greed Index value: Pure white → gradient `#ffffff → #f0f0f0 → #e8e8e8`
+    - Fear/Greed labels: `#ffffff` → `rgba(255, 255, 255, 0.95)`
+    - Progress marker: Solid white → gradient `#ffffff → #f5f5f5`
+    - Body text: `color: white` → `rgba(255, 255, 255, 0.95)`
+  - Trading Calls stories (Long & Short):
+    - Body text: `color: white` → `rgba(255, 255, 255, 0.95)`
+  - Subtle gradients add depth while maintaining readability
+
+### 📦 Files Modified
+- `base_templates/bitcoin_story.html` - Added conditional trend classes
+- `base_templates/style_bitcoin_story.css` - Fixed trend badge colors, replaced pure whites
+- `base_templates/style_trading_calls_story.css` - Replaced pure whites
+
+### 📊 Impact
+- Bearish trends now correctly display in red (was cyan/blue)
+- All stories use sophisticated gradients instead of flat pure white
+- Better visual hierarchy with gradient depth
+- More professional aesthetic throughout
+
+### 📅 Status
+- **Production Ready**: All stories regenerated and posted to Instagram
+- **Next Review**: 7 days (2025-10-31)
+
+---
+
 ## [v2.5.1] - 2025-10-24
 
 ### 🎨 Changed

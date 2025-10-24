@@ -47,7 +47,7 @@
                 </div>
                 <div class="stat-item">
                     <div class="stat-label">TREND</div>
-                    <div class="stat-value trend-badge">{{ snaps['Trend'] }}</div>
+                    <div class="stat-value trend-badge {% if snaps['Trend'].lower() == 'bearish' %}trend-bearish{% elif snaps['Trend'].lower() == 'bullish' %}trend-bullish{% endif %}">{{ snaps['Trend'] }}</div>
                 </div>
             </div>
         </div>
