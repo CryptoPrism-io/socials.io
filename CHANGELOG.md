@@ -12,6 +12,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.5.1] - 2025-10-24
+
+### 🎨 Changed
+- **Enhanced Glassmorphic Design Across All Stories** - Applied premium design system from Story Teaser to all 3 remaining stories
+  - Updated `base_templates/style_bitcoin_story.css` with improved glassmorphism
+  - Updated `base_templates/style_trading_calls_story.css` with improved glassmorphism
+  - Better margins: `padding: 192px 54px 422px 54px` (10% top, 5% sides, 22% bottom)
+  - Lighter background overlay: 30% opacity (was 50%) - enhances background visibility
+  - Increased content gaps: 35px → 45px for better breathing room
+  - Premium card styling:
+    - Background: `rgba(0, 0, 0, 0.1)` (lighter, more transparent)
+    - Blur: `blur(28px) saturate(180%)` (enhanced saturation)
+    - Border: `0.5px solid rgba(255, 255, 255, 0.05)` (subtle refinement)
+    - Border radius: `28px` (consistent across all stories)
+    - Inset highlights: `inset 0 1px 0 rgba(255, 255, 255, 0.15)`
+
+### 📦 Files Modified
+- `base_templates/style_bitcoin_story.css` - Bitcoin Intelligence story styling
+- `base_templates/style_trading_calls_story.css` - Long & Short Calls story styling
+
+### 📊 Impact
+- **All 4 Instagram Stories** now have consistent premium glassmorphic design
+- Better visual hierarchy with proper Instagram Story margins
+- Enhanced background blur creates more professional aesthetic
+- Lighter overlays allow background images to shine through
+- All cards share unified design language from Story Teaser
+
+### 📅 Status
+- **Production Ready**: All stories regenerated and posted to Instagram
+- **Next Review**: 7 days (2025-10-31)
+
+---
+
 ## [v2.5.0] - 2025-10-24
 
 ### ✨ Added

@@ -30,7 +30,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     z-index: 0;
 }
 
@@ -40,10 +40,10 @@ body::before {
     z-index: 1;
     width: 100%;
     height: 100%;
-    padding: 60px 50px;
+    padding: 192px 54px 422px 54px;
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 45px;
 }
 
 /* Header */
@@ -112,13 +112,16 @@ body::before {
 
 /* Bitcoin Price Card */
 .btc-price-card {
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(30px) saturate(150%);
-    -webkit-backdrop-filter: blur(30px) saturate(150%);
-    border-radius: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 28px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
     padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 6px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .btc-header {
@@ -197,13 +200,16 @@ body::before {
 
 /* Fear & Greed Card */
 .fear-greed-card {
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(30px) saturate(150%);
-    -webkit-backdrop-filter: blur(30px) saturate(150%);
-    border-radius: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 28px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
     padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 6px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .fg-header {
@@ -339,13 +345,16 @@ body::before {
 
 /* Sentiment Card */
 .sentiment-card {
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(30px) saturate(150%);
-    -webkit-backdrop-filter: blur(30px) saturate(150%);
-    border-radius: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border-radius: 28px;
+    border: 0.5px solid rgba(255, 255, 255, 0.05);
     padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 6px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .sentiment-title {
@@ -414,15 +423,19 @@ body::before {
 }
 
 .cta-card {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
     border: 3px solid rgba(255, 255, 255, 0.6);
-    border-radius: 30px;
-    padding: 35px;
+    border-radius: 28px;
+    padding: 30px 20px;
     text-align: center;
     box-shadow:
-        0 0 30px rgba(255, 255, 255, 0.2),
-        0 0 60px rgba(255, 255, 255, 0.1);
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 6px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 0 30px rgba(255, 255, 255, 0.4),
+        0 0 60px rgba(255, 255, 255, 0.2);
 }
 
 .cta-text {
