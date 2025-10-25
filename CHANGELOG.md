@@ -12,6 +12,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.6.5] - 2025-10-25
+
+### 📚 Documentation
+- **README Showcase Enhancement** - Transformed README into a GitHub showcase-ready document
+  - **Animated Gradient Banners** - Dynamic waving header and footer using Capsule Render with twinkling animation
+  - **25+ Technology Stack Badges** - Organized into 6 categories (Core, Status, Database, AI, Web, Python, Social)
+  - **Mermaid Architecture Diagram** - Visual flowchart showing 5 subsystems (Data Layer, Content Generation, AI Processing, Publishing, Automation)
+  - **ASCII Data Flow Pipeline** - Visual 5-stage ETL pipeline with performance metrics at each stage
+  - **Comparison Table** - Comprehensive comparison with competitors (Buffer, Hootsuite, Later) highlighting 100x cost savings
+  - **Collapsible Sections** - Interactive expandable Quick Start guide with 5 sections
+  - **Enhanced Performance Metrics** - Pipeline performance table, ASCII metric boxes, and performance highlights comparison
+  - **Professional Footer** - Star History chart, social media badges, support section, and repository statistics
+  - **Visual Indicators** - Status badges for each pipeline stage, emoji organization throughout
+
+### 🎨 Design Improvements
+- Modern badge styling with `for-the-badge` format for better visibility
+- Color-coded Mermaid diagram nodes matching technology brand colors
+- Three detailed ASCII boxes for Daily Automation, Content Quality, and Session Management metrics
+- Performance comparison table showing 2x-100x improvements over alternatives
+
+### 📦 Files Modified
+- `README.md` - Enhanced from 480 lines → 830 lines with rich visual content
+
+### 📊 Impact
+- Professional appearance rivaling top GitHub open-source projects
+- Better visual communication of system architecture and value proposition
+- Easier understanding of data flow and automation processes
+- Clear competitive advantages highlighted for potential users
+- Interactive sections improve documentation navigation
+
+---
+
 ## [v2.6.4] - 2025-10-25
 
 ### 📚 Documentation
