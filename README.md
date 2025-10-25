@@ -4,7 +4,7 @@
 
 **Automated Social Media Content Generation & Publishing Platform**
 
-[![Version](https://img.shields.io/badge/version-2.6.3-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.6.4-blue.svg)](CHANGELOG.md)
 [![Python](https://img.shields.io/badge/python-3.11+-green.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
 [![Instagram](https://img.shields.io/badge/Instagram-Automated-E4405F.svg?logo=instagram)](https://instagram.com)
@@ -42,7 +42,12 @@
 
 ## ✨ What's New
 
-### v2.6.3 (Current) - Enhanced Visual Design
+### v2.6.4 (Current) - Documentation Revamp
+- **Modern README** - Visual showcase with 8 embedded output images
+- **Better Organization** - Streamlined structure, emoji headers, clear sections
+- **Automation Schedule** - Complete timeline for 4 Stories + 3 Carousels
+
+### v2.6.3 - Enhanced Visual Design
 - **CTA Strategy Overhaul** - Multi-action CTAs driving LIKES, SHARES, FOLLOWS, and PAGE VISITS
 - **Glassmorphic Design** - Modern dark glassmorphism across all stories and carousels
 - **Fixed White Box Issue** - Proper background opacity and inset shadow removal
