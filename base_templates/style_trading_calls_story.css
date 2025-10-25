@@ -328,21 +328,41 @@ body::before {
         0 0 60px rgba(255, 85, 85, 0.15);
 }
 
-.cta-text {
-    font-size: 36px;
-    font-weight: 800;
+.cta-title {
+    font-size: 32px;
+    font-weight: 700;
     background: linear-gradient(135deg, #cccccc 0%, #e0e0e0 50%, #ffffff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
 }
 
-.cta-subtitle {
+.cta-action-primary {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+.cta-action-secondary {
+    font-size: 22px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931a 50%, #ffcc02 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+.cta-social-proof {
     font-size: 20px;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.5px;
 }
 

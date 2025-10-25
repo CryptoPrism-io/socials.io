@@ -101,10 +101,10 @@ body::before {
     max-width: 1900px;
 }
 
-/* 💬 Thank You Title - Largest Element */
-.thank-you-title {
-    font-size: 6.75rem; /* 108px - Larger */
-    font-weight: 800;
+/* 💬 Main Headline */
+.cta-headline {
+    font-size: 7.5rem; /* 120px - Larger and bolder */
+    font-weight: 900;
     letter-spacing: -2px;
     line-height: 1.1;
     background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #e8e8e8 75%, #d8d8d8 100%);
@@ -112,76 +112,100 @@ body::before {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+    margin-bottom: 40px;
 }
 
-.thank-you-subtitle {
-    font-size: 2.75rem; /* 44px - Larger */
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.6;
-    max-width: 1400px;
-    margin-bottom: 20px;
-}
-
-/* 🎯 Actions Grid */
-.actions-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    width: 100%;
-    max-width: 1700px;
-}
-
-.action-card {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 40px 30px;
+/* 📊 Value Stack */
+.value-stack {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    gap: 25px;
+    width: 100%;
+    max-width: 1600px;
+    margin-bottom: 40px;
+}
+
+.value-item {
+    font-size: 3.5rem; /* 56px */
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    text-align: left;
+    padding-left: 60px;
+}
+
+/* 🎯 Primary CTA Button */
+.primary-cta-button {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931a 50%, #ffcc02 100%);
+    font-size: 4.5rem; /* 72px */
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #ffffff;
+    padding: 40px 80px;
+    border-radius: 28px;
+    box-shadow:
+        0 20px 80px rgba(255, 107, 53, 0.5),
+        0 10px 40px rgba(255, 107, 53, 0.3),
+        0 0 60px rgba(255, 107, 53, 0.4);
+    text-transform: uppercase;
+    margin: 40px 0;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.action-card:hover {
-    transform: translateY(-6px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow:
-        0 20px 80px rgba(0, 0, 0, 0.4),
-        0 10px 40px rgba(0, 0, 0, 0.3);
+/* 🔄 Secondary CTAs Grid */
+.secondary-ctas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    width: 100%;
+    max-width: 1600px;
+    margin-bottom: 30px;
 }
 
-.action-icon {
-    font-size: 6.5rem; /* 104px - Larger */
+.secondary-cta-item {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 35px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.secondary-icon {
+    font-size: 5rem; /* 80px */
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
 }
 
-.action-title {
-    font-size: 4.5rem; /* 72px - Larger */
+.secondary-text {
+    font-size: 3rem; /* 48px */
     font-weight: 700;
-    letter-spacing: -1px;
+    letter-spacing: 1px;
     color: rgba(255, 255, 255, 0.95);
 }
 
-.action-desc {
-    font-size: 2.5rem; /* 40px - Larger */
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.6);
-    text-align: center;
-}
-
-/* 📝 CTA Footer */
-.cta-footer {
-    margin-top: 20px;
-}
-
-.cta-tagline {
-    font-size: 2.75rem; /* 44px - Larger */
+/* 💾 Tertiary CTA */
+.tertiary-cta {
+    font-size: 2.75rem; /* 44px */
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.5px;
+    margin-bottom: 30px;
+}
+
+/* 👥 Social Proof Footer */
+.social-proof-footer {
+    font-size: 3rem; /* 48px */
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931a 50%, #ffcc02 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: 1px;
 }
 

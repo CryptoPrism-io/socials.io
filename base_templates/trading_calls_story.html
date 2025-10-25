@@ -85,8 +85,17 @@
         <!-- CTA Section -->
         <div class="cta-section">
             <div class="cta-card {{ call_type|lower }}">
-                <div class="cta-text">SEE ALL {{ total_positions }} POSITIONS</div>
-                <div class="cta-subtitle">Visit @cryptoprism.io to learn more</div>
+                {% if call_type == 'LONG' %}
+                <div class="cta-title">🚀 {{ total_positions }} Bullish Setups + Entry Zones</div>
+                <div class="cta-action-primary">👉 Go to @cryptoprism.io → Latest post for all positions</div>
+                <div class="cta-action-secondary">❤️ Like • Share with traders • Follow for daily setups</div>
+                <div class="cta-social-proof">Fresh picks every morning</div>
+                {% else %}
+                <div class="cta-title">📉 {{ total_positions }} Bearish Opportunities + DMV Scores</div>
+                <div class="cta-action-primary">👉 Visit @cryptoprism.io → See full breakdown</div>
+                <div class="cta-action-secondary">❤️ Like this • Share • Follow for tomorrow's picks</div>
+                <div class="cta-social-proof">Don't miss EOD moves</div>
+                {% endif %}
             </div>
         </div>
 

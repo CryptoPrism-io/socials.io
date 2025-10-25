@@ -282,32 +282,41 @@
             text-align: center;
         }
 
-        .cta-text {
-            font-size: 3.4rem; /* 55px - Fibonacci relationship (33 * 1.618 ≈ 55) */
+        .cta-title {
+            font-size: 2.8rem; /* 45px */
             font-weight: 700;
-            line-height: 1.25;
-            max-width: 95%;
-            margin: 0 auto;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .cta-green {
-            background: linear-gradient(135deg, #cccccc 0%, #e0e0e0 33%, #ffffff 66%, #ffffff 100%);
+            background: linear-gradient(135deg, #cccccc 0%, #e0e0e0 50%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
         }
 
-        .cta-blue {
-            color: #3b82f6;
-            font-weight: 700;
+        .cta-action-primary {
+            font-size: 2.2rem; /* 35px */
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
-        .cta-normal {
-            color: rgba(255, 255, 255, 0.8);
+        .cta-action-secondary {
+            font-size: 2rem; /* 32px */
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931a 50%, #ffcc02 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .cta-social-proof {
+            font-size: 1.6rem; /* 26px */
             font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5px;
         }
 
         /* 🔗 Footer */
@@ -374,9 +383,10 @@
 
             <!-- CTA Card -->
             <div class="cta-card">
-                <div class="cta-text">
-                    <span class="cta-green">Check latest post for your 60-second crypto edge</span>
-                </div>
+                <div class="cta-title">🎯 Today's Top Crypto Intel</div>
+                <div class="cta-action-primary">👉 Visit @cryptoprism.io → Check latest post</div>
+                <div class="cta-action-secondary">❤️ Like • Share • Follow for daily drops</div>
+                <div class="cta-social-proof">10K+ traders getting this at 2AM UTC</div>
             </div>
         </div>
 

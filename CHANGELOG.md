@@ -12,6 +12,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.6.0] - 2025-10-24
+
+### ✨ Added
+- **Comprehensive CTA Strategy Overhaul** - Multi-action CTAs driving LIKES, SHARES, FOLLOWS, and PAGE VISITS
+  - Story CTAs now include 4-line structure:
+    - Line 1: Value proposition with emoji
+    - Line 2: Visit page instruction with @handle
+    - Line 3: Like • Share • Follow encouragement
+    - Line 4: Social proof or urgency
+  - Carousel CTA slide completely redesigned:
+    - Large headline: "Get This Every Morning"
+    - 3-bullet value stack with emojis
+    - Primary CTA: "TAP FOLLOW FOR DAILY INTEL" (glowing orange button)
+    - Secondary CTAs: "LIKE THIS POST" + "SHARE WITH TRADERS" (side by side)
+    - Tertiary: "Save for later reference"
+    - Social proof: "Join 10,000+ crypto traders"
+
+### 🎨 Changed
+- **Story Teaser CTA:** "🎯 Today's Top Crypto Intel" + multi-action encouragement
+- **Bitcoin Story CTA:** "📈 Full 30-Day BTC + Fear & Greed Chart" + specific data promise
+- **Long Calls CTA:** "🚀 15 Bullish Setups + Entry Zones" + action path
+- **Short Calls CTA:** "📉 15 Bearish Opportunities + DMV Scores" + FOMO trigger
+- **Visual hierarchy:** Primary (FOLLOW) > Secondary (LIKE/SHARE) > Tertiary (SAVE)
+- **Orange gradient branding** on action buttons for consistency
+
+### 📦 Files Modified
+- `base_templates/story_teaser.html` - New 4-line CTA structure + inline CSS
+- `base_templates/bitcoin_story.html` - New 4-line CTA structure
+- `base_templates/trading_calls_story.html` - Conditional CTAs for LONG/SHORT
+- `base_templates/cta.html` - Complete redesign with multi-action hierarchy
+- `base_templates/style_bitcoin_story.css` - New CTA classes
+- `base_templates/style_trading_calls_story.css` - New CTA classes
+- `base_templates/style_cta.css` - Complete redesign for visual hierarchy
+
+### 📊 Impact
+- Clear multi-action CTAs on every story
+- Drives LIKES, SHARES, FOLLOWS, and PAGE VISITS simultaneously
+- Specific value propositions (not vague "learn more")
+- Social proof (10K+ traders) reduces friction
+- Orange gradient creates brand consistency
+- Clear navigation: @cryptoprism.io → Latest post
+
+### 📅 Status
+- **Production Ready**: All stories and carousel regenerated and posted to Instagram
+- **Next Review**: 7 days (2025-10-31) - Monitor engagement metrics
+
+---
+
 ## [v2.5.2] - 2025-10-24
 
 ### 🐛 Fixed
