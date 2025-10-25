@@ -39,10 +39,9 @@ def main():
     """Start the local network server."""
     PORT = 8080
 
-    # Change to project root directory and then to output_html
+    # Change to project root directory to serve both output_html and input_images
     project_root = Path(__file__).parent.parent.parent
-    output_html_dir = project_root / "output_html"
-    os.chdir(output_html_dir)
+    os.chdir(project_root)
 
     # Get local IP address
     local_ip = get_local_ip()
@@ -53,16 +52,20 @@ def main():
 🌐 Socials.io HTML Output Server Started
 ═══════════════════════════════════════════
 
-📂 Serving HTML outputs from: {Path.cwd()}
+📂 Serving from: {Path.cwd()}
 🖥️  Local access:     http://localhost:{PORT}
 📱 Network access:    http://{local_ip}:{PORT}
 
-🔗 Direct HTML links:
-   • Template 1: http://{local_ip}:{PORT}/1_output.html
-   • Template 2: http://{local_ip}:{PORT}/2_output.html
-   • Template 5: http://{local_ip}:{PORT}/5_output.html
-   • Template 6: http://{local_ip}:{PORT}/6_output.html
-   • Template 7: http://{local_ip}:{PORT}/7_output.html
+🔗 Story HTML links:
+   • Story Teaser:    http://localhost:{PORT}/output_html/story_teaser_output.html
+   • Bitcoin Story:   http://localhost:{PORT}/output_html/04_bitcoin_intelligence_output.html
+   • Long Calls:      http://localhost:{PORT}/output_html/long_calls_story_output.html
+   • Short Calls:     http://localhost:{PORT}/output_html/short_calls_story_output.html
+
+🔗 Carousel templates:
+   • Cover:           http://localhost:{PORT}/output_html/01_cover_output.html
+   • Top Cryptos:     http://localhost:{PORT}/output_html/12_top_cryptos_2_24_output.html
+   • Gainers/Losers:  http://localhost:{PORT}/output_html/09_top_gainers_output.html
 
 💡 To test from other devices on your network:
    1. Connect devices to the same Wi-Fi network

@@ -12,6 +12,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.6.3] - 2025-10-25
+
+### 🐛 Fixed
+- **Local Server Path Resolution** - Fixed CSS background images not loading in local preview
+  - Changed server to serve from project root instead of `output_html/` only
+  - CSS files can now properly access `../input_images/` paths
+  - Updated server output to show correct HTML paths with `/output_html/` prefix
+
+### 📦 Files Modified
+- `scripts/dev/local_server.py` - Server now serves from project root
+
+### 📊 Impact
+- Local HTML preview now displays with all CSS and background images properly loaded
+- Better development/testing experience with accurate visual preview
+
+---
+
 ## [v2.6.2] - 2025-10-25
 
 ### 🐛 Fixed
