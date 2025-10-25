@@ -12,6 +12,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.6.4] - 2025-10-25
+
+### 📚 Documentation
+- **README Revamp** - Completely redesigned README.md with modern structure and visuals
+  - Added hero section with badges (version, Python, license, Instagram)
+  - Visual showcase section featuring all Story and Carousel outputs
+  - Embedded 8 output images showing actual generated content
+  - "What's New" section highlighting v2.6.3, v2.5.0, and v2.4.0
+  - Instagram automation schedule (4 Stories + 3 Carousels with timing)
+  - Streamlined Quick Start guide with 5 clear steps
+  - Better organized sections with emoji headers
+  - Technology stack table
+  - Performance metrics section
+  - Troubleshooting guide with solutions
+
+### 📦 Files Modified
+- `README.md` - Complete revamp from 896 lines → 463 lines (better density)
+
+### 📊 Impact
+- Better first impression for new developers
+- Visual proof of system capabilities with actual outputs
+- Clearer understanding of automation schedule and workflows
+- Easier onboarding with improved Quick Start section
+
+---
+
 ## [v2.6.3] - 2025-10-25
 
 ### 🐛 Fixed
