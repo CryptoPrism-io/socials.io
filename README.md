@@ -1,7 +1,9 @@
 <div align="center">
 
 <!-- Animated Banner -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,15,20,24&height=180&section=header&text=Socials.io&fontSize=70&fontAlignY=35&animation=twinkling&fontColor=fff&desc=Automated%20Social%20Media%20Content%20Generation%20%26%20Publishing%20Platform&descAlignY=55&descSize=18"/>
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,15,20,24&height=180&section=header&text=Socials.io&fontSize=70&fontAlignY=35&animation=twinkling&fontColor=fff"/>
+
+<h3>Automated Social Media Content Generation & Publishing Platform</h3>
 
 <!-- Core Badges -->
 [![Version](https://img.shields.io/badge/version-2.6.5-blue.svg?style=for-the-badge)](CHANGELOG.md)
