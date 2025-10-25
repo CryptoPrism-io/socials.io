@@ -5,9 +5,21 @@
 **Automated Social Media Content Generation & Publishing Platform**
 
 [![Version](https://img.shields.io/badge/version-2.6.4-blue.svg)](CHANGELOG.md)
-[![Python](https://img.shields.io/badge/python-3.11+-green.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.11+-green.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
-[![Instagram](https://img.shields.io/badge/Instagram-Automated-E4405F.svg?logo=instagram)](https://instagram.com)
+[![Instagram](https://img.shields.io/badge/Instagram-Automated-E4405F.svg?logo=instagram&logoColor=white)](https://instagram.com)
+
+### Technology Stack
+
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?logo=playwright&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=github-actions&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white)
+![Jinja](https://img.shields.io/badge/Jinja-B41717?logo=jinja&logoColor=white)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?logo=sqlalchemy&logoColor=white)
+![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?logo=google-cloud&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 
 *Transform cryptocurrency data into engaging Instagram content through AI-powered automation*
 
