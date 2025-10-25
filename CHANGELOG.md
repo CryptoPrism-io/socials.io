@@ -12,6 +12,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.6.1] - 2025-10-25
+
+### 🐛 Fixed
+- **CTA Border Visibility** - Removed bright white borders from CTA cards in stories
+  - Reduced base border opacity: `0.15` → `0.05` (nearly invisible)
+  - Reduced Long Calls border: `0.25` → `0.08` (subtle green tint)
+  - Reduced Short Calls border: `0.25` → `0.08` (subtle red tint)
+  - Reduced glow effects from `0.15` to `0.08` for softer appearance
+  - CTA cards now blend seamlessly with glassmorphic design
+
+### 📦 Files Modified
+- `base_templates/style_trading_calls_story.css` - Updated `.cta-card`, `.cta-card.long`, `.cta-card.short` borders
+- `base_templates/style_bitcoin_story.css` - Updated `.cta-card` borders
+
+### 📊 Impact
+- CTA sections no longer appear as bright white boxes
+- Improved visual consistency with glassmorphic design language
+- Better contrast and readability against dark backgrounds
+
+---
+
 ## [v2.6.0] - 2025-10-24
 
 ### ✨ Added

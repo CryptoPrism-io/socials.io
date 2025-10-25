@@ -296,36 +296,32 @@ body::before {
     background: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 3px solid rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 28px;
     padding: 30px 20px;
     text-align: center;
     box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.4),
         0 6px 20px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15),
-        0 0 30px rgba(255, 255, 255, 0.4),
-        0 0 60px rgba(255, 255, 255, 0.2);
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .cta-card.long {
-    border-color: rgba(0, 255, 159, 0.6);
+    border-color: rgba(0, 255, 159, 0.08);
     box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.4),
         0 6px 20px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.15),
-        0 0 30px rgba(0, 255, 159, 0.3),
-        0 0 60px rgba(0, 255, 159, 0.15);
+        0 0 15px rgba(0, 255, 159, 0.08);
 }
 
 .cta-card.short {
-    border-color: rgba(255, 85, 85, 0.6);
+    border-color: rgba(255, 85, 85, 0.08);
     box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.4),
         0 6px 20px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.15),
-        0 0 30px rgba(255, 85, 85, 0.3),
-        0 0 60px rgba(255, 85, 85, 0.15);
+        0 0 15px rgba(255, 85, 85, 0.08);
 }
 
 .cta-title {
