@@ -12,6 +12,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v2.6.2] - 2025-10-25
+
+### 🐛 Fixed
+- **CTA Background Transparency** - Fixed white box appearance in CTA sections
+  - Increased background opacity: `rgba(0, 0, 0, 0.1)` → `rgba(0, 0, 0, 0.35)`
+  - Removed bright inset shadow: `inset 0 1px 0 rgba(255, 255, 255, 0.15)` creating white highlight
+  - CTA cards now have darker, more solid appearance while maintaining glassmorphic effect
+  - Text remains clearly visible with gradient styling
+
+### 📦 Files Modified
+- `base_templates/style_trading_calls_story.css` - Updated `.cta-card` background and removed inset shadows
+- `base_templates/style_bitcoin_story.css` - Updated `.cta-card` background and removed inset shadows
+
+### 📊 Impact
+- CTA sections no longer appear as bright/white boxes against dark background
+- Improved visual consistency and contrast
+- Better readability with darker card background
+
+---
+
 ## [v2.6.1] - 2025-10-25
 
 ### 🐛 Fixed

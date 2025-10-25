@@ -293,7 +293,7 @@ body::before {
 }
 
 .cta-card {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -302,8 +302,7 @@ body::before {
     text-align: center;
     box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.4),
-        0 6px 20px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cta-card.long {
@@ -311,7 +310,6 @@ body::before {
     box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.4),
         0 6px 20px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15),
         0 0 15px rgba(0, 255, 159, 0.08);
 }
 
@@ -320,7 +318,6 @@ body::before {
     box-shadow:
         0 12px 40px rgba(0, 0, 0, 0.4),
         0 6px 20px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15),
         0 0 15px rgba(255, 85, 85, 0.08);
 }
 
